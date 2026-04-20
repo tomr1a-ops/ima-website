@@ -3,1160 +3,772 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impact Martial Athletics – Youth Martial Arts & Athletic Training in Davie, FL</title>
-  <meta name="description" content="Impact Martial Athletics is a science-based performance system for kids in Davie, FL that builds strength, confidence, and resilience through martial arts and athletic training.">
+  <title>Impact Martial Athletics | Martial Arts &amp; Fitness in Davie, FL</title>
+  <meta name="description" content="A science-based performance system for kids that builds strength, confidence, and resilience through martial arts and athletic training in Davie, FL.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --dark: #0a0a0a;
-      --white: #ffffff;
       --gold: #e8b84b;
-      --black: #000000;
-      --text-dark: #ffffff;
-      --text-muted: #cccccc;
-      --text-light: #1a1a1a;
-      --heading: 'Bebas Neue', 'Oswald', sans-serif;
-      --body: 'Inter', 'Open Sans', sans-serif;
+      --dark: #0a0a0a;
+      --darker: #050505;
+      --white: #fff;
+      --gray: #cccccc;
+      --light-bg: #f5f5f5;
     }
-
     html { scroll-behavior: smooth; }
-    body { font-family: var(--body); background: var(--dark); color: var(--text-muted); line-height: 1.6; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--gray); line-height: 1.6; overflow-x: hidden; }
 
-    /* ANNOUNCEMENT BAR */
-    .announcement-bar {
-      background: var(--gold);
-      color: var(--black);
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      z-index: 1001;
-      position: relative;
+    /* ─── ANNOUNCEMENT BAR ─── */
+    .ann-bar {
+      background: var(--gold); color: #000;
+      text-align: center; padding: 11px 20px;
+      font-size: 14px; font-weight: 700; letter-spacing: .3px;
+      position: relative; z-index: 1002;
     }
-    .announcement-bar a { color: var(--black); text-decoration: none; }
-    .announcement-bar a:hover { text-decoration: underline; }
+    .ann-bar a { color: #000; text-decoration: none; }
 
-    /* NAV */
+    /* ─── NAV ─── */
     nav {
-      position: sticky;
-      top: 0;
-      background: var(--black);
-      z-index: 1000;
-      padding: 0 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 70px;
+      position: sticky; top: 0; z-index: 1001;
+      background: #000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 72px;
       border-bottom: 1px solid #1a1a1a;
     }
-    .nav-logo img { height: 50px; object-fit: contain; }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-right a { color: var(--white); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-    .nav-right a:hover { color: var(--gold); }
-    .nav-cta {
-      background: var(--gold);
-      color: var(--black) !important;
-      padding: 10px 22px;
-      border-radius: 4px;
-      font-weight: 700 !important;
-      font-size: 14px !important;
-      transition: background 0.2s !important;
+    .nav-logo a { display: block; }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: #ddd; text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links .cta-btn {
+      background: var(--gold); color: #000 !important;
+      padding: 11px 26px; border-radius: 3px; font-weight: 700 !important;
+      transition: background .2s !important;
     }
-    .nav-cta:hover { background: #d4a43c !important; color: var(--black) !important; }
-    .nav-phone { display: flex; align-items: center; gap: 6px; }
-
-    /* HAMBURGER */
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
-    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--black); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: 30px; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { color: var(--white); text-decoration: none; font-size: 22px; font-weight: 600; }
-    .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--white); font-size: 32px; cursor: pointer; }
-
-    /* BUTTONS */
-    .btn-gold {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--black);
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: background 0.2s, transform 0.1s;
-      border: none;
-      cursor: pointer;
+    .nav-links .cta-btn:hover { background: #d4a43c !important; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; transition: .3s; }
+    .mob-menu {
+      display: none; position: fixed; inset: 0; background: #000; z-index: 9999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
     }
+    .mob-menu.open { display: flex; }
+    .mob-menu a { color: #fff; font-size: 22px; font-weight: 600; text-decoration: none; }
+    .mob-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: #fff; font-size: 36px; cursor: pointer; line-height: 1; }
+
+    /* ─── BUTTONS ─── */
+    .btn { display: inline-block; padding: 15px 36px; border-radius: 3px; font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: .5px; transition: all .2s; cursor: pointer; border: none; }
+    .btn-gold { background: var(--gold); color: #000; }
     .btn-gold:hover { background: #d4a43c; transform: translateY(-1px); }
-    .btn-gold-outline {
-      display: inline-block;
-      background: transparent;
-      color: var(--gold);
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      border: 2px solid var(--gold);
-      transition: all 0.2s;
-    }
-    .btn-gold-outline:hover { background: var(--gold); color: var(--black); }
+    .btn-dark { background: #000; color: var(--gold); border: 2px solid #000; }
+    .btn-dark:hover { background: #111; }
 
-    /* VIDEO WRAPPER */
-    .video-wrapper {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-    .video-wrapper video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .video-wrapper .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-    }
-    .sound-toggle {
-      position: absolute;
-      bottom: 24px;
-      left: 24px;
-      background: rgba(0,0,0,0.65);
-      color: var(--white);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 30px;
-      padding: 8px 18px;
-      font-size: 13px;
-      cursor: pointer;
-      z-index: 10;
-      backdrop-filter: blur(4px);
-      transition: background 0.2s;
-    }
-    .sound-toggle:hover { background: rgba(0,0,0,0.85); }
-    .video-placeholder {
-      position: absolute;
-      inset: 0;
-      background: #111111;
-    }
-    .sound-toggle.disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* SECTIONS */
-    section { position: relative; }
-
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 5;
-      max-width: 860px;
-      padding: 40px 20px;
-    }
-    .hero-content h1 {
-      font-family: var(--heading);
-      font-size: clamp(42px, 7vw, 90px);
-      color: var(--white);
-      line-height: 1.05;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-    }
-    .hero-content p {
-      font-size: clamp(16px, 2vw, 20px);
-      color: rgba(255,255,255,0.88);
-      max-width: 680px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
+    /* ─── SECTION LABEL ─── */
+    .label {
+      display: inline-block; background: var(--gold); color: #000;
+      font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 2px; margin-bottom: 18px;
     }
 
-    /* COMPETITIVE EDGE */
-    #competitive-edge {
-      background: var(--dark);
-      padding: 100px 40px;
-      text-align: center;
+    /* ─── VIDEO SECTIONS ─── */
+    .vid-section {
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .section-tag {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--black);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 2px;
-      margin-bottom: 20px;
+    .vid-section video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
     }
-    #competitive-edge h2 {
-      font-family: var(--heading);
-      font-size: clamp(36px, 5vw, 64px);
-      color: var(--white);
-      max-width: 800px;
-      margin: 0 auto 24px;
-      letter-spacing: 1px;
+    .vid-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,.45) 100%);
     }
-    #competitive-edge p {
-      max-width: 700px;
-      margin: 0 auto 36px;
-      font-size: 17px;
-      line-height: 1.8;
+    .vid-content { position: relative; z-index: 2; padding: 100px 20px; max-width: 900px; }
+    .vid-placeholder { position: absolute; inset: 0; background: #111; z-index: 0; }
+    .sound-btn {
+      position: absolute; bottom: 28px; left: 28px; z-index: 10;
+      background: rgba(0,0,0,.6); color: #fff; border: 1px solid rgba(255,255,255,.25);
+      border-radius: 30px; padding: 8px 20px; font-size: 13px; cursor: pointer;
+      backdrop-filter: blur(6px); transition: background .2s; font-family: 'Inter', sans-serif;
+    }
+    .sound-btn:hover { background: rgba(0,0,0,.85); }
+
+    /* ─── HERO ─── */
+    #hero { min-height: 100vh; }
+    .hero-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(50px, 8vw, 100px);
+      color: #fff; line-height: 1; letter-spacing: 1px;
+      margin-bottom: 22px;
+      text-shadow: 0 2px 30px rgba(0,0,0,.4);
+    }
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 22px); color: rgba(255,255,255,.85);
+      max-width: 720px; margin: 0 auto 36px; line-height: 1.65;
     }
 
-    /* PROGRAMS */
-    #programs {
-      background: #0f0f0f;
-      padding: 100px 40px;
+    /* ─── COMPETITIVE EDGE ─── */
+    #edge {
+      background: var(--dark); padding: 110px 48px; text-align: center;
     }
-    #programs .section-header {
-      text-align: center;
-      margin-bottom: 60px;
+    #edge h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(38px, 5.5vw, 70px);
+      color: #fff; max-width: 820px; margin: 0 auto 22px; letter-spacing: .5px;
     }
-    #programs h2 {
-      font-family: var(--heading);
-      font-size: clamp(34px, 4.5vw, 58px);
-      color: var(--white);
-      letter-spacing: 1px;
-    }
-    .programs-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .program-card {
-      background: #161616;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #222;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .program-card:hover { transform: translateY(-6px); border-color: var(--gold); }
-    .program-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-    .program-card-body { padding: 24px; }
-    .program-card h3 {
-      font-family: var(--heading);
-      font-size: 22px;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
-    }
-    .program-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+    #edge p { font-size: 17px; max-width: 680px; margin: 0 auto 36px; line-height: 1.8; }
 
-    /* ABOUT IMA */
-    #about {
-      background: var(--white);
-      padding: 100px 40px;
+    /* ─── PROGRAMS ─── */
+    #programs { background: #0d0d0d; padding: 110px 48px; }
+    .sec-head { text-align: center; margin-bottom: 64px; }
+    .sec-head h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 64px); color: #fff; letter-spacing: .5px;
     }
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-      align-items: center;
+    .prog-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; max-width: 1240px; margin: 0 auto;
     }
-    .about-text .section-tag { background: var(--gold); }
+    .prog-card {
+      background: #141414; border: 1px solid #1e1e1e; border-radius: 6px;
+      overflow: hidden; transition: transform .3s, border-color .3s;
+    }
+    .prog-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+    .prog-card img { width: 100%; height: 230px; object-fit: cover; display: block; }
+    .prog-card-body { padding: 26px 22px; }
+    .prog-card h3 {
+      font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600;
+      color: #fff; margin-bottom: 10px; letter-spacing: .3px;
+    }
+    .prog-card p { font-size: 14px; color: #aaa; line-height: 1.7; }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--white); padding: 110px 48px; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; max-width: 1200px; margin: 0 auto; align-items: center;
+    }
+    .about-text .label { background: var(--gold); }
     .about-text h2 {
-      font-family: var(--heading);
-      font-size: clamp(34px, 4vw, 54px);
-      color: var(--text-light);
-      margin-bottom: 20px;
-      letter-spacing: 1px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 4vw, 58px); color: #111; margin-bottom: 20px; letter-spacing: .5px;
     }
-    .about-text p { font-size: 16px; color: #444; line-height: 1.8; margin-bottom: 16px; }
-    .about-img img { width: 100%; border-radius: 8px; }
+    .about-text p { font-size: 16px; color: #333; line-height: 1.85; margin-bottom: 16px; }
+    .about-img img { width: 100%; border-radius: 6px; display: block; }
 
-    /* SUMMER CAMP BANNER */
-    #summer-camp {
-      position: relative;
-      min-height: 480px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
+    /* ─── SUMMER CAMP ─── */
+    #camp {
+      position: relative; overflow: hidden;
+      min-height: 480px; display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .summer-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/summer-camp.png');
-      background-size: cover;
-      background-position: center;
+    .camp-bg {
+      position: absolute; inset: 0;
+      background: url('https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/summer-camp.png') center/cover no-repeat;
     }
-    .summer-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.65); }
-    .summer-content { position: relative; z-index: 5; padding: 60px 20px; }
-    .summer-content h2 {
-      font-family: var(--heading);
-      font-size: clamp(32px, 5vw, 64px);
-      color: var(--white);
-      margin-bottom: 24px;
-      letter-spacing: 1px;
+    .camp-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.65); }
+    .camp-content { position: relative; z-index: 2; padding: 80px 20px; }
+    .camp-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 5.5vw, 70px); color: #fff; margin-bottom: 24px; letter-spacing: .5px;
     }
+    .camp-content p { font-size: 18px; color: rgba(255,255,255,.85); margin-bottom: 30px; max-width: 580px; margin-left: auto; margin-right: auto; }
 
-    /* WHY CHOOSE */
-    #why-choose {
-      background: var(--dark);
-      padding: 100px 40px;
+    /* ─── WHY CHOOSE ─── */
+    #why { background: var(--dark); padding: 110px 48px; }
+    #why .sec-head p { font-size: 17px; color: #aaa; max-width: 620px; margin: 12px auto 0; }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; max-width: 1240px; margin: 0 auto;
     }
-    #why-choose .section-header { text-align: center; margin-bottom: 60px; }
-    #why-choose h2 {
-      font-family: var(--heading);
-      font-size: clamp(34px, 4.5vw, 58px);
-      color: var(--white);
-      letter-spacing: 1px;
+    .why-card {
+      background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 6px;
+      padding: 36px 28px; transition: border-color .3s;
     }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .why-card:hover { border-color: var(--gold); }
+    .why-icon { font-size: 44px; margin-bottom: 18px; }
+    .why-card h3 {
+      font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600;
+      color: #fff; margin-bottom: 12px;
     }
-    .feature-box {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 8px;
-      padding: 36px 28px;
-      text-align: center;
-      transition: border-color 0.3s;
-    }
-    .feature-box:hover { border-color: var(--gold); }
-    .feature-icon { font-size: 42px; margin-bottom: 18px; }
-    .feature-box h3 {
-      font-family: var(--heading);
-      font-size: 22px;
-      color: var(--white);
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-    }
-    .feature-box p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+    .why-card p { font-size: 14px; color: #999; line-height: 1.75; }
 
-    /* 50% OFF BANNER */
-    #fifty-off {
-      background: var(--gold);
-      padding: 80px 40px;
-      text-align: center;
+    /* ─── 50% OFF BANNER ─── */
+    #fifty {
+      background: var(--gold); padding: 90px 48px; text-align: center;
     }
-    #fifty-off h2 {
-      font-family: var(--heading);
-      font-size: clamp(34px, 5vw, 68px);
-      color: var(--black);
-      margin-bottom: 24px;
-      letter-spacing: 1px;
+    #fifty h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 80px); color: #000; letter-spacing: .5px; margin-bottom: 14px;
     }
-    #fifty-off p { font-size: 18px; color: #1a1a1a; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    #fifty p { font-size: 19px; color: #1a1a1a; margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
 
-    /* MEET COACH */
-    #coach {
-      background: var(--white);
-      padding: 100px 40px 0;
+    /* ─── MEET COACH ─── */
+    #coach { background: var(--white); padding: 110px 48px 0; }
+    .coach-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; max-width: 1200px; margin: 0 auto;
+      padding-bottom: 80px; align-items: start;
     }
-    .coach-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-      align-items: start;
-      padding-bottom: 80px;
-    }
-    .coach-text .section-tag { background: var(--gold); }
+    .coach-text .label { background: var(--gold); }
     .coach-text h2 {
-      font-family: var(--heading);
-      font-size: clamp(32px, 4vw, 52px);
-      color: var(--text-light);
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 4vw, 56px); color: #111; margin-bottom: 8px; letter-spacing: .5px;
     }
-    .coach-text .subheading { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 24px; }
-    .coach-text p { font-size: 16px; color: #444; line-height: 1.8; margin-bottom: 20px; }
-    .coach-bullets { list-style: none; padding: 0; margin: 20px 0; }
+    .coach-text .coach-tagline {
+      font-size: 18px; font-weight: 600; color: #333; margin-bottom: 28px;
+    }
+    .coach-bullets { list-style: none; padding: 0; margin: 0; }
     .coach-bullets li {
-      padding: 8px 0 8px 28px;
-      position: relative;
-      font-size: 15px;
-      color: #333;
-      border-bottom: 1px solid #f0f0f0;
+      padding: 10px 0 10px 30px; position: relative;
+      font-size: 15px; color: #333; border-bottom: 1px solid #eee; line-height: 1.5;
     }
-    .coach-bullets li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-weight: 700;
-    }
-    .coach-img img { width: 100%; border-radius: 8px; }
-    .coach-family-img { width: 100%; display: block; }
-    .coach-family-img img { width: 100%; max-height: 500px; object-fit: cover; display: block; }
+    .coach-bullets li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 16px; }
+    .coach-bullets li:last-child { border-bottom: none; }
+    .coach-img img { width: 100%; border-radius: 6px; display: block; }
+    .coach-family { width: 100%; }
+    .coach-family img { width: 100%; max-height: 520px; object-fit: cover; display: block; }
 
-    /* BETTER PATH */
-    #better-path {
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* ─── BETTER PATH (video) ─── */
+    #better-path { min-height: 85vh; }
+    #better-path .vid-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5.5vw, 72px); color: #fff; margin-bottom: 28px; letter-spacing: .5px;
     }
-    .better-path-content {
-      position: relative;
-      z-index: 5;
-      max-width: 860px;
-      padding: 80px 20px;
-    }
-    .better-path-content h2 {
-      font-family: var(--heading);
-      font-size: clamp(34px, 5vw, 66px);
-      color: var(--white);
-      margin-bottom: 28px;
-      letter-spacing: 1px;
-    }
-    .better-path-content p {
-      font-size: 18px;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
+    #better-path .vid-content p { font-size: 18px; color: rgba(255,255,255,.85); line-height: 1.8; margin-bottom: 16px; }
+    #better-path .vid-content strong { color: #fff; font-size: 20px; font-weight: 700; display: block; margin: 20px 0; }
 
-    /* TESTIMONIALS */
-    #testimonials {
-      background: #0f0f0f;
-      padding: 100px 40px;
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { background: #0d0d0d; padding: 110px 48px; }
+    #testimonials .sec-head h2 { font-size: clamp(28px, 4vw, 52px); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; max-width: 1240px; margin: 0 auto;
     }
-    #testimonials .section-header { text-align: center; margin-bottom: 60px; }
-    #testimonials h2 {
-      font-family: var(--heading);
-      font-size: clamp(30px, 4vw, 52px);
-      color: var(--white);
-      letter-spacing: 1px;
+    .testi-card {
+      background: #141414; border: 1px solid #1e1e1e; border-radius: 6px;
+      padding: 32px 24px; text-align: center; transition: border-color .3s;
     }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .testi-card:hover { border-color: var(--gold); }
+    .testi-card img {
+      width: 88px; height: 88px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--gold); margin-bottom: 16px;
     }
-    .testimonial-card {
-      background: #161616;
-      border: 1px solid #222;
-      border-radius: 8px;
-      padding: 32px 24px;
-      text-align: center;
-      transition: border-color 0.3s;
-    }
-    .testimonial-card:hover { border-color: var(--gold); }
-    .testimonial-card img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--gold);
-      margin-bottom: 16px;
-    }
-    .testimonial-card .name {
-      font-family: var(--heading);
-      font-size: 20px;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .testimonial-card .title {
-      font-size: 12px;
-      color: var(--gold);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-    .star-divider { margin: 12px 0; color: var(--gold); font-size: 16px; letter-spacing: 3px; }
-    .testimonial-card .quote { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-style: italic; }
+    .testi-name { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .testi-title { font-size: 12px; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .testi-stars { color: var(--gold); font-size: 16px; letter-spacing: 3px; margin-bottom: 14px; }
+    .testi-quote { font-size: 13.5px; color: #aaa; line-height: 1.75; font-style: italic; }
 
-    /* COMMUNITY */
-    #community {
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* ─── COMMUNITY (video) ─── */
+    #community { min-height: 72vh; }
+    #community .vid-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5.5vw, 72px); color: #fff; margin-bottom: 20px; letter-spacing: .5px;
     }
-    .community-content {
-      position: relative;
-      z-index: 5;
-      max-width: 800px;
-      padding: 80px 20px;
-    }
-    .community-content h2 {
-      font-family: var(--heading);
-      font-size: clamp(36px, 5vw, 68px);
-      color: var(--white);
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    }
-    .community-content p { font-size: 18px; color: rgba(255,255,255,0.85); margin-bottom: 16px; line-height: 1.7; }
-    .featured-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.15);
-      color: var(--white);
-      padding: 8px 18px;
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-
-    /* STEP UP */
-    #step-up {
-      background: var(--white);
-      padding: 100px 40px;
-    }
-    .step-up-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .step-up-inner img { max-height: 80px; object-fit: contain; margin-bottom: 30px; }
-    .step-up-inner h2 {
-      font-family: var(--heading);
-      font-size: clamp(28px, 4vw, 48px);
-      color: var(--text-light);
+    #community .vid-content p { font-size: 18px; color: rgba(255,255,255,.85); margin-bottom: 14px; line-height: 1.7; }
+    .featured-tag {
+      display: inline-block; background: rgba(255,255,255,.12); color: #fff;
+      border: 1px solid rgba(255,255,255,.25); padding: 7px 18px;
+      border-radius: 3px; font-size: 13px; font-weight: 600; letter-spacing: .8px;
       margin-bottom: 24px;
-      letter-spacing: 1px;
     }
-    .step-up-inner p { font-size: 16px; color: #444; line-height: 1.8; margin-bottom: 16px; }
 
-    /* AREAS WE SERVE */
-    #areas {
-      background: #f8f8f8;
-      padding: 100px 40px;
+    /* ─── STEP UP ─── */
+    #stepup { background: var(--white); padding: 110px 48px; }
+    .stepup-inner { max-width: 920px; margin: 0 auto; text-align: center; }
+    .stepup-inner img { max-height: 80px; object-fit: contain; margin-bottom: 28px; display: block; margin-left: auto; margin-right: auto; }
+    .stepup-inner h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 52px); color: #111; margin-bottom: 24px; letter-spacing: .5px;
     }
-    .areas-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+    .stepup-inner p { font-size: 16px; color: #333; line-height: 1.85; margin-bottom: 16px; }
+
+    /* ─── AREAS ─── */
+    #areas { background: #f7f7f7; padding: 110px 48px; }
+    .areas-inner { max-width: 1000px; margin: 0 auto; }
     .areas-inner h2 {
-      font-family: var(--heading);
-      font-size: clamp(30px, 4vw, 50px);
-      color: var(--text-light);
-      margin-bottom: 20px;
-      letter-spacing: 1px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 4.5vw, 56px); color: #111; margin-bottom: 20px; letter-spacing: .5px;
     }
-    .areas-inner p { font-size: 16px; color: #444; line-height: 1.8; margin-bottom: 20px; }
-    .map-link { display: block; margin-top: 30px; }
-    .map-link img { width: 100%; max-width: 700px; border-radius: 8px; border: 2px solid #ddd; }
+    .areas-inner p { font-size: 16px; color: #333; line-height: 1.85; margin-bottom: 18px; }
+    .map-wrap { margin-top: 32px; }
+    .map-wrap a { display: block; }
+    .map-wrap img { width: 100%; max-width: 680px; border-radius: 6px; border: 2px solid #ddd; display: block; margin: 0 auto; }
 
-    /* LEAD FORM */
-    #lead-form {
-      background: var(--dark);
-      padding: 100px 40px;
+    /* ─── LEAD FORM ─── */
+    #form-section { background: var(--dark); padding: 110px 48px; }
+    .form-wrap { max-width: 1100px; margin: 0 auto; }
+    #form-section .sec-head h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(34px, 5vw, 64px); color: #fff; letter-spacing: .5px; }
+    #form-section .sec-head p { font-size: 16px; color: #888; margin-top: 12px; }
+    .form-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fg.full { grid-column: 1 / -1; }
+    .fg label { font-size: 12px; font-weight: 700; color: #777; text-transform: uppercase; letter-spacing: .5px; }
+    .fg input, .fg select, .fg textarea {
+      background: #111; border: 1px solid #2a2a2a; border-radius: 3px;
+      padding: 13px 16px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif;
+      transition: border-color .2s;
     }
-    .lead-form-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--gold); }
+    .fg select { appearance: none; cursor: pointer; }
+    .fg textarea { resize: vertical; min-height: 110px; }
+    .consent-row { grid-column: 1 / -1; display: flex; gap: 12px; align-items: flex-start; }
+    .consent-row input[type="checkbox"] { width: 17px; height: 17px; flex-shrink: 0; margin-top: 3px; accent-color: var(--gold); cursor: pointer; }
+    .consent-row label { font-size: 13px; color: #888; line-height: 1.6; cursor: pointer; }
+    .consent-row a { color: var(--gold); }
+    .btn-form-submit {
+      grid-column: 1 / -1; width: 100%; background: var(--gold); color: #000; border: none;
+      padding: 17px; font-size: 19px; font-weight: 700; font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 1.5px; border-radius: 3px; cursor: pointer; transition: background .2s; margin-top: 4px;
     }
-    #lead-form .section-header { text-align: center; margin-bottom: 50px; }
-    #lead-form h2 {
-      font-family: var(--heading);
-      font-size: clamp(32px, 4.5vw, 58px);
-      color: var(--white);
-      letter-spacing: 1px;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .form-group { display: flex; flex-direction: column; gap: 8px; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 4px;
-      padding: 12px 16px;
-      color: var(--white);
-      font-size: 15px;
-      font-family: var(--body);
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-    .form-group select { appearance: none; cursor: pointer; }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .consent-group { grid-column: 1 / -1; display: flex; gap: 12px; align-items: flex-start; }
-    .consent-group input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--gold); cursor: pointer; }
-    .consent-group label { font-size: 13px; color: var(--text-muted); line-height: 1.6; cursor: pointer; }
-    .consent-group a { color: var(--gold); }
-    .btn-submit {
-      grid-column: 1 / -1;
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      padding: 16px;
-      font-size: 18px;
-      font-weight: 700;
-      font-family: var(--heading);
-      letter-spacing: 1px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s;
-      width: 100%;
-    }
-    .btn-submit:hover { background: #d4a43c; }
-    .form-success { display: none; text-align: center; padding: 40px; }
-    .form-success h3 { font-family: var(--heading); font-size: 36px; color: var(--gold); margin-bottom: 12px; }
-    .form-success p { color: var(--text-muted); font-size: 16px; }
-    #child-fields-2, #child-fields-3, #child-fields-4 { display: none; grid-column: 1 / -1; }
-    .child-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .btn-form-submit:hover { background: #d4a43c; }
+    .child-extra { display: none; grid-column: 1 / -1; }
+    .child-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-success { display: none; text-align: center; padding: 60px 20px; }
+    .form-success h3 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--gold); margin-bottom: 14px; }
+    .form-success p { font-size: 17px; color: #aaa; line-height: 1.7; }
 
-    /* FOOTER */
-    footer {
-      background: #050505;
-      padding: 60px 40px 30px;
-      border-top: 1px solid #1a1a1a;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      gap: 40px;
-      max-width: 1100px;
-      margin: 0 auto 40px;
-    }
-    .footer-logo img { height: 50px; object-fit: contain; margin-bottom: 20px; }
-    .footer-social { display: flex; gap: 14px; margin-top: 16px; }
-    .footer-social a img { width: 36px; height: 36px; filter: brightness(0.8); transition: filter 0.2s; }
-    .footer-social a:hover img { filter: brightness(1); }
-    .footer-social-svg { width: 36px; height: 36px; fill: #888; transition: fill 0.2s; }
-    .footer-social a:hover .footer-social-svg { fill: var(--gold); }
-    .footer-links h4 { font-family: var(--heading); color: var(--white); font-size: 18px; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .footer-links ul { list-style: none; }
-    .footer-links ul li { margin-bottom: 10px; }
-    .footer-links ul li a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .footer-links ul li a:hover { color: var(--gold); }
-    .footer-contact h4 { font-family: var(--heading); color: var(--white); font-size: 18px; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .footer-contact p { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
-    .footer-contact a { color: var(--text-muted); text-decoration: none; }
-    .footer-contact a:hover { color: var(--gold); }
-    .footer-bottom {
-      border-top: 1px solid #1a1a1a;
-      padding-top: 24px;
-      text-align: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .footer-bottom p { font-size: 13px; color: #555; }
+    /* ─── FOOTER ─── */
+    footer { background: var(--darker); padding: 64px 48px 28px; border-top: 1px solid #111; }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto 48px; }
+    .footer-brand img { height: 48px; display: block; margin-bottom: 20px; }
+    .footer-brand p { font-size: 13px; color: #555; line-height: 1.7; }
+    .footer-socials { display: flex; gap: 14px; margin-top: 20px; }
+    .footer-socials a svg { width: 34px; height: 34px; fill: #555; transition: fill .2s; }
+    .footer-socials a:hover svg { fill: var(--gold); }
+    .footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 18px; letter-spacing: .3px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 14px; color: #555; text-decoration: none; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-col p { font-size: 14px; color: #555; line-height: 1.8; }
+    .footer-col a { color: #555; text-decoration: none; transition: color .2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid #111; padding-top: 24px; text-align: center; max-width: 1100px; margin: 0 auto; }
+    .footer-bottom p { font-size: 13px; color: #333; }
+    .footer-bottom a { color: #444; margin: 0 10px; text-decoration: none; }
+    .footer-bottom a:hover { color: var(--gold); }
 
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .programs-grid { grid-template-columns: repeat(2, 1fr); }
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .prog-grid, .why-grid, .testi-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-right { display: none; }
-      .hamburger { display: flex; }
-      .about-inner { grid-template-columns: 1fr; gap: 40px; }
-      .coach-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-top { grid-template-columns: 1fr; }
-      .programs-grid { grid-template-columns: 1fr; }
-      .features-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
-      .child-group { grid-template-columns: 1fr; }
-      section { padding-left: 20px !important; padding-right: 20px !important; }
-      #competitive-edge, #programs, #about, #summer-camp, #why-choose, #fifty-off, #coach, #testimonials, #step-up, #areas, #lead-form { padding-left: 20px; padding-right: 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .about-grid, .coach-grid { grid-template-columns: 1fr; gap: 40px; }
+      .prog-grid, .why-grid, .testi-grid { grid-template-columns: 1fr; }
+      .form-layout { grid-template-columns: 1fr; }
+      .child-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      #edge, #programs, #about, #why, #fifty, #coach, #testimonials, #stepup, #areas, #form-section { padding-left: 20px; padding-right: 20px; }
+      .sound-btn { left: 16px; bottom: 16px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ANNOUNCEMENT BAR -->
-<div class="announcement-bar">
+<!-- ANN BAR -->
+<div class="ann-bar">
   <a href="https://summercamp.impactmartialathletics.com/" target="_blank" rel="noopener">
-    Enroll Your Child in Summer Camp Today | Limited Spots Available! →
+    Enroll Your Child in Summer Camp Today | Limited Spots Available!
   </a>
 </div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <a href="/"><img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/logo.png" alt="Impact Martial Athletics Logo"></a>
+    <a href="/"><img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/logo.png" alt="Impact Martial Athletics"></a>
   </div>
-  <div class="nav-right">
+  <div class="nav-links">
     <a href="/email-form">Email Us</a>
-    <a href="tel:9546361515" class="nav-phone">📞 954-636-1515</a>
-    <a href="/trial-offer" class="nav-cta">50% Off Trial</a>
+    <a href="tel:9546361515">📞 954-636-1515</a>
+    <a href="/trial-offer" class="cta-btn">50% Off Trial</a>
   </div>
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+  <button class="hamburger" onclick="openMob()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
-  <a href="/email-form" onclick="toggleMobileMenu()">Email Us</a>
-  <a href="tel:9546361515" onclick="toggleMobileMenu()">954-636-1515</a>
-  <a href="/trial-offer" class="btn-gold" onclick="toggleMobileMenu()">50% Off Trial</a>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="/email-form" onclick="closeMob()">Email Us</a>
+  <a href="tel:9546361515" onclick="closeMob()">954-636-1515</a>
+  <a href="/trial-offer" class="btn btn-gold" onclick="closeMob()">50% Off Trial</a>
 </div>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="video-wrapper" id="hero-wrapper">
-    <video id="hero-video" autoplay muted loop playsinline>
-      <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/hero-video.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <button class="sound-toggle" onclick="toggleSound('hero-video', this)">🔇 Enable sound</button>
-  </div>
-  <div class="hero-content">
-    <h1>Impact Martial Athletics – The Future of Youth Training</h1>
-    <p>A science-based performance system that builds strength, confidence, and resilience through a fusion of athletic performance and martial arts training.</p>
-    <a href="/trial-offer" class="btn-gold">Get Started!</a>
+<!-- ═══ HERO ═══ -->
+<section id="hero" class="vid-section">
+  <video id="vid-hero" autoplay muted loop playsinline>
+    <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="vid-overlay"></div>
+  <button class="sound-btn" onclick="toggleSound('vid-hero',this)">🔇 Enable sound</button>
+  <div class="vid-content">
+    <h1 class="hero-h1">Impact Martial Athletics –<br>The Future of Youth Training</h1>
+    <p class="hero-sub">A science-based performance system that builds strength, confidence, and resilience through a fusion of athletic performance and martial arts training.</p>
+    <a href="/trial-offer" class="btn btn-gold">Get Started!</a>
   </div>
 </section>
 
-<!-- COMPETITIVE EDGE -->
-<section id="competitive-edge">
-  <div class="section-tag">Why IMA</div>
+<!-- ═══ COMPETITIVE EDGE ═══ -->
+<section id="edge">
+  <div class="label">Why IMA</div>
   <h2>Give Your Kid the Competitive Edge in Life</h2>
   <p>At Impact Martial Athletics, we've designed a program that goes beyond traditional martial arts. Our science-driven approach combines athletic performance training with martial arts discipline to give your child the mental and physical edge they need to succeed — on and off the mat.</p>
-  <a href="/trial-offer" class="btn-gold">Get Started!</a>
+  <a href="/trial-offer" class="btn btn-gold">Get Started!</a>
 </section>
 
-<!-- PROGRAMS -->
+<!-- ═══ PROGRAMS ═══ -->
 <section id="programs">
-  <div class="section-header">
-    <div class="section-tag">Our Programs</div>
-    <h2>Training Programs Built for Every Child</h2>
+  <div class="sec-head">
+    <div class="label">Our Programs</div>
+    <h2>Our Programs &amp; Expertise</h2>
   </div>
-  <div class="programs-grid">
-    <div class="program-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/kids-ma.png" alt="Kids Martial Arts & Self-Defense" loading="lazy">
-      <div class="program-card-body">
-        <h3>Kids Martial Arts & Self-Defense</h3>
-        <p>Age-appropriate martial arts training that builds discipline, focus, and real-world self-defense skills in a safe, structured environment.</p>
+  <div class="prog-grid">
+    <div class="prog-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/kids-ma.png" alt="Kids Martial Arts" loading="lazy">
+      <div class="prog-card-body">
+        <h3>Kids Martial Arts &amp; Self-Defense</h3>
+        <p>Dynamic classes that teach technique, discipline, and real-world self-defense skills.</p>
       </div>
     </div>
-    <div class="program-card">
+    <div class="prog-card">
       <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/youth-sports.png" alt="Youth Sports & Athletic Training" loading="lazy">
-      <div class="program-card-body">
-        <h3>Youth Sports & Athletic Training</h3>
-        <p>Sports-specific conditioning, agility, and strength training designed to elevate your child's performance in any sport they compete in.</p>
+      <div class="prog-card-body">
+        <h3>Youth Sports &amp; Athletic Training</h3>
+        <p>Strength, agility, speed, coordination — tailored to young athletes looking to level up.</p>
       </div>
     </div>
-    <div class="program-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/anti-bullying.png" alt="Anti-Bullying Martial Arts Program" loading="lazy">
-      <div class="program-card-body">
+    <div class="prog-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/anti-bullying.png" alt="Anti-Bullying Martial Arts" loading="lazy">
+      <div class="prog-card-body">
         <h3>Anti-Bullying Martial Arts Program</h3>
-        <p>Teaching kids to recognize, avoid, and confidently handle bullying situations with verbal strategies, boundary-setting, and physical confidence.</p>
+        <p>A unique curriculum built to empower kids against bullying through confidence and non-violent defense skills.</p>
       </div>
     </div>
-    <div class="program-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/mindset.png" alt="Mindset Coaching & Character Development" loading="lazy">
-      <div class="program-card-body">
-        <h3>Mindset Coaching & Character Development</h3>
-        <p>We train the whole child — building resilience, leadership, and a growth mindset that translates to success in school, sports, and life.</p>
+    <div class="prog-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/mindset.png" alt="Mindset Coaching" loading="lazy">
+      <div class="prog-card-body">
+        <h3>Mindset Coaching &amp; Character Development</h3>
+        <p>Mental resilience, leadership, focus and discipline — skills that serve in life beyond sports.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT IMA -->
+<!-- ═══ ABOUT IMA (video overlay) ═══ -->
+<section id="about-vid" class="vid-section" style="min-height:70vh;">
+  <video id="vid-about" autoplay muted loop playsinline>
+    <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-shick-intro.mp4" type="video/mp4">
+  </video>
+  <div class="vid-overlay" style="background:linear-gradient(to bottom,rgba(0,0,0,.7),rgba(0,0,0,.6));"></div>
+  <button class="sound-btn" onclick="toggleSound('vid-about',this)">🔇 Enable sound</button>
+  <div class="vid-content" style="max-width:880px;">
+    <div class="label">About IMA</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,70px);color:#fff;margin-bottom:22px;letter-spacing:.5px;">Impact Martial Athletics</h2>
+    <p style="font-size:clamp(16px,1.8vw,20px);color:rgba(255,255,255,.88);line-height:1.75;max-width:760px;margin:0 auto 32px;">Impact Martial Athletics is a science-backed training program for kids that combines the discipline, self-defense, and mental focus of martial arts with the strength, speed, and agility of sports athletic training. It builds both physical and mental strength, enhancing confidence, leadership, and athletic skills to help kids excel in sports and life. By pushing kids beyond their limits, they develop into confident, disciplined, and high performing individuals who are prepared to face challenges.</p>
+    <a href="/trial-offer" class="btn btn-gold">Get Started!</a>
+  </div>
+</section>
+
+<!-- ═══ ABOUT IMA (light, split) ═══ -->
 <section id="about">
-  <div class="about-inner">
+  <div class="about-grid">
     <div class="about-text">
-      <div class="section-tag">About Us</div>
-      <h2>About Impact Martial Athletics</h2>
-      <p>Impact Martial Athletics is a science-backed training program unlike anything your child has experienced before. We combine the discipline and confidence-building of traditional martial arts with modern athletic performance science.</p>
-      <p>Our coaches are certified in both martial arts instruction and youth athletic development — giving your child a truly complete training experience designed to produce results that last a lifetime.</p>
-      <p>We believe every child has the potential to become their best self. Our structured curriculum, mentorship-focused coaches, and positive community create the environment where that potential is realized.</p>
-      <a href="/trial-offer" class="btn-gold" style="margin-top: 12px;">Get Started!</a>
+      <div class="label">About Us</div>
+      <h2>Impact Martial Athletics</h2>
+      <p>Impact Martial Athletics is a science-backed training program for kids that combines the discipline, self-defense, and mental focus of martial arts with the strength, speed, and agility of sports athletic training.</p>
+      <p>It builds both physical and mental strength, enhancing confidence, leadership, and athletic skills to help kids excel in sports and life. By pushing kids beyond their limits, they develop into confident, disciplined, and high performing individuals who are prepared to face challenges.</p>
+      <a href="/trial-offer" class="btn btn-gold" style="margin-top:8px;">Get Started!</a>
     </div>
     <div class="about-img">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/4-kids.png" alt="Kids training at Impact Martial Athletics" loading="lazy">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/4-kids.png" alt="Kids training at IMA" loading="lazy">
     </div>
   </div>
 </section>
 
-<!-- SUMMER CAMP BANNER -->
-<section id="summer-camp">
-  <div class="summer-bg"></div>
-  <div class="summer-overlay"></div>
-  <div class="summer-content">
-    <h2>Keep Your Kids Active This Summer | Join Our Summer Camp!</h2>
-    <p style="color:rgba(255,255,255,0.85);font-size:18px;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto;">Fun, structured, and skill-building — our summer camp keeps kids engaged, active, and growing all summer long.</p>
-    <a href="https://summercamp.impactmartialathletics.com/" target="_blank" rel="noopener" class="btn-gold">Register for Summer Camp →</a>
+<!-- ═══ SUMMER CAMP ═══ -->
+<section id="camp">
+  <div class="camp-bg"></div>
+  <div class="camp-overlay"></div>
+  <div class="camp-content">
+    <h2>Keep Your Kids Active This Summer | Join Our Camp!</h2>
+    <p>Fun, structured, and skill-building — our summer camp keeps kids engaged and growing all summer long.</p>
+    <a href="https://summercamp.impactmartialathletics.com/" target="_blank" rel="noopener" class="btn btn-gold">Register Now →</a>
   </div>
 </section>
 
-<!-- WHY CHOOSE IMA -->
-<section id="why-choose">
-  <div class="section-header">
-    <div class="section-tag">Why Choose IMA</div>
-    <h2>What Makes Impact Martial Athletics Different</h2>
+<!-- ═══ WHY CHOOSE ═══ -->
+<section id="why">
+  <div class="sec-head">
+    <div class="label">Why Choose IMA</div>
+    <h2>Why Choose Impact Martial Athletics</h2>
+    <p>We're not just a martial arts studio — we build warriors in life. Here's what sets us apart:</p>
   </div>
-  <div class="features-grid">
-    <div class="feature-box">
-      <div class="feature-icon">🔬</div>
-      <h3>Science-Driven Training & Safety</h3>
-      <p>Every drill and workout is designed based on sports science research and age-appropriate athletic development principles, ensuring safe, effective progress.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🔬</div>
+      <h3>Science-Driven Training &amp; Safety</h3>
+      <p>We use evidence-based drills and protocols. Every session is designed around youth athletic development science.</p>
     </div>
-    <div class="feature-box">
-      <div class="feature-icon">🏅</div>
+    <div class="why-card">
+      <div class="why-icon">🏅</div>
       <h3>All Levels Welcome</h3>
-      <p>Whether your child is brand new to martial arts or a seasoned competitor, our curriculum adapts to meet them exactly where they are and accelerates their growth.</p>
+      <p>Beginners to advanced; kids thrive in our inclusive environment. Ages 5 and up.</p>
     </div>
-    <div class="feature-box">
-      <div class="feature-icon">🛡️</div>
+    <div class="why-card">
+      <div class="why-icon">🛡️</div>
       <h3>Anti-Bullying Focus</h3>
-      <p>Our dedicated anti-bullying program gives kids the tools, confidence, and strategies to handle difficult social situations safely and effectively.</p>
+      <p>Built into all classes, we teach respect, conflict resolution, and assertiveness.</p>
     </div>
-    <div class="feature-box">
-      <div class="feature-icon">🌱</div>
+    <div class="why-card">
+      <div class="why-icon">🌱</div>
       <h3>Holistic Growth</h3>
-      <p>We develop the whole child — body, mind, and character. Our coaches are mentors who invest in each student's long-term success, not just their technique.</p>
+      <p>Boosts speed, agility, and power with our specially designed Impact MAAT system.</p>
     </div>
   </div>
 </section>
 
-<!-- 50% OFF BANNER -->
-<section id="fifty-off">
+<!-- ═══ 50% OFF ═══ -->
+<section id="fifty">
   <h2>Get 50% Off Your Child's First Two Classes</h2>
-  <p>Experience the Impact Martial Athletics difference firsthand. Limited spots available — claim your discounted trial now.</p>
-  <a href="/trial-offer" class="btn-gold" style="background:#000;color:var(--gold);border:2px solid #000;">Get Started!</a>
+  <p>Experience the Impact Martial Athletics difference. Limited spots available.</p>
+  <a href="/trial-offer" class="btn btn-dark">Get Started!</a>
 </section>
 
-<!-- MEET COACH SHICK -->
+<!-- ═══ MEET COACH SHICK ═══ -->
 <section id="coach">
-  <div class="coach-inner">
+  <div class="coach-grid">
     <div class="coach-text">
-      <div class="section-tag">Your Coach</div>
-      <h2>Meet Coach Shick — Your Child's Mentor</h2>
-      <p class="subheading">Combining Martial Arts and Athletic Training to Build Warriors.</p>
-      <p>Coach Shick has spent over a decade developing young athletes and martial artists. His unique approach combines elite-level sports performance science with the timeless values of martial arts discipline — creating a training experience that transforms not just bodies, but character.</p>
+      <div class="label">Your Coach</div>
+      <h2>Meet Coach Shick —<br>Your Child's Mentor</h2>
+      <p class="coach-tagline">Combining Martial Arts and Athletic Training to Build Warriors.</p>
       <ul class="coach-bullets">
-        <li>Over 10 years of experience coaching youth martial arts and athletics</li>
-        <li>Certified in youth athletic performance development</li>
-        <li>Black belt martial artist with competitive experience</li>
-        <li>Trained over 500+ young athletes in South Florida</li>
-        <li>Specialist in anti-bullying education and youth empowerment</li>
-        <li>Expert in mindset coaching and character development</li>
-        <li>Passionate mentor focused on long-term student success</li>
-        <li>Founder of the science-based IMA training curriculum</li>
-        <li>Dedicated to building the next generation of confident leaders</li>
+        <li>Dad of 4 kids</li>
+        <li>40+ years of martial arts experience</li>
+        <li>Created a national anti-bullying program for public and private schools</li>
+        <li>Certified Pop Warner and USA Football coach</li>
+        <li>Trained elite athletes in martial arts and sports performance</li>
+        <li>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
+        <li>Owned 20+ martial arts schools</li>
+        <li>Owned an Orangetheory Fitness franchise</li>
+        <li>Professional martial arts stuntman</li>
       </ul>
-      <a href="/trial-offer" class="btn-gold" style="color:#000;margin-top:12px;display:inline-block;">Train With Coach Shick</a>
     </div>
     <div class="coach-img">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-shick.png" alt="Coach Shick - Impact Martial Athletics" loading="lazy">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-shick.png" alt="Coach Shick" loading="lazy">
     </div>
   </div>
-  <div class="coach-family-img">
-    <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-shick-family.png" alt="Coach Shick with the IMA Family" loading="lazy">
+  <div class="coach-family">
+    <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-shick-family.png" alt="Coach Shick with students" loading="lazy">
   </div>
 </section>
 
-<!-- BETTER PATH -->
-<section id="better-path">
-  <div class="video-wrapper" id="better-path-wrapper">
-    <video id="better-path-video" autoplay muted loop playsinline>
-      <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <button class="sound-toggle" onclick="toggleSound('better-path-video', this)">🔇 Enable sound</button>
-  </div>
-  <div class="better-path-content">
-    <h2>A Better Path for Their Energy, Confidence & Future</h2>
-    <p>Today's world keeps kids sitting, scrolling, and sedentary. The consequences — anxiety, low confidence, poor focus — are showing up in classrooms and homes everywhere.</p>
-    <p>Through structure, mentorship, and fun training that they actually look forward to, IMA gives kids a positive outlet that builds them physically, mentally, and emotionally. This isn't just martial arts — it's a better path forward.</p>
-    <br>
-    <a href="/trial-offer" class="btn-gold">Get Started Today</a>
+<!-- ═══ BETTER PATH (video) ═══ -->
+<section id="better-path" class="vid-section">
+  <video id="vid-better" autoplay muted loop playsinline>
+    <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path.mp4" type="video/mp4">
+  </video>
+  <div class="vid-overlay" style="background:rgba(0,0,0,.65);"></div>
+  <button class="sound-btn" onclick="toggleSound('vid-better',this)">🔇 Enable sound</button>
+  <div class="vid-content">
+    <h2>A Better Path for Their Energy, Confidence &amp; Future</h2>
+    <p>Today's world keeps kids sitting, scrolling, and losing valuable time.</p>
+    <p>Our program flips that script — giving kids a place to move with purpose, learn real martial arts, and build the mindset of a champion.</p>
+    <strong>Through structure, mentorship, and fun training, we help children fight for their health, not for likes on a screen.</strong>
+    <a href="/trial-offer" class="btn btn-gold" style="margin-top:12px;">Get Started!</a>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- ═══ TESTIMONIALS ═══ -->
 <section id="testimonials">
-  <div class="section-header">
-    <div class="section-tag">What People Say</div>
-    <h2>Professional Athletes & Educators, Parents Agree: This Works…</h2>
+  <div class="sec-head">
+    <div class="label">Testimonials</div>
+    <h2>Professional Athletes &amp; Educators,<br>Parents Agree: This Works...</h2>
   </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/juan-moreno.png" alt="Juan Moreno">
-      <div class="name">Juan Moreno</div>
-      <div class="title">2X Olympic Silver Champion</div>
-      <div class="star-divider">★★★★★</div>
-      <p class="quote">"The program Coach Shick has built is exceptional. The combination of martial arts discipline with modern athletic science is exactly what young athletes need. I wish something like this existed when I was coming up."</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/juan-moreno.png" alt="Juan Moreno" loading="lazy">
+      <div class="testi-name">Juan Moreno</div>
+      <div class="testi-title">2X Olympic Silver Champion</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"During my 35 years in the Olympic movement, I've worked with many outstanding athletes and coaches—Coach Shick is one of them. His dedication to performance and achievement is remarkable, and his ability to connect with athletes and develop sport-specific training is a tremendous asset."</p>
     </div>
-    <div class="testimonial-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/kristal-richardson.png" alt="Kristal Richardson">
-      <div class="name">Kristal Richardson</div>
-      <div class="title">IFBB Pro Olympia Competitor</div>
-      <div class="star-divider">★★★★★</div>
-      <p class="quote">"As a professional athlete and parent, I can see the quality and intentionality in IMA's program. Coach Shick genuinely cares about developing each child as a whole person. My children love it here."</p>
+    <div class="testi-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/kristal-richardson.png" alt="Kristal Richardson" loading="lazy">
+      <div class="testi-name">Kristal Richardson</div>
+      <div class="testi-title">IFBB Pro Olympia Competitor</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Coach Shick's program at Impact Martial Athletics is built just like my own fitness competition training—structured, effective, and it's amazing to see how much stronger and faster my daughters have gotten!"</p>
     </div>
-    <div class="testimonial-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/denis-shvidki.png" alt="Denis Shvidki">
-      <div class="name">Denis Shvidki</div>
-      <div class="title">Florida Panthers NHL Player</div>
-      <div class="star-divider">★★★★★</div>
-      <p class="quote">"Elite performance starts young, and IMA gets it right. The foundation of discipline, athleticism, and mental toughness they're building in these kids is exactly what it takes to compete at the highest level."</p>
+    <div class="testi-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/denis-shvidki.png" alt="Denis Shvidki" loading="lazy">
+      <div class="testi-name">Denis Shvidki</div>
+      <div class="testi-title">Florida Panthers NHL Player</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"The foundation of any great athlete is discipline, resilience, and smart training. Coach Shick instills all of that at Impact Martial Athletics, giving kids the edge they need to succeed."</p>
     </div>
-    <div class="testimonial-card">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/nick-additon.png" alt="Nick Additon">
-      <div class="name">Nick Additon</div>
-      <div class="title">Professional MLB Pitcher</div>
-      <div class="star-divider">★★★★★</div>
-      <p class="quote">"Coach Shick's program is built on the same principles that made me a professional athlete — discipline, science, and a genuine passion for developing human potential. I fully endorse what he's doing for our community's youth."</p>
+    <div class="testi-card">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/nick-additon.png" alt="Nick Additon" loading="lazy">
+      <div class="testi-name">Nick Additon</div>
+      <div class="testi-title">Professional MLB Pitcher</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Coach Shick has a rare ability to bring out the best in young athletes not just in their skills, but in their confidence, discipline, and mindset. Parents see the transformation firsthand."</p>
     </div>
   </div>
 </section>
 
-<!-- IMPACT IN THE COMMUNITY -->
-<section id="community">
-  <div class="video-wrapper" id="community-wrapper">
-    <video id="community-video" autoplay muted loop playsinline>
-      <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/community.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <button class="sound-toggle" onclick="toggleSound('community-video', this)">🔇 Enable sound</button>
-  </div>
-  <div class="community-content">
-    <div class="featured-badge">📺 Featured on Local 10+ Plus</div>
+<!-- ═══ COMMUNITY (video) ═══ -->
+<section id="community" class="vid-section">
+  <video id="vid-comm" autoplay muted loop playsinline>
+    <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/community.mp4" type="video/mp4">
+  </video>
+  <div class="vid-overlay"></div>
+  <button class="sound-btn" onclick="toggleSound('vid-comm',this)">🔇 Enable sound</button>
+  <div class="vid-content">
+    <div class="featured-tag">📺 Featured on Local 10+ Plus</div>
     <h2>Impact in the Community</h2>
-    <p>This program gave our students confidence to stand up for themselves, make better decisions, and become leaders in their schools and neighborhoods.</p>
-    <p>Impact Martial Athletics is proud to serve and uplift the Davie and South Florida community.</p>
+    <p>"This program gave our students confidence to stand up for themselves…"</p>
     <br>
-    <a href="/trial-offer" class="btn-gold">Get Started!</a>
+    <a href="/trial-offer" class="btn btn-gold">Get Started!</a>
   </div>
 </section>
 
-<!-- STEP UP SCHOLARSHIPS -->
-<section id="step-up">
-  <div class="step-up-inner">
+<!-- ═══ STEP UP ═══ -->
+<section id="stepup">
+  <div class="stepup-inner">
     <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/step-up.png" alt="Step Up Scholarships" loading="lazy">
     <h2>Step Up Scholarships Accepted – A Perfect Fit for Homeschool Families</h2>
-    <p>Impact Martial Athletics is proud to accept Step Up for Students scholarships, making our world-class youth training program accessible to more families throughout South Florida — including homeschool families looking for a structured, enriching physical education experience.</p>
-    <p>Step Up scholarships can be used to cover tuition for our ongoing martial arts and athletic training programs. This is an incredible opportunity for families who are invested in their child's physical, mental, and character development but need financial support to access premium programs.</p>
-    <p>Our program aligns perfectly with homeschool PE requirements and provides the structured social environment that homeschool families often seek for their children. Students enrolled through Step Up scholarships receive the exact same premium training experience as all of our members.</p>
-    <p style="margin-top: 16px;"><a href="/trial-offer" class="btn-gold">Claim Your Trial Offer</a></p>
+    <p>At Impact Martial Athletics, we proudly accept Step Up For Students scholarships, making it easier for families to include high-quality martial arts and sports training as part of their child's education. Our program is a great fit for homeschool students looking for an engaging and structured way to stay active, build confidence, and develop discipline.</p>
+    <p>Martial arts provide the perfect balance of physical exercise, focus, and fun, giving kids a positive outlet during their school day or recess time.</p>
   </div>
 </section>
 
-<!-- AREAS WE SERVE -->
+<!-- ═══ AREAS ═══ -->
 <section id="areas">
   <div class="areas-inner">
-    <div class="section-tag" style="background:var(--gold);color:#000;">Service Area</div>
+    <div class="label" style="background:var(--gold);color:#000;">Service Area</div>
     <h2>Areas We Serve</h2>
     <p>Our kids fitness programs proudly serve families in <strong>Davie, Weston, Pembroke Pines, Cooper City, Sunrise, Plantation, Southwest Ranches, and Hollywood</strong>.</p>
-    <p>If you're searching for kids fitness in Davie or children's fitness programs in Weston, Impact Martial Athletics is your premier destination. Conveniently located at 4401 S Flamingo Rd, Davie, FL 33330 — just minutes from families across Southwest Broward County.</p>
-    <p>Whether you're in Cooper City looking for youth martial arts, in Plantation seeking anti-bullying programs, or in Hollywood searching for youth athletic training — we welcome your family to experience the IMA difference.</p>
-    <a href="https://www.google.com/maps/place/Impact+Martial+Athletics/@26.0415,-80.3425,15z" target="_blank" rel="noopener" class="map-link">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/map.png" alt="Impact Martial Athletics location map - Davie FL" loading="lazy">
-    </a>
+    <p>If you're searching for kids fitness in Davie or children's fitness programs in Weston, our facility is conveniently located and easy to access from all surrounding areas.</p>
+    <div class="map-wrap">
+      <a href="https://www.google.com/maps/dir//4401+S+Flamingo+Rd+%23104,+Davie,+FL+33330/@26.0651504,-80.3969938,12z" target="_blank" rel="noopener">
+        <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/map.png" alt="IMA Location Map" loading="lazy">
+      </a>
+    </div>
   </div>
 </section>
 
-<!-- LEAD FORM -->
-<section id="lead-form">
-  <div class="lead-form-inner">
-    <div class="section-header">
-      <div class="section-tag">Get Started</div>
+<!-- ═══ LEAD FORM ═══ -->
+<section id="form-section">
+  <div class="form-wrap">
+    <div class="sec-head">
+      <div class="label">Get Started</div>
       <h2>Claim Your 50% Off Trial</h2>
-      <p style="color:var(--text-muted);margin-top:12px;font-size:16px;">Fill out the form below and we'll reach out to schedule your child's first class.</p>
+      <p>Fill out the form below and we'll reach out to schedule your child's first class.</p>
     </div>
-    <form id="enrollForm" onsubmit="submitForm(event)">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="firstName">First Name *</label>
-          <input type="text" id="firstName" name="firstName" required placeholder="Your first name">
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name *</label>
-          <input type="text" id="lastName" name="lastName" required placeholder="Your last name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" required placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone *</label>
-          <input type="tel" id="phone" name="phone" required placeholder="(954) 000-0000">
-        </div>
-        <div class="form-group full">
-          <label for="numChildren">How many children?</label>
-          <select id="numChildren" name="numChildren" onchange="showChildFields(this.value)">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+    <form id="mainForm" onsubmit="handleSubmit(event)">
+      <div class="form-layout">
+        <div class="fg"><label>First Name *</label><input type="text" name="firstName" required placeholder="First name"></div>
+        <div class="fg"><label>Last Name *</label><input type="text" name="lastName" required placeholder="Last name"></div>
+        <div class="fg"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="fg"><label>Phone *</label><input type="tel" name="phone" required placeholder="(954) 000-0000"></div>
+        <div class="fg full">
+          <label>How many children would you like to enroll? *</label>
+          <select name="numChildren" onchange="showChildren(this.value)">
+            <option value="1">1</option><option value="2">2</option>
+            <option value="3">3</option><option value="4">4</option>
           </select>
         </div>
-
-        <!-- Child 1 -->
-        <div class="form-group">
-          <label for="child1Name">1st Child's Name *</label>
-          <input type="text" id="child1Name" name="child1Name" required placeholder="Child's first name">
-        </div>
-        <div class="form-group">
-          <label for="child1Age">1st Child's Age *</label>
-          <select id="child1Age" name="child1Age" required>
+        <div class="fg"><label>1st Child's Name *</label><input type="text" name="child1Name" required placeholder="Child's name"></div>
+        <div class="fg">
+          <label>1st Child's Age *</label>
+          <select name="child1Age" required>
             <option value="">Select age</option>
-            <option>5</option><option>6</option><option>7</option><option>8</option>
-            <option>9</option><option>10</option><option>11</option><option>12</option>
-            <option>13</option><option>14</option><option>15</option>
+            <option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+            <option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
           </select>
         </div>
-
-        <!-- Child 2 -->
-        <div id="child-fields-2" class="child-group">
-          <div class="form-group">
-            <label for="child2Name">2nd Child's Name</label>
-            <input type="text" id="child2Name" name="child2Name" placeholder="Child's first name">
-          </div>
-          <div class="form-group">
-            <label for="child2Age">2nd Child's Age</label>
-            <select id="child2Age" name="child2Age">
-              <option value="">Select age</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option><option>11</option><option>12</option>
-              <option>13</option><option>14</option><option>15</option>
-            </select>
-          </div>
+        <div id="c2" class="child-extra"><div class="child-row">
+          <div class="fg"><label>2nd Child's Name</label><input type="text" name="child2Name" placeholder="Child's name"></div>
+          <div class="fg"><label>2nd Child's Age</label><select name="child2Age"><option value="">Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option></select></div>
+        </div></div>
+        <div id="c3" class="child-extra"><div class="child-row">
+          <div class="fg"><label>3rd Child's Name</label><input type="text" name="child3Name" placeholder="Child's name"></div>
+          <div class="fg"><label>3rd Child's Age</label><select name="child3Age"><option value="">Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option></select></div>
+        </div></div>
+        <div id="c4" class="child-extra"><div class="child-row">
+          <div class="fg"><label>4th Child's Name</label><input type="text" name="child4Name" placeholder="Child's name"></div>
+          <div class="fg"><label>4th Child's Age</label><select name="child4Age"><option value="">Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option></select></div>
+        </div></div>
+        <div class="fg full"><label>Message</label><textarea name="message" placeholder="Any questions or additional information..."></textarea></div>
+        <div class="consent-row">
+          <input type="checkbox" id="sms" name="smsConsent" required>
+          <label for="sms">I consent to receive text messages from Impact Martial Athletics at the number provided, including class reminders, studio updates, and promotional offers. Message frequency varies. Reply STOP to opt out or HELP for help. Msg &amp; data rates may apply.</label>
         </div>
-
-        <!-- Child 3 -->
-        <div id="child-fields-3" class="child-group">
-          <div class="form-group">
-            <label for="child3Name">3rd Child's Name</label>
-            <input type="text" id="child3Name" name="child3Name" placeholder="Child's first name">
-          </div>
-          <div class="form-group">
-            <label for="child3Age">3rd Child's Age</label>
-            <select id="child3Age" name="child3Age">
-              <option value="">Select age</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option><option>11</option><option>12</option>
-              <option>13</option><option>14</option><option>15</option>
-            </select>
-          </div>
+        <div class="consent-row">
+          <input type="checkbox" id="prv" name="privacyConsent" required>
+          <label for="prv">By clicking the checkbox, I have read &amp; agree to the <a href="/privacy-policy" target="_blank">PRIVACY POLICY</a> and <a href="/terms-of-service" target="_blank">TERMS OF SERVICES</a>.</label>
         </div>
-
-        <!-- Child 4 -->
-        <div id="child-fields-4" class="child-group">
-          <div class="form-group">
-            <label for="child4Name">4th Child's Name</label>
-            <input type="text" id="child4Name" name="child4Name" placeholder="Child's first name">
-          </div>
-          <div class="form-group">
-            <label for="child4Age">4th Child's Age</label>
-            <select id="child4Age" name="child4Age">
-              <option value="">Select age</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option><option>11</option><option>12</option>
-              <option>13</option><option>14</option><option>15</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group full">
-          <label for="message">Message (optional)</label>
-          <textarea id="message" name="message" placeholder="Any questions or additional information..."></textarea>
-        </div>
-
-        <div class="consent-group">
-          <input type="checkbox" id="smsConsent" name="smsConsent" required>
-          <label for="smsConsent">I consent to receive text messages from Impact Martial Athletics at the number provided, including class reminders, studio updates, and promotional offers. Message frequency varies. Reply STOP to opt out or HELP for help. Msg &amp; data rates may apply.</label>
-        </div>
-
-        <div class="consent-group">
-          <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
-          <label for="privacyConsent">By clicking the checkbox, I have read &amp; agree to the <a href="/privacy-policy" target="_blank">PRIVACY POLICY</a> and <a href="/terms-of-service" target="_blank">TERMS OF SERVICES</a>.</label>
-        </div>
-
-        <button type="submit" class="btn-submit">SUBMIT — CLAIM MY 50% OFF TRIAL</button>
+        <button type="submit" class="btn-form-submit">SUBMIT</button>
       </div>
     </form>
-    <div class="form-success" id="formSuccess">
+    <div class="form-success" id="mainFormSuccess">
       <h3>🎉 You're In!</h3>
-      <p>We received your information and will be in touch shortly to schedule your child's first class. Get ready to experience the Impact Martial Athletics difference!</p>
+      <p>We received your info and will reach out shortly to schedule your child's first class.</p>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-logo">
+  <div class="footer-grid">
+    <div class="footer-brand">
       <a href="/"><img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/logo-footer.png" alt="Impact Martial Athletics"></a>
-      <div class="footer-social">
+      <p>Science-based youth martial arts and athletic training in Davie, FL.</p>
+      <div class="footer-socials">
         <a href="https://www.facebook.com/p/Impact-Martial-Athletics-61573942885497/" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg class="footer-social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
         <a href="https://www.instagram.com/impactmartialathletics/" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg class="footer-social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
       </div>
     </div>
-    <div class="footer-links">
+    <div class="footer-col">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="/trial-offer">50% Off Trial Offer</a></li>
+        <li><a href="/trial-offer">50% Off Trial</a></li>
         <li><a href="#programs">Programs</a></li>
-        <li><a href="#about">About IMA</a></li>
         <li><a href="#coach">Meet Coach Shick</a></li>
         <li><a href="https://summercamp.impactmartialathletics.com/" target="_blank" rel="noopener">Summer Camp</a></li>
         <li><a href="/privacy-policy">Privacy Policy</a></li>
         <li><a href="/terms-of-service">Terms of Service</a></li>
         <li><a href="/refund-policy">Refund Policy</a></li>
+        <li><a href="/email-form">Contact</a></li>
       </ul>
     </div>
-    <div class="footer-contact">
-      <h4>Contact</h4>
+    <div class="footer-col">
+      <h4>Contact Information</h4>
       <p>
         <a href="mailto:tom@imaimpact.com">tom@imaimpact.com</a><br>
         <a href="tel:9546361515">954-636-1515</a><br><br>
-        4401 S Flamingo Rd<br>
-        Davie, FL 33330
+        <a href="https://www.google.com/maps/dir//4401+S+Flamingo+Rd" target="_blank" rel="noopener">
+          4401 S Flamingo Rd<br>Davie, FL 33330
+        </a>
       </p>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Impact Martial Athletics. All rights reserved. | <a href="/privacy-policy" style="color:#555;text-decoration:none;">Privacy Policy</a> | <a href="/terms-of-service" style="color:#555;text-decoration:none;">Terms of Service</a> | <a href="/refund-policy" style="color:#555;text-decoration:none;">Refund Policy</a></p>
+    <p>
+      © 2025 Impact Martial Athletics &nbsp;|&nbsp;
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/email-form">Contact Information</a>
+      <a href="/terms-of-service">Terms of Service</a>
+      <a href="/refund-policy">Refund Policy</a>
+    </p>
   </div>
 </footer>
 
@@ -1168,76 +780,44 @@ function toggleSound(id, btn) {
   btn.textContent = v.muted ? '🔇 Enable sound' : '🔊 Sound on';
 }
 
-function toggleMobileMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
+function openMob() { document.getElementById('mobMenu').classList.add('open'); }
+function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
 
-function showChildFields(num) {
+function showChildren(n) {
   for (let i = 2; i <= 4; i++) {
-    const el = document.getElementById('child-fields-' + i);
-    if (el) el.style.display = i <= parseInt(num) ? 'grid' : 'none';
+    const el = document.getElementById('c' + i);
+    if (el) el.style.display = i <= parseInt(n) ? 'block' : 'none';
   }
 }
 
-async function submitForm(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  const form = document.getElementById('enrollForm');
-  const btn = form.querySelector('.btn-submit');
-  btn.textContent = 'Submitting…';
-  btn.disabled = true;
-
-  const data = {
-    firstName: form.firstName.value,
-    lastName: form.lastName.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    numChildren: form.numChildren.value,
-    child1Name: form.child1Name.value,
-    child1Age: form.child1Age.value,
-    child2Name: form.child2Name?.value,
-    child2Age: form.child2Age?.value,
-    child3Name: form.child3Name?.value,
-    child3Age: form.child3Age?.value,
-    child4Name: form.child4Name?.value,
-    child4Age: form.child4Age?.value,
-    message: form.message.value,
-    smsConsent: form.smsConsent.checked,
-    privacyConsent: form.privacyConsent.checked,
-    source: 'homepage',
-    submittedAt: new Date().toISOString()
-  };
-
+  const form = e.target;
+  const btn = form.querySelector('.btn-form-submit');
+  btn.textContent = 'Submitting…'; btn.disabled = true;
+  const data = Object.fromEntries(new FormData(form));
+  data.source = 'homepage'; data.submittedAt = new Date().toISOString();
   try {
-    const res = await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (res.ok) {
-      form.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    } else {
-      throw new Error('Server error');
-    }
-  } catch (err) {
-    btn.textContent = 'SUBMIT — CLAIM MY 50% OFF TRIAL';
-    btn.disabled = false;
-    alert('Something went wrong. Please try again or call us at 954-636-1515.');
+    const r = await fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    if (r.ok) { form.style.display = 'none'; document.getElementById('mainFormSuccess').style.display = 'block'; }
+    else throw new Error();
+  } catch {
+    btn.textContent = 'SUBMIT'; btn.disabled = false;
+    alert('Something went wrong. Please call 954-636-1515.');
   }
 }
 
-// Handle video load errors — show placeholder
+// Graceful video error handling
 document.querySelectorAll('video').forEach(v => {
   v.addEventListener('error', () => {
-    const wrapper = v.closest('.video-wrapper');
-    if (wrapper) {
-      const ph = document.createElement('div');
-      ph.className = 'video-placeholder';
-      wrapper.insertBefore(ph, v);
-      v.remove();
-      const btn = wrapper.querySelector('.sound-toggle');
-      if (btn) { btn.classList.add('disabled'); btn.disabled = true; }
-    }
+    const sec = v.closest('.vid-section');
+    if (!sec) return;
+    const ph = document.createElement('div');
+    ph.className = 'vid-placeholder';
+    sec.insertBefore(ph, v);
+    v.remove();
+    const btn = sec.querySelector('.sound-btn');
+    if (btn) { btn.style.opacity = '.4'; btn.disabled = true; }
   });
 });
 </script>
