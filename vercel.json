@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/lead-form", "destination": "/trial-offer.html" },
+    { "source": "/email-form", "destination": "/email-form.html" },
+    { "source": "/trial-offer", "destination": "/trial-offer.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
+    { "source": "/refund-policy", "destination": "/refund-policy.html" }
+  ]
+}

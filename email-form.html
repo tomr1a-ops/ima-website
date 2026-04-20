@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Impact Martial Athletics – Davie, FL</title>
+  <meta name="description" content="Get in touch with Impact Martial Athletics in Davie, FL. Email us, call us, or stop by our studio at 4401 S Flamingo Rd.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #e8b84b; --dark: #0a0a0a; --heading: 'Bebas Neue', sans-serif; --body: 'Inter', sans-serif; }
+    body { font-family: var(--body); background: var(--dark); color: #ccc; line-height: 1.6; }
+    .announcement-bar { background: var(--gold); color: #000; text-align: center; padding: 10px 20px; font-size: 14px; font-weight: 600; }
+    .announcement-bar a { color: #000; text-decoration: none; }
+    nav { background: #000; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .nav-logo img { height: 50px; }
+    .nav-right a { color: #fff; text-decoration: none; font-size: 14px; margin-left: 24px; }
+    .nav-cta { background: var(--gold); color: #000 !important; padding: 10px 22px; border-radius: 4px; font-weight: 700 !important; }
+    .page-header { background: #111; padding: 60px 40px 50px; text-align: center; border-bottom: 1px solid #222; }
+    .page-header h1 { font-family: var(--heading); font-size: 60px; color: #fff; letter-spacing: 1px; margin-bottom: 12px; }
+    .page-header p { color: #999; font-size: 16px; max-width: 500px; margin: 0 auto; }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 0;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 40px;
+    }
+    .contact-info { padding-right: 60px; }
+    .contact-info h2 { font-family: var(--heading); font-size: 36px; color: #fff; margin-bottom: 30px; letter-spacing: 0.5px; }
+    .info-item { display: flex; gap: 18px; margin-bottom: 28px; align-items: flex-start; }
+    .info-icon { font-size: 28px; flex-shrink: 0; }
+    .info-text h3 { font-size: 14px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .info-text p { font-size: 15px; color: #ccc; line-height: 1.6; }
+    .info-text a { color: #ccc; text-decoration: none; }
+    .info-text a:hover { color: var(--gold); }
+    .social-links { margin-top: 36px; }
+    .social-links h3 { font-size: 14px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .social-links a { display: inline-flex; align-items: center; gap: 10px; color: #ccc; text-decoration: none; font-size: 14px; margin-right: 20px; margin-bottom: 10px; }
+    .social-links a:hover { color: var(--gold); }
+    .contact-form-box { background: #111; border: 1px solid #222; border-radius: 12px; padding: 40px 36px; }
+    .contact-form-box h3 { font-family: var(--heading); font-size: 30px; color: #fff; margin-bottom: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .form-group label { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: #0a0a0a; border: 1px solid #333; border-radius: 4px;
+      padding: 12px 14px; color: #fff; font-size: 15px; font-family: var(--body);
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .consent-check { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 16px; }
+    .consent-check input[type="checkbox"] { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; accent-color: var(--gold); }
+    .consent-check label { font-size: 12px; color: #888; line-height: 1.5; }
+    .consent-check a { color: var(--gold); }
+    .btn-submit { width: 100%; background: var(--gold); color: #000; border: none; padding: 16px; font-size: 18px; font-weight: 700; font-family: var(--heading); letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
+    .btn-submit:hover { background: #d4a43c; }
+    .form-success { display: none; text-align: center; padding: 40px 20px; }
+    .form-success h3 { font-family: var(--heading); font-size: 36px; color: var(--gold); margin-bottom: 12px; }
+    .form-success p { color: #ccc; font-size: 16px; }
+    footer { background: #050505; padding: 30px 40px; text-align: center; border-top: 1px solid #111; margin-top: 60px; }
+    footer p { font-size: 13px; color: #444; }
+    footer a { color: #555; margin: 0 8px; text-decoration: none; }
+    @media (max-width: 768px) {
+      .contact-layout { grid-template-columns: 1fr; padding: 0 20px; }
+      .contact-info { padding-right: 0; margin-bottom: 40px; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+      nav { padding: 0 20px; }
+      .nav-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  <a href="https://summercamp.impactmartialathletics.com/" target="_blank" rel="noopener">
+    Enroll Your Child in Summer Camp Today | Limited Spots Available! →
+  </a>
+</div>
+
+<nav>
+  <div class="nav-logo"><a href="/"><img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/logo.png" alt="Impact Martial Athletics"></a></div>
+  <div class="nav-right">
+    <a href="/email-form">Email Us</a>
+    <a href="tel:9546361515">📞 954-636-1515</a>
+    <a href="/trial-offer" class="nav-cta">50% Off Trial</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Contact Us</h1>
+  <p>We'd love to hear from you. Send us a message and we'll get back to you as soon as possible.</p>
+</div>
+
+<div class="contact-layout">
+  <div class="contact-info">
+    <h2>Get in Touch</h2>
+    <div class="info-item">
+      <div class="info-icon">📍</div>
+      <div class="info-text">
+        <h3>Location</h3>
+        <p>4401 S Flamingo Rd<br>Davie, FL 33330</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">📞</div>
+      <div class="info-text">
+        <h3>Phone</h3>
+        <p><a href="tel:9546361515">954-636-1515</a></p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">✉️</div>
+      <div class="info-text">
+        <h3>Email</h3>
+        <p><a href="mailto:tom@imaimpact.com">tom@imaimpact.com</a></p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">⏰</div>
+      <div class="info-text">
+        <h3>Response Time</h3>
+        <p>We typically respond within 1-2 business hours during business days. For urgent inquiries, please call us directly.</p>
+      </div>
+    </div>
+    <div class="social-links">
+      <h3>Follow Us</h3>
+      <a href="https://www.facebook.com/p/Impact-Martial-Athletics-61573942885497/" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/impactmartialathletics/" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-form-box">
+    <form id="emailForm" onsubmit="submitEmailForm(event)">
+      <h3>Send Us a Message</h3>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" name="firstName" required placeholder="First name">
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" name="lastName" required placeholder="Last name">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" name="email" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="(954) 000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject *</label>
+        <input type="text" name="subject" required placeholder="How can we help?">
+      </div>
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea name="message" required placeholder="Tell us about your child and what you're looking for…"></textarea>
+      </div>
+      <div class="consent-check">
+        <input type="checkbox" id="smsConsentEmail" name="smsConsent">
+        <label for="smsConsentEmail">I consent to receive text messages from Impact Martial Athletics including class information and promotional offers. Reply STOP to opt out. Msg &amp; data rates may apply.</label>
+      </div>
+      <div class="consent-check">
+        <input type="checkbox" id="privacyConsentEmail" name="privacyConsent" required>
+        <label for="privacyConsentEmail">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and <a href="/terms-of-service" target="_blank">Terms of Service</a>. *</label>
+      </div>
+      <button type="submit" class="btn-submit">SEND MESSAGE</button>
+    </form>
+    <div class="form-success" id="emailFormSuccess">
+      <h3>✅ Message Sent!</h3>
+      <p>Thank you for reaching out. We'll get back to you within 1-2 business hours.<br><br>
+      In a hurry? Call us directly at <a href="tel:9546361515" style="color:var(--gold);">954-636-1515</a>.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="/">Home</a>
+    <a href="/trial-offer">50% Off Trial</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms-of-service">Terms of Service</a>
+    <a href="/refund-policy">Refund Policy</a>
+  </p>
+  <p style="margin-top: 10px;">© 2025 Impact Martial Athletics | 4401 S Flamingo Rd, Davie, FL 33330</p>
+</footer>
+
+<script>
+async function submitEmailForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.btn-submit');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  const data = Object.fromEntries(new FormData(form));
+  data.source = 'email-form';
+  data.submittedAt = new Date().toISOString();
+  try {
+    const res = await fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('emailFormSuccess').style.display = 'block';
+    } else { throw new Error(); }
+  } catch {
+    btn.textContent = 'SEND MESSAGE';
+    btn.disabled = false;
+    alert('Something went wrong. Please email us directly at tom@imaimpact.com or call 954-636-1515.');
+  }
+}
+</script>
+</body>
+</html>
