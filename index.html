@@ -68,13 +68,13 @@ img{max-width:100%}
 .camp-banner h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:18px}
 
 /* ── WHY SECTION ── */
-.why-section{background:rgba(214,212,212,0.5);padding:50px 40px}
-.why-section .section-title{text-align:left;margin-bottom:4px}
-.why-sub{font-family:'Poppins',sans-serif;font-size:14px;color:#000;margin-bottom:22px;line-height:1.5}
-.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px}
-.why-card{background:#fff;border-radius:8px;padding:18px;display:flex;gap:14px;align-items:flex-start;border:1px solid #ddd}
-.why-card img{width:52px;height:52px;object-fit:contain;flex-shrink:0}
-.why-card-body h3{font-family:'Teko',sans-serif;font-size:24px;font-weight:600;color:#000;margin-bottom:3px}
+.why-section{background:rgba(214,212,212,0.5);padding:50px 40px;text-align:center}
+.why-section .section-title{text-align:center;margin-bottom:6px}
+.why-sub{font-family:'Poppins',sans-serif;font-size:14px;color:#000;margin-bottom:28px;line-height:1.5;text-align:center}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1200px;margin:0 auto}
+.why-card{background:#fff;border-radius:8px;padding:28px 18px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;border:1px solid #ddd}
+.why-card img{width:72px;height:72px;object-fit:contain;margin-bottom:14px}
+.why-card-body h3{font-family:'Teko',sans-serif;font-size:22px;font-weight:600;color:#000;margin-bottom:6px}
 .why-card-body p{font-family:'Poppins',sans-serif;font-size:13px;color:#444;line-height:1.5}
 
 /* ── BETTER PATH ── */
@@ -173,6 +173,7 @@ img{max-width:100%}
 @media(max-width:900px){
   .prog-grid{grid-template-columns:repeat(2,1fr)}
   .tcard-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
   .hero-float{display:none}
   .coach-inner{grid-template-columns:1fr;gap:30px}
   .ima-inner{grid-template-columns:180px 1fr 180px;gap:20px}
@@ -219,7 +220,7 @@ img{max-width:100%}
 
   /* Why choose */
   .why-section{padding:40px 16px}
-  .why-grid{grid-template-columns:1fr;max-width:100%}
+  .why-grid{grid-template-columns:1fr 1fr;max-width:100%}
 
   /* Better path */
   .better-path{padding:40px 16px}
