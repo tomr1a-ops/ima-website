@@ -79,9 +79,14 @@ img{max-width:100%}
 
 /* ── BETTER PATH ── */
 .better-path{background:#fff;padding:60px 40px}
-.better-path h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,52px);font-weight:600;color:rgb(6,6,243);line-height:1.05;margin-bottom:14px}
-.better-path p{font-family:'Poppins',sans-serif;font-size:14px;color:#000;line-height:1.65;margin-bottom:10px}
-.better-path p.bold-p{font-weight:700;border-left:4px solid rgb(6,6,243);padding-left:12px;margin-top:12px}
+.better-path-inner{display:grid;grid-template-columns:1fr 380px;gap:60px;max-width:1100px;margin:0 auto;align-items:center}
+.better-path-text h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,50px);font-weight:600;color:rgb(6,6,243);line-height:1.05;margin-bottom:16px}
+.better-path-text p{font-family:'Poppins',sans-serif;font-size:14px;color:#000;line-height:1.65;margin-bottom:10px}
+.better-path-text p.bold-p{font-weight:700;border-left:4px solid rgb(6,6,243);padding-left:12px;margin-top:12px;margin-bottom:22px}
+.better-path-vid{position:relative;overflow:hidden;border-radius:6px;border:3px solid rgb(235,255,0)}
+.better-path-vid video{width:100%;display:block;max-height:420px;object-fit:cover}
+.better-path-vid-sound{position:absolute;top:8px;left:8px;z-index:2}
+.better-path-vid-sound button{background:rgba(0,0,0,.65);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px}
 
 /* ── OFFER BANNER ── */
 .offer-banner{background:rgb(6,6,243);padding:50px 40px;text-align:center}
@@ -229,7 +234,8 @@ img{max-width:100%}
 
   /* Better path */
   .better-path{padding:40px 16px}
-  .better-path h2{font-size:28px}
+  .better-path-inner{grid-template-columns:1fr;gap:28px}
+  .better-path-text h2{font-size:28px}
 
   /* Offer banner */
   .offer-banner{padding:40px 16px}
@@ -413,12 +419,23 @@ img{max-width:100%}
 
 <!-- BETTER PATH -->
 <div class="better-path">
-  <h2>A Better Path for Their Energy, Confidence &amp; Future</h2>
-  <p>Today&#8217;s world keeps kids sitting, scrolling, and losing valuable time.</p>
-  <p>Our program flips that script — giving kids a place to move with purpose, learn real martial arts, and build the mindset of a champion.</p>
-  <p class="bold-p">Through structure, mentorship, and fun training, we help children fight for their health, not for likes on a screen.</p>
-  <br>
-  <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
+  <div class="better-path-inner">
+    <div class="better-path-text">
+      <h2>A Better Path for Their Energy, Confidence &amp; Future</h2>
+      <p>Today&#8217;s world keeps kids sitting, scrolling, and losing valuable time.</p>
+      <p>Our program flips that script — giving kids a place to move with purpose, learn real martial arts, and build the mindset of a champion.</p>
+      <p class="bold-p">Through structure, mentorship, and fun training, we help children fight for their health, not for likes on a screen.</p>
+      <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
+    </div>
+    <div class="better-path-vid">
+      <video id="betterPathVid" autoplay muted loop playsinline>
+        <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4" type="video/mp4">
+      </video>
+      <div class="better-path-vid-sound">
+        <button onclick="toggleBetterVid(this)">&#128263; Enable sound</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- OFFER BANNER -->
@@ -576,6 +593,12 @@ img{max-width:100%}
 </div>
 
 <script>
+function toggleBetterVid(btn) {
+  var v = document.getElementById('betterPathVid');
+  if (!v) return;
+  v.muted = !v.muted;
+  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
+}
 function toggleCoachVid(btn) {
   var v = document.getElementById('coachVid');
   if (!v) return;
