@@ -18,22 +18,22 @@ img{max-width:100%}
 .announce-bar .sub{font-size:13px;color:#fff}
 
 /* NAV */
-.nav{background:#000;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.nav-logo{height:50px;object-fit:contain}
-.nav-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.nav-links a{color:#fff;font-size:13px;font-weight:500;white-space:nowrap}
-.nav-links a.btn-gold{background:#e8b84b;color:#000;padding:9px 18px;border-radius:4px;font-weight:700}
+.nav{background:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.nav a{display:flex;align-items:center;justify-content:center;gap:7px;background:rgb(216,236,25);color:#000;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;padding:13px 20px;border-radius:5px;border:2px solid #000;text-decoration:none;white-space:nowrap}
+.nav a svg{width:17px;height:17px;fill:#000;flex-shrink:0}
 
 /* HERO */
-.hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;background:#000}
-.hero-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.6}
-.hero-content{position:relative;z-index:2;padding:40px 30px;max-width:700px}
-.hero-content img.hero-logo{width:80px;margin-bottom:16px;display:block}
+.hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;background:#000;overflow:hidden}
+.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.7}
+.hero-content{position:relative;z-index:2;padding:40px 30px;max-width:600px}
+.hero-content img.hero-logo{width:120px;margin:0 auto 20px;display:block}
 .hero-content h1{font-family:'Teko',sans-serif;font-size:clamp(42px,6vw,80px);font-weight:600;color:#fff;line-height:1.0;margin-bottom:10px}
 .hero-line{width:100px;height:3px;background:#00c8c8;margin:8px 0 16px}
 .hero-content p{font-size:15px;color:#ddd;margin-bottom:24px;max-width:480px;line-height:1.6}
+.hero-video-wrap{position:absolute;right:30px;bottom:40px;z-index:3;width:320px;border:3px solid #e8b84b;border-radius:6px;overflow:hidden;background:#000}
+.hero-video-wrap video{width:100%;display:block}
+.sound-toggle{position:absolute;top:8px;left:8px;z-index:4;background:rgba(0,0,0,0.6);color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:12px;cursor:pointer}
 .btn-lime{display:inline-block;background:rgb(235,255,0);color:#222;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;padding:13px 28px;border-radius:5px;cursor:pointer;border:none;text-decoration:none}
-.sound-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.4);padding:7px 14px;border-radius:4px;font-size:12px;cursor:pointer;margin-top:14px}
 
 /* BLUE BANNER */
 .blue-banner{background:rgb(6,6,243);padding:40px 30px;text-align:center}
@@ -172,17 +172,14 @@ img{max-width:100%}
 
 <!-- NAV -->
 <nav class="nav">
-  <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ff8e176c38963f59764e9c.png" alt="Impact Martial Athletics" class="nav-logo">
-  <div class="nav-links">
-    <a href="mailto:tom@imaimpact.com">Email Us</a>
-    <a href="tel:954-636-1515">954-636-1515</a>
-    <a href="/trial-offer" class="btn-gold">50% Off Trial</a>
-  </div>
+  <a href="mailto:tom@imaimpact.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email Us</a>
+  <a href="tel:954-636-1515"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/></svg>954-636-1515</a>
+  <a href="/trial-offer">50% Off Trial</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_900/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68f7b8aeecb608b19e052c52.webp" alt="" class="hero-video">
+  <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_900/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68f7b8aeecb608b19e052c52.webp" alt="" class="hero-bg">
   <div class="hero-content">
     <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ff8e176c38963f59764e9c.png" alt="Impact Martial Logo" class="hero-logo">
     <h1>Impact Martial Athletics – The Future of Youth Training.</h1>
@@ -190,7 +187,21 @@ img{max-width:100%}
     <p>A science-based performance system that builds strength, confidence, and resilience through athletic and martial arts training.</p>
     <a href="/trial-offer" class="btn-lime">Get Started!</a>
   </div>
+  <div class="hero-video-wrap">
+    <button class="sound-toggle" id="soundBtn" onclick="toggleSound()">🔇 Enable sound</button>
+    <video id="heroVideo" autoplay muted loop playsinline>
+      <source src="/hero-video.mov" type="video/mp4">
+    </video>
+  </div>
 </div>
+<script>
+function toggleSound() {
+  const v = document.getElementById('heroVideo');
+  const btn = document.getElementById('soundBtn');
+  v.muted = !v.muted;
+  btn.textContent = v.muted ? '🔇 Enable sound' : '🔊 Sound on';
+}
+</script>
 
 <!-- BLUE BANNER -->
 <div class="blue-banner">
