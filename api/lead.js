@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { firstName = '', lastName = '', email = '', phone = '', children = '', message = '', source = 'website-form' } = req.body || {};
+    const { firstName = '', lastName = '', email = '', phone = '', children = '', message = '', source = 'website-form', sms_consent = false } = req.body || {};
 
     // Insert into Supabase prospects table
     try {
@@ -68,7 +68,8 @@ module.exports = async (req, res) => {
         phone,
         source,
         stage: 'new-lead',
-        notes: message
+        notes: message,
+        sms_consent: sms_consent === true || sms_consent === 'true'
       });
       console.log('[IMA] Supabase insert OK');
     } catch (err) {

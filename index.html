@@ -546,6 +546,10 @@ img{max-width:100%}
       </div>
       <div class="fgroup full"><label>Email *</label><input type="email" name="email" placeholder="Email" required></div>
       <div class="fgroup full"><label>Phone *</label><input type="tel" name="phone" placeholder="Phone" required></div>
+      <div class="tc-row">
+        <input type="checkbox" id="sms_consent" name="sms_consent" required>
+        <label for="sms_consent">I consent to receive text messages from Impact Martial Athletics at the number provided, including class reminders, studio updates, and promotional offers. Message frequency varies. Reply STOP to opt out or HELP for help. Msg &amp; data rates may apply. View our <a href="/privacy-policy">Privacy Policy</a>.</label>
+      </div>
       <div class="fgroup full"><label>How many children would you like to enroll?</label>
         <select name="children"><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
       </div>
@@ -629,6 +633,10 @@ document.getElementById('mainLeadForm').addEventListener('submit', async functio
       return;
     }
   }
+  if (!document.getElementById('sms_consent').checked) {
+    showMsg(msg, 'Please consent to receive text messages to continue.', '#c00');
+    return;
+  }
   if (!document.getElementById('mainPrivacy').checked) {
     showMsg(msg, 'Please accept the privacy policy to continue.', '#c00');
     return;
@@ -649,6 +657,7 @@ document.getElementById('mainLeadForm').addEventListener('submit', async functio
         phone: form.phone.value.trim(),
         children: form.children.value,
         message: form.message.value.trim(),
+        sms_consent: document.getElementById('sms_consent').checked,
         source: 'website-form'
       })
     });
