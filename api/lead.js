@@ -1,47 +1,93 @@
+const https = require('https');
+
+function httpsPost(hostname, path, headers, body) {
+  return new Promise((resolve, reject) => {
+    const options = { hostname, path, method: 'POST', headers: { ...headers, 'Content-Length': Buffer.byteLength(body) } };
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, body: data }));
+    });
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+async function supabaseInsert(record) {
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const body = JSON.stringify(record);
+  const result = await httpsPost(
+    'mxvkicuojeiapqroksfd.supabase.co',
+    '/rest/v1/prospects',
+    {
+      'Content-Type': 'application/json',
+      'apikey': key,
+      'Authorization': `Bearer ${key}`,
+      'Prefer': 'return=minimal'
+    },
+    body
+  );
+  if (result.status >= 300) throw new Error(`Supabase ${result.status}: ${result.body}`);
+  return result;
+}
+
+async function sendSMS(to, text) {
+  const key = process.env.TELNYX_API_KEY;
+  const from = process.env.TELNYX_PHONE_NUMBER;
+  if (!key || !from) { console.warn('[IMA] Telnyx env vars missing'); return; }
+  const body = JSON.stringify({ from, to, text });
+  const result = await httpsPost(
+    'api.telnyx.com',
+    '/v2/messages',
+    { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+    body
+  );
+  if (result.status >= 300) throw new Error(`Telnyx ${result.status}: ${result.body}`);
+  return result;
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const body = req.body || {};
-    const timestamp = new Date().toISOString();
+    const { firstName = '', lastName = '', email = '', phone = '', children = '', message = '', source = 'website-form' } = req.body || {};
 
-    const lead = {
-      timestamp,
-      firstName: body.firstName || '',
-      lastName: body.lastName || '',
-      email: body.email || '',
-      phone: body.phone || '',
-      numChildren: body.numChildren || '1',
-      child1Name: body.child1Name || '',
-      child1Age: body.child1Age || '',
-      child2Name: body.child2Name || '',
-      child2Age: body.child2Age || '',
-      child3Name: body.child3Name || '',
-      child3Age: body.child3Age || '',
-      child4Name: body.child4Name || '',
-      child4Age: body.child4Age || '',
-      message: body.message || '',
-      subject: body.subject || '',
-      smsConsent: body.smsConsent === true || body.smsConsent === 'on',
-      privacyConsent: body.privacyConsent === true || body.privacyConsent === 'on',
-      source: body.source || 'website',
-      submittedAt: body.submittedAt || timestamp,
-      ip: req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown',
-    };
+    // Insert into Supabase prospects table
+    try {
+      await supabaseInsert({
+        studio_id: 'ec356e58',
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone,
+        source,
+        stage: 'new-lead',
+        notes: message
+      });
+      console.log('[IMA] Supabase insert OK');
+    } catch (err) {
+      console.error('[IMA] Supabase error:', err.message);
+    }
 
-    console.log('[IMA Lead Submission]', JSON.stringify(lead, null, 2));
+    // Send SMS to Tom and Coach Shick
+    const smsText = `New lead from IMA website: ${firstName} ${lastName} - ${phone} - ${email}`;
+    try {
+      await Promise.all([
+        sendSMS('+19546361515', smsText),
+        sendSMS('+19542134478', smsText)
+      ]);
+      console.log('[IMA] SMS sent');
+    } catch (err) {
+      console.error('[IMA] SMS error:', err.message);
+    }
 
-    return res.status(200).json({ success: true, message: 'Lead received successfully' });
+    return res.status(200).json({ success: true });
   } catch (err) {
     console.error('[IMA Lead Error]', err);
     return res.status(500).json({ success: false, error: 'Internal server error' });

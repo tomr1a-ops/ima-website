@@ -297,7 +297,7 @@ img{max-width:100%}
       954-636-1515
     </a>
   </div>
-  <a href="https://www.ima-os.com/trial/ima" class="wide">50% off Trial</a>
+  <a href="https://impactmartialathletics.com/lead-form" class="wide">50% off Trial</a>
 </nav>
 
 <!-- HERO -->
@@ -307,7 +307,7 @@ img{max-width:100%}
     <h1>Impact Martial Athletics &#8211; The Future of Youth Training</h1>
     <div class="hero-line"></div>
     <p>A science-based performance system that builds strength, confidence, and resilience through a fusion of athletic performance and martial arts training.</p>
-    <a href="https://www.ima-os.com/trial/ima" class="btn-lime">Get Started!</a>
+    <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
   </div>
   <!-- Floating video player -->
   <div class="hero-float">
@@ -323,7 +323,7 @@ img{max-width:100%}
 <!-- BLUE BANNER -->
 <div class="blue-banner">
   <h2>Give Your Kid the Competitive Edge in Life</h2>
-  <a href="https://www.ima-os.com/trial/ima" class="btn-lime">Get Started!</a>
+  <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
 </div>
 
 <!-- PROGRAMS -->
@@ -367,7 +367,7 @@ img{max-width:100%}
     <div class="ima-text">
       <h2>Impact Martial Athletics</h2>
       <p>Impact Martial Athletics is a science-backed training program for kids that combines the discipline, self-defense, and mental focus of martial arts with the strength, speed, and agility of sports athletic training. It builds both physical and mental strength, enhancing confidence, leadership, and athletic skills to help kids excel in sports and life. By pushing kids beyond their limits, they develop into confident, disciplined, and high performing individuals who are prepared to face challenges.</p>
-      <a href="https://www.ima-os.com/trial/ima" class="btn-lime">Get Started!</a>
+      <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
     </div>
     <div class="ima-img-col">
       <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/4-kids-group.png" alt="4 Kids at Impact Martial Athletics">
@@ -425,7 +425,7 @@ img{max-width:100%}
       <p>Today&#8217;s world keeps kids sitting, scrolling, and losing valuable time.</p>
       <p>Our program flips that script — giving kids a place to move with purpose, learn real martial arts, and build the mindset of a champion.</p>
       <p class="bold-p">Through structure, mentorship, and fun training, we help children fight for their health, not for likes on a screen.</p>
-      <a href="https://www.ima-os.com/trial/ima" class="btn-lime">Get Started!</a>
+      <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
     </div>
     <div class="better-path-vid">
       <video id="betterPathVid" autoplay muted loop playsinline>
@@ -441,7 +441,7 @@ img{max-width:100%}
 <!-- OFFER BANNER -->
 <div class="offer-banner">
   <h2>Get 50% Off Your Child&#8217;s First Two Classes</h2>
-  <a href="https://www.ima-os.com/trial/ima" class="btn-lime">Get Started!</a>
+  <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
 </div>
 
 <!-- COACH SHICK -->
@@ -515,7 +515,7 @@ img{max-width:100%}
   <h2>Impact in the Community</h2>
   <p>&#8220;This program gave our students confidence to stand up for themselves&#8230;&#8221;</p>
   <p class="media-tag">Featured on Local 10+ Plus</p>
-  <a href="https://www.ima-os.com/trial/ima" class="btn-lime">Get Started!</a>
+  <a href="https://impactmartialathletics.com/lead-form" class="btn-lime">Get Started!</a>
 </div>
 
 <!-- STEP UP -->
@@ -539,22 +539,25 @@ img{max-width:100%}
 <div class="form-section">
   <h2>Get In Touch</h2>
   <div class="form-wrap">
-    <div class="frow">
-      <div class="fgroup"><label>First Name</label><input type="text" placeholder="First Name"></div>
-      <div class="fgroup"><label>Last Name</label><input type="text" placeholder="Last Name"></div>
-    </div>
-    <div class="fgroup full"><label>Email</label><input type="email" placeholder="Email"></div>
-    <div class="fgroup full"><label>Phone</label><input type="tel" placeholder="Phone"></div>
-    <div class="fgroup full"><label>How many children would you like to enroll?</label>
-      <select><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-    </div>
-    <div class="frow">
-      <div class="fgroup"><label>1st Child&#8217;s Name</label><input type="text" placeholder="Full Name"></div>
-      <div class="fgroup"><label>1st Child&#8217;s Age</label><select><option value="">Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15+</option></select></div>
-    </div>
-    <div class="fgroup full"><label>Message</label><textarea placeholder="Have a question? Ask us here."></textarea></div>
-    <div class="tc-row"><input type="checkbox"><label>By clicking the checkbox, I have read &amp; agree to the <a href="https://impactmartialathletics.com/privacy-policy">PRIVACY POLICY</a> and <a href="https://impactmartialathletics.com/terms-of-service">TERMS OF SERVICES</a>.</label></div>
-    <button class="btn-submit">SUBMIT</button>
+    <form id="mainLeadForm" novalidate>
+      <div class="frow">
+        <div class="fgroup"><label>First Name *</label><input type="text" name="firstName" placeholder="First Name" required></div>
+        <div class="fgroup"><label>Last Name *</label><input type="text" name="lastName" placeholder="Last Name" required></div>
+      </div>
+      <div class="fgroup full"><label>Email *</label><input type="email" name="email" placeholder="Email" required></div>
+      <div class="fgroup full"><label>Phone *</label><input type="tel" name="phone" placeholder="Phone" required></div>
+      <div class="fgroup full"><label>How many children would you like to enroll?</label>
+        <select name="children"><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+      </div>
+      <div class="frow">
+        <div class="fgroup"><label>1st Child&#8217;s Name</label><input type="text" name="child1Name" placeholder="Full Name"></div>
+        <div class="fgroup"><label>1st Child&#8217;s Age</label><select name="child1Age"><option value="">Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15+</option></select></div>
+      </div>
+      <div class="fgroup full"><label>Message</label><textarea name="message" placeholder="Have a question? Ask us here."></textarea></div>
+      <div class="tc-row"><input type="checkbox" id="mainPrivacy" required><label for="mainPrivacy">By clicking the checkbox, I have read &amp; agree to the <a href="/privacy-policy">PRIVACY POLICY</a> and <a href="/terms-of-service">TERMS OF SERVICES</a>.</label></div>
+      <div id="mainFormMsg" style="display:none;padding:12px;border-radius:4px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;margin-bottom:10px;text-align:center"></div>
+      <button type="submit" class="btn-submit" id="mainSubmitBtn">SUBMIT</button>
+    </form>
   </div>
 </div>
 
@@ -562,7 +565,7 @@ img{max-width:100%}
 <div class="footer-cta">
   <div class="fct-item">
     <span class="fct-label">Email</span>
-    <a href="https://impactmartialathletics.com/email-form"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@imaimpact.com</a>
+    <a href="mailto:tom@imaimpact.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>tom@imaimpact.com</a>
   </div>
   <div class="fct-item">
     <span class="fct-label">Call us now</span>
@@ -611,6 +614,64 @@ function toggleImaVid(btn) {
   v.muted = !v.muted;
   btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
 }
+document.getElementById('mainLeadForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('mainSubmitBtn');
+  const msg = document.getElementById('mainFormMsg');
+
+  // Validation
+  const req = ['firstName','lastName','email','phone'];
+  for (const f of req) {
+    if (!form[f].value.trim()) {
+      form[f].focus();
+      showMsg(msg, 'Please fill in all required fields.', '#c00');
+      return;
+    }
+  }
+  if (!document.getElementById('mainPrivacy').checked) {
+    showMsg(msg, 'Please accept the privacy policy to continue.', '#c00');
+    return;
+  }
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  msg.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: form.firstName.value.trim(),
+        lastName: form.lastName.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        children: form.children.value,
+        message: form.message.value.trim(),
+        source: 'website-form'
+      })
+    });
+    if (res.ok) {
+      showMsg(msg, 'Thank you! We\'ll be in touch shortly.', '#1a7a1a');
+      form.reset();
+    } else { throw new Error(); }
+  } catch {
+    showMsg(msg, 'Something went wrong. Please call us at 954-636-1515.', '#c00');
+  } finally {
+    btn.textContent = 'SUBMIT';
+    btn.disabled = false;
+  }
+});
+
+function showMsg(el, text, color) {
+  el.textContent = text;
+  el.style.color = color;
+  el.style.background = color === '#1a7a1a' ? '#e6f9e6' : '#fff0f0';
+  el.style.border = '1px solid ' + color;
+  el.style.display = 'block';
+}
+
 function toggleFloat() {
   var v = document.getElementById('heroFloatVid');
   var btn = document.querySelector('.hero-float-sound button');
