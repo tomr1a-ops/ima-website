@@ -168,21 +168,98 @@ img{max-width:100%}
 .footer-copy a{color:#666;margin:0 6px}
 
 /* ── RESPONSIVE ── */
+
+/* Tablet (≤900px) */
 @media(max-width:900px){
-  .prog-grid,.tcard-grid{grid-template-columns:repeat(2,1fr)}
+  .prog-grid{grid-template-columns:repeat(2,1fr)}
+  .tcard-grid{grid-template-columns:repeat(2,1fr)}
   .hero-float{display:none}
+  .coach-inner{grid-template-columns:1fr;gap:30px}
+  .ima-inner{grid-template-columns:180px 1fr 180px;gap:20px}
 }
-@media(max-width:600px){
-  .btn-bar{flex-direction:column;padding:14px}
-  .btn-bar .row{display:flex;gap:10px;width:100%}
-  .btn-bar a{flex:1;padding:12px 10px}
-  .btn-bar a.wide{width:100%;flex:none}
-  .hero-content{padding:0 20px 40px}
-  .hero-logo{width:72px;height:72px}
-  .programs,.why-section,.better-path,.offer-banner,.testimonials,.stepup,.areas,.form-section{padding-left:20px;padding-right:20px}
-  .prog-grid,.tcard-grid{grid-template-columns:1fr}
-  .why-grid{grid-template-columns:1fr}
-  .footer-cta{flex-direction:column;gap:20px;padding:22px 20px}
+
+/* Mobile (≤640px) */
+@media(max-width:640px){
+
+  /* Nav */
+  .btn-bar{flex-direction:column;padding:12px 16px;gap:10px}
+  .btn-bar .row{display:flex;gap:8px;width:100%}
+  .btn-bar .row a{flex:1;padding:11px 8px;font-size:13px}
+  .btn-bar a.wide{width:100%;padding:12px 8px}
+
+  /* Hero */
+  .hero{min-height:70vh;justify-content:flex-end;background-position:center top}
+  .hero::before{background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.3) 60%,transparent 100%)}
+  .hero-logo{width:64px;height:64px;top:16px}
+  .hero-content{padding:0 20px 40px;max-width:100%}
+  .hero h1{font-size:32px}
+  .hero p{font-size:13px;max-width:100%}
+  .hero-float{display:none}
+
+  /* Blue banner */
+  .blue-banner{padding:28px 20px}
+  .blue-banner h2{font-size:28px}
+
+  /* Programs */
+  .programs{padding:40px 16px}
+  .prog-grid{grid-template-columns:1fr;gap:14px}
+  .section-title{font-size:30px;margin-bottom:20px}
+
+  /* About IMA */
+  .ima-section{padding:40px 16px}
+  .ima-inner{grid-template-columns:1fr;gap:0}
+  .ima-vid-col{height:240px;border-radius:6px 6px 0 0}
+  .ima-text{padding:24px 0 0}
+  .ima-text h2{font-size:30px}
+  .ima-img-col img{height:240px;border-radius:0 0 6px 6px}
+
+  /* Camp banner */
+  .camp-banner{padding:28px 20px}
+  .camp-banner h2{font-size:26px}
+
+  /* Why choose */
+  .why-section{padding:40px 16px}
+  .why-grid{grid-template-columns:1fr;max-width:100%}
+
+  /* Better path */
+  .better-path{padding:40px 16px}
+  .better-path h2{font-size:28px}
+
+  /* Offer banner */
+  .offer-banner{padding:40px 16px}
+  .offer-banner h2{font-size:32px}
+
+  /* Coach */
+  .coach-section{padding:60px 16px}
+  .coach-inner{grid-template-columns:1fr;gap:24px}
+  .coach-section>h2{font-size:32px}
+
+  /* Testimonials */
+  .testimonials{padding:40px 16px}
+  .tcard-grid{grid-template-columns:1fr;gap:14px}
+  .testimonials h2{font-size:26px}
+
+  /* Community */
+  .community{padding:60px 20px}
+
+  /* Step up */
+  .stepup{padding:40px 16px}
+  .stepup h2{font-size:26px}
+
+  /* Areas */
+  .areas{padding:40px 16px}
+  .areas h2{font-size:26px}
+
+  /* Form */
+  .form-section{padding:50px 16px}
+  .frow{flex-direction:column;gap:0}
+  .frow .fgroup{margin-bottom:12px}
+
+  /* Footer CTA */
+  .footer-cta{flex-direction:column;gap:18px;padding:22px 20px}
+
+  /* Main footer */
+  .main-footer{padding:28px 20px 16px}
 }
 </style>
 </head>
