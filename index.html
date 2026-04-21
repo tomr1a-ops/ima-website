@@ -55,11 +55,15 @@ img{max-width:100%}
 <style>
 /* ── IMA ABOUT ── */
 .ima-section{background:#fff;padding:60px 40px}
-.ima-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1100px;margin:0 auto;align-items:center}
+.ima-inner{display:grid;grid-template-columns:200px 1fr 220px;gap:40px;max-width:1100px;margin:0 auto;align-items:center}
+.ima-vid-col{position:relative;overflow:hidden;border-radius:6px;height:320px}
+.ima-vid-col video{width:100%;height:100%;object-fit:cover;display:block}
+.ima-vid-sound{position:absolute;top:8px;left:8px;z-index:2}
+.ima-vid-sound button{background:rgba(0,0,0,.65);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px}
 .ima-text h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,50px);font-weight:600;color:#000;line-height:1.05;margin-bottom:14px}
 .ima-text p{font-family:'Poppins',sans-serif;font-size:14px;color:#222;line-height:1.65;margin-bottom:22px}
 .ima-text .btn-lime{display:inline-block}
-.ima-img-col img{width:100%;height:100%;object-fit:cover;display:block;border-radius:6px}
+.ima-img-col img{width:100%;height:320px;object-fit:cover;display:block;border-radius:6px}
 .camp-banner{background:rgb(6,6,243);padding:28px 40px;text-align:center}
 .camp-banner h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:18px}
 
@@ -260,6 +264,14 @@ img{max-width:100%}
 <!-- ABOUT IMA -->
 <div class="ima-section">
   <div class="ima-inner">
+    <div class="ima-vid-col">
+      <video id="imaAboutVid" autoplay muted loop playsinline>
+        <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/about-video.mp4" type="video/mp4">
+      </video>
+      <div class="ima-vid-sound">
+        <button onclick="toggleImaVid(this)">&#128263; Enable sound</button>
+      </div>
+    </div>
     <div class="ima-text">
       <h2>Impact Martial Athletics</h2>
       <p>Impact Martial Athletics is a science-backed training program for kids that combines the discipline, self-defense, and mental focus of martial arts with the strength, speed, and agility of sports athletic training. It builds both physical and mental strength, enhancing confidence, leadership, and athletic skills to help kids excel in sports and life. By pushing kids beyond their limits, they develop into confident, disciplined, and high performing individuals who are prepared to face challenges.</p>
@@ -466,6 +478,12 @@ img{max-width:100%}
 </div>
 
 <script>
+function toggleImaVid(btn) {
+  var v = document.getElementById('imaAboutVid');
+  if (!v) return;
+  v.muted = !v.muted;
+  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
+}
 function toggleFloat() {
   var v = document.getElementById('heroFloatVid');
   var btn = document.querySelector('.hero-float-sound button');
