@@ -88,17 +88,22 @@ img{max-width:100%}
 .offer-banner h2{font-family:'Teko',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:18px}
 
 /* ── COACH ── */
-.coach-section{background-color:rgb(5,5,5);background-image:url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_900/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/691f9e0451f4001c084c0eec.png');background-size:cover;background-position:center top;padding:80px 40px}
-.coach-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1100px;margin:0 auto;align-items:start}
-.coach-section>h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,52px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:2px}
-.coach-section>h3.ch-sub{font-family:'Teko',sans-serif;font-size:28px;font-weight:500;color:rgb(235,255,0);margin-bottom:6px}
-.coach-section>p.ch-tagline{font-family:'Teko',sans-serif;font-size:22px;color:#ddd;margin-bottom:26px}
-.coach-card{background:rgba(0,0,0,0.76);border-radius:10px;padding:24px 18px}
-.coach-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:3px solid rgb(235,255,0)}
-.coach-card h3{font-family:'Teko',sans-serif;font-size:34px;font-weight:600;color:#fff;text-align:center;margin-bottom:12px}
-.coach-card ul{list-style:none;padding:0}
-.coach-card ul li{font-family:'Poppins',sans-serif;font-size:13px;color:#fff;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.15);display:flex;align-items:flex-start;gap:8px;line-height:1.45}
-.coach-card ul li::before{content:'✓';color:rgb(235,255,0);font-weight:700;flex-shrink:0}
+.coach-section{background:#000;padding:70px 40px;text-align:center}
+.coach-section>h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:6px}
+.coach-section>p.ch-tagline{font-family:'Poppins',sans-serif;font-size:15px;color:#ccc;margin-bottom:36px}
+.coach-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;max-width:1100px;margin:0 auto;align-items:stretch}
+.coach-vid-col{position:relative;overflow:hidden;border-radius:6px;min-height:320px}
+.coach-vid-col video{width:100%;height:100%;object-fit:cover;display:block;min-height:320px}
+.coach-vid-sound{position:absolute;top:8px;left:8px;z-index:2}
+.coach-vid-sound button{background:rgba(0,0,0,.65);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px}
+.coach-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:28px 20px;text-align:center}
+.coach-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 14px;border:3px solid rgb(235,255,0)}
+.coach-card h3{font-family:'Teko',sans-serif;font-size:30px;font-weight:600;color:#fff;margin-bottom:16px}
+.coach-card ul{list-style:none;padding:0;text-align:left}
+.coach-card ul li{font-family:'Poppins',sans-serif;font-size:12.5px;color:#ddd;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+.coach-card ul li::before{content:'•';color:rgb(235,255,0);font-weight:700;flex-shrink:0}
+.coach-family-col{overflow:hidden;border-radius:6px}
+.coach-family-col img{width:100%;height:100%;object-fit:cover;display:block;min-height:320px}
 
 /* ── TESTIMONIALS ── */
 .testimonials{background:#fff;padding:60px 40px}
@@ -231,9 +236,12 @@ img{max-width:100%}
   .offer-banner h2{font-size:32px}
 
   /* Coach */
-  .coach-section{padding:60px 16px}
-  .coach-inner{grid-template-columns:1fr;gap:24px}
-  .coach-section>h2{font-size:32px}
+  .coach-section{padding:50px 16px}
+  .coach-section>h2{font-size:28px}
+  .coach-inner{grid-template-columns:1fr;gap:16px}
+  .coach-vid-col{min-height:220px}
+  .coach-vid-col video{min-height:220px}
+  .coach-family-col img{min-height:220px}
 
   /* Testimonials */
   .testimonials{padding:40px 16px}
@@ -421,23 +429,35 @@ img{max-width:100%}
 
 <!-- COACH SHICK -->
 <div class="coach-section">
-  <h2>Meet Coach Shick</h2>
-  <h3 class="ch-sub">Your Child&#8217;s Mentor</h3>
+  <h2>Meet Coach Shick &#8212; Your Child&#8217;s Mentor</h2>
   <p class="ch-tagline">Combining Martial Arts and Athletic Training to Build Warriors.</p>
-  <div class="coach-card">
-    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbceed0d0b96fd98d25e0a.png" alt="Coach Shick" class="coach-photo">
-    <h3>Coach Shick</h3>
-    <ul>
-      <li>Dad of 4 kids</li>
-      <li>40+ years of martial arts experience</li>
-      <li>Created a national anti-bullying program for public and private schools</li>
-      <li>Certified Pop Warner and USA Football coach</li>
-      <li>Trained elite athletes in martial arts and sports performance</li>
-      <li>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
-      <li>Owned 20+ martial arts schools</li>
-      <li>Owned an Orangetheory Fitness franchise</li>
-      <li>Professional martial arts stuntman</li>
-    </ul>
+  <div class="coach-inner">
+    <div class="coach-vid-col">
+      <video id="coachVid" autoplay muted loop playsinline>
+        <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-video.mp4" type="video/mp4">
+      </video>
+      <div class="coach-vid-sound">
+        <button onclick="toggleCoachVid(this)">&#128263; Enable sound</button>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbceed0d0b96fd98d25e0a.png" alt="Coach Shick" class="coach-photo">
+      <h3>Coach Shick</h3>
+      <ul>
+        <li>Dad of 4 kids</li>
+        <li>40+ years of martial arts experience</li>
+        <li>Created a national anti-bullying program for public and private schools</li>
+        <li>Certified Pop Warner and USA Football coach</li>
+        <li>Trained elite athletes in martial arts and sports performance</li>
+        <li>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
+        <li>Owned 20+ martial arts schools</li>
+        <li>Owned an Orangetheory Fitness franchise</li>
+        <li>Professional martial arts stuntman</li>
+      </ul>
+    </div>
+    <div class="coach-family-col">
+      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-family.png" alt="Coach Shick Family">
+    </div>
   </div>
 </div>
 
@@ -556,6 +576,12 @@ img{max-width:100%}
 </div>
 
 <script>
+function toggleCoachVid(btn) {
+  var v = document.getElementById('coachVid');
+  if (!v) return;
+  v.muted = !v.muted;
+  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
+}
 function toggleImaVid(btn) {
   var v = document.getElementById('imaAboutVid');
   if (!v) return;
