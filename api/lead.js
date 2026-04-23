@@ -34,8 +34,8 @@ async function supabaseInsert(record) {
 
 async function sendSMS(to, text) {
   const key = process.env.TELNYX_API_KEY;
-  // Approved 10DLC number: +17542838817 — set TELNYX_PHONE_NUMBER in Vercel to match.
-  const from = (process.env.TELNYX_PHONE_NUMBER || '').trim() || '+17542838817';
+  // Approved 10DLC number: +17542838817 — set TELNYX_SMS_NUMBER in Vercel to match.
+  const from = (process.env.TELNYX_SMS_NUMBER || '').trim() || '+17542838817';
   if (!key) { console.warn('[IMA] Telnyx API key missing'); return; }
   const body = JSON.stringify({ from, to, text });
   const result = await httpsPost(
