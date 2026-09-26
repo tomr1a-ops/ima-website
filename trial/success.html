@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're In! Trial Purchased</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0f172a; color: #fff; }
+    .card { width: min(680px, 92vw); background: #111827; border: 1px solid #334155; border-radius: 14px; padding: 24px; }
+    h1 { margin: 0 0 10px; font-size: 38px; }
+    p { color: #cbd5e1; line-height: 1.6; }
+    .btn { display: inline-block; margin-top: 10px; text-decoration: none; background: #ebff00; color: #000; font-weight: 700; padding: 12px 16px; border-radius: 8px; }
+    .ghost { background: transparent; color: #e2e8f0; border: 1px solid #475569; margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <h1>You're In!</h1>
+    <p>Payment completed. Next step: book your trial class in the scheduler.</p>
+    <p id="detail"></p>
+    <a id="sched" class="btn" href="#">Schedule Your Trial Class</a>
+    <a class="btn ghost" href="/trial">Back to Trial Page</a>
+  </section>
+  <script>
+    (function () {
+      const qs = new URLSearchParams(window.location.search);
+      const phone = qs.get('phone') || '';
+      const kids = qs.get('kids') || '';
+      const lead = qs.get('lead_id') || '';
+      const schedule = `https://ima-os.com/schedule/ima?phone=${encodeURIComponent(phone)}&kids=${encodeURIComponent(kids)}&lead_id=${encodeURIComponent(lead)}`;
+      document.getElementById('sched').href = schedule;
+      document.getElementById('detail').textContent = kids ? `Kids: ${kids}` : '';
+    })();
+  </script>
+</body>
+</html>

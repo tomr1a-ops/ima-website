@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>50% off Impact Trial | Impact Martial Athletics Davie, FL</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 28px 18px 40px; }
+    .hero { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 22px; }
+    h1 { margin: 0 0 8px; font-size: 36px; line-height: 1.05; }
+    .sub { color: #475569; margin-bottom: 18px; }
+    .grid { display: grid; gap: 10px; }
+    .g2 { grid-template-columns: 1fr 1fr; }
+    input, select, textarea, button { font: inherit; }
+    input, select, textarea {
+      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;
+    }
+    textarea { min-height: 70px; resize: vertical; }
+    .children { margin-top: 12px; }
+    .child { border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; margin-bottom: 10px; background: #fff; }
+    .summary { margin-top: 14px; padding: 12px; background: #f1f5f9; border-radius: 8px; }
+    .btn { background: #ebff00; color: #000; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    .btn[disabled] { opacity: .6; cursor: not-allowed; }
+    .row { display: flex; gap: 10px; align-items: center; }
+    .error { color: #b91c1c; margin: 10px 0; display: none; }
+    .chat { margin-top: 22px; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; }
+    .chatlog { max-height: 220px; overflow: auto; margin-bottom: 8px; }
+    .msg { padding: 8px; margin: 6px 0; border-radius: 8px; }
+    .v { background: #dbeafe; }
+    .s { background: #f1f5f9; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Get 50% Off Your Child's First Two Classes</h1>
+      <p class="sub">Impact Martial Athletics • Ages 5+ • Trial offer is $27 per child (test checkout active).</p>
+
+      <div class="grid g2">
+        <input id="first" placeholder="Parent first name" />
+        <input id="last" placeholder="Parent last name" />
+      </div>
+      <div class="grid g2" style="margin-top:10px;">
+        <input id="email" type="email" placeholder="Email" />
+        <input id="phone" type="tel" placeholder="Phone" />
+      </div>
+
+      <div class="children" id="children"></div>
+      <button class="btn" type="button" id="add-child">Add Child</button>
+
+      <div style="margin-top:10px;">
+        <select id="referral">
+          <option value="">How did you hear about us?</option>
+          <option>Instagram</option><option>Facebook</option><option>Google Search</option><option>Drive By</option><option>Referral</option><option>Other</option>
+        </select>
+      </div>
+      <div style="margin-top:10px;"><textarea id="message" placeholder="Message (optional)"></textarea></div>
+      <div style="margin-top:10px;" class="row">
+        <input id="sms" type="checkbox" style="width:auto" /><label for="sms">I consent to SMS updates</label>
+      </div>
+      <div style="margin-top:4px;" class="row">
+        <input id="legal" type="checkbox" style="width:auto" /><label for="legal">I agree to terms and privacy policy</label>
+      </div>
+
+      <div class="summary" id="summary">Total: $27.00</div>
+      <p id="err" class="error"></p>
+      <button class="btn" id="submit" type="button">Start Test Checkout</button>
+    </section>
+
+    <section class="chat">
+      <h3 style="margin:0 0 8px;">Questions? Chat with us</h3>
+      <div class="grid g2" style="margin-bottom:8px;">
+        <input id="chat-name" placeholder="Your name" />
+        <input id="chat-phone" placeholder="Your phone" />
+      </div>
+      <div class="chatlog" id="chat-log"></div>
+      <div class="row">
+        <input id="chat-text" placeholder="Type your message..." />
+        <button class="btn" id="chat-send" type="button">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const TRIAL_PRICE = 27;
+    let childCount = 0;
+    let conversationId = sessionStorage.getItem('trial_chat_conv_id') || '';
+    let lastReplyAt = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+
+    function addChild() {
+      if (childCount >= 4) return;
+      childCount += 1;
+      const id = childCount;
+      const div = document.createElement('div');
+      div.className = 'child';
+      div.innerHTML = `
+        <div class="grid g2">
+          <input data-k="first" data-id="${id}" placeholder="Child first name" />
+          <input data-k="last" data-id="${id}" placeholder="Child last name" />
+        </div>
+        <div class="grid g2" style="margin-top:8px;">
+          <input data-k="age" data-id="${id}" placeholder="Age" />
+          <input data-k="gender" data-id="${id}" placeholder="Gender" />
+        </div>
+      `;
+      document.getElementById('children').appendChild(div);
+      updateTotal();
+    }
+
+    function childrenData() {
+      const rows = [];
+      for (let i = 1; i <= childCount; i += 1) {
+        const first = document.querySelector(`[data-k="first"][data-id="${i}"]`)?.value?.trim() || '';
+        const last = document.querySelector(`[data-k="last"][data-id="${i}"]`)?.value?.trim() || '';
+        const age = document.querySelector(`[data-k="age"][data-id="${i}"]`)?.value?.trim() || '';
+        const gender = document.querySelector(`[data-k="gender"][data-id="${i}"]`)?.value?.trim() || '';
+        if (first) rows.push({ first, last, age, gender });
+      }
+      return rows;
+    }
+
+    function updateTotal() {
+      const count = Math.max(1, childCount);
+      document.getElementById('summary').textContent = `Total: $${(TRIAL_PRICE * count).toFixed(2)}`;
+    }
+
+    function showErr(msg) {
+      const el = document.getElementById('err');
+      el.textContent = msg;
+      el.style.display = msg ? 'block' : 'none';
+    }
+
+    async function submit() {
+      showErr('');
+      const first_name = document.getElementById('first').value.trim();
+      const last_name = document.getElementById('last').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const referral_source = document.getElementById('referral').value;
+      const message = document.getElementById('message').value.trim();
+      const sms_consent = document.getElementById('sms').checked;
+      const legal = document.getElementById('legal').checked;
+      const children = childrenData();
+      const num_children = Math.max(1, childCount);
+
+      if (!first_name || !last_name || !email || !phone) return showErr('Missing required fields.');
+      if (!sms_consent || !legal) return showErr('SMS consent and legal agreement are required.');
+      if (!referral_source) return showErr('Please select referral source.');
+      if (children.length === 0) return showErr('At least one child first name is required.');
+
+      const btn = document.getElementById('submit');
+      btn.disabled = true;
+      btn.textContent = 'Processing...';
+      try {
+        const res = await fetch('/api/trial-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            first_name, last_name, email, phone, num_children, children, message, referral_source, sms_consent,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.url) throw new Error(data.error || `HTTP ${res.status}`);
+        window.location.href = data.url;
+      } catch (err) {
+        showErr(err.message || 'Checkout failed.');
+        btn.disabled = false;
+        btn.textContent = 'Start Test Checkout';
+      }
+    }
+
+    function addMsg(text, cls) {
+      const log = document.getElementById('chat-log');
+      const el = document.createElement('div');
+      el.className = `msg ${cls}`;
+      el.textContent = text;
+      log.appendChild(el);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    async function sendChat() {
+      const visitor_name = document.getElementById('chat-name').value.trim();
+      const visitor_phone = document.getElementById('chat-phone').value.trim();
+      const message = document.getElementById('chat-text').value.trim();
+      if (!visitor_name || !visitor_phone || !message) return;
+      document.getElementById('chat-text').value = '';
+      addMsg(message, 'v');
+      try {
+        const res = await fetch('/api/trial-chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ visitor_name, visitor_phone, message }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (data.conversation_id) {
+          conversationId = data.conversation_id;
+          sessionStorage.setItem('trial_chat_conv_id', conversationId);
+        }
+      } catch {}
+    }
+
+    async function pollChat() {
+      if (!conversationId) return;
+      try {
+        const res = await fetch(`/api/trial-chat-poll?conversation_id=${encodeURIComponent(conversationId)}&after=${encodeURIComponent(lastReplyAt)}`);
+        const data = await res.json().catch(() => ({}));
+        const msgs = Array.isArray(data.messages) ? data.messages : [];
+        msgs.forEach((m) => addMsg(m.message_text || '', 's'));
+        if (msgs.length) lastReplyAt = msgs[msgs.length - 1].created_at || lastReplyAt;
+      } catch {}
+    }
+
+    document.getElementById('add-child').addEventListener('click', addChild);
+    document.getElementById('submit').addEventListener('click', submit);
+    document.getElementById('chat-send').addEventListener('click', sendChat);
+    document.getElementById('chat-text').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChat(); });
+
+    addChild();
+    setInterval(pollChat, 10000);
+  </script>
+</body>
+</html>
