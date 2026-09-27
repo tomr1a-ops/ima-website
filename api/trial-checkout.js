@@ -1,5 +1,4 @@
 const { sbFetch, requireSupabaseEnv } = require('./lib/supabase')
-const { sendTrialOwnerAlertEmail } = require('./lib/send-trial-owner-alert-email')
 
 const IMA_STUDIO_ID = 'ec356e58-a649-4fd3-a098-ebe91f396d84'
 const IMA_STUDIO_NAME = 'Impact Martial Athletics'
@@ -184,29 +183,6 @@ module.exports = async function handler(req, res) {
       ...trialFields,
     }),
   })
-
-  // Send owner alert when a trial is created (independent of payment completion).
-  try {
-    const ownerAlert = await sendTrialOwnerAlertEmail({
-      studioName: IMA_STUDIO_NAME,
-      firstName: first_name,
-      lastName: last_name,
-      email,
-      phone,
-      numChildren: num_children,
-      children,
-      leadId,
-      message,
-      referralSource: referral_source,
-    })
-    if (ownerAlert?.ok) {
-      console.log('[trial-checkout] owner alert email sent:', ownerAlert.id || '(no id)')
-    } else {
-      console.warn('[trial-checkout] owner alert email skipped/failed:', ownerAlert?.error || 'unknown')
-    }
-  } catch (err) {
-    console.error('[trial-checkout] owner alert email failed:', err.message)
-  }
 
   const origin = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}`
   const kidsStr =

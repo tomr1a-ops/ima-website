@@ -1,4 +1,5 @@
 const { sbFetch, requireSupabaseEnv } = require('./lib/supabase')
+const { maybeSendTrialScheduledOwnerSummary } = require('./lib/send-trial-scheduled-owner-summary')
 
 const IMA_STUDIO_ID = 'ec356e58-a649-4fd3-a098-ebe91f396d84'
 const IMA_STUDIO_NAME = 'Impact Martial Athletics'
@@ -386,6 +387,13 @@ module.exports = async function handler(req, res) {
     }
     const displayName = child_name || first_name
     await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cls.name} at ${IMA_STUDIO_NAME} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
+    if (lead_id) {
+      try {
+        await maybeSendTrialScheduledOwnerSummary(lead_id, 'schedule-book')
+      } catch (summaryErr) {
+        console.warn('[schedule-book] Owner summary trigger failed:', summaryErr.message)
+      }
+    }
 
     return json(res, 200, {
       success: true,

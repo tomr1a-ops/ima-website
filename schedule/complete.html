@@ -18,5 +18,19 @@
     <p>Your trial reservations are confirmed. We look forward to seeing your family in class.</p>
     <a class="btn" href="/">Return to Website</a>
   </section>
+  <script>
+    (function () {
+      try {
+        var qs = new URLSearchParams(window.location.search || '');
+        var leadId = (qs.get('lead_id') || '').trim();
+        if (!leadId) return;
+        fetch('/api/trial-owner-summary', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lead_id: leadId, trigger: 'schedule-complete-page' }),
+        }).catch(function () {});
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>

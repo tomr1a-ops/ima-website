@@ -665,7 +665,7 @@
       btn.textContent = '✓ All Reserved!';
       btn.classList.add('success');
       if (allKidsReservedForClass(classId)) {
-        window.location.href = '/schedule/complete';
+        goToCompletionPage();
       }
     } else if (btn) {
       btn.disabled = false;
@@ -719,7 +719,7 @@
       var cls = _classes.find(function (c) { return c.id === classId; });
       if (cls) renderDropdown(cls);
       if (allKidsReservedForClass(classId)) {
-        window.location.href = '/schedule/complete';
+        goToCompletionPage();
       }
 
     } catch (e) {
@@ -838,6 +838,14 @@
     return _kids.every(function (_, idx) {
       return !!_reservations[classId + '_' + idx];
     });
+  }
+
+  function goToCompletionPage() {
+    var url = '/schedule/complete';
+    if (QS.lead_id) {
+      url += '?lead_id=' + encodeURIComponent(QS.lead_id);
+    }
+    window.location.href = url;
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────
