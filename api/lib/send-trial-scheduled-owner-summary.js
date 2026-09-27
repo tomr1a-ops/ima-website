@@ -81,7 +81,7 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
   }
 
   const reservationRes = await sbFetch(
-    `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&status=eq.reserved&is_trial=is.true&select=id,guest_name,class_id,member_id,created_at&order=created_at.asc`,
+    `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&status=eq.reserved&is_trial=eq.true&select=id,guest_name,class_id,member_id,created_at&order=created_at.asc`,
     { method: 'GET' }
   )
   const reservations = Array.isArray(reservationRes.data) ? reservationRes.data : []
