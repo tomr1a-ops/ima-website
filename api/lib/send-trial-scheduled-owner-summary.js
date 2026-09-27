@@ -165,6 +165,38 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
     })
   }
 
+  if (reservationsRaw.length === 0) {
+    const expectedNamesList = leadChildren
+      .map((c) => normalizeName(childNameFromLead(c, lead.last_name)))
+      .filter(Boolean)
+    const seen = new Set()
+    const byName = []
+    const leadCreatedAt = lead.created_at ? new Date(lead.created_at).getTime() : 0
+    for (const expectedName of expectedNamesList) {
+      const rawName = expectedName
+        .split(' ')
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ')
+      const reservationByNameRes = await sbFetch(
+        `reservations_v2?guest_name=ilike.${encodeURIComponent(rawName)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
+        { method: 'GET' }
+      )
+      const rows = Array.isArray(reservationByNameRes.data) ? reservationByNameRes.data : []
+      rows.forEach((row) => {
+        if (!row?.id || seen.has(row.id)) return
+        const nameOk = normalizeName(row.guest_name) === expectedName
+        if (!nameOk) return
+        if (leadCreatedAt) {
+          const createdAtMs = row?.created_at ? new Date(row.created_at).getTime() : 0
+          if (createdAtMs < leadCreatedAt) return
+        }
+        seen.add(row.id)
+        byName.push(row)
+      })
+    }
+    reservationsRaw = byName
+  }
+
   const reservations = reservationsRaw.filter((r) => {
     const status = String(r?.status || '').toLowerCase()
     const isTrial = r?.is_trial === true || String(r?.is_trial || '').toLowerCase() === 'true'
