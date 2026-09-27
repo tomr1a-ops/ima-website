@@ -1,6 +1,7 @@
 const { sbFetch, requireSupabaseEnv } = require('./lib/supabase')
 
 const IMA_STUDIO_ID = 'ec356e58-a649-4fd3-a098-ebe91f396d84'
+const IMA_STUDIO_NAME = 'Impact Martial Athletics'
 
 function json(res, code, body) {
   res.statusCode = code
@@ -35,6 +36,14 @@ function normalizePhone(raw) {
   if (stripped.length === 11 && stripped[0] === '1') return `+${stripped}`
   if (stripped.length > 7) return `+${stripped}`
   return raw
+}
+
+function childSlug(name) {
+  return String(name || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
 function formatDate(dateStr) {
@@ -87,13 +96,6 @@ module.exports = async function handler(req, res) {
   if (!phone) return json(res, 400, { error: 'Missing phone' })
 
   try {
-    const studioRes = await sbFetch(
-      `studio_config?id=eq.${encodeURIComponent(IMA_STUDIO_ID)}&select=id,studio_name,slug&limit=1`,
-      { method: 'GET' }
-    )
-    const studio = Array.isArray(studioRes.data) ? studioRes.data[0] : null
-    if (!studio) return json(res, 404, { error: 'Studio not found' })
-
     const clsRes = await sbFetch(
       `classes?id=eq.${encodeURIComponent(class_id)}&studio_id=eq.${encodeURIComponent(IMA_STUDIO_ID)}&deleted_at=is.null&select=id,name,date,start_time,end_time,max_capacity,current_enrollment&limit=1`,
       { method: 'GET' }
@@ -107,9 +109,10 @@ module.exports = async function handler(req, res) {
     const guestName = child_name || [first_name, last_name].filter(Boolean).join(' ') || 'Guest'
     const memberFirst = first_name || 'Guest'
     const memberLast = last_name || ''
+    const childKey = childSlug(child_name || `${memberFirst} ${memberLast}`) || 'child'
     const externalId = lead_id
-      ? `lead_${lead_id}`
-      : `trial_${IMA_STUDIO_ID}_${memberFirst.toLowerCase()}_${String(phone || '').replace(/\D/g, '')}`
+      ? `trial_lead_${lead_id}_${childKey}`
+      : `trial_${IMA_STUDIO_ID}_${childKey}_${String(phone || '').replace(/\D/g, '')}`
 
     let memberId = null
     const byExt = await sbFetch(
@@ -167,6 +170,10 @@ module.exports = async function handler(req, res) {
         headers: { Prefer: 'return=minimal' },
         body: JSON.stringify({ date_of_birth: child_dob }),
       })
+    }
+
+    if (!memberId) {
+      return json(res, 500, { error: 'Failed to resolve member before booking' })
     }
 
     let prospectCaptureOk = false
@@ -378,7 +385,7 @@ module.exports = async function handler(req, res) {
       await sendSms(studioNotifyNum, studioMsg)
     }
     const displayName = child_name || first_name
-    await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cls.name} at ${studio.studio_name} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
+    await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cls.name} at ${IMA_STUDIO_NAME} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
 
     return json(res, 200, {
       success: true,
@@ -392,7 +399,7 @@ module.exports = async function handler(req, res) {
         date_label: dateLabel,
         time_label: timeLabel,
       },
-      studio_name: studio.studio_name,
+      studio_name: IMA_STUDIO_NAME,
     })
   } catch (err) {
     console.error('[schedule-book] Unhandled error:', err.message)
