@@ -3,6 +3,7 @@ const { sbFetch, requireSupabaseEnv } = require('./supabase')
 const OWNER_EMAIL = 'tom@imaimpact.com'
 const IMA_STUDIO_NAME = 'Impact Martial Athletics'
 const MARKER_PREFIX = '[OWNER_SUMMARY_SENT_AT:'
+const IMA_STUDIO_ID = 'ec356e58-a649-4fd3-a098-ebe91f396d84'
 
 function toIsoDayLabel(dateStr) {
   if (!dateStr) return 'n/a'
@@ -27,6 +28,14 @@ function childNameFromLead(child, fallbackLast) {
 
 function normalizeName(v) {
   return String(v || '').trim().toLowerCase().replace(/\s+/g, ' ')
+}
+
+function childSlug(name) {
+  return String(name || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
 function expectedChildCount(lead) {
@@ -80,11 +89,40 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
     return { ok: true, skipped: true, reason: 'already-sent', expected: expectedChildCount(lead), booked: null }
   }
 
-  const reservationRes = await sbFetch(
-    `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
-    { method: 'GET' }
-  )
-  const reservationsRaw = Array.isArray(reservationRes.data) ? reservationRes.data : []
+  const leadChildren = Array.isArray(lead.children) ? lead.children : []
+  const candidateExternalIds = leadChildren
+    .map((c) => childNameFromLead(c, lead.last_name))
+    .map((name) => childSlug(name))
+    .filter(Boolean)
+    .map((slug) => `trial_lead_${safeLeadId}_${slug}`)
+
+  let reservationsRaw = []
+  if (candidateExternalIds.length > 0) {
+    const membersRes = await sbFetch(
+      `members?studio_id=eq.${encodeURIComponent(IMA_STUDIO_ID)}&external_id=in.(${candidateExternalIds
+        .map((v) => encodeURIComponent(v))
+        .join(',')})&select=id,external_id`,
+      { method: 'GET' }
+    )
+    const members = Array.isArray(membersRes.data) ? membersRes.data : []
+    const memberIds = members.map((m) => m.id).filter(Boolean)
+    if (memberIds.length > 0) {
+      const reservationByMemberRes = await sbFetch(
+        `reservations_v2?member_id=in.(${memberIds.map((v) => encodeURIComponent(v)).join(',')})&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
+        { method: 'GET' }
+      )
+      reservationsRaw = Array.isArray(reservationByMemberRes.data) ? reservationByMemberRes.data : []
+    }
+  }
+
+  if (reservationsRaw.length === 0) {
+    const reservationByLeadRes = await sbFetch(
+      `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
+      { method: 'GET' }
+    )
+    reservationsRaw = Array.isArray(reservationByLeadRes.data) ? reservationByLeadRes.data : []
+  }
+
   const reservations = reservationsRaw.filter((r) => {
     const status = String(r?.status || '').toLowerCase()
     const isTrial = r?.is_trial === true || String(r?.is_trial || '').toLowerCase() === 'true'
@@ -137,7 +175,6 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
     }, {})
   }
 
-  const leadChildren = Array.isArray(lead.children) ? lead.children : []
   const childMetaByName = {}
   leadChildren.forEach((c) => {
     const name = normalizeName(childNameFromLead(c, lead.last_name))
