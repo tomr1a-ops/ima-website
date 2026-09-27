@@ -187,7 +187,7 @@ module.exports = async function handler(req, res) {
 
   // Send owner alert when a trial is created (independent of payment completion).
   try {
-    await sendTrialOwnerAlertEmail({
+    const ownerAlert = await sendTrialOwnerAlertEmail({
       studioName: IMA_STUDIO_NAME,
       firstName: first_name,
       lastName: last_name,
@@ -199,6 +199,11 @@ module.exports = async function handler(req, res) {
       message,
       referralSource: referral_source,
     })
+    if (ownerAlert?.ok) {
+      console.log('[trial-checkout] owner alert email sent:', ownerAlert.id || '(no id)')
+    } else {
+      console.warn('[trial-checkout] owner alert email skipped/failed:', ownerAlert?.error || 'unknown')
+    }
   } catch (err) {
     console.error('[trial-checkout] owner alert email failed:', err.message)
   }
