@@ -81,10 +81,15 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
   }
 
   const reservationRes = await sbFetch(
-    `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&status=eq.reserved&is_trial=eq.true&select=id,guest_name,class_id,member_id,created_at&order=created_at.asc`,
+    `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
     { method: 'GET' }
   )
-  const reservations = Array.isArray(reservationRes.data) ? reservationRes.data : []
+  const reservationsRaw = Array.isArray(reservationRes.data) ? reservationRes.data : []
+  const reservations = reservationsRaw.filter((r) => {
+    const status = String(r?.status || '').toLowerCase()
+    const isTrial = r?.is_trial === true || String(r?.is_trial || '').toLowerCase() === 'true'
+    return status === 'reserved' && isTrial
+  })
   const expected = expectedChildCount(lead)
   if (reservations.length < expected) {
     return { ok: true, skipped: true, reason: 'family-not-complete', expected, booked: reservations.length }
