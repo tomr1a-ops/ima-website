@@ -4,220 +4,1106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>50% off Impact Trial | Impact Martial Athletics Davie, FL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Lato:wght@300;400;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 28px 18px 40px; }
-    .hero { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 22px; }
-    h1 { margin: 0 0 8px; font-size: 36px; line-height: 1.05; }
-    .sub { color: #475569; margin-bottom: 18px; }
-    .grid { display: grid; gap: 10px; }
-    .g2 { grid-template-columns: 1fr 1fr; }
-    input, select, textarea, button { font: inherit; }
-    input, select, textarea {
-      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #2c3345;
+      font-family: 'Lato', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    textarea { min-height: 70px; resize: vertical; }
-    .children { margin-top: 12px; }
-    .child { border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; margin-bottom: 10px; background: #fff; }
-    .summary { margin-top: 14px; padding: 12px; background: #f1f5f9; border-radius: 8px; }
-    .btn { background: #ebff00; color: #000; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-    .btn[disabled] { opacity: .6; cursor: not-allowed; }
-    .row { display: flex; gap: 10px; align-items: center; }
-    .error { color: #b91c1c; margin: 10px 0; display: none; }
-    .chat { margin-top: 22px; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; }
-    .chatlog { max-height: 220px; overflow: auto; margin-bottom: 8px; }
-    .msg { padding: 8px; margin: 6px 0; border-radius: 8px; }
-    .v { background: #dbeafe; }
-    .s { background: #f1f5f9; }
+
+    :root {
+      --yellow:     #ebff00;
+      --yellow-mid: #D8EC19;
+      --blue:       #0606f3;
+      --text:       #2c3345;
+      --muted:      #8c8c8c;
+      --light:      #f9f9f9;
+      --green:      #9ae6b4;
+      --radius:     5px;
+      --accent:     #000;
+      --accent-dark:#000;
+    }
+
+    /* ── LOGO BAR ─────────────────────────────────────── */
+    .logo-bar {
+      background: #fff;
+      padding: 20px 20px 0;
+      text-align: center;
+    }
+    .logo-bar img {
+      max-height: 100px;
+      width: auto;
+      display: inline-block;
+    }
+
+    /* ── NAV BUTTONS ──────────────────────────────────── */
+    .nav-bar {
+      background: #fff;
+      padding: 10px 20px;
+    }
+    .nav-bar-inner {
+      max-width: 1170px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-btn {
+      display: inline-block;
+      background: var(--yellow);
+      color: #000;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px; font-weight: 800;
+      text-decoration: none;
+      padding: 10px 50px;
+      border: 1px solid #fff;
+      box-shadow: 0 2px 2px 1px #707070;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .nav-btn:hover { background: var(--yellow-mid); }
+    .nav-spacer { flex: 0.1; }
+    @media (max-width: 768px) { .nav-bar { display: none; } }
+
+    /* Mobile nav */
+    .mobile-nav { display: none; padding: 10px 12px; background: #fff; }
+    .mobile-nav-inner { display: flex; gap: 8px; }
+    .mobile-nav-btn {
+      flex: 1;
+      background: var(--yellow-mid); color: #000;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; text-align: center;
+      padding: 10px 4px;
+      box-shadow: 0 2px 2px 1px #707070;
+      border: 1px solid #fff;
+    }
+    @media (max-width: 768px) { .mobile-nav { display: block; } }
+
+    /* ── MAIN SECTION: Left gray col + Right form col ── */
+    .main-section {
+      background: #fff;
+      padding-bottom: 40px;
+    }
+    .main-inner {
+      max-width: 1170px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 49.1% 1fr;
+      align-items: start;
+    }
+
+    /* LEFT COLUMN — gray, contains headline + copy + video */
+    .main-left {
+      background: var(--light);
+      padding: 40px 20px 30px;
+    }
+    .hero-headline {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(42px, 5.5vw, 65px);
+      font-weight: 400;
+      line-height: 1em;
+      letter-spacing: 1px;
+      color: #000;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+    }
+    /* Keep JS accent span black to match GHL */
+    .hero-headline .accent { color: #000; }
+    .hero-copy {
+      font-size: clamp(15px, 2vw, 25px);
+      font-weight: 500;
+      line-height: 1.35;
+      color: #2c3345;
+      margin-bottom: 16px;
+    }
+    .hero-copy p { margin-bottom: 2px; }
+
+    /* Portrait video — inside left column, centered */
+    .video-wrap {
+      position: relative;
+      width: 67%; /* ~406px at 1170px container */
+      margin: 0 auto;
+    }
+    .video-aspect {
+      position: relative;
+      width: 100%;
+      padding-bottom: 177.78%; /* 9:16 portrait */
+      overflow: hidden;
+      background: #111;
+    }
+    .video-aspect video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    #sound-toggle {
+      position: absolute; top: 8px; left: 8px; z-index: 10;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 4px; color: #fff;
+      padding: 4px 10px; font-size: 11px;
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.04em;
+      display: flex; align-items: center; gap: 5px;
+    }
+    /* sound icon SVG */
+    #sound-toggle svg { width: 14px; height: 14px; fill: #fff; }
+
+    /* RIGHT COLUMN — white, form */
+    .main-right {
+      background: #fff;
+      padding: 30px 30px 30px 20px;
+    }
+
+    /* Error box */
+    .err-box {
+      display: none;
+      background: #fff0f0;
+      border: 1px solid #ff6a6a;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 14px; color: #c00;
+      margin-bottom: 14px; line-height: 1.5;
+    }
+
+    /* GHL inputs */
+    .ghl-label {
+      font-size: 14px; font-weight: 700;
+      color: #2c3345; margin-bottom: 4px; display: block;
+    }
+    .ghl-label .req { color: #c00; }
+    .ghl-input {
+      width: 100%;
+      background: #fff;
+      border: 1px solid #acacac;
+      border-radius: var(--radius);
+      padding: 8px 15px;
+      color: #2c3345;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px; font-weight: 300;
+      transition: border-color 0.2s; outline: none;
+    }
+    .ghl-input::placeholder { color: #bbb; }
+    .ghl-input:focus { border-color: var(--blue); }
+    .ghl-input.sel {
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%238c8c8c'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+      padding-right: 28px; cursor: pointer;
+    }
+    .ghl-input.sel option { background: #fff; color: #2c3345; }
+    .ghl-input.ta { min-height: 60px; resize: vertical; font-size: 12px; }
+
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .f1 { margin-bottom: 10px; }
+
+    /* Child groups */
+    .child-group {
+      background: #f9f9f9; border: 1px solid #e0e0e0;
+      border-radius: var(--radius); padding: 12px; margin-bottom: 10px;
+    }
+    .child-group-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .child-label {
+      font-family: 'Teko', sans-serif; font-weight: 600; font-size: 16px;
+      letter-spacing: 1px; text-transform: uppercase; color: var(--blue);
+    }
+    .child-remove {
+      background: none; border: none; color: #aaa; cursor: pointer;
+      font-size: 14px; padding: 2px 4px; transition: color 0.12s;
+    }
+    .child-remove:hover { color: #c00; }
+    .child-remove:disabled { opacity: 0; pointer-events: none; }
+    .child-row { display: grid; grid-template-columns: 1fr 1fr 72px; gap: 8px; }
+
+    /* Pills */
+    .hear-label { font-size: 13px; font-weight: 700; color: #2c3345; display: block; margin-bottom: 6px; }
+    .hear-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .hear-pill, .gender-pill { position: relative; }
+    .hear-pill input[type="radio"], .gender-pill input[type="radio"] {
+      position: absolute; opacity: 0; width: 0; height: 0;
+    }
+    .hear-pill label, .gender-pill label {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #fff; border: 1px solid #acacac; border-radius: var(--radius);
+      padding: 5px 10px; font-size: 12px; color: #2c3345;
+      cursor: pointer; transition: all 0.12s; user-select: none; white-space: nowrap;
+    }
+    .hear-pill input:checked + label, .gender-pill input:checked + label {
+      background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 700;
+    }
+    .hear-pill label:hover, .gender-pill label:hover { border-color: var(--blue); }
+
+    /* Add child */
+    .add-child-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: #fff; border: 1px dashed var(--blue);
+      color: var(--blue); border-radius: var(--radius);
+      padding: 7px 12px; font-family: 'Poppins', sans-serif;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; margin-top: 6px;
+    }
+    .add-child-btn:hover { background: rgba(6,6,243,0.04); }
+    .add-child-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .add-child-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* Order summary */
+    .order-box {
+      background: #fff; border: 1px solid #eaecf0;
+      border-radius: var(--radius); padding: 14px;
+      margin: 14px 0 10px;
+    }
+    .order-title {
+      font-family: 'Teko', sans-serif; font-size: 20px; font-weight: 500;
+      color: #000; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .order-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 0; font-size: 13px;
+    }
+    .order-row + .order-row { border-top: 1px solid #eaecf0; }
+    .order-muted { color: var(--muted); font-size: 12px; padding: 2px 0 6px; }
+    .order-bold { font-weight: 900; font-size: 15px; }
+    .order-price-lg {
+      font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 600; color: #000;
+    }
+
+    /* Legal */
+    .legal { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 12px; }
+    .legal input[type="checkbox"] { width: 15px; height: 15px; min-width: 15px; margin-top: 2px; accent-color: var(--blue); cursor: pointer; }
+    .legal-text { font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .legal-text a { color: var(--blue); text-decoration: none; font-weight: 700; }
+    .legal-text a:hover { text-decoration: underline; }
+
+    /* SUBMIT */
+    .submit-btn {
+      display: block; width: 100%;
+      background: var(--yellow); color: #000;
+      border: 2px solid var(--blue); border-radius: 0;
+      font-family: 'Teko', sans-serif; font-size: 32px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      padding: 10px; cursor: pointer;
+      box-shadow: 0 2px 2px 1px #707070; transition: background 0.15s;
+    }
+    .submit-btn:hover:not(:disabled) { background: var(--yellow-mid); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .secure-line { text-align: center; color: var(--muted); font-size: 12px; font-weight: 700; margin-top: 8px; }
+
+    /* ── YELLOW SOCIAL PROOF SECTION ───────────────── */
+    .cta-section {
+      background: var(--yellow);
+      border-top: 2px solid var(--blue);
+      border-bottom: 2px solid var(--blue);
+      padding: 20px;
+    }
+    .cta-inner {
+      max-width: 1170px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .cta-card {
+      border: 2px solid var(--green); padding: 20px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .cta-card-name {
+      font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 500;
+      color: var(--blue); line-height: 1; text-transform: uppercase;
+    }
+    .cta-card-title { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
+    .cta-card-quote { font-size: 13px; line-height: 1.55; color: #2c3345; flex: 1; }
+    @media (max-width: 768px) { .cta-inner { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    .footer { background: #000; padding: 20px 0; }
+    .footer-top { padding: 0 130px; max-width: 1170px; }
+    .footer-logo { max-height: 55px; display: block; margin-bottom: 6px; }
+    .footer-contact {
+      padding: 12px 130px 0;
+      display: flex; flex-wrap: wrap; gap: 20px;
+      font-size: 13px; color: #fff;
+    }
+    .footer-contact a { color: #fff; text-decoration: none; }
+    .footer-contact .label { font-weight: 700; color: var(--yellow-mid); }
+    .footer-social-row { padding: 10px 130px 0; display: flex; gap: 10px; }
+    .footer-social-row a {
+      width: 30px; height: 30px; border-radius: 4px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+    }
+    .footer-social-row a:hover { background: var(--yellow); color: #000; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 14px; padding: 10px 130px 0;
+      display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
+    }
+    .footer-copy { color: rgba(255,255,255,0.4); font-size: 12px; flex: 1; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 3px 10px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+    @media (max-width: 768px) {
+      .footer-top, .footer-contact, .footer-social-row, .footer-bottom {
+        padding-left: 20px; padding-right: 20px;
+      }
+    }
+
+    /* ── CHAT BUBBLE ───────────────────────────────── */
+    #chat-bubble {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      background: var(--yellow); color: #000;
+      border-radius: 50px; padding: 12px 18px;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px;
+      display: flex; align-items: center; gap: 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      cursor: pointer; transition: transform 0.2s;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+    #chat-bubble:hover { transform: scale(1.04); }
+    #chat-bubble svg { width: 16px; height: 16px; fill: #000; }
+    #chat-unread {
+      position: absolute; top: -6px; right: -6px;
+      background: #ef4444; color: #fff; border-radius: 50%;
+      width: 18px; height: 18px; font-size: 10px; font-weight: 800;
+      display: none; align-items: center; justify-content: center;
+    }
+
+    /* ── CHAT PANEL ────────────────────────────────── */
+    #chat-panel {
+      position: fixed; bottom: 84px; right: 24px; z-index: 1000;
+      width: 310px; max-height: 460px;
+      background: #fff; border: 2px solid var(--blue);
+      border-radius: 8px; box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+      display: none; flex-direction: column; overflow: hidden;
+    }
+    #chat-panel.open { display: flex; }
+    .chat-header {
+      padding: 11px 13px; background: var(--blue); color: #fff;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .chat-header-dot { width: 7px; height: 7px; border-radius: 50%; background: #9ae6b4; }
+    .chat-header-title { font-weight: 700; font-size: 13px; flex: 1; }
+    .chat-header-sub { font-size: 11px; opacity: 0.7; }
+    .chat-msgs {
+      flex: 1; overflow-y: auto; padding: 10px;
+      display: flex; flex-direction: column; gap: 6px; background: #f9f9f9;
+    }
+    .chat-msg { max-width: 80%; padding: 7px 11px; border-radius: 10px; font-size: 13px; line-height: 1.4; }
+    .chat-msg.visitor { background: var(--blue); color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+    .chat-msg.studio  { background: #fff; border: 1px solid #e0e0e0; align-self: flex-start; border-bottom-left-radius: 3px; }
+    .chat-input-row {
+      padding: 8px 10px; border-top: 1px solid #eee; background: #fff;
+      display: flex; gap: 6px;
+    }
+    .chat-input-row input {
+      flex: 1; background: #f9f9f9; border: 1px solid #d0d0d0;
+      border-radius: 18px; color: #2c3345;
+      padding: 7px 12px; font-size: 13px; outline: none;
+    }
+    .chat-input-row button {
+      background: var(--blue); border: none; border-radius: 50%;
+      width: 32px; height: 32px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .chat-input-row button svg { width: 13px; height: 13px; fill: #fff; }
+    #chat-identify { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+    #chat-identify p { font-size: 13px; color: #666; line-height: 1.4; }
+    #chat-identify input {
+      background: #f9f9f9; border: 1px solid #d0d0d0; border-radius: 6px;
+      color: #2c3345; padding: 9px 12px; font-size: 13px; outline: none;
+    }
+    #chat-identify button {
+      background: var(--blue); color: #fff; border: none;
+      border-radius: 6px; padding: 10px;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 900px) {
+      .main-inner { grid-template-columns: 1fr; }
+      .main-left { padding: 20px 16px; }
+      .video-wrap { width: 56%; }
+      .main-right { padding: 20px 16px; }
+      .row2 { grid-template-columns: 1fr; }
+      .child-row { grid-template-columns: 1fr 1fr; }
+      .child-age-col { grid-column: 1 / -1; }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <h1>Get 50% Off Your Child's First Two Classes</h1>
-      <p class="sub">Impact Martial Athletics • Ages 5+ • Trial offer is $27 per child (test checkout active).</p>
 
-      <div class="grid g2">
-        <input id="first" placeholder="Parent first name" />
-        <input id="last" placeholder="Parent last name" />
-      </div>
-      <div class="grid g2" style="margin-top:10px;">
-        <input id="email" type="email" placeholder="Email" />
-        <input id="phone" type="tel" placeholder="Phone" />
+<!-- ═══════════ LOGO ═══════════ -->
+<div class="logo-bar">
+  <img id="logo-img"
+       src="/trial/assets/ima-logo-final.png"
+       alt="Impact Martial Athletics" />
+</div>
+
+<!-- ═══════════ DESKTOP NAV ═══════════ -->
+<div class="nav-bar">
+  <div class="nav-bar-inner">
+    <a class="nav-btn" href="https://ima-website-six.vercel.app/email-form" target="_blank">Email Us</a>
+    <div class="nav-spacer"></div>
+    <a class="nav-btn" href="tel:9546361515">954-636-1515</a>
+  </div>
+</div>
+
+<!-- ═══════════ MOBILE NAV ═══════════ -->
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a class="mobile-nav-btn" href="https://ima-website-six.vercel.app/email-form" target="_blank">📧 Email Us</a>
+    <a class="mobile-nav-btn" href="tel:9546361515">📞 954-636-1515</a>
+  </div>
+</div>
+
+<!-- ═══════════ MAIN: LEFT GRAY + RIGHT FORM ═══════════ -->
+<section class="main-section">
+  <div class="main-inner">
+
+    <!-- LEFT: headline + copy + portrait video -->
+    <div class="main-left">
+      <h2 class="hero-headline" id="headline-text">50% OFF RIGHT NOW</h2>
+      <div class="hero-copy">
+        <p id="subheadline-text">Just $27! 2 Action-Packed Classes +</p>
+        <p>Free Impact Shirt</p>
+        <p>(Normally $54 – Limited Time!)</p>
+        <p id="age-line-text">Ages 5 &amp; up</p>
       </div>
 
-      <div class="children" id="children"></div>
-      <button class="btn" type="button" id="add-child">Add Child</button>
-
-      <div style="margin-top:10px;">
-        <select id="referral">
-          <option value="">How did you hear about us?</option>
-          <option>Instagram</option><option>Facebook</option><option>Google Search</option><option>Drive By</option><option>Referral</option><option>Other</option>
-        </select>
-      </div>
-      <div style="margin-top:10px;"><textarea id="message" placeholder="Message (optional)"></textarea></div>
-      <div style="margin-top:10px;" class="row">
-        <input id="sms" type="checkbox" style="width:auto" /><label for="sms">I consent to SMS updates</label>
-      </div>
-      <div style="margin-top:4px;" class="row">
-        <input id="legal" type="checkbox" style="width:auto" /><label for="legal">I agree to terms and privacy policy</label>
-      </div>
-
-      <div class="summary" id="summary">Total: $27.00</div>
-      <p id="err" class="error"></p>
-      <button class="btn" id="submit" type="button">Start Test Checkout</button>
-    </section>
-
-    <section class="chat">
-      <h3 style="margin:0 0 8px;">Questions? Chat with us</h3>
-      <div class="grid g2" style="margin-bottom:8px;">
-        <input id="chat-name" placeholder="Your name" />
-        <input id="chat-phone" placeholder="Your phone" />
-      </div>
-      <div class="chatlog" id="chat-log"></div>
-      <div class="row">
-        <input id="chat-text" placeholder="Type your message..." />
-        <button class="btn" id="chat-send" type="button">Send</button>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const TRIAL_PRICE = 27;
-    let childCount = 0;
-    let conversationId = sessionStorage.getItem('trial_chat_conv_id') || '';
-    let lastReplyAt = new Date(Date.now() - 10 * 60 * 1000).toISOString();
-
-    function addChild() {
-      if (childCount >= 4) return;
-      childCount += 1;
-      const id = childCount;
-      const div = document.createElement('div');
-      div.className = 'child';
-      div.innerHTML = `
-        <div class="grid g2">
-          <input data-k="first" data-id="${id}" placeholder="Child first name" />
-          <input data-k="last" data-id="${id}" placeholder="Child last name" />
+      <!-- Portrait video centered in left column -->
+      <div class="video-wrap">
+        <div class="video-aspect">
+          <!-- Hidden div kept for JS compat -->
+          <div id="video-bg" style="display:none;"></div>
+          <video id="bg-video" autoplay loop muted playsinline preload="auto"
+                 poster="/trial/assets/trial-thumb-hd.png">
+            <source src="https://storage.googleapis.com/msgsndr/JOPG3e2g7KUAA5lfKMPK/media/691f84c701286e145e68f774.mp4" type="video/mp4" />
+            <source src="/trial/assets/trial-page-0.mp4" type="video/mp4" />
+          </video>
+          <button id="sound-toggle" onclick="toggleSound()">
+            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.63 0.635029C0.24 1.02503 0.24 1.65503 0.63 2.04503L4.29 5.70503L4 6.00503H1C0.45 6.00503 0 6.45503 0 7.00503V11.005C0 11.555 0.45 12.005 1 12.005H4L7.29 15.295C7.92 15.925 9 15.475 9 14.585V10.415L13.18 14.595C12.69 14.965 12.16 15.275 11.58 15.505C11.22 15.655 11 16.035 11 16.425C11 17.145 11.73 17.605 12.39 17.335C13.19 17.005 13.94 16.565 14.61 16.025L15.95 17.365C16.34 17.755 16.97 17.755 17.36 17.365C17.75 16.975 17.75 16.345 17.36 15.955L2.05 0.635029C1.66 0.245029 1.03 0.245029 0.63 0.635029ZM16 9.00503C16 9.82503 15.85 10.615 15.59 11.345L17.12 12.875C17.68 11.705 18 10.395 18 9.00503C18 5.17503 15.6 1.89503 12.22 0.605029C11.63 0.375029 11 0.835029 11 1.46503V1.65503C11 2.03503 11.25 2.36503 11.61 2.50503C14.18 3.54503 16 6.06503 16 9.00503ZM7.29 2.71503L7.12 2.88503L9 4.76503V3.41503C9 2.52503 7.92 2.08503 7.29 2.71503ZM13.5 9.00503C13.5 7.23503 12.48 5.71503 11 4.97503V6.76503L13.48 9.24503C13.49 9.16503 13.5 9.08503 13.5 9.00503Z"/>
+            </svg>
+            Enable sound
+          </button>
         </div>
-        <div class="grid g2" style="margin-top:8px;">
-          <input data-k="age" data-id="${id}" placeholder="Age" />
-          <input data-k="gender" data-id="${id}" placeholder="Gender" />
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="main-right">
+
+      <div class="err-box" id="err-box"></div>
+
+      <!-- Parent info -->
+      <div class="row2">
+        <div>
+          <label class="ghl-label">First Name <span class="req">*</span></label>
+          <input id="f-first" class="ghl-input" type="text" placeholder="First Name" autocomplete="given-name" required />
         </div>
-      `;
-      document.getElementById('children').appendChild(div);
-      updateTotal();
+        <div>
+          <label class="ghl-label">Last Name <span class="req">*</span></label>
+          <input id="f-last" class="ghl-input" type="text" placeholder="Last Name" autocomplete="family-name" required />
+        </div>
+      </div>
+      <div class="f1">
+        <label class="ghl-label">Email <span class="req">*</span></label>
+        <input id="f-email" class="ghl-input" type="email" placeholder="Email" autocomplete="email" required />
+      </div>
+      <div class="f1">
+        <label class="ghl-label">Phone <span class="req">*</span></label>
+        <input id="f-phone" class="ghl-input" type="tel" placeholder="Phone *" autocomplete="tel" required />
+      </div>
+
+      <!-- SMS Consent -->
+      <div class="legal" style="margin-bottom:10px;">
+        <input type="checkbox" id="f-sms-consent" />
+        <div class="legal-text">I consent to receive text messages from Impact Martial Athletics at the number provided, including class reminders, studio updates, and promotional offers. Message frequency varies. Reply STOP to opt out or HELP for help. Msg &amp; data rates may apply. View our <a href="/privacy-policy" target="_blank">Privacy Policy</a>.</div>
+      </div>
+
+      <!-- Dynamic child fields -->
+      <div id="child-fields"></div>
+
+      <button type="button" class="add-child-btn" id="add-child-btn" onclick="addChild()">
+        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        Add Another Child
+      </button>
+
+      <!-- Hear about -->
+      <div style="margin-top:14px;">
+        <span class="hear-label">How did you hear about us? <span style="color:#c00;">*</span></span>
+        <div class="hear-pills" id="hear-pills">
+          <span class="hear-pill">
+            <input type="radio" name="hear_about" id="h-instagram" value="Instagram"
+                   onchange="document.getElementById('hear-pills').style.outline=''" />
+            <label for="h-instagram">📸 Instagram</label>
+          </span>
+          <span class="hear-pill">
+            <input type="radio" name="hear_about" id="h-facebook" value="Facebook"
+                   onchange="document.getElementById('hear-pills').style.outline=''" />
+            <label for="h-facebook">👍 Facebook</label>
+          </span>
+          <span class="hear-pill">
+            <input type="radio" name="hear_about" id="h-google" value="Google Search"
+                   onchange="document.getElementById('hear-pills').style.outline=''" />
+            <label for="h-google">🔍 Google</label>
+          </span>
+          <span class="hear-pill">
+            <input type="radio" name="hear_about" id="h-driveby" value="Drive By"
+                   onchange="document.getElementById('hear-pills').style.outline=''" />
+            <label for="h-driveby">🚗 Drive By</label>
+          </span>
+          <span class="hear-pill">
+            <input type="radio" name="hear_about" id="h-referral" value="Referral"
+                   onchange="document.getElementById('hear-pills').style.outline=''" />
+            <label for="h-referral">🤝 Referral</label>
+          </span>
+          <span class="hear-pill">
+            <input type="radio" name="hear_about" id="h-other" value="Other"
+                   onchange="document.getElementById('hear-pills').style.outline=''" />
+            <label for="h-other">💬 Other</label>
+          </span>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="f1" style="margin-top:8px;">
+        <label class="ghl-label">Message (optional)</label>
+        <textarea id="f-message" class="ghl-input ta" placeholder="Anything you'd like us to know…"></textarea>
+      </div>
+
+      <!-- Note (matches GHL) -->
+      <p style="font-size:12px;color:var(--muted);margin:8px 0;font-style:italic;">
+        Please make sure to update the number of children you'd like to enroll before checking out.
+      </p>
+
+      <!-- Order summary -->
+      <div class="order-box">
+        <div class="order-title">Order Summary</div>
+        <div class="order-row">
+          <span style="color:var(--muted);" id="order-desc">Trial Offer Per Child</span>
+          <span id="order-amount" style="font-weight:700;">$27</span>
+        </div>
+        <div class="order-muted">2 Classes and an Impact Shirt</div>
+        <div class="order-row">
+          <span class="order-bold">Total</span>
+          <span class="order-price-lg" id="order-total">$27.00</span>
+        </div>
+      </div>
+
+      <!-- Legal -->
+      <div class="legal">
+        <input type="checkbox" id="f-legal" />
+        <div class="legal-text">
+          By clicking the checkbox, I have read &amp; agree to the
+          <a href="/privacy-policy" target="_blank">PRIVACY POLICY</a>,
+          <a href="/terms-of-service" target="_blank">TERMS OF SERVICES</a> and
+          <a href="/refund-policy" target="_blank">REFUND POLICY</a>.
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">SUBMIT</button>
+      <div class="secure-line">*100% secure &amp; safe payments*</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ YELLOW SOCIAL PROOF ═══════════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-card">
+      <div class="cta-card-name">Juan Moreno</div>
+      <div class="cta-card-title">2X Olympic Silver Champion</div>
+      <div class="cta-card-quote">"Coach Shick's dedication to performance and achievement is remarkable. His ability to connect with athletes and develop sport-specific training is a tremendous asset."</div>
+    </div>
+    <div class="cta-card">
+      <div class="cta-card-name">Kristal Richardson</div>
+      <div class="cta-card-title">IFBB Pro Olympia Competitor</div>
+      <div class="cta-card-quote">"It's amazing to see how much stronger and faster my daughters have gotten! Built just like elite fitness competition training — structured and effective."</div>
+    </div>
+    <div class="cta-card">
+      <div class="cta-card-name">Denis Shvidki</div>
+      <div class="cta-card-title">Florida Panthers NHL Player</div>
+      <div class="cta-card-quote">"The foundation of any great athlete is discipline and smart training. Coach Shick instills all of that at Impact Martial Athletics."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <img class="footer-logo" id="footer-logo" src="/trial/assets/ima-logo-final.png"
+         alt="Impact Martial Athletics" onerror="this.style.display='none'" />
+  </div>
+  <div class="footer-contact">
+    <div><span class="label">Email</span><br /><a href="mailto:tom@imaimpact.com">tom@imaimpact.com</a></div>
+    <div><span class="label">Call</span><br /><a href="tel:9546361515">954-636-1515</a></div>
+    <div><span class="label">Address</span><br />4401 S Flamingo Rd, Davie, FL 33330</div>
+  </div>
+  <div class="footer-social-row">
+    <a href="https://www.facebook.com/impactmartialathletics" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/impactmartialathletics" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+    </a>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Impact Martial Athletics</div>
+    <div class="footer-links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="#">Contact Information</a>
+      <a href="/terms-of-service">Terms of Service</a>
+      <a href="/refund-policy">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ CHAT BUBBLE ═══════════ -->
+<div id="chat-bubble" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  Chat With Us
+  <div id="chat-unread"></div>
+</div>
+
+<!-- ═══════════ CHAT PANEL ═══════════ -->
+<div id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-title" id="chat-studio-name">Studio</div>
+      <div class="chat-header-sub">Usually responds in minutes</div>
+    </div>
+  </div>
+  <div id="chat-identify">
+    <p>Have a question? Drop us a message and we'll text you back.</p>
+    <input id="ci-name"  type="text" placeholder="Your name" />
+    <input id="ci-phone" type="tel"  placeholder="Your phone number" />
+    <button onclick="startChat()">Start Chatting →</button>
+  </div>
+  <div id="chat-msgs-wrap" style="display:none;flex:1;display:none;flex-direction:column;overflow:hidden;">
+    <div class="chat-msgs" id="chat-msgs">
+      <div class="chat-msg studio">Hi! How can we help? 👋</div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Type a message…"
+             onkeydown="if(event.key==='Enter')sendChat()" />
+      <button onclick="sendChat()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Force video play after load -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var vid = document.getElementById('bg-video');
+  if (vid) {
+    vid.muted = true;
+    var p = vid.play();
+    if (p !== undefined) {
+      p.catch(function() {
+        // autoplay blocked — poster image shows, user can click sound button
+      });
     }
+  }
+});
+</script>
 
-    function childrenData() {
-      const rows = [];
-      for (let i = 1; i <= childCount; i += 1) {
-        const first = document.querySelector(`[data-k="first"][data-id="${i}"]`)?.value?.trim() || '';
-        const last = document.querySelector(`[data-k="last"][data-id="${i}"]`)?.value?.trim() || '';
-        const age = document.querySelector(`[data-k="age"][data-id="${i}"]`)?.value?.trim() || '';
-        const gender = document.querySelector(`[data-k="gender"][data-id="${i}"]`)?.value?.trim() || '';
-        if (first) rows.push({ first, last, age, gender });
-      }
-      return rows;
+<!-- Mirror logo to footer -->
+<script>
+(function() {
+  var tries = 0;
+  var t = setInterval(function() {
+    var src = document.getElementById('logo-img');
+    var dst = document.getElementById('footer-logo');
+    if (src && src.complete && src.naturalWidth > 0 && dst) {
+      dst.src = src.src; clearInterval(t);
     }
+    if (++tries > 40) clearInterval(t);
+  }, 300);
+})();
+</script>
 
-    function updateTotal() {
-      const count = Math.max(1, childCount);
-      document.getElementById('summary').textContent = `Total: $${(TRIAL_PRICE * count).toFixed(2)}`;
-    }
+<script>
+(function () {
+  // ── State ──────────────────────────────────────────────────────────────────
+  var SLUG = 'ima';
 
-    function showErr(msg) {
-      const el = document.getElementById('err');
-      el.textContent = msg;
-      el.style.display = msg ? 'block' : 'none';
-    }
+  var studio = {
+    trial_price: 27,
+    primary_color: '#F59E0B',
+    studio_name: 'Impact Martial Athletics',
+    slug: SLUG,
+  };
 
-    async function submit() {
-      showErr('');
-      const first_name = document.getElementById('first').value.trim();
-      const last_name = document.getElementById('last').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const referral_source = document.getElementById('referral').value;
-      const message = document.getElementById('message').value.trim();
-      const sms_consent = document.getElementById('sms').checked;
-      const legal = document.getElementById('legal').checked;
-      const children = childrenData();
-      const num_children = Math.max(1, childCount);
+  var visitorName  = sessionStorage.getItem('trial_chat_name')    || '';
+  var visitorPhone = sessionStorage.getItem('trial_chat_phone')   || '';
+  var convId       = sessionStorage.getItem('trial_chat_conv_id') || '';
+  var chatOpen     = false;
+  var soundOn      = false;
 
-      if (!first_name || !last_name || !email || !phone) return showErr('Missing required fields.');
-      if (!sms_consent || !legal) return showErr('SMS consent and legal agreement are required.');
-      if (!referral_source) return showErr('Please select referral source.');
-      if (children.length === 0) return showErr('At least one child first name is required.');
+  // ── Child state ────────────────────────────────────────────────────────────
+  var childCount = 0; // tracks unique ID counter
+  var childIds = [];  // ordered list of active child IDs
 
-      const btn = document.getElementById('submit');
-      btn.disabled = true;
-      btn.textContent = 'Processing...';
-      try {
-        const res = await fetch('/api/trial-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            first_name, last_name, email, phone, num_children, children, message, referral_source, sms_consent,
-          }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.url) throw new Error(data.error || `HTTP ${res.status}`);
-        window.location.href = data.url;
-      } catch (err) {
-        showErr(err.message || 'Checkout failed.');
-        btn.disabled = false;
-        btn.textContent = 'Start Test Checkout';
-      }
-    }
+  // ── Boot ───────────────────────────────────────────────────────────────────
+  function boot() {
+    applyStudioConfig();
 
-    function addMsg(text, cls) {
-      const log = document.getElementById('chat-log');
-      const el = document.createElement('div');
-      el.className = `msg ${cls}`;
-      el.textContent = text;
-      log.appendChild(el);
-      log.scrollTop = log.scrollHeight;
-    }
-
-    async function sendChat() {
-      const visitor_name = document.getElementById('chat-name').value.trim();
-      const visitor_phone = document.getElementById('chat-phone').value.trim();
-      const message = document.getElementById('chat-text').value.trim();
-      if (!visitor_name || !visitor_phone || !message) return;
-      document.getElementById('chat-text').value = '';
-      addMsg(message, 'v');
-      try {
-        const res = await fetch('/api/trial-chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ visitor_name, visitor_phone, message }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (data.conversation_id) {
-          conversationId = data.conversation_id;
-          sessionStorage.setItem('trial_chat_conv_id', conversationId);
-        }
-      } catch {}
-    }
-
-    async function pollChat() {
-      if (!conversationId) return;
-      try {
-        const res = await fetch(`/api/trial-chat-poll?conversation_id=${encodeURIComponent(conversationId)}&after=${encodeURIComponent(lastReplyAt)}`);
-        const data = await res.json().catch(() => ({}));
-        const msgs = Array.isArray(data.messages) ? data.messages : [];
-        msgs.forEach((m) => addMsg(m.message_text || '', 's'));
-        if (msgs.length) lastReplyAt = msgs[msgs.length - 1].created_at || lastReplyAt;
-      } catch {}
-    }
-
-    document.getElementById('add-child').addEventListener('click', addChild);
-    document.getElementById('submit').addEventListener('click', submit);
-    document.getElementById('chat-send').addEventListener('click', sendChat);
-    document.getElementById('chat-text').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChat(); });
-
+    // Start with one child form
     addChild();
-    setInterval(pollChat, 10000);
-  </script>
+
+    // Pre-fill chat if returning visitor
+    if (visitorName && visitorPhone) {
+      showChatMessages();
+    }
+  }
+
+  function applyStudioConfig() {
+    var c = studio.primary_color || '#F59E0B';
+    document.documentElement.style.setProperty('--accent', c);
+
+    var darkened = shadeColor(c, -20);
+    document.documentElement.style.setProperty('--accent-dark', darkened);
+
+    if (studio.logo_url) {
+      var img = document.getElementById('logo-img');
+      img.src = studio.logo_url;
+      img.style.display = 'block';
+      img.onerror = function () { img.style.display = 'none'; };
+    }
+
+    var headline = studio.trial_headline || '50% OFF RIGHT NOW';
+    var lines = headline.split(' ');
+    // Bold formatting: first 2 words get accent treatment
+    document.getElementById('headline-text').textContent = headline;
+    document.getElementById('headline-text').innerHTML = headline.replace(/(50%\s+OFF|SPECIAL\s+OFFER|LIMITED\s+TIME)/i, '<span class="accent">$1</span>');
+
+    setTextContent('subheadline-text', studio.trial_subheadline || 'Just $27! 2 Action-Packed Classes +');
+    setTextContent('age-line-text', studio.trial_age_restriction || 'Ages 5 & up');
+    setTextContent('chat-studio-name', studio.studio_name || 'Studio');
+
+    document.title = (studio.studio_name || 'Studio') + ' — Trial Offer';
+    updateOrderSummary();
+  }
+
+  function setTextContent(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  function shadeColor(hex, pct) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    var num = parseInt(hex, 16);
+    var r = Math.min(255, Math.max(0, (num >> 16) + pct));
+    var g = Math.min(255, Math.max(0, ((num >> 8) & 0xff) + pct));
+    var b = Math.min(255, Math.max(0, (num & 0xff) + pct));
+    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+  }
+
+  // ── Child fields ───────────────────────────────────────────────────────────
+  var ORDINALS = ['1st', '2nd', '3rd', '4th'];
+  var MAX_CHILDREN = 4;
+
+  window.addChild = function () {
+    if (childIds.length >= MAX_CHILDREN) return;
+
+    var id = ++childCount;
+    childIds.push(id);
+
+    var group = document.createElement('div');
+    group.className = 'child-group';
+    group.id = 'child-group-' + id;
+
+    var ageOptions = '';
+    for (var age = 5; age <= 15; age++) {
+      ageOptions += '<option value="' + age + '">' + age + '</option>';
+    }
+
+    group.innerHTML =
+      '<div class="child-group-header">' +
+        '<div class="child-label" id="child-label-' + id + '"></div>' +
+        '<button type="button" class="child-remove" id="child-remove-' + id + '" onclick="removeChild(' + id + ')" title="Remove child" aria-label="Remove child">✕</button>' +
+      '</div>' +
+      '<div class="child-row">' +
+        '<div class="field"><label class="ghl-label">First Name *</label><input class="ghl-input child-first" type="text" placeholder="First name" data-id="' + id + '" /></div>' +
+        '<div class="field"><label class="ghl-label">Last Name *</label><input class="ghl-input child-last" type="text" placeholder="Last name" data-id="' + id + '" /></div>' +
+        '<div class="field child-age-col"><label class="ghl-label">Age *</label><select class="ghl-input sel child-age" data-id="' + id + '">' + ageOptions + '</select></div>' +
+      '</div>' +
+      '<div style="margin-top:8px;">' +
+        '<span class="hear-label">Gender</span>' +
+        '<div class="hear-pills">' +
+          '<span class="gender-pill"><input type="radio" name="child_gender_' + id + '" id="g-boy-' + id + '" value="Male" /><label for="g-boy-' + id + '">👦 Boy</label></span>' +
+          '<span class="gender-pill"><input type="radio" name="child_gender_' + id + '" id="g-girl-' + id + '" value="Female" /><label for="g-girl-' + id + '">👧 Girl</label></span>' +
+          '<span class="gender-pill"><input type="radio" name="child_gender_' + id + '" id="g-nb-' + id + '" value="Non-binary" /><label for="g-nb-' + id + '">🌟 Non-binary</label></span>' +
+          '<span class="gender-pill"><input type="radio" name="child_gender_' + id + '" id="g-pnts-' + id + '" value="Prefer not to say" /><label for="g-pnts-' + id + '">Prefer not to say</label></span>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById('child-fields').appendChild(group);
+    refreshChildLabels();
+    updateOrderSummary();
+
+    // Focus the new first-name input
+    var nameInput = group.querySelector('.child-first');
+    if (nameInput && childIds.length > 1) nameInput.focus();
+  };
+
+  window.removeChild = function (id) {
+    if (childIds.length <= 1) return; // always keep at least one
+
+    var idx = childIds.indexOf(id);
+    if (idx === -1) return;
+    childIds.splice(idx, 1);
+
+    var group = document.getElementById('child-group-' + id);
+    if (group) {
+      group.style.opacity = '0';
+      group.style.transform = 'scale(.97)';
+      group.style.transition = 'opacity .15s, transform .15s';
+      setTimeout(function () { if (group.parentNode) group.parentNode.removeChild(group); }, 150);
+    }
+
+    refreshChildLabels();
+    updateOrderSummary();
+  };
+
+  function refreshChildLabels() {
+    childIds.forEach(function (id, idx) {
+      var labelEl = document.getElementById('child-label-' + id);
+      if (labelEl) labelEl.textContent = ORDINALS[idx] + ' Child';
+
+      // Disable remove button if only 1 child left
+      var removeBtn = document.getElementById('child-remove-' + id);
+      if (removeBtn) removeBtn.disabled = childIds.length <= 1;
+    });
+
+    // Disable add button at max
+    var addBtn = document.getElementById('add-child-btn');
+    if (addBtn) addBtn.disabled = childIds.length >= MAX_CHILDREN;
+  }
+
+  function updateOrderSummary() {
+    var n = childIds.length || 1;
+    var price = Number(studio.trial_price) || 27;
+    var total = (price * n).toFixed(2);
+    setTextContent('price-display', '$' + price);
+    setTextContent('price-old-display', 'Normally $' + (price * 2));
+    setTextContent('order-desc', 'Trial Offer Per Child');
+    setTextContent('order-amount', '$' + (price * n).toFixed(2));
+    setTextContent('order-total', '$' + total);
+  }
+
+  // ── Sound ─────────────────────────────────────────────────────────────────
+  window.toggleSound = function () {
+    var vid = document.getElementById('bg-video');
+    soundOn = !soundOn;
+    vid.muted = !soundOn;
+    var btn = document.getElementById('sound-toggle');
+    btn.innerHTML = soundOn
+      ? '<svg viewBox="0 0 24 24" width="14" height="14" fill="#fff"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> Sound On'
+      : '<svg viewBox="0 0 18 18" width="14" height="14" fill="#fff"><path d="M0.63 0.635029C0.24 1.02503 0.24 1.65503 0.63 2.04503L4.29 5.70503L4 6.00503H1C0.45 6.00503 0 6.45503 0 7.00503V11.005C0 11.555 0.45 12.005 1 12.005H4L7.29 15.295C7.92 15.925 9 15.475 9 14.585V10.415L13.18 14.595C12.69 14.965 12.16 15.275 11.58 15.505C11.22 15.655 11 16.035 11 16.425C11 17.145 11.73 17.605 12.39 17.335C13.19 17.005 13.94 16.565 14.61 16.025L15.95 17.365C16.34 17.755 16.97 17.755 17.36 17.365C17.75 16.975 17.75 16.345 17.36 15.955L2.05 0.635029C1.66 0.245029 1.03 0.245029 0.63 0.635029ZM16 9.00503C16 9.82503 15.85 10.615 15.59 11.345L17.12 12.875C17.68 11.705 18 10.395 18 9.00503C18 5.17503 15.6 1.89503 12.22 0.605029C11.63 0.375029 11 0.835029 11 1.46503V1.65503C11 2.03503 11.25 2.36503 11.61 2.50503C14.18 3.54503 16 6.06503 16 9.00503ZM7.29 2.71503L7.12 2.88503L9 4.76503V3.41503C9 2.52503 7.92 2.08503 7.29 2.71503ZM13.5 9.00503C13.5 7.23503 12.48 5.71503 11 4.97503V6.76503L13.48 9.24503C13.49 9.16503 13.5 9.08503 13.5 9.00503Z"/></svg> Enable sound';
+  };
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+  window.handleSubmit = async function () {
+    var errBox = document.getElementById('err-box');
+    errBox.style.display = 'none';
+
+    var first = document.getElementById('f-first').value.trim();
+    var last = document.getElementById('f-last').value.trim();
+    var email = document.getElementById('f-email').value.trim();
+    var phone = document.getElementById('f-phone').value.trim();
+    var legal = document.getElementById('f-legal').checked;
+    var smsConsent = document.getElementById('f-sms-consent').checked;
+    var message = document.getElementById('f-message').value.trim();
+    var hearRadio = document.querySelector('input[name="hear_about"]:checked');
+    var hearAbout = hearRadio ? hearRadio.value : '';
+
+    var errors = [];
+    if (!first) errors.push('First name is required');
+    if (!last) errors.push('Last name is required');
+    if (!email || !/\S+@\S+\.\S+/.test(email)) errors.push('Valid email is required');
+    if (!phone) errors.push('Phone number is required');
+    if (!hearAbout) errors.push('Please tell us how you heard about us');
+    if (!smsConsent) errors.push('Please consent to receive text messages to continue');
+    if (!legal) errors.push('Please agree to the terms to continue');
+
+    // Collect children from dynamic form
+    var children = [];
+    var childError = false;
+    childIds.forEach(function (id) {
+      var firstEl   = document.querySelector('.child-first[data-id="' + id + '"]');
+      var lastEl    = document.querySelector('.child-last[data-id="'  + id + '"]');
+      var ageEl     = document.querySelector('.child-age[data-id="'   + id + '"]');
+      var genderEl  = document.querySelector('input[name="child_gender_' + id + '"]:checked');
+      var cFirst  = firstEl  ? firstEl.value.trim()  : '';
+      var cLast   = lastEl   ? lastEl.value.trim()   : '';
+      var cGender = genderEl ? genderEl.value        : '';
+      if (!cFirst) childError = true;
+      children.push({ first: cFirst, last: cLast, age: ageEl ? ageEl.value : '5', gender: cGender });
+    });
+    var numKids = children.length;
+    if (childError) errors.push('Please fill in all children\'s first names');
+
+    // Highlight missing hear-about pills
+    var pillsWrap = document.getElementById('hear-pills');
+    if (!hearAbout) {
+      if (pillsWrap) pillsWrap.style.outline = '1.5px solid #0606f3';
+    } else {
+      if (pillsWrap) pillsWrap.style.outline = '';
+    }
+
+    if (errors.length) {
+      errBox.textContent = errors.join(' · ');
+      errBox.style.display = 'block';
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Processing…';
+
+    try {
+      var resp = await fetch('/api/trial-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studio_slug: SLUG,
+          first_name: first,
+          last_name: last,
+          email: email,
+          phone: phone,
+          num_children: numKids,
+          children: children,
+          message: message,
+          referral_source: hearAbout,
+          sms_consent: smsConsent,
+        }),
+      });
+
+      var data = await resp.json();
+
+      if (!resp.ok || !data.url) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
+      window.location.href = data.url;
+    } catch (err) {
+      errBox.textContent = err.message || 'Something went wrong. Please try again.';
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'SUBMIT';
+    }
+  };
+
+  // ── Chat ──────────────────────────────────────────────────────────────────
+  window.toggleChat = function () {
+    chatOpen = !chatOpen;
+    document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+    if (chatOpen) {
+      document.getElementById('chat-unread').style.display = 'none';
+      if (visitorName && visitorPhone) showChatMessages();
+    } else {
+      stopPolling();
+    }
+  };
+
+  window.startChat = function () {
+    var name = document.getElementById('ci-name').value.trim();
+    var phone = document.getElementById('ci-phone').value.trim();
+    if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+    visitorName = name;
+    visitorPhone = phone;
+    sessionStorage.setItem('trial_chat_name', name);
+    sessionStorage.setItem('trial_chat_phone', phone);
+    showChatMessages();
+  };
+
+  function showChatMessages() {
+    document.getElementById('chat-identify').style.display = 'none';
+    var wrap = document.getElementById('chat-msgs-wrap');
+    wrap.style.display = 'flex';
+    wrap.style.flexDirection = 'column';
+    wrap.style.overflow = 'hidden';
+    wrap.style.flex = '1';
+    subscribeToReplies();
+  }
+
+  window.sendChat = async function () {
+    var input = document.getElementById('chat-input');
+    var text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    appendChatMsg(text, 'visitor');
+    try {
+      var resp = await fetch('/api/trial-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studio_slug: SLUG, visitor_name: visitorName,
+          visitor_phone: visitorPhone, message: text,
+        }),
+      });
+      var data = await resp.json();
+      if (data.conversation_id && !convId) {
+        convId = data.conversation_id;
+        sessionStorage.setItem('trial_chat_conv_id', convId);
+        subscribeToReplies();
+      }
+    } catch (e) { appendChatMsg('Failed to send. Please try again.', 'studio'); }
+  };
+
+  function appendChatMsg(text, type) {
+    var msgs = document.getElementById('chat-msgs');
+    var div = document.createElement('div');
+    div.className = 'chat-msg ' + type;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  var _pollInterval = null;
+  var _lastReplyAt  = new Date().toISOString();
+
+  function subscribeToReplies() {
+    if (_pollInterval || !convId) return;
+    // COST-OPT: dropped from 3s → 10s. Every tab with the trial page open was hitting
+    // Supabase 20× per minute; at 10s that drops to 6× per minute (−70%). 10s is still
+    // well below the perceived-instant threshold for a chat reply in a slow-paced flow.
+    _pollInterval = setInterval(pollForReplies, 10000);
+  }
+
+  function stopPolling() {
+    if (_pollInterval) { clearInterval(_pollInterval); _pollInterval = null; }
+  }
+
+  async function pollForReplies() {
+    if (!convId || !chatOpen) return;
+    try {
+      var url = '/api/trial-chat-poll?conversation_id=' +
+        encodeURIComponent(convId) + '&after=' + encodeURIComponent(_lastReplyAt);
+      var resp = await fetch(url);
+      if (!resp.ok) return;
+      var data = await resp.json();
+      var msgs = data.messages || [];
+      if (msgs.length > 0) {
+        _lastReplyAt = msgs[msgs.length - 1].created_at;
+        msgs.forEach(function (m) { appendChatMsg(m.message_text, 'studio'); });
+      }
+    } catch (e) { /* silent */ }
+  }
+
+  boot();
+})();
+</script>
+
 </body>
 </html>
