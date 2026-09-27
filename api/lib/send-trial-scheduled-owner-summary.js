@@ -38,6 +38,20 @@ function childSlug(name) {
     .replace(/^-+|-+$/g, '')
 }
 
+function phoneVariants(raw) {
+  const original = String(raw || '').trim()
+  const digits = original.replace(/\D/g, '')
+  const variants = [
+    original,
+    digits,
+    digits.length === 10 ? `+1${digits}` : null,
+    digits.length === 10 ? `1${digits}` : null,
+    digits.length === 11 && digits.startsWith('1') ? `+${digits}` : null,
+    digits.length === 11 && digits.startsWith('1') ? digits.slice(1) : null,
+  ].filter(Boolean)
+  return [...new Set(variants)]
+}
+
 function expectedChildCount(lead) {
   const fromNum = Number.parseInt(String(lead?.num_children || ''), 10)
   if (Number.isFinite(fromNum) && fromNum > 0) return fromNum
@@ -124,11 +138,20 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
   }
 
   if (reservationsRaw.length === 0 && lead.phone) {
-    const reservationByPhoneRes = await sbFetch(
-      `reservations_v2?guest_phone=eq.${encodeURIComponent(lead.phone)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
-      { method: 'GET' }
-    )
-    const byPhone = Array.isArray(reservationByPhoneRes.data) ? reservationByPhoneRes.data : []
+    const byPhone = []
+    const seen = new Set()
+    for (const variant of phoneVariants(lead.phone)) {
+      const reservationByPhoneRes = await sbFetch(
+        `reservations_v2?guest_phone=eq.${encodeURIComponent(variant)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
+        { method: 'GET' }
+      )
+      const rows = Array.isArray(reservationByPhoneRes.data) ? reservationByPhoneRes.data : []
+      rows.forEach((row) => {
+        if (!row?.id || seen.has(row.id)) return
+        seen.add(row.id)
+        byPhone.push(row)
+      })
+    }
     const expectedNames = new Set(
       leadChildren.map((c) => normalizeName(childNameFromLead(c, lead.last_name))).filter(Boolean)
     )
