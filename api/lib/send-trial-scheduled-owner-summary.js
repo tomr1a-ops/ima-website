@@ -65,25 +65,10 @@ async function sendResendEmail(payload) {
   return { ok: true, id: data?.id || null, from }
 }
 
-async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
-  requireSupabaseEnv()
-  const safeLeadId = String(leadId || '').trim()
-  if (!safeLeadId) return { ok: false, error: 'lead_id required' }
-
-  const leadRes = await sbFetch(
-    `leads?id=eq.${encodeURIComponent(safeLeadId)}&select=id,first_name,last_name,email,phone,num_children,children,message&limit=1`,
-    { method: 'GET' }
-  )
-  const lead = Array.isArray(leadRes.data) ? leadRes.data[0] : null
-  if (!lead) return { ok: false, status: 404, error: 'Lead not found' }
-
-  if (hasMarker(lead.message)) {
-    return { ok: true, skipped: true, reason: 'already-sent', expected: expectedChildCount(lead), booked: null }
-  }
-
+async function loadBookedReservationsForLead(leadId) {
   const reservationByLeadRes = await sbFetch(
     `reservations_v2?lead_id=eq.${encodeURIComponent(
-      safeLeadId
+      leadId
     )}&studio_id=eq.${encodeURIComponent(
       IMA_STUDIO_ID
     )}&is_trial=eq.true&status=in.(reserved,attended)&select=id,guest_name,class_id,member_id,reserved_at,status,is_trial&order=reserved_at.asc`,
@@ -93,7 +78,7 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
 
   // Secondary deterministic lookup only: trial members with child-scoped external IDs.
   if (reservations.length === 0) {
-    const memberPattern = `trial_lead_${safeLeadId}_%`
+    const memberPattern = `trial_lead_${leadId}_%`
     const membersRes = await sbFetch(
       `members?studio_id=eq.${encodeURIComponent(
         IMA_STUDIO_ID
@@ -113,9 +98,30 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
       reservations = Array.isArray(reservationByMemberRes.data) ? reservationByMemberRes.data : []
     }
   }
+
+  return reservations
+}
+
+async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
+  requireSupabaseEnv()
+  const safeLeadId = String(leadId || '').trim()
+  if (!safeLeadId) return { ok: false, error: 'lead_id required' }
+
+  const leadRes = await sbFetch(
+    `leads?id=eq.${encodeURIComponent(safeLeadId)}&select=id,first_name,last_name,email,phone,num_children,children,message&limit=1`,
+    { method: 'GET' }
+  )
+  const lead = Array.isArray(leadRes.data) ? leadRes.data[0] : null
+  if (!lead) return { ok: false, status: 404, error: 'Lead not found' }
   const expected = expectedChildCount(lead)
-  if (reservations.length < expected) {
-    return { ok: true, skipped: true, reason: 'family-not-complete', expected, booked: reservations.length }
+  const reservations = await loadBookedReservationsForLead(safeLeadId)
+  const booked = reservations.length
+
+  if (hasMarker(lead.message)) {
+    return { ok: true, skipped: true, reason: 'already-sent', expected, booked }
+  }
+  if (booked < expected) {
+    return { ok: true, skipped: true, reason: 'family-not-complete', expected, booked }
   }
 
   const nowIso = new Date().toISOString()
