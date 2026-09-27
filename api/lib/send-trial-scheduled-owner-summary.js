@@ -79,7 +79,7 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
   if (!safeLeadId) return { ok: false, error: 'lead_id required' }
 
   const leadRes = await sbFetch(
-    `leads?id=eq.${encodeURIComponent(safeLeadId)}&select=id,first_name,last_name,email,phone,num_children,children,message&limit=1`,
+    `leads?id=eq.${encodeURIComponent(safeLeadId)}&select=id,first_name,last_name,email,phone,num_children,children,message,created_at&limit=1`,
     { method: 'GET' }
   )
   const lead = Array.isArray(leadRes.data) ? leadRes.data[0] : null
@@ -121,6 +121,25 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
       { method: 'GET' }
     )
     reservationsRaw = Array.isArray(reservationByLeadRes.data) ? reservationByLeadRes.data : []
+  }
+
+  if (reservationsRaw.length === 0 && lead.phone) {
+    const reservationByPhoneRes = await sbFetch(
+      `reservations_v2?guest_phone=eq.${encodeURIComponent(lead.phone)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
+      { method: 'GET' }
+    )
+    const byPhone = Array.isArray(reservationByPhoneRes.data) ? reservationByPhoneRes.data : []
+    const expectedNames = new Set(
+      leadChildren.map((c) => normalizeName(childNameFromLead(c, lead.last_name))).filter(Boolean)
+    )
+    const leadCreatedAt = lead.created_at ? new Date(lead.created_at).getTime() : 0
+    reservationsRaw = byPhone.filter((r) => {
+      const guestName = normalizeName(r?.guest_name || '')
+      if (!expectedNames.has(guestName)) return false
+      if (!leadCreatedAt) return true
+      const createdAtMs = r?.created_at ? new Date(r.created_at).getTime() : 0
+      return createdAtMs >= leadCreatedAt
+    })
   }
 
   const reservations = reservationsRaw.filter((r) => {
