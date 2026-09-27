@@ -1,4 +1,3 @@
-const Stripe = require('stripe');
 const { sbFetch, requireSupabaseEnv } = require('./lib/supabase');
 
 module.exports = async function handler(req, res) {
@@ -40,9 +39,21 @@ module.exports = async function handler(req, res) {
 
   let session;
   try {
-    const stripe = new Stripe(stripeKey, { apiVersion: '2023-10-16' });
-    session = await stripe.checkout.sessions.retrieve(session_id);
-  } catch(e) {
+    const stripeRes = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(session_id)}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${stripeKey}` },
+    });
+    const text = await stripeRes.text();
+    try {
+      session = text ? JSON.parse(text) : null;
+    } catch {
+      session = null;
+    }
+    if (!stripeRes.ok || !session) {
+      const msg = session?.error?.message || text || `Stripe HTTP ${stripeRes.status}`;
+      throw new Error(msg);
+    }
+  } catch (e) {
     console.error('[verify-checkout] Stripe session fetch failed:', e.message);
     return res.status(400).json({ error: 'Could not retrieve session: ' + e.message });
   }
