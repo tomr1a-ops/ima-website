@@ -27,7 +27,7 @@
       const phone = qs.get('phone') || '';
       const kids = qs.get('kids') || '';
       const lead = qs.get('lead_id') || '';
-      const schedule = `https://ima-os.com/schedule/ima?phone=${encodeURIComponent(phone)}&kids=${encodeURIComponent(kids)}&lead_id=${encodeURIComponent(lead)}`;
+      const schedule = `/schedule?phone=${encodeURIComponent(phone)}&kids=${encodeURIComponent(kids)}&lead_id=${encodeURIComponent(lead)}`;
       document.getElementById('sched').href = schedule;
       document.getElementById('detail').textContent = kids ? `Kids: ${kids}` : '';
     })();

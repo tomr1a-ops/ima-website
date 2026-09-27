@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule Your Trial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #00ffb4;
+    --accent-dark: #00cc8f;
+    --bg: #080c1a;
+    --surface: #0d1527;
+    --card: #111827;
+    --card-open: #0e1f14;
+    --border: #1f2d45;
+    --text: #f1f5f9;
+    --muted: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; display: none; }
+  .header-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: .04em; }
+  .header-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+  /* ── Layout ── */
+  .container { max-width: 680px; margin: 0 auto; padding: 24px 16px 80px; }
+
+  .page-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  /* ── Date groups ── */
+  .class-group { margin-bottom: 28px; }
+  .date-header {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Class card ── */
+  .class-wrap { margin-bottom: 8px; }
+
+  .class-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, border-radius .15s;
+    user-select: none;
+  }
+  .class-card:hover { border-color: var(--accent); background: #131c30; }
+  .class-card.open {
+    border-color: var(--accent);
+    background: var(--card-open);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+  }
+
+  .class-time {
+    min-width: 62px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .class-time .ampm { font-size: 10px; font-weight: 500; color: var(--muted); }
+
+  .class-info { flex: 1; }
+  .class-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .class-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .class-spots {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: rgba(0,255,180,.1);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .class-spots.few { background: rgba(251,191,36,.1); color: #fbbf24; }
+
+  .chevron {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform .2s;
+    line-height: 1;
+    padding-left: 4px;
+  }
+  .chevron.open { transform: rotate(90deg); color: var(--accent); }
+
+  /* ── Dropdown panel ── */
+  .class-dropdown {
+    display: none;
+    background: var(--card-open);
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  .dropdown-inner {
+    padding: 16px;
+  }
+
+  .dropdown-class-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Kids list ── */
+  .kids-list { margin-bottom: 12px; }
+
+  .kid-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+
+  .kid-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .kid-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: rgba(16,185,129,.15);
+    color: var(--success);
+    white-space: nowrap;
+  }
+
+  .btn-reserve-kid {
+    padding: 6px 14px;
+    background: var(--accent);
+    color: #080c1a;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .03em;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+    white-space: nowrap;
+  }
+  .btn-reserve-kid:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .btn-reserve-kid:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  .btn-remove {
+    padding: 5px 11px;
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid rgba(239,68,68,.3);
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+    white-space: nowrap;
+  }
+  .btn-remove:hover { background: rgba(239,68,68,.1); border-color: var(--danger); }
+
+  /* ── Add child row (removed — children come from paid trial form only) ── */
+  .add-child-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+  .add-child-row input {
+    flex: 1;
+    padding: 9px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .add-child-row input:focus { border-color: var(--accent); }
+  .add-child-row input::placeholder { color: var(--muted); }
+  .add-child-age {
+    width: 58px;
+    flex: 0 0 58px;
+    text-align: center;
+  }
+
+  .btn-add-kid {
+    padding: 9px 14px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s;
+  }
+  .btn-add-kid:hover { background: rgba(0,255,180,.08); }
+
+  /* ── Phone field ── */
+  .phone-field-wrap {
+    margin-bottom: 4px;
+  }
+  .phone-field-wrap label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 5px;
+  }
+  .phone-field-wrap input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .phone-field-wrap input:focus { border-color: var(--accent); }
+  .phone-field-wrap input::placeholder { color: var(--muted); }
+
+  /* ── Prompt when no kids ── */
+  .no-kids-prompt {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  /* ── Save / Reserve All button ── */
+  .btn-save-all {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 20px;
+    background: var(--accent);
+    color: #080c1a;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: .05em;
+    cursor: pointer;
+    transition: background .15s, transform .1s, opacity .15s;
+  }
+  .btn-save-all:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .btn-save-all:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+  .btn-save-all.success {
+    background: var(--success);
+    pointer-events: none;
+  }
+
+  /* ── Dropdown error ── */
+  .dropdown-error {
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(239,68,68,.08);
+    border-radius: 6px;
+  }
+
+  /* ── Loading / empty states ── */
+  .loading { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px; }
+  .spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .empty { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 440px) {
+    .header-title { font-size: 18px; }
+    .page-title { font-size: 26px; }
+    .kid-row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <img id="logo-img" class="header-logo" src="" alt="">
+  <div>
+    <div class="header-title" id="studio-name">Impact Martial Athletics</div>
+    <div class="header-sub" id="studio-sub">Select a class and reserve your spot</div>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Loading -->
+  <div class="loading" id="loading-state">
+    <div class="spinner"></div>
+    Loading schedule…
+  </div>
+
+  <!-- Schedule -->
+  <div id="main-content" style="display:none;">
+    <div class="page-title">Schedule Your Trial</div>
+    <div class="page-sub">Pick a class below and add your child to reserve their spot</div>
+
+    <div id="classes-list"></div>
+
+    <div class="empty" id="empty-state" style="display:none;">
+      No upcoming classes available. Check back soon!
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // De-tenant scheduler: this page is fixed to IMA.
+  var SLUG = 'ima';
+
+  // ── Parse query params ───────────────────────────────────────────────
+  var QS = (function () {
+    var out = {};
+    window.location.search.replace(/[?&]([^=&]+)=([^&]*)/g, function (_, k, v) {
+      out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' '));
+    });
+    return out;
+  })();
+
+  // ── Reschedule mode ───────────────────────────────────────────────────
+  var IS_RESCHEDULE = QS.reschedule === 'true';
+  if (IS_RESCHEDULE) {
+    var banner = document.createElement('div');
+    banner.id = 'reschedule-banner';
+    banner.style.cssText = [
+      'background:#ff6b35',
+      'color:#fff',
+      'text-align:center',
+      'padding:12px 16px',
+      'font-size:14px',
+      'font-weight:600',
+      'letter-spacing:.01em',
+      'position:sticky',
+      'top:0',
+      'z-index:99',
+    ].join(';');
+    banner.textContent = '🔄 Select a new class to reschedule your trial';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  // ── State ────────────────────────────────────────────────────────────
+  var _studio       = {};
+  var _classes      = [];
+  var _kids         = [];          // [{name: string}]
+  var _phone        = '';
+  var _reservations = {};          // key: classId+'_'+kidIdx → reservationId
+  var _openClassId  = null;
+
+  // ── Expose handlers for inline onclick ───────────────────────────────
+  window.schedToggle   = toggleDropdown;
+  window.schedAddKid   = addKid;
+  window.schedReserve  = reserveKid;
+  window.schedRemove   = removeReservation;
+  window.schedSetPhone = function (v) { _phone = v.trim(); };
+  window.schedSaveAll  = saveAll;
+  window.schedAgeInput = function (classId) {
+    // No-op handler — age is read at addKid/save time
+  };
+
+  // ── Boot ─────────────────────────────────────────────────────────────
+  _kids  = parseKids(QS.kids || QS.children || '');
+  _phone = QS.phone || '';
+
+  // Verify Stripe payment when landing from checkout success
+  if (QS.session_id) {
+    console.log('[schedule] session_id present:', QS.session_id, '| lead_id:', QS.lead_id);
+    if (QS.lead_id) {
+      fetch('/api/verify-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: QS.session_id, lead_id: QS.lead_id }),
+      }).then(function(r) { return r.json(); })
+        .then(function(d) { console.log('[schedule] verify-checkout result:', JSON.stringify(d)); })
+        .catch(function(e) { console.warn('[schedule] verify-checkout error:', e.message); });
+    } else {
+      console.warn('[schedule] session_id present but no lead_id — cannot verify');
+    }
+  }
+
+  fetch('/api/schedule-config')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.error) { showEmpty(d.error || 'Unable to load schedule'); return; }
+      _studio  = d.studio;
+      _classes = d.classes || [];
+      applyStudio();
+      renderClasses();
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('main-content').style.display  = 'block';
+    })
+    .catch(function () {
+      showEmpty('Unable to load schedule. Please try again.');
+    });
+
+  // ── Parse comma-separated kids names ─────────────────────────────────
+  function parseKids(str) {
+    if (!str) return [];
+    return str.split(',').map(function (s) { return s.trim(); }).filter(Boolean).map(function (n) { return { name: n }; });
+  }
+
+  // ── Apply studio branding ─────────────────────────────────────────────
+  function applyStudio() {
+    var c = _studio.primary_color || '#00ffb4';
+    document.documentElement.style.setProperty('--accent', c);
+    document.documentElement.style.setProperty('--accent-dark', shadeHex(c, -25));
+    document.getElementById('studio-name').textContent = _studio.name || 'Trial Scheduler';
+    document.getElementById('studio-sub').textContent  = 'Select a class and reserve your spot';
+    document.title = (_studio.name || 'Studio') + ' — Schedule Your Trial';
+    if (_studio.logo_url) {
+      var img = document.getElementById('logo-img');
+      img.src = _studio.logo_url;
+      img.style.display = 'block';
+      img.onerror = function () { img.style.display = 'none'; };
+    }
+  }
+
+  // ── Render class list grouped by date ────────────────────────────────
+  function renderClasses() {
+    var list = document.getElementById('classes-list');
+    if (!_classes.length) {
+      document.getElementById('empty-state').style.display = 'block';
+      return;
+    }
+
+    var groups = {}, order = [];
+    _classes.forEach(function (c) {
+      if (!groups[c.date]) { groups[c.date] = []; order.push(c.date); }
+      groups[c.date].push(c);
+    });
+
+    list.innerHTML = '';
+    order.forEach(function (date) {
+      var group = document.createElement('div');
+      group.className = 'class-group';
+
+      var dh = document.createElement('div');
+      dh.className = 'date-header';
+      dh.textContent = formatDate(date);
+      group.appendChild(dh);
+
+      groups[date].forEach(function (cls) {
+        var wrap = document.createElement('div');
+        wrap.className = 'class-wrap';
+
+        var few = cls.spots_left <= 5;
+        var card = document.createElement('div');
+        card.className = 'class-card';
+        card.setAttribute('data-id', cls.id);
+        card.onclick = function () { toggleDropdown(cls); };
+        card.innerHTML =
+          '<div class="class-time">' + formatTimeFull(cls.start_time) + '</div>' +
+          '<div class="class-info">' +
+            '<div class="class-name">' + escHtml(cls.name) + '</div>' +
+            '<div class="class-meta">' + (cls.instructor ? escHtml(cls.instructor) : '') + '</div>' +
+          '</div>' +
+          '<div class="chevron" id="chevron-' + cls.id + '">›</div>';
+
+        var dropdown = document.createElement('div');
+        dropdown.className = 'class-dropdown';
+        dropdown.id = 'dropdown-' + cls.id;
+
+        wrap.appendChild(card);
+        wrap.appendChild(dropdown);
+        group.appendChild(wrap);
+      });
+
+      list.appendChild(group);
+    });
+  }
+
+  // ── Toggle dropdown open/closed ───────────────────────────────────────
+  function toggleDropdown(cls) {
+    var wasOpen = (_openClassId === cls.id);
+
+    // Close all
+    document.querySelectorAll('.class-dropdown').forEach(function (d) { d.style.display = 'none'; });
+    document.querySelectorAll('.class-card').forEach(function (c) { c.classList.remove('open'); });
+    document.querySelectorAll('.chevron').forEach(function (c) { c.classList.remove('open'); });
+
+    if (wasOpen) {
+      _openClassId = null;
+      return;
+    }
+
+    _openClassId = cls.id;
+    renderDropdown(cls);
+
+    document.getElementById('dropdown-' + cls.id).style.display = 'block';
+    var card = document.querySelector('[data-id="' + cls.id + '"]');
+    if (card) card.classList.add('open');
+    var chev = document.getElementById('chevron-' + cls.id);
+    if (chev) chev.classList.add('open');
+
+    setTimeout(function () {
+      document.getElementById('dropdown-' + cls.id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 80);
+  }
+
+  // ── Render dropdown content ───────────────────────────────────────────
+  function renderDropdown(cls) {
+    var el = document.getElementById('dropdown-' + cls.id);
+
+    var kidRows = _kids.map(function (kid, idx) {
+      var key  = cls.id + '_' + idx;
+      var resId = _reservations[key];
+      var safe  = escHtml(kid.name);
+      if (resId) {
+        return '<div class="kid-row" id="kid-row-' + cls.id + '-' + idx + '">' +
+          '<span class="kid-name">' + safe + '</span>' +
+          '<span class="kid-badge">✓ Reserved</span>' +
+          '<button class="btn-remove" onclick="schedRemove(\'' + cls.id + '\',' + idx + ',\'' + resId + '\')">Remove</button>' +
+          '</div>';
+      }
+      return '<div class="kid-row" id="kid-row-' + cls.id + '-' + idx + '">' +
+        '<span class="kid-name">' + safe + '</span>' +
+        '<button class="btn-reserve-kid" id="rsvbtn-' + cls.id + '-' + idx + '" onclick="schedReserve(\'' + cls.id + '\',' + idx + ')">Reserve →</button>' +
+        '</div>';
+    }).join('');
+
+    var noKids    = _kids.length === 0;
+    var phoneVal  = escAttr(_phone);
+    var classLabel = escHtml(cls.name) + ' · ' + formatDate(cls.date) + ' at ' + formatTimeSimple(cls.start_time);
+
+    // Check if all kids already reserved for this class
+    var allReserved = _kids.length > 0 && _kids.every(function (_, idx) {
+      return !!_reservations[cls.id + '_' + idx];
+    });
+
+    el.innerHTML =
+      '<div class="dropdown-inner">' +
+        '<div class="dropdown-class-label">' + classLabel + '</div>' +
+        (noKids ? '<div class="no-kids-prompt" style="color:var(--muted);font-size:13px;margin-bottom:10px;">No children found — please complete the trial form first.</div>' : '') +
+        '<div class="kids-list">' + kidRows + '</div>' +
+        '<div class="phone-field-wrap">' +
+          '<label>Parent / Guardian Phone</label>' +
+          '<input type="tel" id="phone-field-' + cls.id + '" value="' + phoneVal + '" placeholder="(305) 555-0100" ' +
+            'oninput="schedSetPhone(this.value)">' +
+        '</div>' +
+        '<div id="dropdown-error-' + cls.id + '" class="dropdown-error" style="display:none;"></div>' +
+      '</div>';
+  }
+
+  // ── Derive DOB from age: 01/01/(currentYear - age) ──────────────────
+  function ageToDob(age) {
+    var a = parseInt(age, 10);
+    if (!a || a < 1 || a > 99) return null;
+    var year = new Date().getFullYear() - a;
+    return year + '-01-01'; // YYYY-MM-DD for the API / DB
+  }
+
+  // ── Add a child name ──────────────────────────────────────────────────
+  function addKid(classId) {
+    var input    = document.getElementById('new-kid-' + classId);
+    var ageInput = document.getElementById('new-kid-age-' + classId);
+    var name     = input ? input.value.trim() : '';
+    if (!name) return;
+    var dob = ageToDob(ageInput ? ageInput.value : '');
+    _kids.push({ name: name, dob: dob });
+    input.value = '';
+    if (ageInput) ageInput.value = '';
+    var cls = _classes.find(function (c) { return c.id === classId; });
+    if (cls) renderDropdown(cls);
+  }
+
+  // ── Save All: reserve every unreserved kid for this class ────────────
+  async function saveAll(classId) {
+    // Sync phone from open dropdown
+    var pf = document.getElementById('phone-field-' + classId);
+    if (pf) _phone = pf.value.trim();
+
+    if (!_phone) {
+      showDropdownError(classId, 'Please enter a parent / guardian phone number.');
+      return;
+    }
+
+    // Collect kids that haven't been reserved yet
+    var pending = _kids.reduce(function (acc, kid, idx) {
+      if (!_reservations[classId + '_' + idx]) acc.push(idx);
+      return acc;
+    }, []);
+
+    if (pending.length === 0) return;
+
+    var btn = document.getElementById('save-all-btn-' + classId);
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+
+    var allOk = true;
+    for (var i = 0; i < pending.length; i++) {
+      var ok = await reserveKidSilent(classId, pending[i]);
+      if (!ok) { allOk = false; }
+    }
+
+    if (allOk && btn) {
+      btn.textContent = '✓ All Reserved!';
+      btn.classList.add('success');
+      if (allKidsReservedForClass(classId)) {
+        window.location.href = '/schedule/complete';
+      }
+    } else if (btn) {
+      btn.disabled = false;
+      btn.textContent = '💾 Save — Reserve All';
+    }
+  }
+
+  // ── Reserve a kid for a class ─────────────────────────────────────────
+  async function reserveKid(classId, kidIdx) {
+    // Sync phone from open dropdown
+    var pf = document.getElementById('phone-field-' + classId);
+    if (pf) _phone = pf.value.trim();
+
+    if (!_phone) {
+      showDropdownError(classId, 'Please enter a parent / guardian phone number.');
+      return;
+    }
+
+    var kid = _kids[kidIdx];
+    if (!kid) return;
+
+    var btn = document.getElementById('rsvbtn-' + classId + '-' + kidIdx);
+    if (btn) { btn.disabled = true; btn.textContent = 'Booking…'; }
+
+    try {
+      var nameParts  = kid.name.trim().split(/\s+/);
+      var resp = await fetch('/api/schedule-book', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slug:       SLUG,
+          class_id:   classId,
+          child_name: kid.name,
+          child_dob:  kid.dob || null,
+          first_name: nameParts[0] || kid.name,
+          last_name:  nameParts.slice(1).join(' ') || '',
+          phone:      _phone,
+          lead_id:    QS.lead_id || null,
+        }),
+      });
+
+      var data = await resp.json();
+
+      if (!resp.ok || data.error) {
+        showDropdownError(classId, data.error || 'Booking failed. Please try again.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Reserve →'; }
+        return;
+      }
+
+      _reservations[classId + '_' + kidIdx] = data.reservation_id;
+      var cls = _classes.find(function (c) { return c.id === classId; });
+      if (cls) renderDropdown(cls);
+      if (allKidsReservedForClass(classId)) {
+        window.location.href = '/schedule/complete';
+      }
+
+    } catch (e) {
+      showDropdownError(classId, 'Network error. Please try again.');
+      if (btn) { btn.disabled = false; btn.textContent = 'Reserve →'; }
+    }
+  }
+
+  // ── Internal: book one kid, returns true/false ────────────────────────
+  async function reserveKidSilent(classId, kidIdx) {
+    var kid = _kids[kidIdx];
+    if (!kid) return false;
+    try {
+      var nameParts = kid.name.trim().split(/\s+/);
+      var resp = await fetch('/api/schedule-book', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slug:       SLUG,
+          class_id:   classId,
+          child_name: kid.name,
+          child_dob:  kid.dob || null,
+          first_name: nameParts[0] || kid.name,
+          last_name:  nameParts.slice(1).join(' ') || '',
+          phone:      _phone,
+          lead_id:    QS.lead_id || null,
+        }),
+      });
+      var data = await resp.json();
+      if (!resp.ok || data.error) {
+        showDropdownError(classId, data.error || 'Booking failed for ' + kid.name);
+        return false;
+      }
+      _reservations[classId + '_' + kidIdx] = data.reservation_id;
+
+      // Update individual kid row to show reserved state
+      var cls = _classes.find(function (c) { return c.id === classId; });
+      if (cls) {
+        var row = document.getElementById('kid-row-' + classId + '-' + kidIdx);
+        if (row) {
+          row.innerHTML =
+            '<span class="kid-name">' + escHtml(kid.name) + '</span>' +
+            '<span class="kid-badge">✓ Reserved</span>' +
+            '<button class="btn-remove" onclick="schedRemove(\'' + classId + '\',' + kidIdx + ',\'' + data.reservation_id + '\')">Remove</button>';
+        }
+
+        // If in reschedule mode, update SMS sequence with the new class date
+        if (IS_RESCHEDULE && QS.lead_id) {
+          var newClassDate = cls.date + 'T' + (cls.start_time || '00:00:00');
+          var relink = window.location.origin + '/schedule' +
+            '?phone=' + encodeURIComponent(_phone) +
+            '&kids=' + encodeURIComponent(kid.name) +
+            '&lead_id=' + encodeURIComponent(QS.lead_id) +
+            '&reschedule=true';
+          fetch('/api/sms-reschedule', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              prospect_id:    QS.lead_id,
+              studio_id:      _studio.id || null,
+              new_class_name: cls.name,
+              new_class_date: newClassDate,
+              reschedule_link: relink,
+            }),
+          }).then(function (r) {
+            return r.json();
+          }).then(function (d) {
+            console.log('[schedule] Reschedule SMS updated:', d.sequence_id || d.error);
+          }).catch(function (e) {
+            console.warn('[schedule] Reschedule SMS update failed (non-fatal):', e.message);
+          });
+        }
+      }
+      return true;
+    } catch (e) {
+      showDropdownError(classId, 'Network error for ' + kid.name);
+      return false;
+    }
+  }
+
+  // ── Remove / cancel a reservation ─────────────────────────────────────
+  async function removeReservation(classId, kidIdx, reservationId) {
+    try {
+      var resp = await fetch('/api/schedule-cancel', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: SLUG, reservation_id: reservationId }),
+      });
+
+      var data = await resp.json();
+
+      if (!resp.ok || data.error) {
+        showDropdownError(classId, data.error || 'Could not remove reservation. Please try again.');
+        return;
+      }
+
+      delete _reservations[classId + '_' + kidIdx];
+      var cls = _classes.find(function (c) { return c.id === classId; });
+      if (cls) renderDropdown(cls);
+
+    } catch (e) {
+      showDropdownError(classId, 'Network error. Please try again.');
+    }
+  }
+
+  function showDropdownError(classId, msg) {
+    var el = document.getElementById('dropdown-error-' + classId);
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(function () { if (el) el.style.display = 'none'; }, 6000);
+  }
+
+  function allKidsReservedForClass(classId) {
+    if (!_kids.length) return false;
+    return _kids.every(function (_, idx) {
+      return !!_reservations[classId + '_' + idx];
+    });
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────────
+  function formatDate(str) {
+    var d = new Date(str + 'T12:00:00');
+    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+  }
+
+  function formatTimeFull(t) {
+    if (!t) return '';
+    var parts = t.split(':');
+    var h    = parseInt(parts[0], 10);
+    var m    = parts[1] || '00';
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    var hr   = h % 12 || 12;
+    return hr + ':' + m + '<br><span class="ampm">' + ampm + '</span>';
+  }
+
+  function formatTimeSimple(t) {
+    if (!t) return '';
+    var parts = t.split(':');
+    var h    = parseInt(parts[0], 10);
+    var m    = parts[1] || '00';
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    var hr   = h % 12 || 12;
+    return hr + ':' + m + ' ' + ampm;
+  }
+
+  function escHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function escAttr(s) {
+    return String(s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function shadeHex(hex, pct) {
+    try {
+      var n = parseInt(hex.replace('#', ''), 16);
+      var r = Math.min(255, Math.max(0, ((n >> 16) & 0xff) + pct));
+      var g = Math.min(255, Math.max(0, ((n >>  8) & 0xff) + pct));
+      var b = Math.min(255, Math.max(0, ((n >>  0) & 0xff) + pct));
+      return '#' + [r, g, b].map(function (x) { return x.toString(16).padStart(2, '0'); }).join('');
+    } catch (e) { return hex; }
+  }
+
+  function showEmpty(msg) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('main-content').style.display  = 'block';
+    var el = document.getElementById('empty-state');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+})();
+</script>
+</body>
+</html>

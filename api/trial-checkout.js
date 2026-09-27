@@ -224,7 +224,7 @@ module.exports = async function handler(req, res) {
     'line_items[0][price_data][product_data][description]': '2 Classes + Impact Shirt per child',
     'line_items[0][quantity]': num_children,
     customer_email: email,
-    success_url: `${origin}/trial/success?session_id={CHECKOUT_SESSION_ID}&lead_id=${encodeURIComponent(leadId)}&phone=${encodeURIComponent(phone)}&kids=${encodeURIComponent(kidsStr)}`,
+    success_url: `${origin}/schedule?session_id={CHECKOUT_SESSION_ID}&lead_id=${encodeURIComponent(leadId)}&phone=${encodeURIComponent(phone)}&kids=${encodeURIComponent(kidsStr)}`,
     cancel_url: `${origin}/trial`,
     'metadata[studio_id]': IMA_STUDIO_ID,
     'metadata[studio_slug]': 'ima',
