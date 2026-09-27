@@ -30,28 +30,6 @@ function normalizeName(v) {
   return String(v || '').trim().toLowerCase().replace(/\s+/g, ' ')
 }
 
-function childSlug(name) {
-  return String(name || '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-function phoneVariants(raw) {
-  const original = String(raw || '').trim()
-  const digits = original.replace(/\D/g, '')
-  const variants = [
-    original,
-    digits,
-    digits.length === 10 ? `+1${digits}` : null,
-    digits.length === 10 ? `1${digits}` : null,
-    digits.length === 11 && digits.startsWith('1') ? `+${digits}` : null,
-    digits.length === 11 && digits.startsWith('1') ? digits.slice(1) : null,
-  ].filter(Boolean)
-  return [...new Set(variants)]
-}
-
 function expectedChildCount(lead) {
   const fromNum = Number.parseInt(String(lead?.num_children || ''), 10)
   if (Number.isFinite(fromNum) && fromNum > 0) return fromNum
@@ -93,7 +71,7 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
   if (!safeLeadId) return { ok: false, error: 'lead_id required' }
 
   const leadRes = await sbFetch(
-    `leads?id=eq.${encodeURIComponent(safeLeadId)}&select=id,first_name,last_name,email,phone,num_children,children,message,created_at&limit=1`,
+    `leads?id=eq.${encodeURIComponent(safeLeadId)}&select=id,first_name,last_name,email,phone,num_children,children,message&limit=1`,
     { method: 'GET' }
   )
   const lead = Array.isArray(leadRes.data) ? leadRes.data[0] : null
@@ -103,105 +81,38 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
     return { ok: true, skipped: true, reason: 'already-sent', expected: expectedChildCount(lead), booked: null }
   }
 
-  const leadChildren = Array.isArray(lead.children) ? lead.children : []
-  const candidateExternalIds = leadChildren
-    .map((c) => childNameFromLead(c, lead.last_name))
-    .map((name) => childSlug(name))
-    .filter(Boolean)
-    .map((slug) => `trial_lead_${safeLeadId}_${slug}`)
+  const reservationByLeadRes = await sbFetch(
+    `reservations_v2?lead_id=eq.${encodeURIComponent(
+      safeLeadId
+    )}&studio_id=eq.${encodeURIComponent(
+      IMA_STUDIO_ID
+    )}&is_trial=eq.true&status=in.(reserved,attended)&select=id,guest_name,class_id,member_id,reserved_at,status,is_trial&order=reserved_at.asc`,
+    { method: 'GET' }
+  )
+  let reservations = Array.isArray(reservationByLeadRes.data) ? reservationByLeadRes.data : []
 
-  let reservationsRaw = []
-  if (candidateExternalIds.length > 0) {
+  // Secondary deterministic lookup only: trial members with child-scoped external IDs.
+  if (reservations.length === 0) {
+    const memberPattern = `trial_lead_${safeLeadId}_%`
     const membersRes = await sbFetch(
-      `members?studio_id=eq.${encodeURIComponent(IMA_STUDIO_ID)}&external_id=in.(${candidateExternalIds
-        .map((v) => encodeURIComponent(v))
-        .join(',')})&select=id,external_id`,
+      `members?studio_id=eq.${encodeURIComponent(
+        IMA_STUDIO_ID
+      )}&external_id=like.${encodeURIComponent(memberPattern)}&select=id`,
       { method: 'GET' }
     )
-    const members = Array.isArray(membersRes.data) ? membersRes.data : []
-    const memberIds = members.map((m) => m.id).filter(Boolean)
+    const memberIds = (Array.isArray(membersRes.data) ? membersRes.data : []).map((m) => m.id).filter(Boolean)
     if (memberIds.length > 0) {
       const reservationByMemberRes = await sbFetch(
-        `reservations_v2?member_id=in.(${memberIds.map((v) => encodeURIComponent(v)).join(',')})&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
+        `reservations_v2?member_id=in.(${memberIds
+          .map((v) => encodeURIComponent(v))
+          .join(',')})&studio_id=eq.${encodeURIComponent(
+          IMA_STUDIO_ID
+        )}&is_trial=eq.true&status=in.(reserved,attended)&select=id,guest_name,class_id,member_id,reserved_at,status,is_trial&order=reserved_at.asc`,
         { method: 'GET' }
       )
-      reservationsRaw = Array.isArray(reservationByMemberRes.data) ? reservationByMemberRes.data : []
+      reservations = Array.isArray(reservationByMemberRes.data) ? reservationByMemberRes.data : []
     }
   }
-
-  if (reservationsRaw.length === 0) {
-    const reservationByLeadRes = await sbFetch(
-      `reservations_v2?lead_id=eq.${encodeURIComponent(safeLeadId)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
-      { method: 'GET' }
-    )
-    reservationsRaw = Array.isArray(reservationByLeadRes.data) ? reservationByLeadRes.data : []
-  }
-
-  if (reservationsRaw.length === 0 && lead.phone) {
-    const byPhone = []
-    const seen = new Set()
-    for (const variant of phoneVariants(lead.phone)) {
-      const reservationByPhoneRes = await sbFetch(
-        `reservations_v2?guest_phone=eq.${encodeURIComponent(variant)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
-        { method: 'GET' }
-      )
-      const rows = Array.isArray(reservationByPhoneRes.data) ? reservationByPhoneRes.data : []
-      rows.forEach((row) => {
-        if (!row?.id || seen.has(row.id)) return
-        seen.add(row.id)
-        byPhone.push(row)
-      })
-    }
-    const expectedNames = new Set(
-      leadChildren.map((c) => normalizeName(childNameFromLead(c, lead.last_name))).filter(Boolean)
-    )
-    const leadCreatedAt = lead.created_at ? new Date(lead.created_at).getTime() : 0
-    reservationsRaw = byPhone.filter((r) => {
-      const guestName = normalizeName(r?.guest_name || '')
-      if (!expectedNames.has(guestName)) return false
-      if (!leadCreatedAt) return true
-      const createdAtMs = r?.created_at ? new Date(r.created_at).getTime() : 0
-      return createdAtMs >= leadCreatedAt
-    })
-  }
-
-  if (reservationsRaw.length === 0) {
-    const expectedNamesList = leadChildren
-      .map((c) => normalizeName(childNameFromLead(c, lead.last_name)))
-      .filter(Boolean)
-    const seen = new Set()
-    const byName = []
-    const leadCreatedAt = lead.created_at ? new Date(lead.created_at).getTime() : 0
-    for (const expectedName of expectedNamesList) {
-      const rawName = expectedName
-        .split(' ')
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join(' ')
-      const reservationByNameRes = await sbFetch(
-        `reservations_v2?guest_name=ilike.${encodeURIComponent(rawName)}&select=id,guest_name,class_id,member_id,created_at,status,is_trial&order=created_at.asc`,
-        { method: 'GET' }
-      )
-      const rows = Array.isArray(reservationByNameRes.data) ? reservationByNameRes.data : []
-      rows.forEach((row) => {
-        if (!row?.id || seen.has(row.id)) return
-        const nameOk = normalizeName(row.guest_name) === expectedName
-        if (!nameOk) return
-        if (leadCreatedAt) {
-          const createdAtMs = row?.created_at ? new Date(row.created_at).getTime() : 0
-          if (createdAtMs < leadCreatedAt) return
-        }
-        seen.add(row.id)
-        byName.push(row)
-      })
-    }
-    reservationsRaw = byName
-  }
-
-  const reservations = reservationsRaw.filter((r) => {
-    const status = String(r?.status || '').toLowerCase()
-    const isTrial = r?.is_trial === true || String(r?.is_trial || '').toLowerCase() === 'true'
-    return status === 'reserved' && isTrial
-  })
   const expected = expectedChildCount(lead)
   if (reservations.length < expected) {
     return { ok: true, skipped: true, reason: 'family-not-complete', expected, booked: reservations.length }
@@ -249,6 +160,7 @@ async function maybeSendTrialScheduledOwnerSummary(leadId, trigger) {
     }, {})
   }
 
+  const leadChildren = Array.isArray(lead.children) ? lead.children : []
   const childMetaByName = {}
   leadChildren.forEach((c) => {
     const name = normalizeName(childNameFromLead(c, lead.last_name))

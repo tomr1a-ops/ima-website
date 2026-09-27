@@ -92,6 +92,7 @@ module.exports = async function handler(req, res) {
   }
 
   const { class_id, first_name, last_name, phone, lead_id, child_name, child_dob, child_gender } = body || {}
+  const leadId = String(lead_id || '').trim() || null
   if (!class_id) return json(res, 400, { error: 'Missing class_id' })
   if (!first_name) return json(res, 400, { error: 'Missing first_name' })
   if (!phone) return json(res, 400, { error: 'Missing phone' })
@@ -111,8 +112,8 @@ module.exports = async function handler(req, res) {
     const memberFirst = first_name || 'Guest'
     const memberLast = last_name || ''
     const childKey = childSlug(child_name || `${memberFirst} ${memberLast}`) || 'child'
-    const externalId = lead_id
-      ? `trial_lead_${lead_id}_${childKey}`
+    const externalId = leadId
+      ? `trial_lead_${leadId}_${childKey}`
       : `trial_${IMA_STUDIO_ID}_${childKey}_${String(phone || '').replace(/\D/g, '')}`
 
     let memberId = null
@@ -122,7 +123,7 @@ module.exports = async function handler(req, res) {
     )
     if (Array.isArray(byExt.data) && byExt.data[0]?.id) memberId = byExt.data[0].id
 
-    if (!memberId && child_name) {
+    if (!leadId && !memberId && child_name) {
       const parts = child_name.trim().split(/\s+/)
       const cFirst = parts[0] || ''
       const cLast = parts.slice(1).join(' ') || ''
@@ -135,7 +136,7 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    if (!memberId && memberFirst !== 'Guest') {
+    if (!leadId && !memberId && memberFirst !== 'Guest') {
       const byParent = await sbFetch(
         `members?studio_id=eq.${encodeURIComponent(IMA_STUDIO_ID)}&first_name=ilike.${encodeURIComponent(memberFirst)}&last_name=ilike.${encodeURIComponent(memberLast || '')}&deleted_at=is.null&select=id&limit=1`,
         { method: 'GET' }
@@ -183,9 +184,9 @@ module.exports = async function handler(req, res) {
       const today = `${new Date().toISOString().slice(0, 10)}T00:00:00+00:00`
       let parentName = [first_name, last_name].filter(Boolean).join(' ') || 'Guest'
       let parentEmail = null
-      if (lead_id) {
+      if (leadId) {
         const leadRes = await sbFetch(
-          `leads?id=eq.${encodeURIComponent(lead_id)}&select=first_name,last_name,email&limit=1`,
+          `leads?id=eq.${encodeURIComponent(leadId)}&select=first_name,last_name,email&limit=1`,
           { method: 'GET' }
         )
         const lead = Array.isArray(leadRes.data) ? leadRes.data[0] : null
@@ -227,10 +228,10 @@ module.exports = async function handler(req, res) {
       ].filter(Boolean))]
 
       let existingId = null
-      if (lead_id) {
+      if (leadId) {
         prospectDebug.step = 'lookup-ext'
         const byExtProspect = await sbFetch(
-          `prospects?external_id=eq.${encodeURIComponent(`trial_lead_${lead_id}`)}&select=id&limit=1`,
+          `prospects?external_id=eq.${encodeURIComponent(`trial_lead_${leadId}`)}&select=id&limit=1`,
           { method: 'GET' }
         )
         if (Array.isArray(byExtProspect.data) && byExtProspect.data[0]?.id) existingId = byExtProspect.data[0].id
@@ -283,15 +284,15 @@ module.exports = async function handler(req, res) {
           }
           patchFields.family_members = existingFm
           if (!existing?.source || existing.source === 'trial_page') patchFields.source = 'trial_schedule'
-          if (lead_id) {
-            const leadExternalId = `trial_lead_${lead_id}`
+          if (leadId) {
+            const leadExternalId = `trial_lead_${leadId}`
             if (!existing?.external_id || existing.external_id === leadExternalId) {
               patchFields.external_id = leadExternalId
             }
           }
         }
-        if (lead_id && !('external_id' in patchFields)) {
-          const leadExternalId = `trial_lead_${lead_id}`
+        if (leadId && !('external_id' in patchFields)) {
+          const leadExternalId = `trial_lead_${leadId}`
           if (!existing?.external_id || existing.external_id === leadExternalId) {
             patchFields.external_id = leadExternalId
           }
@@ -314,7 +315,7 @@ module.exports = async function handler(req, res) {
           updated_date: today,
         }
         if (parentEmail) core.email = parentEmail
-        if (lead_id) core.external_id = `trial_lead_${lead_id}`
+        if (leadId) core.external_id = `trial_lead_${leadId}`
         const insertRes = await sbFetch('prospects', {
           method: 'POST',
           headers: { Prefer: 'return=representation' },
@@ -355,7 +356,7 @@ module.exports = async function handler(req, res) {
         trial_id: null,
         guest_name: guestName,
         guest_phone: phone || null,
-        lead_id: lead_id || null,
+        lead_id: leadId,
       }),
     })
     const reservation = Array.isArray(reservationRes.data) ? reservationRes.data[0] : null
@@ -367,8 +368,8 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({ current_enrollment: Number(cls.current_enrollment || 0) + 1 }),
     })
 
-    if (lead_id) {
-      await sbFetch(`leads?id=eq.${encodeURIComponent(lead_id)}`, {
+    if (leadId) {
+      await sbFetch(`leads?id=eq.${encodeURIComponent(leadId)}`, {
         method: 'PATCH',
         headers: { Prefer: 'return=minimal' },
         body: JSON.stringify({ status: 'booked' }),
@@ -387,9 +388,9 @@ module.exports = async function handler(req, res) {
     }
     const displayName = child_name || first_name
     await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cls.name} at ${IMA_STUDIO_NAME} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
-    if (lead_id) {
+    if (leadId) {
       try {
-        await maybeSendTrialScheduledOwnerSummary(lead_id, 'schedule-book')
+        await maybeSendTrialScheduledOwnerSummary(leadId, 'schedule-book')
       } catch (summaryErr) {
         console.warn('[schedule-book] Owner summary trigger failed:', summaryErr.message)
       }
