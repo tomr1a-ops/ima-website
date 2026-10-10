@@ -46,8 +46,8 @@ a{color:inherit}
 .hero h1{font-size:30px;line-height:1.13;font-weight:800;margin-top:14px}
 .hero h1 em{font-style:normal;color:var(--orange)}
 .hero .sub{color:#d9d7de;font-size:16px;line-height:1.36;margin:16px 0 0}
-.video{position:relative;margin-top:24px;aspect-ratio:16/9;max-width:100%;border-radius:16px;background:#16131b;overflow:hidden;width:100%}
-.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#16131b}
+.video{position:relative;margin:24px auto 0;aspect-ratio:9/16;max-width:100%;width:min(100%,calc(64vh * 9 / 16));border-radius:16px;background:#16131b;overflow:hidden}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#16131b}
 .vbtn{position:absolute;inset:0;display:grid;place-items:center;border:0;background:rgba(18,15,22,.25);cursor:pointer;color:var(--white);font:inherit;padding:0}
 .video.playing .vbtn{display:none}
 .video .play{width:68px;height:68px;border-radius:50%;border:3px solid var(--white);display:grid;place-items:center}
