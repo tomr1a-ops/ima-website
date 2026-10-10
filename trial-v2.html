@@ -133,6 +133,8 @@ h2.sec{font-size:23px;font-weight:800;line-height:1.2}
 .coach{background:var(--ink);color:var(--white);padding-block:0 34px}
 .coach .photo{margin-top:0;border-radius:0;aspect-ratio:16/10;background:#16131b;color:#55525c}
 .coach .wrap{padding-top:26px}
+.coach .coachvid-wrap{padding-top:28px}
+.coach #coachvideo{margin-top:0}
 .coach h2{font-size:24px;font-weight:800}
 .coach .tagline{color:var(--cyan);font-weight:700;font-size:15px;margin:2px 0 0}
 .checks{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
@@ -296,7 +298,15 @@ h2.sec{font-size:23px;font-weight:800;line-height:1.2}
 </section>
 
 <section class="coach">
-  <div class="photo" id="coachphoto"><img src="/trial/assets/v2/coach.jpg" alt="Coach Shick" loading="lazy" width="1000" height="625"></div>
+  <div class="wrap coachvid-wrap">
+    <div class="video" id="coachvideo">
+      <video id="coachvid" preload="metadata" playsinline poster="/trial/assets/v2/coach-poster.jpg" src="/trial/assets/v2/coach-video.mp4"></video>
+      <button class="vbtn" type="button" id="cplay" aria-label="Watch Coach Shick's video">
+        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg></span>
+        <span class="tag">Meet Coach Shick</span>
+      </button>
+    </div>
+  </div>
   <div class="wrap">
     <h2>Meet Coach Shick</h2>
     <p class="tagline">Dad of 4. Your child's mentor.</p>
@@ -406,11 +416,16 @@ h2.sec{font-size:23px;font-weight:800;line-height:1.2}
     b.closest('.item').querySelector('dd').hidden=open;
   });
   // Video placeholder
-  var vid=document.getElementById('herovid'),vw=document.getElementById('video');
-  document.getElementById('vplay').addEventListener('click',function(){
-    vid.controls=true;vw.classList.add('playing');
-    var pr=vid.play(); if(pr&&pr.catch) pr.catch(function(){vw.classList.remove('playing');vid.controls=false});
-  });
+  function wireVideo(boxId,vidId,btnId){
+    var vid=document.getElementById(vidId),vw=document.getElementById(boxId);
+    document.getElementById(btnId).addEventListener('click',function(){
+      document.querySelectorAll('.video video').forEach(function(o){if(o!==vid)o.pause()});
+      vid.controls=true;vw.classList.add('playing');
+      var pr=vid.play(); if(pr&&pr.catch) pr.catch(function(){vw.classList.remove('playing');vid.controls=false});
+    });
+  }
+  wireVideo('video','herovid','vplay');
+  wireVideo('coachvideo','coachvid','cplay');
   // Sticky bar: show once the form card has scrolled past, hide when form is on screen
   var sticky=document.getElementById('sticky'),reserve=document.getElementById('reserve');
   function upd(){
