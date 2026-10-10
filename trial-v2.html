@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>$27 Trial | Impact Martial Athletics, Davie FL</title>
+<meta name="description" content="2 classes plus a free Impact shirt for $27 at Impact Martial Athletics in Davie, FL. Martial arts and athletic performance training, ages 5 and up.">
+<meta property="og:title" content="$27 Trial | Impact Martial Athletics, Davie FL">
+<meta property="og:description" content="2 classes plus a free Impact shirt for $27. Ages 5 and up. Beginners welcome.">
+<meta property="og:image" content="/trial/assets/v2/class.jpg">
+<link rel="icon" href="/trial/assets/v2/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: ported 1:1 from "Trial landing page.pdf" (390px mobile mock). Single committed look, no theme switching. */
+:root{
+  --ink:#120f16; --ink-2:#0b0a0f; --orange:#ff8b1a; --orange-edge:#c96a0a;
+  --blue:#0606f4; --blue-tint:#ecedff; --cyan:#12f3f9;
+  --page:#f5f6fb; --white:#ffffff; --text:#14131a; --muted:#5b616d; --line:#dde1ec; --input:#c9cdd8;
+  --font:'Poppins',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --gut:20px; --col:480px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;padding-top:env(safe-area-inset-top,0px);background:var(--white);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--col);margin:0 auto;padding-inline:var(--gut)}
+h1,h2,h3{margin:0;letter-spacing:-.015em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+
+/* Header */
+.hdr{background:var(--ink);border-bottom:1px solid #2a2730}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none}
+.brand img{width:46px;height:46px;border-radius:50%;background:var(--white)}
+.brand span{font-weight:700;font-size:12px;letter-spacing:.14em;line-height:1.3;text-transform:uppercase}
+.call{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border:1.5px solid #6b6872;border-radius:999px;color:var(--white);text-decoration:none;font-weight:700;font-size:15px}
+.call svg{width:17px;height:17px}
+
+/* Hero */
+.hero{background:var(--ink);color:var(--white);padding-block:18px 36px}
+.pill{display:inline-block;background:var(--orange);color:var(--ink);font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.hero h1{font-size:30px;line-height:1.13;font-weight:800;margin-top:14px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .sub{color:#d9d7de;font-size:16px;line-height:1.36;margin:16px 0 0}
+.video{position:relative;margin-top:24px;aspect-ratio:16/9;max-width:100%;border-radius:16px;background:#16131b;overflow:hidden;width:100%}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#16131b}
+.vbtn{position:absolute;inset:0;display:grid;place-items:center;border:0;background:rgba(18,15,22,.25);cursor:pointer;color:var(--white);font:inherit;padding:0}
+.video.playing .vbtn{display:none}
+.video .play{width:68px;height:68px;border-radius:50%;border:3px solid var(--white);display:grid;place-items:center}
+.video .play svg{width:22px;height:22px;margin-left:4px}
+.video .tag{position:absolute;left:10px;bottom:10px;background:#0f0d13;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;padding:0 18px;background:var(--orange);color:var(--ink);font:700 18px/1.2 var(--font);border:0;border-top:2px solid var(--orange-edge);border-radius:13px;text-decoration:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+.btn:hover{filter:brightness(1.04)}
+.btn:active{transform:translateY(1px)}
+.hero .btn{margin-top:18px}
+.reassure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:13px;color:#d9d7de}
+.reassure svg{width:13px;height:13px}
+
+/* Form */
+.formsec{background:var(--page);padding-block:20px 22px}
+.card{background:var(--white);border-radius:20px;padding:22px 20px 20px;box-shadow:0 1px 3px rgba(20,19,26,.05)}
+.steprow{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.steprow .secure{display:flex;align-items:center;gap:5px;color:var(--blue)}
+.steprow .secure svg{width:12px;height:12px}
+.bar{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}
+.bar i{height:6px;border-radius:9px;background:var(--line)}
+.bar i:first-child{background:var(--blue)}
+.card h2{font-size:22.5px;font-weight:800;margin-top:14px}
+.card .lede{color:var(--muted);font-size:14px;margin:2px 0 0}
+.field{margin-top:14px}
+.field label,.field .lbl{display:block;font-weight:700;font-size:14px;margin-bottom:7px}
+.field input{width:100%;height:50px;border:1.5px solid var(--input);border-radius:12px;padding:0 15px;font:400 16px var(--font);color:var(--text);background:var(--white)}
+.field input::placeholder{color:#5c5d66}
+.field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.field input[aria-invalid=true]{border-color:#d4372c}
+.ages{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.ages button{height:47px;border:1.5px solid var(--input);border-radius:12px;background:var(--white);font:500 15px var(--font);color:var(--text);cursor:pointer;padding:0 4px}
+.ages button[aria-pressed=true]{border:2px solid var(--blue);background:var(--blue-tint);font-weight:700}
+.err{color:#c02d22;font-size:13px;margin:6px 0 0}
+.card .btn{margin-top:18px;justify-content:space-between;padding:0 16px;font-size:16.5px;white-space:nowrap}
+.card .btn svg{width:18px;height:18px;flex:none}
+.next{text-align:center;color:var(--muted);font-size:12.5px;margin:14px 0 0}
+.legal{text-align:center;color:var(--muted);font-size:11px;line-height:1.45;margin:10px 0 0}
+.legal a{color:var(--blue)}
+.done{text-align:center;padding:24px 4px 6px}
+.done h3{font-size:20px;font-weight:800}
+.done p{color:var(--muted);font-size:14px;margin:8px 0 0}
+
+/* Trust strip */
+.strip{border-bottom:1px solid #e8e9ef;padding-block:28px 22px}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.strip svg{width:26px;height:26px;color:var(--blue);display:block;margin:0 auto 6px}
+.strip b{font-size:12.5px;line-height:1.3;display:block}
+
+/* How it works */
+.how{background:var(--page);padding-block:34px 36px}
+h2.sec{font-size:23px;font-weight:800;line-height:1.2}
+.steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:20px}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.num{width:40px;height:40px;border-radius:50%;background:var(--blue);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:16px}
+.steps h3{font-size:16.5px;font-weight:700;line-height:1.25;margin-top:1px}
+.steps p{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.45;min-width:0}
+
+/* Benefits */
+.bene{padding-block:32px 34px}
+.photo{margin-top:20px;border-radius:16px;aspect-ratio:16/10;max-width:100%;background:#eceef4;display:grid;place-items:center;color:#8a8f9c;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.benes{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:20px}
+.benes li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.ic{width:44px;height:44px;border-radius:50%;background:var(--blue-tint);display:grid;place-items:center;color:var(--blue)}
+.ic svg{width:20px;height:20px}
+.benes h3{font-size:16px;font-weight:700;line-height:1.3}
+.benes p{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+
+/* Testimonials */
+.trust{background:var(--page);padding-block:34px 30px}
+.quotes{display:grid;gap:12px;margin-top:18px}
+.q{background:var(--white);border-radius:18px;padding:18px 16px;box-shadow:0 1px 4px rgba(20,19,26,.06)}
+.q blockquote{margin:0;font-size:14.5px;line-height:1.48}
+.q blockquote.lg{font-size:16px;font-weight:500}
+.who{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;margin-top:12px}
+.av{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:13px}
+.av.b{background:var(--blue);width:46px;height:46px}
+.nm b{display:block;font-size:15px;line-height:1.25}
+.nm span{display:block;color:var(--muted);font-size:13px}
+.trust .btn{margin-top:20px}
+
+/* Coach */
+.coach{background:var(--ink);color:var(--white);padding-block:0 34px}
+.coach .photo{margin-top:0;border-radius:0;aspect-ratio:16/10;background:#16131b;color:#55525c}
+.coach .wrap{padding-top:26px}
+.coach h2{font-size:24px;font-weight:800}
+.coach .tagline{color:var(--cyan);font-weight:700;font-size:15px;margin:2px 0 0}
+.checks{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.checks li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14px;line-height:1.45;color:#e6e4ea}
+.checks svg{width:18px;height:18px;color:var(--cyan);margin-top:2px}
+
+/* Step Up */
+.stepup{padding-block:24px 8px}
+.box{background:var(--blue-tint);border-radius:18px;padding:16px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.box .ic{background:var(--blue);color:var(--white)}
+.box h3{font-size:15.5px;font-weight:700;line-height:1.3}
+.box p{margin:4px 0 0;color:var(--muted);font-size:13.5px;line-height:1.45}
+
+/* FAQ */
+.faq{padding-block:26px 30px}
+.faq dl{margin:16px 0 0;border-top:1px solid #e3e5ee}
+.faq .item{border-bottom:1px solid #e3e5ee}
+.faq dt button{width:100%;display:grid;grid-template-columns:1fr 20px;gap:14px;align-items:center;text-align:left;background:none;border:0;padding:18px 0;font:500 15.5px/1.35 var(--font);color:var(--text);cursor:pointer}
+.faq dt svg{width:16px;height:16px;color:var(--blue);transition:transform .2s ease;justify-self:end}
+.faq dt button[aria-expanded=true] svg{transform:rotate(180deg)}
+.faq dd{margin:0;padding:0 28px 18px 0;color:var(--muted);font-size:14.5px;line-height:1.5}
+
+/* Closer */
+.closer{background:var(--ink);color:var(--white);text-align:center;padding-block:32px 34px}
+.closer img{width:86px;height:86px;border-radius:50%;background:var(--white);display:block;margin:0 auto}
+.closer .pill{margin-top:16px}
+.closer h2{font-size:27px;font-weight:800;line-height:1.15;margin-top:12px}
+.price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:6px}
+.price b{font-size:54px;font-weight:800;color:var(--orange);line-height:1.05}
+.price s{font-size:20px;font-weight:600;color:#9e9ba5}
+.closer p{margin:6px 0 0;color:#d9d7de;font-size:14.5px;line-height:1.45}
+.closer .btn{margin-top:18px}
+
+/* Footer */
+.foot{background:var(--ink-2);color:#c9c7ce;padding-block:28px 104px;border-top:1px solid #24212a;font-size:13.5px}
+.foot b{color:var(--white);font-size:14.5px}
+.foot ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.foot li{display:flex;gap:10px;align-items:center}
+.foot svg{width:17px;height:17px;flex:none}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:16px}
+.foot small{display:block;margin-top:14px;color:#8d8a94;font-size:12.5px}
+
+/* Sticky bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);box-shadow:0 -4px 18px rgba(20,19,26,.12);padding-bottom:env(safe-area-inset-bottom,0px);transform:translateY(110%);transition:transform .25s ease}
+.sticky.on{transform:none}
+@media (prefers-reduced-motion:reduce){.sticky{transition:none}}
+.sticky .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:76px}
+.sticky .p b{font-size:22px;font-weight:800;line-height:1}
+.sticky .p s{font-size:12px;color:var(--muted);margin-left:6px;font-weight:600}
+.sticky .p span{display:block;font-size:11.5px;color:var(--muted)}
+.sticky .btn{width:auto;min-height:52px;padding:0 24px;font-size:16px}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top" id="top" aria-label="Impact Martial Athletics">
+      <img src="/trial/assets/v2/logo.png" alt="">
+      <span>Impact Martial<br>Athletics</span>
+    </a>
+    <a class="call" href="tel:+19546361515"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">50% off trial · Ages 5 and up</span>
+    <h1>2 Classes + a Free Impact Shirt for Just <em>$27</em></h1>
+    <p class="sub">Fun, high energy classes that build confidence, focus, and discipline. Try it first. Decide later.</p>
+    <div class="video" id="video">
+      <video id="herovid" preload="none" playsinline poster="/trial/assets/v2/poster.jpg" src="/trial/assets/trial-page-0.mp4"></video>
+      <button class="vbtn" type="button" id="vplay" aria-label="Watch the video">
+        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg></span>
+        <span class="tag">Watch the video</span>
+      </button>
+    </div>
+    <a class="btn cta" href="#reserve">Claim My Child's $27 Trial</a>
+    <div class="reassure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Takes about a minute · Secure checkout</div>
+  </div>
+</section>
+
+<section class="formsec" id="reserve">
+  <div class="wrap">
+    <div class="card">
+      <div class="steprow"><span>Step 1 of 2</span><span class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure</span></div>
+      <div class="bar" aria-hidden="true"><i></i><i></i></div>
+      <h2>Reserve Your Child's Spot</h2>
+      <p class="lede">We'll text you the available class times.</p>
+      <form id="lead" novalidate>
+        <div class="field">
+          <label for="fname">Parent's first name</label>
+          <input id="fname" name="fname" autocomplete="given-name" placeholder="First name" required>
+        </div>
+        <div class="field">
+          <label for="phone">Mobile number</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="Mobile number" required>
+        </div>
+        <div class="field" role="group" aria-labelledby="agelbl">
+          <span class="lbl" id="agelbl">Child's age</span>
+          <div class="ages" id="ages">
+            <button type="button" aria-pressed="false" data-v="5-7">5 to 7</button>
+            <button type="button" aria-pressed="true" data-v="8-12">8 to 12</button>
+            <button type="button" aria-pressed="false" data-v="13+">13 and up</button>
+          </div>
+        </div>
+        <p class="err" id="err" hidden></p>
+        <button class="btn" type="submit">Continue to Secure Checkout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="next">Next: pay $27 with Apple Pay, Google Pay, or card</p>
+        <p class="legal">By continuing you agree to our <a href="https://impactmartialathletics.com/privacy-policy">Privacy Policy</a> and <a href="https://impactmartialathletics.com/terms-of-service">Terms of Service</a> and to receive texts about your trial. Reply STOP to opt out.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="wrap">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.5a5 5 0 0 0 8 0"/><circle cx="9" cy="9.5" r=".6" fill="currentColor"/><circle cx="15" cy="9.5" r=".6" fill="currentColor"/></svg><b>Ages 5 and up</b></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.1V12a9 9 0 1 1-5.3-8.2"/><path d="M8.5 11.5l3 3L21 5"/></svg><b>Beginners welcome</b></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg><b>Step Up scholarships accepted</b></div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <h2 class="sec">Here's Exactly What Happens</h2>
+    <ol class="steps">
+      <li><span class="num">1</span><div><h3>Claim your trial</h3><p>Enter your name and number, then pay $27. It takes about a minute.</p></div></li>
+      <li><span class="num">2</span><div><h3>Pick your first class</h3><p>Choose the day and time that fits your family's week.</p></div></li>
+      <li><span class="num">3</span><div><h3>Come in and train</h3><p>Your child gets a free Impact shirt and jumps right into class. After 2 classes, you decide what's next.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="bene">
+  <div class="wrap">
+    <h2 class="sec">More Than Kicks and Punches</h2>
+    <div class="photo" id="kidsphoto"><img src="/trial/assets/v2/class.jpg" alt="Kids training on the Impact floor" loading="lazy" width="1000" height="625"></div>
+    <ul class="benes">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.2 12.7 7 22l5-3 5 3-1.2-9.3"/></svg></span><div><h3>Confidence</h3><p>Kids learn to stand tall, speak up, and try hard things.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><div><h3>Focus and discipline</h3><p>Structure and respect are built into every class.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div><h3>Anti bullying skills</h3><p>We teach respect, conflict resolution, and assertiveness.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span><div><h3>Off the screen</h3><p>Time spent moving with purpose instead of scrolling.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <h2 class="sec">Parents and Pros Trust Coach Shick</h2>
+    <div class="quotes">
+      <figure class="q" style="margin:0"><blockquote class="lg">“…it’s amazing to see how much stronger and faster my daughters have gotten!”</blockquote><figcaption class="who"><span class="av b">KR</span><span class="nm"><b>Kristal Richardson</b><span>IFBB Pro Olympia Competitor</span></span></figcaption></figure>
+      <figure class="q" style="margin:0"><blockquote>“Coach Shick has a rare ability to bring out the best in young athletes… Parents see the transformation firsthand.”</blockquote><figcaption class="who"><span class="av">NA</span><span class="nm"><b>Nick Additon</b><span>Professional MLB pitcher</span></span></figcaption></figure>
+      <figure class="q" style="margin:0"><blockquote>“His dedication to performance and achievement is remarkable…”</blockquote><figcaption class="who"><span class="av">JM</span><span class="nm"><b>Juan Moreno</b><span>2X Olympic Silver Medalist</span></span></figcaption></figure>
+      <figure class="q" style="margin:0"><blockquote>“The foundation of any great athlete is discipline, resilience, and smart training. Coach Shick instills all of that…”</blockquote><figcaption class="who"><span class="av">DS</span><span class="nm"><b>Denis Shvidki</b><span>Florida Panthers NHL player</span></span></figcaption></figure>
+    </div>
+    <a class="btn cta" href="#reserve">Claim My Child's $27 Trial</a>
+  </div>
+</section>
+
+<section class="coach">
+  <div class="photo" id="coachphoto"><img src="/trial/assets/v2/coach.jpg" alt="Coach Shick" loading="lazy" width="1000" height="625"></div>
+  <div class="wrap">
+    <h2>Meet Coach Shick</h2>
+    <p class="tagline">Dad of 4. Your child's mentor.</p>
+    <ul class="checks">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>40+ years of martial arts experience</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Created a national anti bullying program for public and private schools</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Certified Pop Warner and USA Football coach</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
+    </ul>
+  </div>
+</section>
+
+<section class="stepup">
+  <div class="wrap">
+    <div class="box"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg></span><div><h3>Step Up For Students scholarships accepted</h3><p>A great fit for homeschool families. Ask us how to use yours.</p></div></div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2 class="sec">Questions Parents Ask</h2>
+    <dl id="faq">
+      <div class="item"><dt><button type="button" aria-expanded="false">My child has never done martial arts. Is that OK?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Yes. Most kids start with zero experience. Coaches meet every child where they are and build from day one.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">Is it safe for my child?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Yes. Classes are coach led and age grouped, with control and respect taught before anything else.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">What should my child wear?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Comfortable athletic clothes. Bring water. Your child gets a free Impact shirt at the first class.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">Can I stay and watch?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Yes. Parents are welcome to stay and watch every class.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">What happens after the 2 classes?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>We sit down with you, talk about how your child did, and walk you through membership options. No pressure. You decide.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <img src="/trial/assets/v2/logo.png" alt="Impact Martial Athletics">
+    <span class="pill">50% off trial</span>
+    <h2>2 Classes +<br>Free Impact Shirt</h2>
+    <div class="price"><b>$27</b><s>$54</s></div>
+    <p>Ages 5 and up. Beginners welcome.<br>Limited time offer.</p>
+    <a class="btn cta" href="#reserve">Claim My Child's $27 Trial</a>
+    <div class="reassure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Takes about a minute · Secure checkout</div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>Impact Martial Athletics</b>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><a href="https://maps.google.com/?q=4401+S+Flamingo+Rd+%23104,+Davie,+FL+33330">4401 S Flamingo Rd #104, Davie, FL 33330</a></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><a href="tel:+19546361515">954 636 1515</a></li>
+    </ul>
+    <nav><a href="https://impactmartialathletics.com/privacy-policy">Privacy Policy</a><a href="https://impactmartialathletics.com/terms-of-service">Terms of Service</a><a href="https://impactmartialathletics.com/refund-policy">Refund Policy</a></nav>
+    <small>© 2026 Impact Martial Athletics</small>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div class="wrap">
+    <div class="p"><b>$27</b><s>$54</s><span>2 classes + free shirt</span></div>
+    <a class="btn" href="#reserve" tabindex="-1">Claim My Trial</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Age chips
+  var ages=document.getElementById('ages');
+  ages.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    ages.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+  });
+  // Phone formatting
+  var ph=document.getElementById('phone');
+  ph.addEventListener('input',function(){
+    var d=ph.value.replace(/\D/g,'').replace(/^1/,'').slice(0,10);
+    ph.value=d.length>6?'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6):d.length>3?'('+d.slice(0,3)+') '+d.slice(3):d;
+  });
+  // Submit
+  var form=document.getElementById('lead'),err=document.getElementById('err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var fn=document.getElementById('fname'),ok=true,msg='';
+    fn.removeAttribute('aria-invalid');ph.removeAttribute('aria-invalid');
+    if(!fn.value.trim()){fn.setAttribute('aria-invalid','true');ok=false;msg='Enter your first name.'}
+    if(ph.value.replace(/\D/g,'').length!==10){ph.setAttribute('aria-invalid','true');ok=false;msg=msg?'Enter your first name and a 10 digit mobile number.':'Enter a 10 digit mobile number.'}
+    err.textContent=msg;err.hidden=ok;
+    if(!ok) return;
+    var btn=form.querySelector('button[type=submit]'),label=btn.innerHTML;
+    var sel=ages.querySelector('[aria-pressed=true]'),band=sel?sel.textContent:'';
+    btn.disabled=true;btn.textContent='Opening secure checkout...';
+    fetch('/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      studio_slug:'ima',first_name:fn.value.trim(),phone:ph.value,num_children:1,
+      children:[{first:'',age_band:band}],message:'Child age: '+band,sms_consent:true,return_path:'/trial-v2'
+    })}).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d}})}).then(function(x){
+      if(!x.ok||!x.d.url) throw new Error(x.d.error||'Something went wrong. Please try again.');
+      window.location.href=x.d.url;
+    }).catch(function(e){
+      err.textContent=(e&&e.message)||'Something went wrong. Please try again.';err.hidden=false;
+      btn.disabled=false;btn.innerHTML=label;
+    });
+  });
+  // FAQ
+  document.getElementById('faq').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',open?'false':'true');
+    b.closest('.item').querySelector('dd').hidden=open;
+  });
+  // Video placeholder
+  var vid=document.getElementById('herovid'),vw=document.getElementById('video');
+  document.getElementById('vplay').addEventListener('click',function(){
+    vid.controls=true;vw.classList.add('playing');
+    var pr=vid.play(); if(pr&&pr.catch) pr.catch(function(){vw.classList.remove('playing');vid.controls=false});
+  });
+  // Sticky bar: show once the form card has scrolled past, hide when form is on screen
+  var sticky=document.getElementById('sticky'),reserve=document.getElementById('reserve');
+  function upd(){
+    var r=reserve.getBoundingClientRect();
+    var show=r.bottom<0||r.top>window.innerHeight*1.2&&window.scrollY>200;
+    var inView=r.top<window.innerHeight&&r.bottom>0;
+    sticky.classList.toggle('on',show&&!inView&&window.scrollY>400);
+  }
+  window.addEventListener('scroll',upd,{passive:true});upd();
+})();
+</script>
+
+</body>
+</html>

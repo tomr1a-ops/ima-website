@@ -71,6 +71,17 @@ module.exports = async function handler(req, res) {
   const lead = await sbFetch(`leads?id=eq.${encodeURIComponent(leadId)}&select=*`, { method: 'GET' })
   const row = Array.isArray(lead.data) ? lead.data[0] : null
 
+  // v2 trial page does not ask for email; take it from Stripe Checkout and store it on the lead.
+  const stripeEmail = String(session?.customer_details?.email || session?.customer_email || '').trim()
+  if (row && !row.email && stripeEmail) {
+    row.email = stripeEmail
+    await sbFetch(`leads?id=eq.${encodeURIComponent(leadId)}`, {
+      method: 'PATCH',
+      headers: { Prefer: 'return=minimal' },
+      body: JSON.stringify({ email: stripeEmail }),
+    })
+  }
+
   if (row?.email && row?.first_name) {
     const kids =
       Array.isArray(row.children) && row.children.length

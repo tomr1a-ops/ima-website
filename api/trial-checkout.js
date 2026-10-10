@@ -100,15 +100,19 @@ module.exports = async function handler(req, res) {
   const referral_source = body.referral_source ? String(body.referral_source) : null
   const num_children = Math.max(1, Math.min(4, Number.parseInt(String(body.num_children || children.length || 1), 10) || 1))
 
-  if (!first_name || !last_name || !email || !phone) {
+  // last_name and email are optional: the v2 trial page collects first name and mobile only,
+  // and Stripe Checkout collects the email (backfilled onto the lead by trial-webhook).
+  if (!first_name || !phone) {
     return json(res, 400, { error: 'Missing required fields' })
   }
+  const RETURN_PATHS = ['/trial', '/trial-v2']
+  const cancelPath = RETURN_PATHS.includes(String(body.return_path || '')) ? String(body.return_path) : '/trial'
 
   const leadPayload = {
     studio_id: IMA_STUDIO_ID,
     first_name,
     last_name,
-    email,
+    email: email || null,
     phone,
     num_children,
     children: children.length ? children : null,
@@ -178,7 +182,7 @@ module.exports = async function handler(req, res) {
       studio_id: IMA_STUDIO_ID,
       name: fullName,
       phone,
-      email,
+      email: email || null,
       added_date: `${new Date().toISOString().slice(0, 10)}T00:00:00+00:00`,
       ...trialFields,
     }),
@@ -199,9 +203,9 @@ module.exports = async function handler(req, res) {
     'line_items[0][price_data][product_data][name]': `${IMA_STUDIO_NAME} Trial Membership`,
     'line_items[0][price_data][product_data][description]': '2 Classes + Impact Shirt per child',
     'line_items[0][quantity]': num_children,
-    customer_email: email,
+    customer_email: email || undefined,
     success_url: `${origin}/schedule?session_id={CHECKOUT_SESSION_ID}&lead_id=${encodeURIComponent(leadId)}&phone=${encodeURIComponent(phone)}&kids=${encodeURIComponent(kidsStr)}`,
-    cancel_url: `${origin}/trial`,
+    cancel_url: `${origin}${cancelPath}`,
     'metadata[studio_id]': IMA_STUDIO_ID,
     'metadata[studio_slug]': 'ima',
     'metadata[lead_id]': leadId,

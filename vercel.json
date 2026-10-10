@@ -1,17 +1,60 @@
 {
   "rewrites": [
-    { "source": "/lead-form", "destination": "/trial-offer.html" },
-    { "source": "/email-form", "destination": "/email-form.html" },
-    { "source": "/trial", "destination": "/trial/index.html" },
-    { "source": "/trial/success", "destination": "/trial/success.html" },
-    { "source": "/schedule", "destination": "/schedule/index.html" },
-    { "source": "/schedule/", "destination": "/schedule/index.html" },
-    { "source": "/schedule/ima", "destination": "/schedule/index.html" },
-    { "source": "/schedule/ima/", "destination": "/schedule/index.html" },
-    { "source": "/schedule/complete", "destination": "/schedule/complete.html" },
-    { "source": "/trial-offer", "destination": "/trial-offer.html" },
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
-    { "source": "/refund-policy", "destination": "/refund-policy.html" }
+    {
+      "source": "/lead-form",
+      "destination": "/trial-offer.html"
+    },
+    {
+      "source": "/email-form",
+      "destination": "/email-form.html"
+    },
+    {
+      "source": "/trial",
+      "destination": "/trial/index.html"
+    },
+    {
+      "source": "/trial/success",
+      "destination": "/trial/success.html"
+    },
+    {
+      "source": "/schedule",
+      "destination": "/schedule/index.html"
+    },
+    {
+      "source": "/schedule/",
+      "destination": "/schedule/index.html"
+    },
+    {
+      "source": "/schedule/ima",
+      "destination": "/schedule/index.html"
+    },
+    {
+      "source": "/schedule/ima/",
+      "destination": "/schedule/index.html"
+    },
+    {
+      "source": "/schedule/complete",
+      "destination": "/schedule/complete.html"
+    },
+    {
+      "source": "/trial-offer",
+      "destination": "/trial-offer.html"
+    },
+    {
+      "source": "/trial-v2",
+      "destination": "/trial-v2.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/terms-of-service.html"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/refund-policy.html"
+    }
   ]
 }
