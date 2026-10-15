@@ -83,8 +83,10 @@ a{color:inherit}
 .kid{border:1.5px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
 .kid .khead{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .kid .khead button{background:none;border:0;color:#c02d22;font:600 13px var(--font);cursor:pointer;padding:2px 4px}
-.kid .krow{display:grid;grid-template-columns:1fr 104px;gap:10px;margin-top:8px}
+.kid .krow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .kid .field{margin-top:0}
+.kid .agef{margin-top:10px}
+.kid .agef select{max-width:110px}
 .addkid{display:block;width:100%;height:46px;margin-top:12px;background:none;border:1.5px dashed var(--blue);border-radius:12px;color:var(--blue);font:600 15px var(--font);cursor:pointer}
 .err{color:#c02d22;font-size:13px;margin:6px 0 0}
 .card .btn{margin-top:18px;justify-content:space-between;padding:0 16px;font-size:16.5px;white-space:nowrap}
@@ -414,8 +416,9 @@ fbq('track','PageView');
     d.innerHTML='<div class="khead"><span>Child</span><button type="button">Remove</button></div>'+
       '<div class="krow">'+
       '<div class="field"><label for="kname'+kseq+'">Child\'s first name</label><input id="kname'+kseq+'" class="kname" autocomplete="off" placeholder="First name"></div>'+
-      '<div class="field"><label for="kage'+kseq+'">Age</label><select id="kage'+kseq+'" class="kage">'+ageOpts()+'</select></div>'+
-      '</div>';
+      '<div class="field"><label for="klast'+kseq+'">Child\'s last name</label><input id="klast'+kseq+'" class="klast" autocomplete="off" placeholder="Last name"></div>'+
+      '</div>'+
+      '<div class="field agef"><label for="kage'+kseq+'">Age</label><select id="kage'+kseq+'" class="kage">'+ageOpts()+'</select></div>';
     d.querySelector('.khead button').addEventListener('click',function(){d.remove();syncKids()});
     kidsEl.appendChild(d);syncKids();
   }
@@ -439,12 +442,13 @@ fbq('track','PageView');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){em.setAttribute('aria-invalid','true');miss.push('email address')}
     var kidRows=[];
     kidsEl.querySelectorAll('.kid').forEach(function(r,i){
-      var kn=r.querySelector('.kname'),ka=r.querySelector('.kage');
-      kn.removeAttribute('aria-invalid');ka.removeAttribute('aria-invalid');
-      var name=kn.value.trim(),age=Number.parseInt(ka.value,10);
+      var kn=r.querySelector('.kname'),kl=r.querySelector('.klast'),ka=r.querySelector('.kage');
+      kn.removeAttribute('aria-invalid');kl.removeAttribute('aria-invalid');ka.removeAttribute('aria-invalid');
+      var name=kn.value.trim(),last=kl.value.trim(),age=Number.parseInt(ka.value,10);
       if(!name){kn.setAttribute('aria-invalid','true');miss.push('child '+(i+1)+"'s first name")}
+      if(!last){kl.setAttribute('aria-invalid','true');miss.push('child '+(i+1)+"'s last name")}
       if(!Number.isFinite(age)){ka.setAttribute('aria-invalid','true');miss.push('child '+(i+1)+"'s age")}
-      kidRows.push({first:name,age:Number.isFinite(age)?age:null});
+      kidRows.push({first:name,last:last,age:Number.isFinite(age)?age:null});
     });
     ok=miss.length===0;
     var msg=ok?'':'Enter your '+(miss.length>1?miss.slice(0,-1).join(', ')+' and '+miss[miss.length-1]:miss[0])+'.';
@@ -456,7 +460,7 @@ fbq('track','PageView');
     var qs=new URLSearchParams(location.search);
     fetch('https://www.ima-os.com/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       studio_slug:'ima',first_name:fn.value.trim(),last_name:ln.value.trim(),email:em.value.trim(),phone:ph.value,num_children:kidRows.length,
-      children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' ('+k.age+')'}).join(', '),
+      children:kidRows,message:'Children: '+kidRows.map(function(k){return (k.first+' '+k.last).trim()+' ('+k.age+')'}).join(', '),
       referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
       fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),return_path:'/trial-v2'
     })}).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d}})}).then(function(x){
