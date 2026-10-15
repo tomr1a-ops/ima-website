@@ -143,7 +143,8 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .coach .photo{margin-top:0;border-radius:0;aspect-ratio:16/10;background:#16131b;color:#55525c}
 .coach .wrap{padding-top:26px}
 .coach .coachvid-wrap{padding-top:28px}
-.coach #coachvideo{margin-top:0}
+.coach .family{margin:0 auto;max-width:360px;border-radius:16px;overflow:hidden;background:#bdb8b6}
+.coach .family img{display:block;width:100%;height:auto}
 .coach h2{font-size:24px;font-weight:800}
 .coach .tagline{color:var(--cyan);font-weight:700;font-size:15px;margin:2px 0 0}
 .checks{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
@@ -321,13 +322,7 @@ fbq('track','PageView');
 
 <section class="coach">
   <div class="wrap coachvid-wrap">
-    <div class="video" id="coachvideo">
-      <video id="coachvid" preload="metadata" playsinline poster="/trial/assets/v2/coach-poster.jpg" src="/trial/assets/v2/coach-video.mp4"></video>
-      <button class="vbtn" type="button" id="cplay" aria-label="Watch Coach Shick's video">
-        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg></span>
-        <span class="tag">Meet Coach Shick</span>
-      </button>
-    </div>
+    <figure class="family"><img src="/trial/assets/v2/shick-family.jpg" alt="Coach Shick with his wife and four kids" width="581" height="866" loading="lazy"></figure>
   </div>
   <div class="wrap">
     <h2>Meet Coach Shick</h2>
@@ -336,7 +331,11 @@ fbq('track','PageView');
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>40+ years of martial arts experience</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Created a national anti bullying program for public and private schools</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Certified Pop Warner and USA Football coach</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Trained elite athletes in martial arts and sports performance</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Owned 20+ martial arts schools</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Owned an Orangetheory Fitness franchise</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Professional martial arts stuntman</li>
     </ul>
   </div>
 </section>
@@ -489,7 +488,6 @@ fbq('track','PageView');
     });
   }
   wireVideo('video','herovid','vplay');
-  wireVideo('coachvideo','coachvid','cplay');
   // Sticky bar: show once the form card has scrolled past, hide when form is on screen
   var sticky=document.getElementById('sticky'),reserve=document.getElementById('reserve');
   function upd(){
