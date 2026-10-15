@@ -151,6 +151,14 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .checks li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14px;line-height:1.45;color:#e6e4ea}
 .checks svg{width:18px;height:18px;color:var(--cyan);margin-top:2px}
 
+/* Better path video */
+.bpath{padding-block:28px 4px}
+.bpvid{position:relative;margin:0 auto;max-width:340px;border-radius:16px;overflow:hidden;background:#16131b;aspect-ratio:7/10}
+.bpvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bpvid .snd{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font:600 13px var(--font);cursor:pointer}
+.bpvid .snd svg{width:16px;height:16px}
+.bpvid .snd.on{display:none}
+
 /* Step Up */
 .stepup{padding-block:24px 8px}
 .box{background:var(--blue-tint);border-radius:18px;padding:16px;display:grid;gap:14px}
@@ -340,6 +348,15 @@ fbq('track','PageView');
   </div>
 </section>
 
+<section class="bpath">
+  <div class="wrap">
+    <div class="bpvid">
+      <video id="bpvid" autoplay muted loop playsinline preload="auto" src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4"></video>
+      <button type="button" class="snd" id="bpsnd" aria-label="Turn sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg><span>Enable sound</span></button>
+    </div>
+  </div>
+</section>
+
 <section class="stepup">
   <div class="wrap">
     <div class="box"><div class="logo"><img src="/trial/assets/v2/stepup-ema.png" alt="Step Up For Students EMA Marketplace Provider" width="646" height="209" loading="lazy"></div><div><h3>Step Up For Students scholarships accepted</h3><p>A great fit for homeschool families. Ask us how to use yours.</p></div></div>
@@ -488,6 +505,10 @@ fbq('track','PageView');
     });
   }
   wireVideo('video','herovid','vplay');
+  // Better path video: muted autoplay loop, tap to turn sound on
+  (function(){var v=document.getElementById('bpvid'),b=document.getElementById('bpsnd');if(!v||!b)return;
+    b.addEventListener('click',function(){document.querySelectorAll('.video video').forEach(function(o){o.pause()});v.muted=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});b.classList.add('on')});
+  })();
   // Sticky bar: show once the form card has scrolled past, hide when form is on screen
   var sticky=document.getElementById('sticky'),reserve=document.getElementById('reserve');
   function upd(){
