@@ -77,9 +77,15 @@ a{color:inherit}
 .field input::placeholder{color:#5c5d66}
 .field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
 .field input[aria-invalid=true]{border-color:#d4372c}
-.ages{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.ages button{height:47px;border:1.5px solid var(--input);border-radius:12px;background:var(--white);font:500 15px var(--font);color:var(--text);cursor:pointer;padding:0 4px}
-.ages button[aria-pressed=true]{border:2px solid var(--blue);background:var(--blue-tint);font-weight:700}
+.field select{width:100%;height:50px;border:1.5px solid var(--input);border-radius:12px;padding:0 12px;font:400 16px var(--font);color:var(--text);background:var(--white);appearance:auto}
+.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.field select[aria-invalid=true]{border-color:#d4372c}
+.kid{border:1.5px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+.kid .khead{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kid .khead button{background:none;border:0;color:#c02d22;font:600 13px var(--font);cursor:pointer;padding:2px 4px}
+.kid .krow{display:grid;grid-template-columns:1fr 104px;gap:10px;margin-top:8px}
+.kid .field{margin-top:0}
+.addkid{display:block;width:100%;height:46px;margin-top:12px;background:none;border:1.5px dashed var(--blue);border-radius:12px;color:var(--blue);font:600 15px var(--font);cursor:pointer}
 .err{color:#c02d22;font-size:13px;margin:6px 0 0}
 .card .btn{margin-top:18px;justify-content:space-between;padding:0 16px;font-size:16.5px;white-space:nowrap}
 .card .btn svg{width:18px;height:18px;flex:none}
@@ -254,17 +260,11 @@ fbq('track','PageView');
           <label for="email">Email</label>
           <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Email" required>
         </div>
-        <div class="field" role="group" aria-labelledby="agelbl">
-          <span class="lbl" id="agelbl">Child's age</span>
-          <div class="ages" id="ages">
-            <button type="button" aria-pressed="false" data-v="5-7">5 to 7</button>
-            <button type="button" aria-pressed="true" data-v="8-12">8 to 12</button>
-            <button type="button" aria-pressed="false" data-v="13+">13 and up</button>
-          </div>
-        </div>
+        <div id="kids"></div>
+        <button type="button" class="addkid" id="addkid">+ Add another child</button>
         <p class="err" id="err" hidden></p>
         <button class="btn" type="submit">Continue to Secure Checkout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <p class="next">Next: pay $27 with Apple Pay, Google Pay, or card</p>
+        <p class="next" id="payline">Next: pay $27 with Apple Pay, Google Pay, or card</p>
         <p class="legal">By continuing you agree to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms of Service</a> and to receive texts about your trial. Reply STOP to opt out.</p>
       </form>
     </div>
@@ -391,12 +391,36 @@ fbq('track','PageView');
 
 <script>
 (function(){
-  // Age chips
-  var ages=document.getElementById('ages');
-  ages.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    ages.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
-  });
+  // Children (first name + actual age, up to 4)
+  var kidsEl=document.getElementById('kids'),addBtn=document.getElementById('addkid'),payline=document.getElementById('payline'),MAXK=4,kseq=0;
+  function ageOpts(){
+    var s='<option value="">Age</option>';
+    for(var a=5;a<=17;a++)s+='<option value="'+a+'">'+a+'</option>';
+    return s+'<option value="18">18+</option>';
+  }
+  function syncKids(){
+    var rows=kidsEl.querySelectorAll('.kid');
+    rows.forEach(function(r,i){
+      r.querySelector('.khead span').textContent='Child '+(i+1);
+      r.querySelector('.khead button').hidden=rows.length<2;
+    });
+    addBtn.hidden=rows.length>=MAXK;
+    var k=rows.length;
+    payline.textContent='Next: pay $'+(27*k)+(k>1?' for '+k+' children':'')+' with Apple Pay, Google Pay, or card';
+  }
+  function addKid(){
+    kseq++;
+    var d=document.createElement('div');d.className='kid';
+    d.innerHTML='<div class="khead"><span>Child</span><button type="button">Remove</button></div>'+
+      '<div class="krow">'+
+      '<div class="field"><label for="kname'+kseq+'">Child\'s first name</label><input id="kname'+kseq+'" class="kname" autocomplete="off" placeholder="First name"></div>'+
+      '<div class="field"><label for="kage'+kseq+'">Age</label><select id="kage'+kseq+'" class="kage">'+ageOpts()+'</select></div>'+
+      '</div>';
+    d.querySelector('.khead button').addEventListener('click',function(){d.remove();syncKids()});
+    kidsEl.appendChild(d);syncKids();
+  }
+  addKid();
+  addBtn.addEventListener('click',addKid);
   // Phone formatting
   var ph=document.getElementById('phone');
   ph.addEventListener('input',function(){
@@ -413,19 +437,28 @@ fbq('track','PageView');
     if(!ln.value.trim()){ln.setAttribute('aria-invalid','true');miss.push('last name')}
     if(ph.value.replace(/\D/g,'').length!==10){ph.setAttribute('aria-invalid','true');miss.push('10 digit mobile number')}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){em.setAttribute('aria-invalid','true');miss.push('email address')}
+    var kidRows=[];
+    kidsEl.querySelectorAll('.kid').forEach(function(r,i){
+      var kn=r.querySelector('.kname'),ka=r.querySelector('.kage');
+      kn.removeAttribute('aria-invalid');ka.removeAttribute('aria-invalid');
+      var name=kn.value.trim(),age=Number.parseInt(ka.value,10);
+      if(!name){kn.setAttribute('aria-invalid','true');miss.push('child '+(i+1)+"'s first name")}
+      if(!Number.isFinite(age)){ka.setAttribute('aria-invalid','true');miss.push('child '+(i+1)+"'s age")}
+      kidRows.push({first:name,age:Number.isFinite(age)?age:null});
+    });
     ok=miss.length===0;
     var msg=ok?'':'Enter your '+(miss.length>1?miss.slice(0,-1).join(', ')+' and '+miss[miss.length-1]:miss[0])+'.';
     err.textContent=msg;err.hidden=ok;
     if(!ok) return;
     var btn=form.querySelector('button[type=submit]'),label=btn.innerHTML;
-    var sel=ages.querySelector('[aria-pressed=true]'),band=sel?sel.textContent:'';
-    try{if(window.fbq)fbq('track','InitiateCheckout',{value:27,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
+    try{if(window.fbq)fbq('track','InitiateCheckout',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
     btn.disabled=true;btn.textContent='Opening secure checkout...';
     var qs=new URLSearchParams(location.search);
     fetch('https://www.ima-os.com/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      studio_slug:'ima',first_name:fn.value.trim(),last_name:ln.value.trim(),email:em.value.trim(),phone:ph.value,num_children:1,
-      children:[{first:'',age_band:band}],message:'Child age: '+band,referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
-      fbclid:qs.get('fbclid'),gclid:qs.get('gclid')
+      studio_slug:'ima',first_name:fn.value.trim(),last_name:ln.value.trim(),email:em.value.trim(),phone:ph.value,num_children:kidRows.length,
+      children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' ('+k.age+')'}).join(', '),
+      referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
+      fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),return_path:'/trial-v2'
     })}).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d}})}).then(function(x){
       if(!x.ok||!x.d.url) throw new Error(x.d.error||'Something went wrong. Please try again.');
       window.location.href=x.d.url;
