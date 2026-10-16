@@ -158,6 +158,12 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .bpvid .snd{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font:600 13px var(--font);cursor:pointer}
 .bpvid .snd svg{width:16px;height:16px}
 .bpvid .snd.on{display:none}
+.bpvid .pp{position:absolute;right:10px;bottom:10px;width:44px;height:44px;display:grid;place-items:center;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;padding:0}
+.bpvid .pp svg{width:18px;height:18px}
+.bpvid .pp .i-play{display:none}
+.bpvid .pp.paused .i-play{display:block}
+.bpvid .pp.paused .i-pause{display:none}
+.bpvid .pp:focus-visible,.bpvid .snd:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 
 /* Step Up */
 .stepup{padding-block:24px 8px}
@@ -353,6 +359,7 @@ fbq('track','PageView');
     <div class="bpvid">
       <video id="bpvid" autoplay muted loop playsinline preload="auto" src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4"></video>
       <button type="button" class="snd" id="bpsnd" aria-label="Turn sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg><span>Enable sound</span></button>
+      <button type="button" class="pp" id="bppp" aria-label="Pause video"><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
     </div>
   </div>
 </section>
@@ -508,6 +515,10 @@ fbq('track','PageView');
   // Better path video: muted autoplay loop, tap to turn sound on
   (function(){var v=document.getElementById('bpvid'),b=document.getElementById('bpsnd');if(!v||!b)return;
     b.addEventListener('click',function(){document.querySelectorAll('.video video').forEach(function(o){o.pause()});v.muted=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});b.classList.add('on')});
+    var pp=document.getElementById('bppp');
+    function sync(){var paused=v.paused;pp.classList.toggle('paused',paused);pp.setAttribute('aria-label',paused?'Play video':'Pause video')}
+    function toggle(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}}
+    if(pp){pp.addEventListener('click',toggle);v.addEventListener('click',toggle);v.addEventListener('play',sync);v.addEventListener('pause',sync);sync()}
   })();
   // Sticky bar: show once the form card has scrolled past, hide when form is on screen
   var sticky=document.getElementById('sticky'),reserve=document.getElementById('reserve');
