@@ -187,6 +187,8 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .closer{background:var(--ink);color:var(--white);text-align:center;padding-block:32px 34px}
 .closer img{width:86px;height:86px;border-radius:50%;background:var(--white);display:block;margin:0 auto}
 .closer .pill{margin-top:16px}
+.pill-xl{font-size:16px;letter-spacing:.08em;padding:12px 20px;margin-bottom:8px;box-shadow:0 6px 18px rgba(240,146,58,.35)}
+@media (min-width:640px){.pill-xl{font-size:21px;padding:14px 28px}}
 .closer h2{font-size:27px;font-weight:800;line-height:1.15;margin-top:12px}
 .price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:6px}
 .price b{font-size:54px;font-weight:800;color:var(--orange);line-height:1.05}
@@ -240,7 +242,7 @@ fbq('track','PageView');
 <main>
 <section class="hero">
   <div class="wrap">
-    <a class="pill" href="#reserve">50% off trial · Ages 5 and up</a>
+    <a class="pill pill-xl" href="#reserve">50% off trial · Ages 5 and up</a>
     <h1>2 Classes + a Free Impact Shirt for Just <em>$27</em></h1>
     <p class="sub">Fun, high energy classes that build confidence, focus, and discipline. Try it first. Decide later.</p>
     <div class="video" id="video">
