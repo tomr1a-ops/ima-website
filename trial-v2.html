@@ -475,7 +475,7 @@ fbq('track','PageView');
     try{if(window.fbq)fbq('track','InitiateCheckout',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
     btn.disabled=true;btn.textContent='Opening secure checkout...';
     var qs=new URLSearchParams(location.search);
-    fetch('https://www.ima-os.com/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    fetch('https://imaos-next.vercel.app/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       studio_slug:'ima',first_name:fn.value.trim(),last_name:ln.value.trim(),email:em.value.trim(),phone:ph.value,num_children:kidRows.length,
       children:kidRows,message:'Children: '+kidRows.map(function(k){return (k.first+' '+k.last).trim()+' ('+k.age+')'}).join(', '),
       referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
