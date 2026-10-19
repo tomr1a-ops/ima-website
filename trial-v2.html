@@ -520,6 +520,8 @@ fbq('track','PageView');
     err.textContent=msg;err.hidden=ok;
     if(!ok) return;
     var btn=form.querySelector('button[type=submit]'),label=btn.innerHTML;
+    // Lead fires when a parent leaves their details. The Meta ad set optimizes for Lead, so this must fire here.
+    try{if(window.fbq)fbq('track','Lead',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
     try{if(window.fbq)fbq('track','InitiateCheckout',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
     btn.disabled=true;btn.textContent='Opening secure checkout...';
     var qs=new URLSearchParams(location.search);
