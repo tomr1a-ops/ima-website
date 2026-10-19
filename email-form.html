@@ -195,20 +195,22 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
   msg.style.display = 'none';
 
   try {
-    const res = await fetch('/api/lead', {
+    const res = await fetch('https://imaos-next.vercel.app/api/website-question', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        firstName: form.firstName.value.trim(),
-        lastName: form.lastName.value.trim(),
+        first_name: form.firstName.value.trim(),
+        last_name: form.lastName.value.trim(),
         email: form.email.value.trim(),
         phone: form.phone.value.trim(),
         message: form.message.value.trim(),
         sms_consent: document.getElementById('sms_consent').checked,
-        source: 'email-form'
+        studio_slug: 'ima',
+        source: 'website_email_form'
       })
     });
-    if (res.ok) {
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.ok) {
       showMsg(msg, "Thank you! We'll be in touch shortly.", '#1a7a1a');
       form.reset();
     } else { throw new Error(); }

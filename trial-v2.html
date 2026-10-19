@@ -77,6 +77,7 @@ a{color:inherit}
 .field input::placeholder{color:#5c5d66}
 .field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
 .field input[aria-invalid=true]{border-color:#d4372c}
+.field textarea[aria-invalid=true]{border-color:#d4372c}
 .field select{width:100%;height:50px;border:1.5px solid var(--input);border-radius:12px;padding:0 12px;font:400 16px var(--font);color:var(--text);background:var(--white);appearance:auto}
 .field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
 .field select[aria-invalid=true]{border-color:#d4372c}
@@ -184,6 +185,17 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .faq dd{margin:0;padding:0 28px 18px 0;color:var(--muted);font-size:14.5px;line-height:1.5}
 
 /* Closer */
+.ask .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ask .row2 .field{min-width:0}
+.field textarea{width:100%;border:1.5px solid var(--input);border-radius:12px;padding:12px 15px;font:400 16px/1.4 var(--font);color:var(--text);background:var(--white);resize:vertical}
+.field textarea::placeholder{color:#5c5d66}
+.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.ask-consent{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;margin-top:14px;font-size:12.5px;line-height:1.45;color:var(--muted);cursor:pointer}
+.ask-consent input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--blue)}
+.ask .btn{margin-top:16px;justify-content:center}
+.ask-msg{margin:12px 0 0;font-size:14px;font-weight:600;text-align:center}
+.ask-msg.ok{color:#1a7a1a}.ask-msg.err{color:#d4372c}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .closer{background:var(--ink);color:var(--white);text-align:center;padding-block:32px 34px}
 .closer img{width:86px;height:86px;border-radius:50%;background:var(--white);display:block;margin:0 auto}
 .closer .pill{margin-top:16px}
@@ -389,6 +401,29 @@ fbq('track','PageView');
   </div>
 </section>
 
+<section class="formsec ask" id="ask">
+  <div class="wrap">
+    <div class="card">
+      <h2>Have Questions First?</h2>
+      <p class="lede">Not ready to sign up yet? Send us a note and a coach will text or call you back.</p>
+      <form id="askform" novalidate>
+        <div class="hp" aria-hidden="true"><label for="a_company">Company</label><input id="a_company" tabindex="-1" autocomplete="off"></div>
+        <div class="row2">
+          <div class="field"><label for="a_fname">Parent's first name</label><input id="a_fname" autocomplete="given-name" placeholder="First name" required></div>
+          <div class="field"><label for="a_lname">Last name</label><input id="a_lname" autocomplete="family-name" placeholder="Last name" required></div>
+        </div>
+        <div class="field"><label for="a_phone">Phone</label><input id="a_phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(954) 555-0123" required></div>
+        <div class="field"><label for="a_email">Email</label><input id="a_email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
+        <div class="field"><label for="a_ages">Child ages</label><input id="a_ages" placeholder="Example: 6 and 9"></div>
+        <div class="field"><label for="a_msg">Your question</label><textarea id="a_msg" rows="4" placeholder="Ask us anything about classes, schedule or the trial"></textarea></div>
+        <label class="ask-consent"><input type="checkbox" id="a_sms"> <span>Yes, Impact Martial Athletics may text me about my question. Msg and data rates may apply. Reply STOP to opt out.</span></label>
+        <button class="btn" type="submit">Send My Question</button>
+        <p class="ask-msg" id="ask_msg" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <section class="closer">
   <div class="wrap">
     <a href="/trial-v2"><img src="/trial/assets/v2/logo.png" alt="Impact Martial Athletics"></a>
@@ -525,6 +560,25 @@ fbq('track','PageView');
     function sync(){var paused=v.paused;pp.classList.toggle('paused',paused);pp.setAttribute('aria-label',paused?'Play video':'Pause video')}
     function toggle(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}}
     if(pp){pp.addEventListener('click',toggle);v.addEventListener('click',toggle);v.addEventListener('play',sync);v.addEventListener('pause',sync);sync()}
+  })();
+
+  // Have Questions First? form: saves the parent in IMAOS and texts the gym
+  (function(){var f=document.getElementById('askform');if(!f)return;var m=document.getElementById('ask_msg');
+    function v(id){return (document.getElementById(id).value||'').trim()}
+    function say(t,ok){m.hidden=false;m.textContent=t;m.className='ask-msg '+(ok?'ok':'err')}
+    f.addEventListener('submit',function(e){e.preventDefault();
+      var req=[['a_fname','Please enter your first name.'],['a_lname','Please enter your last name.'],['a_phone','Please enter your phone number.'],['a_email','Please enter your email.']];
+      for(var i=0;i<req.length;i++){var el=document.getElementById(req[i][0]);el.removeAttribute('aria-invalid');if(!v(req[i][0])){el.setAttribute('aria-invalid','true');el.focus();say(req[i][1],false);return}}
+      if(v('a_phone').replace(/\D/g,'').length<10){document.getElementById('a_phone').setAttribute('aria-invalid','true');say('Please enter a valid phone number.',false);return}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('a_email'))){document.getElementById('a_email').setAttribute('aria-invalid','true');say('Please enter a valid email.',false);return}
+      var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sending...';m.hidden=true;
+      fetch('https://imaos-next.vercel.app/api/website-question',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        first_name:v('a_fname'),last_name:v('a_lname'),phone:v('a_phone'),email:v('a_email'),child_ages:v('a_ages'),message:v('a_msg'),
+        sms_consent:document.getElementById('a_sms').checked,company:v('a_company'),studio_slug:'ima',source:'trial_page_question'})})
+      .then(function(r){return r.json().then(function(d){return {ok:r.ok&&d.ok,d:d}})})
+      .then(function(x){if(x.ok){f.reset();say("Thanks! A coach will reach out shortly.",true);b.textContent='Sent';try{if(window.fbq)fbq('track','Contact')}catch(_){}}else{b.disabled=false;b.textContent='Send My Question';say((x.d&&x.d.error)||'Something went wrong. Please call 954 636 1515.',false)}})
+      .catch(function(){b.disabled=false;b.textContent='Send My Question';say('Something went wrong. Please call 954 636 1515.',false)});
+    });
   })();
   // Sticky bar: show once the form card has scrolled past, hide when form is on screen
   var sticky=document.getElementById('sticky'),reserve=document.getElementById('reserve');
