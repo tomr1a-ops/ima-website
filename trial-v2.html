@@ -407,7 +407,7 @@ fbq('track','PageView');
       <h2>Have Questions First?</h2>
       <p class="lede">Not ready to sign up yet? Send us a note and a coach will text or call you back.</p>
       <form id="askform" novalidate>
-        <div class="hp" aria-hidden="true"><label for="a_company">Company</label><input id="a_company" tabindex="-1" autocomplete="off"></div>
+        <div class="hp" aria-hidden="true"><label for="a_hpx">Leave this empty</label><input id="a_hpx" name="hp_check" type="text" tabindex="-1" autocomplete="one-time-code" data-lpignore="true" data-1p-ignore="true"></div>
         <div class="row2">
           <div class="field"><label for="a_fname">Parent's first name</label><input id="a_fname" autocomplete="given-name" placeholder="First name" required></div>
           <div class="field"><label for="a_lname">Last name</label><input id="a_lname" autocomplete="family-name" placeholder="Last name" required></div>
@@ -574,7 +574,7 @@ fbq('track','PageView');
       var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sending...';m.hidden=true;
       fetch('https://imaos-next.vercel.app/api/website-question',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         first_name:v('a_fname'),last_name:v('a_lname'),phone:v('a_phone'),email:v('a_email'),child_ages:v('a_ages'),message:v('a_msg'),
-        sms_consent:document.getElementById('a_sms').checked,company:v('a_company'),studio_slug:'ima',source:'trial_page_question'})})
+        sms_consent:document.getElementById('a_sms').checked,hp_check:v('a_hpx'),studio_slug:'ima',source:'trial_page_question'})})
       .then(function(r){return r.json().then(function(d){return {ok:r.ok&&d.ok,d:d}})})
       .then(function(x){if(x.ok){f.reset();say("Thanks! A coach will reach out shortly.",true);b.textContent='Sent';try{if(window.fbq)fbq('track','Contact')}catch(_){}}else{b.disabled=false;b.textContent='Send My Question';say((x.d&&x.d.error)||'Something went wrong. Please call 954 636 1515.',false)}})
       .catch(function(){b.disabled=false;b.textContent='Send My Question';say('Something went wrong. Please call 954 636 1515.',false)});
