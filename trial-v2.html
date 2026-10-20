@@ -227,11 +227,31 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .sticky .p span{display:block;font-size:11.5px;color:var(--muted)}
 .sticky .btn{width:auto;min-height:52px;padding:0 24px;font-size:16px}
 </style>
-<!-- Meta Pixel (same pixel the GHL trial page uses) -->
+<!-- Meta Pixel (same pixel the GHL trial page uses).
+     Test switch: open the page with ?test (or ?test=1) and Meta is told nothing on this visit.
+     The page and checkout work as normal. Remembered for the browser tab; ?test=0 turns it off. -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','9091446380984399');
-fbq('track','PageView');
+(function(){
+  var q=location.search, on=false;
+  try{
+    if(/[?&]test=0(&|$)/.test(q)) sessionStorage.removeItem('ima_test');
+    else if(/[?&]test(=1)?(&|$)/.test(q)) sessionStorage.setItem('ima_test','1');
+    on=sessionStorage.getItem('ima_test')==='1';
+  }catch(_){ on=/[?&]test(=1)?(&|$)/.test(q); }
+  window.IMA_TEST=on;
+  if(on){
+    document.addEventListener('DOMContentLoaded',function(){
+      var b=document.createElement('div');
+      b.textContent='TEST MODE: Meta is not told about this visit';
+      b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:9999;background:#ffd400;color:#000;font:700 13px/1.2 system-ui,sans-serif;text-align:center;padding:6px 8px';
+      document.body.appendChild(b);
+    });
+    return;
+  }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','9091446380984399');
+  fbq('track','PageView');
+})();
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=9091446380984399&ev=PageView&noscript=1"></noscript>
 <!-- Microsoft Clarity -->
