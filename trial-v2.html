@@ -372,7 +372,7 @@ fbq('track','PageView');
 <section class="bpath">
   <div class="wrap">
     <div class="bpvid">
-      <video id="bpvid" autoplay muted loop playsinline preload="auto" src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4"></video>
+      <video id="bpvid" muted loop playsinline preload="none" data-src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4"></video>
       <button type="button" class="snd" id="bpsnd" aria-label="Turn sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg><span>Enable sound</span></button>
       <button type="button" class="pp" id="bppp" aria-label="Pause video"><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
     </div>
@@ -562,6 +562,29 @@ fbq('track','PageView');
     function sync(){var paused=v.paused;pp.classList.toggle('paused',paused);pp.setAttribute('aria-label',paused?'Play video':'Pause video')}
     function toggle(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}}
     if(pp){pp.addEventListener('click',toggle);v.addEventListener('click',toggle);v.addEventListener('play',sync);v.addEventListener('pause',sync);sync()}
+  })();
+
+  // Videos never compete with the page or the form.
+  // 1. The better-path video downloads only when a parent scrolls near it, then plays muted.
+  // 2. Any playing video stops when it scrolls out of view, when a parent taps a link to the
+  //    form, starts typing in either form, or leaves the tab.
+  (function(){
+    var vids=[].slice.call(document.querySelectorAll('video'));
+    function stopAll(except){vids.forEach(function(v){if(v!==except&&!v.paused)v.pause()})}
+    var bp=document.getElementById('bpvid');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){entries.forEach(function(e){
+        var v=e.target;
+        if(e.isIntersecting){
+          if(v===bp&&!v.src&&v.dataset.src){v.src=v.dataset.src;v.preload='auto'}
+          if(v===bp&&v.muted&&v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+        }else if(!v.paused){v.pause()}
+      })},{rootMargin:'200px 0px',threshold:0});
+      vids.forEach(function(v){io.observe(v)});
+    }else if(bp&&bp.dataset.src){bp.src=bp.dataset.src}
+    document.querySelectorAll('a[href="#reserve"]').forEach(function(a){a.addEventListener('click',function(){stopAll()})});
+    ['lead','askform'].forEach(function(id){var f=document.getElementById(id);if(f)f.addEventListener('focusin',function(){stopAll()})});
+    document.addEventListener('visibilitychange',function(){if(document.hidden)stopAll()});
   })();
 
   // Have Questions First? form: saves the parent in IMAOS and texts the gym
