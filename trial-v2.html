@@ -574,7 +574,32 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
   }
   wireAuto('herovid','herosnd','heropp');
   wireAuto('bpvid','bpsnd','bppp');
-  (function(){var h=document.getElementById('herovid');if(h){h.muted=true;var p=h.play();if(p&&p.catch)p.catch(function(){})}})();
+  // Top video: try to start WITH sound. Browsers only allow that in some cases (for example
+  // some in-app browsers). If blocked, it plays muted and the sound comes on at the parent's
+  // first tap anywhere on the page (not on the forms), since that is the earliest moment a
+  // browser lets a page play sound.
+  (function(){
+    var h=document.getElementById('herovid'),b=document.getElementById('herosnd');if(!h)return;
+    function soundOn(){if(b)b.classList.add('on')}
+    function muted(){h.muted=true;var p=h.play();if(p&&p.catch)p.catch(function(){})}
+    h.muted=false;
+    var p=h.play();
+    if(p&&p.then){p.then(function(){soundOn()}).catch(function(){muted();armFirstTap()})}
+    else if(h.paused){muted();armFirstTap()}else{soundOn()}
+    function armFirstTap(){
+      var evs=['pointerup','touchend','keydown'];
+      function off(){evs.forEach(function(e){document.removeEventListener(e,onTap,true)})}
+      function onTap(e){
+        var t=e.target;
+        if(t&&t.closest&&(t.closest('form')||t.closest('#heropp')||t.closest('#herosnd')||t.closest('.bpvid'))){if(t.closest('form'))off();return}
+        off();
+        if(h.dataset.userPaused||!h.muted)return;
+        var r=h.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
+        h.muted=false;var q=h.play();if(q&&q.catch)q.catch(function(){h.muted=true});soundOn();
+      }
+      evs.forEach(function(e){document.addEventListener(e,onTap,true)});
+    }
+  })();
 
   // Videos never compete with the page or the form.
   // 1. The better-path video downloads only when a parent scrolls near it, then plays muted.
