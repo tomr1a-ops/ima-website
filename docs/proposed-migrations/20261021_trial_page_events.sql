@@ -21,7 +21,7 @@ create table if not exists public.trial_page_events (
     'TrialPageLoaded','TrialOfferSeen','TrialFormSeen','TrialFormStarted',
     'TrialFieldParentFirstName','TrialFieldParentLastName','TrialFieldPhone','TrialFieldEmail',
     'TrialFieldChildFirstName','TrialFieldChildLastName','TrialFieldChildAge',
-    'TrialSubmitTapped','TrialFormError','TrialLeftForStripe')),
+    'TrialSubmitTapped','TrialFormError','TrialCheckoutFailed','TrialLeftForStripe')),
   field_name text check (field_name in (
     'parent_first_name','parent_last_name','phone','email','child_first_name','child_last_name','child_age')),
   error_kind text check (error_kind in ('missing_or_invalid','checkout_failed')),
@@ -37,7 +37,7 @@ create table if not exists public.trial_page_events (
 
 create index if not exists trial_page_events_created_idx on public.trial_page_events (created_at desc);
 create index if not exists trial_page_events_event_idx on public.trial_page_events (event_name, created_at desc);
-create unique index if not exists trial_page_events_visit_event_uq on public.trial_page_events (visit_id, event_name) where visit_id is not null;
+create unique index if not exists trial_page_events_visit_event_uq on public.trial_page_events (visit_id, event_name);
 
 alter table public.trial_page_events enable row level security;
 revoke all on table public.trial_page_events from anon, authenticated;

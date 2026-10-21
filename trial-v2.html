@@ -535,7 +535,7 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
   window.imaTrackFormError=function(kind){
     var f=[];
     try{document.querySelectorAll('#lead [aria-invalid="true"]').forEach(function(el){var n=fieldName(el);if(n&&f.indexOf(n)<0)f.push(n)})}catch(_){}
-    track('TrialFormError',kind==='checkout'?{error:'checkout_failed'}:{error:'missing_or_invalid',fields:f.join(',')});
+    if(kind==='checkout'){track('TrialCheckoutFailed',{error:'checkout_failed'});}else{track('TrialFormError',{error:'missing_or_invalid',fields:f.join(',')});}
   };
   track('TrialPageLoaded');
   // Scrolled to the offer (the "Claim My Child's $27 Trial" button under the top video)

@@ -24,6 +24,7 @@ const EVENTS = new Set([
   'TrialFieldChildAge',
   'TrialSubmitTapped',
   'TrialFormError',
+  'TrialCheckoutFailed',
   'TrialLeftForStripe',
 ])
 const FIELDS = new Set(['parent_first_name', 'parent_last_name', 'phone', 'email', 'child_first_name', 'child_last_name', 'child_age'])
