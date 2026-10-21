@@ -157,15 +157,15 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .bpath{padding-block:28px 4px}
 .bpvid{position:relative;margin:0 auto;max-width:340px;border-radius:16px;overflow:hidden;background:#16131b;aspect-ratio:7/10}
 .bpvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.bpvid .snd{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font:600 13px var(--font);cursor:pointer}
-.bpvid .snd svg{width:16px;height:16px}
-.bpvid .snd.on{display:none}
-.bpvid .pp{position:absolute;right:10px;bottom:10px;width:44px;height:44px;display:grid;place-items:center;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;padding:0}
-.bpvid .pp svg{width:18px;height:18px}
-.bpvid .pp .i-play{display:none}
-.bpvid .pp.paused .i-play{display:block}
-.bpvid .pp.paused .i-pause{display:none}
-.bpvid .pp:focus-visible,.bpvid .snd:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+:is(.bpvid,.video) .snd{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font:600 13px var(--font);cursor:pointer}
+:is(.bpvid,.video) .snd svg{width:16px;height:16px}
+:is(.bpvid,.video) .snd.on{display:none}
+:is(.bpvid,.video) .pp{position:absolute;right:10px;bottom:10px;width:44px;height:44px;display:grid;place-items:center;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;padding:0}
+:is(.bpvid,.video) .pp svg{width:18px;height:18px}
+:is(.bpvid,.video) .pp .i-play{display:none}
+:is(.bpvid,.video) .pp.paused .i-play{display:block}
+:is(.bpvid,.video) .pp.paused .i-pause{display:none}
+:is(.bpvid,.video) .pp:focus-visible,:is(.bpvid,.video) .snd:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 
 /* Step Up */
 .stepup{padding-block:24px 8px}
@@ -278,11 +278,9 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
     <h1>2 Classes + a Free Impact Shirt for Just <em>$27</em></h1>
     <p class="sub">Fun, high energy classes that build confidence, focus, and discipline. Try it first. Decide later.</p>
     <div class="video" id="video">
-      <video id="herovid" preload="metadata" playsinline poster="/trial/assets/v2/shick-poster.jpg?v=3" src="/trial/assets/v2/shick-trial.mp4"></video>
-      <button class="vbtn" type="button" id="vplay" aria-label="Watch the video">
-        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg></span>
-        <span class="tag">Watch the video</span>
-      </button>
+      <video id="herovid" autoplay muted loop playsinline preload="auto" poster="/trial/assets/v2/shick-poster.jpg?v=3" src="/trial/assets/v2/shick-trial.mp4"></video>
+      <button type="button" class="snd" id="herosnd" aria-label="Turn sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg><span>Enable sound</span></button>
+      <button type="button" class="pp" id="heropp" aria-label="Pause video"><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
     </div>
     <a class="btn cta" href="#reserve">Claim My Child's $27 Trial</a>
     <div class="reassure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Takes about a minute · Secure checkout</div>
@@ -565,24 +563,18 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
     b.setAttribute('aria-expanded',open?'false':'true');
     b.closest('.item').querySelector('dd').hidden=open;
   });
-  // Video placeholder
-  function wireVideo(boxId,vidId,btnId){
-    var vid=document.getElementById(vidId),vw=document.getElementById(boxId);
-    document.getElementById(btnId).addEventListener('click',function(){
-      document.querySelectorAll('.video video').forEach(function(o){if(o!==vid)o.pause()});
-      vid.controls=true;vw.classList.add('playing');
-      var pr=vid.play(); if(pr&&pr.catch) pr.catch(function(){vw.classList.remove('playing');vid.controls=false});
-    });
+  // Both videos: play muted on their own, "Enable sound" restarts with sound, pause/play button.
+  function wireAuto(vidId,sndId,ppId){
+    var v=document.getElementById(vidId),b=document.getElementById(sndId),pp=document.getElementById(ppId);if(!v)return;
+    if(b)b.addEventListener('click',function(){document.querySelectorAll('.video video,.bpvid video').forEach(function(o){if(o!==v)o.pause()});v.muted=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});b.classList.add('on')});
+    function sync(){if(!pp)return;var paused=v.paused;pp.classList.toggle('paused',paused);pp.setAttribute('aria-label',paused?'Play video':'Pause video')}
+    function toggle(){if(v.paused){delete v.dataset.userPaused;var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.dataset.userPaused='1';v.pause()}}
+    if(pp)pp.addEventListener('click',toggle);
+    v.addEventListener('click',toggle);v.addEventListener('play',sync);v.addEventListener('pause',sync);sync();
   }
-  wireVideo('video','herovid','vplay');
-  // Better path video: muted autoplay loop, tap to turn sound on
-  (function(){var v=document.getElementById('bpvid'),b=document.getElementById('bpsnd');if(!v||!b)return;
-    b.addEventListener('click',function(){document.querySelectorAll('.video video').forEach(function(o){o.pause()});v.muted=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});b.classList.add('on')});
-    var pp=document.getElementById('bppp');
-    function sync(){var paused=v.paused;pp.classList.toggle('paused',paused);pp.setAttribute('aria-label',paused?'Play video':'Pause video')}
-    function toggle(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}}
-    if(pp){pp.addEventListener('click',toggle);v.addEventListener('click',toggle);v.addEventListener('play',sync);v.addEventListener('pause',sync);sync()}
-  })();
+  wireAuto('herovid','herosnd','heropp');
+  wireAuto('bpvid','bpsnd','bppp');
+  (function(){var h=document.getElementById('herovid');if(h){h.muted=true;var p=h.play();if(p&&p.catch)p.catch(function(){})}})();
 
   // Videos never compete with the page or the form.
   // 1. The better-path video downloads only when a parent scrolls near it, then plays muted.
@@ -597,7 +589,7 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
         var v=e.target;
         if(e.isIntersecting){
           if(v===bp&&!v.src&&v.dataset.src){v.src=v.dataset.src;v.preload='auto'}
-          if(v===bp&&v.muted&&v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+          if(v.muted&&v.paused&&!v.dataset.userPaused){var p=v.play();if(p&&p.catch)p.catch(function(){})}
         }else if(!v.paused){v.pause()}
       })},{rootMargin:'200px 0px',threshold:0});
       vids.forEach(function(v){io.observe(v)});
