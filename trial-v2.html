@@ -90,6 +90,7 @@ a{color:inherit}
 .kid .agef select{max-width:110px}
 .addkid{display:block;width:100%;height:46px;margin-top:12px;background:none;border:1.5px dashed var(--blue);border-radius:12px;color:var(--blue);font:600 15px var(--font);cursor:pointer}
 .err{color:#c02d22;font-size:13px;margin:6px 0 0}
+.backout{background:#e9f6ec;color:#17602a;border:1px solid #bfe3c8;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:600;margin:0 0 14px}
 .card .btn{margin-top:18px;justify-content:space-between;padding:0 16px;font-size:16.5px;white-space:nowrap}
 .card .btn svg{width:18px;height:18px;flex:none}
 .next{text-align:center;color:var(--muted);font-size:12.5px;margin:14px 0 0}
@@ -296,6 +297,7 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
       <div class="bar" aria-hidden="true"><i></i><i></i></div>
       <h2>Reserve Your Child's Spot</h2>
       <p class="lede">We'll text you the available class times.</p>
+      <p class="backout" id="backout" role="status" hidden>No charge was made. Your spot is still open.</p>
       <form id="lead" novalidate>
         <div class="field">
           <label for="fname">Parent's first name</label>
@@ -558,6 +560,21 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
       btn.disabled=false;btn.innerHTML=label;
     });
   });
+  // Back from Stripe without paying: IMAOS sends parents here with checkout=canceled&lead=<id>.
+  // Show a reassuring line, keep the form usable, and tell IMAOS once so the owner gets a text.
+  // Test mode (?test) shows the line but never calls IMAOS.
+  (function(){
+    var q=new URLSearchParams(location.search),lead=q.get('lead');
+    if(q.get('checkout')!=='canceled'||!lead) return;
+    var box=document.getElementById('backout');box.hidden=false;
+    try{document.getElementById('reserve').scrollIntoView({block:'start'})}catch(_){}
+    // Take the flags off the address so a reload or a shared link does not repeat this.
+    try{q.delete('checkout');q.delete('lead');var rest=q.toString();history.replaceState(null,'',location.pathname+(rest?'?'+rest:'')+location.hash)}catch(_){}
+    if(window.IMA_TEST) return;
+    var key='ima_canceled_'+lead;
+    try{if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1')}catch(_){}
+    fetch('https://imaos-next.vercel.app/api/trial-checkout-canceled',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lead_id:lead}),keepalive:true}).catch(function(){});
+  })();
   // FAQ
   document.getElementById('faq').addEventListener('click',function(e){
     var b=e.target.closest('button'); if(!b) return;
