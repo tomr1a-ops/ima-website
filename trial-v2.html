@@ -500,6 +500,78 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 </div>
 
 <script>
+// Drop-off tracking: where parents stop on the way to checkout.
+// Each step goes to Meta as a custom event (fbq trackCustom) and to our own /api/trial-event as a
+// beacon, so we have counts that do not depend on Meta. Each event fires at most once per page view.
+// Never sends names, numbers, emails or any typed value: field names only.
+// Test mode (?test): Meta is skipped, each event is logged to the console instead, and the server
+// copy is marked test so it can be left out of the counts.
+// The existing PageView, Lead and InitiateCheckout events are separate and untouched.
+(function(){
+  var sent={},visit='',t0=Date.now(),qs=new URLSearchParams(location.search);
+  try{visit=(crypto.randomUUID&&crypto.randomUUID())||''}catch(_){}
+  if(!visit)visit=Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+  var FIELD_EVENT={parent_first_name:'TrialFieldParentFirstName',parent_last_name:'TrialFieldParentLastName',phone:'TrialFieldPhone',email:'TrialFieldEmail',child_first_name:'TrialFieldChildFirstName',child_last_name:'TrialFieldChildLastName',child_age:'TrialFieldChildAge'};
+  function fieldName(el){
+    if(!el)return '';
+    var byId={fname:'parent_first_name',lname:'parent_last_name',phone:'phone',email:'email'};
+    if(byId[el.id])return byId[el.id];
+    var c=el.classList;
+    return c.contains('kname')?'child_first_name':c.contains('klast')?'child_last_name':c.contains('kage')?'child_age':'';
+  }
+  function track(name,params){
+    if(sent[name])return;sent[name]=1;
+    params=params||{};
+    if(window.IMA_TEST){try{console.log('[IMA track]',name,JSON.stringify(params))}catch(_){}}
+    else{try{if(window.fbq)fbq('trackCustom',name,params)}catch(_){}}
+    try{
+      var body=JSON.stringify({v:1,visit:visit,event:name,params:params,ms:Date.now()-t0,page:location.pathname,
+        utm_source:qs.get('utm_source'),utm_campaign:qs.get('utm_campaign'),utm_content:qs.get('utm_content'),test:!!window.IMA_TEST});
+      if(navigator.sendBeacon)navigator.sendBeacon('/api/trial-event',new Blob([body],{type:'text/plain'}));
+    }catch(_){}
+  }
+  window.imaTrack=track;
+  // For the error event: the field names the form marked as missing or invalid.
+  window.imaTrackFormError=function(kind){
+    var f=[];
+    try{document.querySelectorAll('#lead [aria-invalid="true"]').forEach(function(el){var n=fieldName(el);if(n&&f.indexOf(n)<0)f.push(n)})}catch(_){}
+    if(kind==='checkout'){track('TrialCheckoutFailed',{error:'checkout_failed'});}else{track('TrialFormError',{error:'missing_or_invalid',fields:f.join(',')});}
+  };
+  track('TrialPageLoaded');
+  // Scrolled to the offer (the "Claim My Child's $27 Trial" button under the top video)
+  // and to the form (its first field). Based on what is on screen, so it works at any screen size.
+  function seen(el,name){
+    if(!el)return;
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){track(name);io.disconnect()}})},{threshold:0.5});
+      io.observe(el);
+    }else{
+      var chk=function(){var r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){track(name);removeEventListener('scroll',chk)}};
+      addEventListener('scroll',chk,{passive:true});chk();
+    }
+  }
+  seen(document.querySelector('.hero .btn.cta'),'TrialOfferSeen');
+  seen(document.getElementById('fname'),'TrialFormSeen');
+  var form=document.getElementById('lead');if(!form)return;
+  form.addEventListener('focusin',function(e){var n=fieldName(e.target);if(n)track('TrialFormStarted',{field:n})});
+  // A field counts as completed when the parent leaves it (or autofill fills it) with a value that
+  // would pass the form's own check.
+  function done(e){
+    var el=e.target,n=fieldName(el);if(!n)return;
+    var v=(el.value||'').trim(),ok;
+    if(n==='phone')ok=v.replace(/\D/g,'').length===10;
+    else if(n==='email')ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    else ok=v!=='';
+    if(ok)track(FIELD_EVENT[n],{field:n});
+  }
+  form.addEventListener('change',done);
+  form.addEventListener('focusout',done);
+  // Registered before the form's own submit handler, so it is counted ahead of any error.
+  form.addEventListener('submit',function(){track('TrialSubmitTapped')});
+})();
+</script>
+
+<script>
 (function(){
   // Children (first name + actual age, up to 4)
   var kidsEl=document.getElementById('kids'),addBtn=document.getElementById('addkid'),payline=document.getElementById('payline'),MAXK=4,kseq=0;
@@ -561,7 +633,7 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
     ok=miss.length===0;
     var msg=ok?'':'Enter your '+(miss.length>1?miss.slice(0,-1).join(', ')+' and '+miss[miss.length-1]:miss[0])+'.';
     err.textContent=msg;err.hidden=ok;
-    if(!ok) return;
+    if(!ok){try{window.imaTrackFormError&&imaTrackFormError('validation')}catch(_){}return}
     var btn=form.querySelector('button[type=submit]'),label=btn.innerHTML;
     // Lead fires when a parent leaves their details. The Meta ad set optimizes for Lead, so this must fire here.
     try{if(window.fbq)fbq('track','Lead',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
@@ -575,9 +647,11 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
       fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),return_path:'/trial-v2'
     })}).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d}})}).then(function(x){
       if(!x.ok||!x.d.url) throw new Error(x.d.error||'Something went wrong. Please try again.');
+      try{window.imaTrack&&imaTrack('TrialLeftForStripe')}catch(_){}
       window.location.href=x.d.url;
     }).catch(function(e){
       err.textContent=(e&&e.message)||'Something went wrong. Please try again.';err.hidden=false;
+      try{window.imaTrackFormError&&imaTrackFormError('checkout')}catch(_){}
       btn.disabled=false;btn.innerHTML=label;
     });
   });
