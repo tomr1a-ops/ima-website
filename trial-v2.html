@@ -92,6 +92,7 @@ img{max-width:100%}
 .slot span{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
 .slot:has(input:checked){outline:2.5px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
 .slot:has(input:focus-visible){outline:3px solid var(--cyan);outline-offset:2px}
+.slots[aria-invalid=true] .slot{border-color:#d4372c}
 .moretimes{background:none;border:0;color:var(--blue);font:600 14px var(--font);padding:10px 0 0;cursor:pointer}
 .timesnote{margin:16px 0 0;font-size:14px;color:var(--muted)}
 .timesnote b{color:var(--text)}
@@ -564,7 +565,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       return d>0||mins(c.start_time)>=n.mins+LEAD_MIN;
     }).sort(function(a,b){var x=a.date+a.start_time,y=b.date+b.start_time;return x<y?-1:x>y?1:0});
   }
-  function renderTimes(list,keepId){
+  // noPick: leave every time unselected so the parent has to choose (used after a "class full" answer).
+  function renderTimes(list,keepId,noPick){
     classes=list;
     // Age groups: each class name on the schedule (IMA's class names carry the age group), with the days it runs this week.
     agesEl.textContent='';
@@ -582,12 +584,12 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       agesEl.appendChild(d);
     });
     slotsEl.textContent='';
-    var chosen=keepId&&list.some(function(c){return c.id===keepId})?keepId:(list[0]&&list[0].id);
+    var chosen=noPick?null:keepId&&list.some(function(c){return c.id===keepId})?keepId:(list[0]&&list[0].id);
     list.forEach(function(c,i){
       var l=document.createElement('label');l.className='slot';
       if(i>=SHOW&&c.id!==chosen)l.hidden=true;
       var r=document.createElement('input');r.type='radio';r.name='slot';r.value=c.id;r.checked=c.id===chosen;
-      r.addEventListener('change',function(){userPicked=true;try{window.imaTrack&&imaTrack('TrialClassPicked')}catch(_){}});
+      r.addEventListener('change',function(){userPicked=true;slotsEl.removeAttribute('aria-invalid');try{window.imaTrack&&imaTrack('TrialClassPicked')}catch(_){}});
       var b=document.createElement('b');b.textContent=dayLabel(c.date)+' · '+timeLabel(c.start_time);
       l.title=dayLabel(c.date,true)+' · '+timeLabel(c.start_time);
       var s=document.createElement('span');s.textContent=c.name;
@@ -602,7 +604,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     try{window.imaTrack&&imaTrack('TrialTimesUnavailable')}catch(_){}
   }
   moreBtn.addEventListener('click',function(){slotsEl.querySelectorAll('.slot[hidden]').forEach(function(l){l.hidden=false});moreBtn.hidden=true});
-  function loadTimes(keepId){
+  function loadTimes(keepId,noPick){
     var ctl=('AbortController' in window)?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort()},8000);
     return fetch(IMAOS+'/api/schedule-config?slug=ima',{cache:'no-store',signal:ctl?ctl.signal:undefined})
       .then(function(r){if(!r.ok)throw new Error('feed '+r.status);return r.json()})
@@ -610,7 +612,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
         clearTimeout(timer);
         var list=upcoming(d&&Array.isArray(d.classes)?d.classes:[]);
         if(!list.length)throw new Error('no classes');
-        renderTimes(list,keepId);
+        renderTimes(list,keepId,noPick);
       })
       .catch(function(){clearTimeout(timer);timesUnavailable()});
   }
@@ -670,8 +672,12 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       if(!Number.isFinite(age)){ka.setAttribute('aria-invalid','true');miss.push(who+' age')}
       kidRows.push({first:name,age:Number.isFinite(age)?age:null});
     });
-    var ok=miss.length===0;
-    var msg=ok?'':'Enter your '+(miss.length>1?miss.slice(0,-1).join(', ')+' and '+miss[miss.length-1]:miss[0])+'.';
+    // When times are shown, one must be picked (after a "class full" answer none is picked for the parent).
+    var needTime=!times.hidden&&classes.length>0&&!pickedClass();
+    if(needTime)slotsEl.setAttribute('aria-invalid','true');else slotsEl.removeAttribute('aria-invalid');
+    var ok=miss.length===0&&!needTime;
+    var msg=ok?'':(needTime?'Pick a class time'+(miss.length?', then enter your ':'.'):'Enter your ')+
+      (miss.length?(miss.length>1?miss.slice(0,-1).join(', ')+' and '+miss[miss.length-1]:miss[0])+'.':'');
     err.textContent=msg;err.hidden=ok;
     if(!ok){try{window.imaTrackFormError&&imaTrackFormError('validation')}catch(_){}return}
     var btn=form.querySelector('button[type=submit]'),label=btn.innerHTML;
@@ -703,7 +709,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       err.textContent=(e&&e.message)||'Something went wrong. Please try again.';err.hidden=false;
       try{window.imaTrackFormError&&imaTrackFormError('checkout')}catch(_){}
       btn.disabled=false;btn.innerHTML=label;
-      if(e&&e.full){loadTimes().then(function(){try{document.getElementById('slotslbl').scrollIntoView({block:'center'})}catch(_){}})}
+      // Fresh times with nothing picked: the parent chooses again.
+      if(e&&e.full){loadTimes(null,true).then(function(){try{document.getElementById('slotslbl').scrollIntoView({block:'center'})}catch(_){}})}
     });
   });
 
