@@ -192,7 +192,10 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .foot small{display:block;margin-top:12px;color:#8d8a94}
 
 /* Sticky */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);box-shadow:0 -4px 18px rgba(20,19,26,.12);padding-bottom:env(safe-area-inset-bottom,0px)}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);box-shadow:0 -4px 18px rgba(20,19,26,.12);padding-bottom:env(safe-area-inset-bottom,0px);transition:transform .2s ease,visibility .2s}
+/* Hidden while the reserve card or its checkout button is on screen, so it never covers the button. */
+.sticky.off{transform:translateY(110%);visibility:hidden}
+@media (prefers-reduced-motion:reduce){.sticky{transition:none}}
 .sticky .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:72px}
 .sticky .p b{font-size:21px;font-weight:800;line-height:1}
 .sticky .p span{display:block;font-size:11.5px;color:var(--muted)}
@@ -446,7 +449,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   </div>
 </footer>
 
-<div class="sticky" id="sticky">
+<div class="sticky" id="sticky" aria-hidden="false">
   <div class="wrap">
     <div class="p"><b>$27</b><span>One-time · 2 classes + shirt</span></div>
     <a class="btn" href="#reserve">See Class Times</a>
@@ -719,6 +722,23 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     var key='ima_canceled_'+lead;
     try{if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1')}catch(_){}
     fetch(IMAOS+'/api/trial-checkout-canceled',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lead_id:lead}),keepalive:true}).catch(function(){});
+  })();
+
+  // ---- Sticky bar ----------------------------------------------------------------------------
+  // Off whenever any part of the reserve card (and so the checkout button) is on screen, back on
+  // once it has scrolled out, so it never sits over "Continue to Secure Checkout".
+  (function(){
+    var bar=document.getElementById('sticky'),card=document.querySelector('#reserve .card'),cta=form.querySelector('button[type=submit]');
+    if(!bar||!card)return;
+    var shown={};
+    function apply(){var off=!!(shown.card||shown.cta);bar.classList.toggle('off',off);bar.setAttribute('aria-hidden',off?'true':'false');bar.querySelector('a').tabIndex=off?-1:0}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){shown[e.target===cta?'cta':'card']=e.isIntersecting});apply()},{threshold:0});
+      io.observe(card);if(cta)io.observe(cta);
+    }else{
+      var chk=function(){var r=card.getBoundingClientRect();shown.card=r.top<innerHeight&&r.bottom>0;apply()};
+      addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk();
+    }
   })();
 
   // ---- Video ---------------------------------------------------------------------------------
