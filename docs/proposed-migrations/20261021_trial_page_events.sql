@@ -21,8 +21,7 @@ create table if not exists public.trial_page_events (
     'TrialPageLoaded','TrialOfferSeen','TrialFormSeen','TrialFormStarted',
     'TrialFieldParentFirstName','TrialFieldParentLastName','TrialFieldPhone','TrialFieldEmail',
     'TrialFieldChildFirstName','TrialFieldChildLastName','TrialFieldChildAge',
-    'TrialSubmitTapped','TrialFormError','TrialCheckoutFailed','TrialLeftForStripe',
-    'TrialClassPicked','TrialTimesUnavailable')),
+    'TrialSubmitTapped','TrialFormError','TrialCheckoutFailed','TrialLeftForStripe')),
   field_name text check (field_name in (
     'parent_first_name','parent_last_name','phone','email','child_first_name','child_last_name','child_age')),
   error_kind text check (error_kind in ('missing_or_invalid','checkout_failed')),
