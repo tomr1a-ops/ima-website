@@ -151,6 +151,28 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
 .greviews .av{width:44px;height:44px;font-size:16px;background:var(--blue)}
 .greviews .gmore{display:inline-flex;align-items:center;gap:6px;margin-top:16px;color:var(--blue);font-weight:700;font-size:15px;text-decoration:none}
 
+
+/* Grid video, early review, class times */
+.gridvid{margin:26px auto 0;max-width:420px;border-radius:16px;overflow:hidden;background:#16131b;aspect-ratio:4/5}
+.gridvid img,.gridvid video{display:block;width:100%;height:100%;object-fit:cover}
+.hero .q.early{margin:16px auto 0;max-width:420px;color:var(--text)}
+.hero .q.early .stars{display:block;margin-bottom:8px}
+.hero .q.early .who{grid-template-columns:44px 1fr;margin-top:12px}
+.hero .q.early .av{width:44px;height:44px;font-size:16px;background:var(--blue)}
+.times{background:var(--white);border-radius:20px;padding:18px 14px 16px;box-shadow:0 1px 3px rgba(20,19,26,.05);margin-bottom:14px}
+.times h2{font-size:20px;font-weight:800;margin:0 4px}
+.times .tl{color:var(--muted);font-size:13.5px;margin:2px 4px 12px}
+.tt{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;text-align:center;table-layout:fixed}
+.tt th{background:var(--ink);color:var(--white);font-weight:700;font-size:12px;letter-spacing:.06em;padding:8px 0}
+.tt th:first-child{border-top-left-radius:10px;width:27%}
+.tt th:last-child{border-top-right-radius:10px}
+.tt td{padding:9px 0;border-bottom:1px solid var(--line);font-weight:600;line-height:1.3;vertical-align:middle}
+.tt td.g{text-align:left;padding-left:8px;font-weight:800;color:var(--blue);font-size:12.5px;line-height:1.15}
+.tt td.g span{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:2px}
+.tt .fam{display:inline-block;margin-top:3px;background:var(--orange);color:var(--ink);border-radius:6px;padding:1px 4px;font-size:11px;font-weight:800;line-height:1.25}
+.tt .fam small{display:block;font-size:8.5px;letter-spacing:.04em}
+.times .note{font-size:12.5px;color:var(--muted);margin:10px 4px 0}
+
 /* Coach */
 .coach{background:var(--ink);color:var(--white);padding-block:0 34px}
 .coach .photo{margin-top:0;border-radius:0;aspect-ratio:16/10;background:#16131b;color:#55525c}
@@ -295,16 +317,31 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
     </div>
     <a class="btn cta" href="#reserve">Claim My Child's $27 Trial</a>
     <div class="reassure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Takes about a minute · Secure checkout</div>
+    <div class="gridvid"><video id="gridvid" autoplay muted loop playsinline preload="metadata" poster="/trial/assets/v2/ima-grid-poster.jpg" src="/trial/assets/v2/ima-grid.mp4" aria-label="Impact Martial Athletics: confidence, discipline, focus, strength, speed, agility, self defense, leadership, respect"></video></div>
+    <figure class="q early" style="margin-left:auto;margin-right:auto"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“My kids love going here to workout. Coach Schick is awesome as are all the other coaches.”</blockquote><figcaption class="who"><span class="av">A</span><span class="nm"><b>Ari D.</b><span>Google review</span></span></figcaption></figure>
   </div>
 </section>
 
 <section class="formsec" id="reserve">
   <div class="wrap">
+    <div class="times" id="times">
+      <h2>Class Times</h2>
+      <p class="tl">Monday to Friday. All times PM.</p>
+      <table class="tt">
+        <thead><tr><th></th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th></tr></thead>
+        <tbody>
+          <tr><td class="g">Young Warriors<span>Ages 5 to 8</span></td><td>4:30</td><td>6:00</td><td>4:30</td><td>6:00</td><td>4:30</td></tr>
+          <tr><td class="g">Unified Warriors<span>All ages</span></td><td>12:00<br>5:30</td><td>4:00<br><span class="fam">7:00<small>FAMILY</small></span></td><td>12:00<br>5:30</td><td>4:00<br><span class="fam">7:00<small>FAMILY</small></span></td><td>12:00<br>5:30</td></tr>
+          <tr><td class="g">Rising Warriors<span>Ages 9 and up</span></td><td>6:30</td><td>5:00</td><td>6:30</td><td>5:00</td><td>6:30</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Family class Tuesdays and Thursdays at 7:00. Parents train with their kids.</p>
+    </div>
     <div class="card">
       <div class="steprow"><span>Step 1 of 2</span><span class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure</span></div>
       <div class="bar" aria-hidden="true"><i></i><i></i></div>
       <h2>Reserve Your Child's Spot</h2>
-      <p class="lede">We'll text you the available class times.</p>
+      <p class="lede">You'll pick your class time after checkout.</p>
       <p class="backout" id="backout" role="status" hidden>No charge was made. Your spot is still open.</p>
       <form id="lead" novalidate>
         <div class="field">
@@ -437,7 +474,6 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
     <p class="gsub"><span class="stars" aria-hidden="true">★★★★★</span>5 star reviews from local families</p>
     <div class="quotes">
       <figure class="q" style="margin:0"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“This place is fantastic. The energy level is awesome. The owner is an amazing martial artist. He knows how to get kids up and moving his direction and life skills are also a big part of it. I highly recommend this place.”</blockquote><figcaption class="who"><span class="av">F</span><span class="nm"><b>Frank L.</b><span>Google review</span></span></figcaption></figure>
-      <figure class="q" style="margin:0"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“My kids love going here to workout. Coach Schick is awesome as are all the other coaches.”</blockquote><figcaption class="who"><span class="av">A</span><span class="nm"><b>Ari D.</b><span>Google review</span></span></figcaption></figure>
       <figure class="q" style="margin:0"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“My daughter just started and absolutely loves it.”</blockquote><figcaption class="who"><span class="av">G</span><span class="nm"><b>Gesette G.</b><span>Google review</span></span></figcaption></figure>
     </div>
     <a class="gmore" href="https://www.google.com/maps/search/?api=1&amp;query=Impact+Martial+Athletics+Davie+FL" target="_blank" rel="noopener">Read more reviews on Google<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
