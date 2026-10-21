@@ -569,7 +569,7 @@ img.av{width:56px;height:56px;object-fit:cover;display:block;background:#e8e9ef;
     var box=document.getElementById('backout');box.hidden=false;
     try{document.getElementById('reserve').scrollIntoView({block:'start'})}catch(_){}
     // Take the flags off the address so a reload or a shared link does not repeat this.
-    try{q.delete('checkout');q.delete('lead');var rest=q.toString();history.replaceState(null,'',location.pathname+(rest?'?'+rest:'')+location.hash)}catch(_){}
+    try{q.delete('checkout');q.delete('lead');var rest=q.toString().replace(/(^|&)test=(?=&|$)/,'$1test');history.replaceState(null,'',location.pathname+(rest?'?'+rest:'')+location.hash)}catch(_){}
     if(window.IMA_TEST) return;
     var key='ima_canceled_'+lead;
     try{if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1')}catch(_){}
