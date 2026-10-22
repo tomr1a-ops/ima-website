@@ -172,10 +172,14 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .box p.hs{margin-top:8px;color:var(--text);font-weight:600}
 
 /* FAQ */
-.faq dl{margin:14px 0 0;border-top:1px solid #e3e5ee}
+.faq{padding-block:26px 30px}
+.faq dl{margin:16px 0 0;border-top:1px solid #e3e5ee}
 .faq .item{border-bottom:1px solid #e3e5ee}
-.faq dt{font-weight:600;font-size:15px;line-height:1.35;padding:14px 0 4px}
-.faq dd{margin:0;padding:0 0 14px;color:var(--muted);font-size:14px;line-height:1.5}
+.faq dt button{width:100%;display:grid;grid-template-columns:1fr 20px;gap:14px;align-items:center;text-align:left;background:none;border:0;padding:18px 0;font:500 15.5px/1.35 var(--font);color:var(--text);cursor:pointer}
+.faq dt svg{width:16px;height:16px;color:var(--blue);transition:transform .2s ease;justify-self:end}
+.faq dt button[aria-expanded=true] svg{transform:rotate(180deg)}
+.faq dd{margin:0;padding:0 28px 18px 0;color:var(--muted);font-size:14.5px;line-height:1.5}
+.faqlede{color:var(--muted);font-size:15px;margin:6px 0 4px}
 
 /* Closer */
 .closer{background:var(--ink);color:var(--white);text-align:center;padding-block:30px}
@@ -414,16 +418,18 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   </div>
 </section>
 
-<section class="s alt faq">
-  <div class="wrap narrow">
-    <h2 class="sec">Questions parents ask</h2>
-    <dl>
-      <div class="item"><dt>Is this a membership? Will I be charged again?</dt><dd>No. The $27 is a one-time charge for 2 classes and a free Impact shirt. Nothing renews. After the trial, we explain membership options and you decide.</dd></div>
-      <div class="item"><dt>Can I get a refund?</dt><dd>The trial fee is non-refundable. If you need a different class time, contact us at least 24 hours before the class at 954 636 1515 or info@imaimpact.com and we will reschedule.</dd></div>
-      <div class="item"><dt>What if my child misses a class?</dt><dd>No problem. Text us and we will reschedule it.</dd></div>
-      <div class="item"><dt>My kid is shy or lacks confidence. Can this help?</dt><dd>Absolutely! Our program helps kids build confidence one class at a time. Through fun challenges, encouragement, and small wins, kids learn to believe in themselves.</dd></div>
-      <div class="item"><dt>My kid isn't very athletic or has never trained. Will they fit in?</dt><dd>Of course! No experience needed. Our coaches guide kids step by step at their own pace. Everyone starts somewhere!</dd></div>
-      <div class="item"><dt>Is Impact traditional karate?</dt><dd>Impact is more than traditional martial arts. Our martial arts and athletic performance training combines martial arts, boxing, self-defense, and athletic training to build strength, speed, coordination, confidence, and discipline.</dd></div>
+<section class="faq">
+  <div class="wrap">
+    <h2 class="sec">Wondering If Impact Is Right for Your Kid?</h2>
+    <p class="faqlede">Here are a few things parents often want to know.</p>
+    <dl id="faq">
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid is shy or lacks confidence. Can this program help?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Absolutely! Our program helps kids build confidence one class at a time. Through fun challenges, encouragement, and small wins, kids learn to believe in themselves and become more confident.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid has trouble listening or staying focused. Can this help?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Yes! Our coaches teach kids to listen, follow directions, stay focused, and respect others. These are important life skills they can use at home, in school, and in everyday life.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid spends too much time on screens. Will this keep them active?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Absolutely! Our 50-minute classes keep kids moving, exercising, and learning new skills. It's a fun way to build strength, improve fitness, burn energy, and spend less time on screens.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">Is Impact traditional karate or martial arts?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Impact Martial Athletics is more than traditional martial arts! Our program combines martial arts, boxing, self-defense, and athletic performance training to help kids build strength, speed, coordination, confidence, and discipline. We teach kids how to protect themselves while developing important life skills they can use at home, in school, and in everyday life.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid isn't very athletic or has never done martial arts. Will they fit in?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Of course! Your kid doesn't need any experience to start. Our coaches guide kids step by step, helping them build strength, coordination, and confidence at their own pace. Everyone starts somewhere!</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">What if my kid doesn't like it?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>That's why we offer our $27 trial! Your kid gets two classes and a free Impact shirt. It's a great way to experience our program before deciding if it's the right fit for your family.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">What happens after the two trial classes?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>We'll talk about how your kid did, answer your questions, and explain our membership options. There's no pressure to join. You decide what's best for your family.</dd></div>
     </dl>
   </div>
 </section>
@@ -772,6 +778,15 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     form.addEventListener('focusin',stop);
     document.addEventListener('visibilitychange',function(){if(document.hidden)stop()});
   })();
+})();
+(function(){var f=document.getElementById('faq');if(!f)return;
+  // FAQ
+  f.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',open?'false':'true');
+    b.closest('.item').querySelector('dd').hidden=open;
+  });
 })();
 </script>
 
