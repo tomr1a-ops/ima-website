@@ -438,8 +438,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 (function(){
   // ---- Children (first name + age, up to 4) -------------------------------------------------
   var kidsEl=document.getElementById('kids'),addBtn=document.getElementById('addkid'),MAXK=4,kseq=0;
-  // Ages as on the approved mock. "10+" is sent as age 10.
-  function ageOpts(){return '<option value="">Age</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10+</option>'}
+  // Ages as on the live page: 5 to 17, then 18+ (sent as 18).
+  function ageOpts(){var s='<option value="">Age</option>';for(var a=5;a<=17;a++)s+='<option value="'+a+'">'+a+'</option>';return s+'<option value="18">18+</option>'}
   function syncKids(){
     var rows=kidsEl.querySelectorAll('.kid');
     rows.forEach(function(r,i){var h=r.querySelector('.kidhead');if(h){h.hidden=i===0;h.querySelector('span').textContent='Child '+(i+1)}});
