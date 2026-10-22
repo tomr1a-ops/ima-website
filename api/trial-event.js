@@ -26,6 +26,9 @@ const EVENTS = new Set([
   'TrialFormError',
   'TrialCheckoutFailed',
   'TrialLeftForStripe',
+  // Added with the 21 Oct 2026 rebuild (class times before the form):
+  'TrialClassPicked', // the parent changed the class time (the first time is picked for them)
+  'TrialTimesUnavailable', // the IMAOS schedule feed failed or had no classes, so the page said "We'll text you class times"
 ])
 const FIELDS = new Set(['parent_first_name', 'parent_last_name', 'phone', 'email', 'child_first_name', 'child_last_name', 'child_age'])
 const ERRORS = new Set(['missing_or_invalid', 'checkout_failed'])
