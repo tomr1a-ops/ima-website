@@ -5,35 +5,32 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>IMA Trial Page Preview</title>
+<meta name="description" content="2 classes plus a free Impact shirt for $27 at Impact Martial Athletics in Davie, FL. Martial arts and athletic performance training, ages 5 and up.">
+<link rel="icon" href="trial-mock-assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <style>
-/* Mock only. Brand tokens copied from trial-v2.html. Single committed light look, same as the live page. */
+/* Layout: ported 1:1 from trial-page-rebuild-mock.html (approved by Tom 21 Oct 2026). Single committed look, no theme switching.
+   The mock's yellow placeholder boxes are replaced by real class times from IMAOS (see the class times script below). */
 :root{
   --ink:#120f16; --ink-2:#0b0a0f; --orange:#ff8b1a; --orange-edge:#c96a0a;
   --blue:#0606f4; --blue-tint:#ecedff; --cyan:#12f3f9;
   --page:#f5f6fb; --white:#ffffff; --text:#14131a; --muted:#5b616d; --line:#dde1ec; --input:#c9cdd8;
-  --ph:#fff6e0; --ph-edge:#e0a400; --ph-text:#7a5600;
   --font:'Poppins',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   --gut:16px; --col:480px;
   color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--white);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;padding-top:env(safe-area-inset-top,0px);background:var(--white);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:var(--col);margin:0 auto;padding-inline:var(--gut)}
 h1,h2,h3{margin:0;letter-spacing:-.015em}
 a{color:inherit}
 img{max-width:100%}
+[hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
-
-/* Mock banner */
-.mockbar{background:#ffd400;color:#000;font:700 12px/1.3 var(--font);text-align:center;padding:6px 10px}
-
-/* Placeholder styling: anything Tom must fill in */
-.ph{background:var(--ph);border:1.5px dashed var(--ph-edge);color:var(--ph-text)}
-.phtag{display:inline-block;background:var(--ph-edge);color:#000;font:700 10px/1 var(--font);letter-spacing:.1em;text-transform:uppercase;padding:4px 7px;border-radius:5px}
 
 /* Header */
 .hdr{background:var(--ink);border-bottom:1px solid #2a2730}
@@ -60,43 +57,61 @@ img{max-width:100%}
 .offer .amt{font-size:40px;font-weight:800;color:var(--orange);line-height:1}
 .offer .what{font-size:14.5px;line-height:1.3;font-weight:600}
 .offer .what span{display:block;color:#b9b6c0;font-weight:500;font-size:13px}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:0 16px;background:var(--orange);color:var(--ink);font:700 17px/1.2 var(--font);border:0;border-top:2px solid var(--orange-edge);border-radius:13px;text-decoration:none;cursor:pointer}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:0 16px;background:var(--orange);color:var(--ink);font:700 17px/1.2 var(--font);border:0;border-top:2px solid var(--orange-edge);border-radius:13px;text-decoration:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+.btn:hover{filter:brightness(1.04)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{cursor:progress;filter:saturate(.7)}
 .btn svg{width:18px;height:18px;flex:none}
 .offer .btn{margin-top:12px}
 .terms{margin:10px 0 0;font-size:12.5px;line-height:1.45;color:#d9d7de}
 .terms b{color:var(--white)}
 .terms.dark{color:var(--muted)}
 .terms.dark b{color:var(--text)}
-.hero-media{display:none}
 
 /* Reserve card: times first, then the short form */
 .reserve{background:var(--page);padding-block:20px 24px;box-shadow:0 0 0 100vmax var(--page);clip-path:inset(0 -100vmax)}
 .card{background:var(--white);border-radius:20px;padding:20px 16px 18px;box-shadow:0 1px 3px rgba(20,19,26,.06)}
 .card h2{font-size:21px;font-weight:800;line-height:1.2}
 .card .lede{color:var(--muted);font-size:14px;margin:4px 0 0}
+.backout{background:#e9f6ec;color:#17602a;border:1px solid #bfe3c8;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:600;margin:12px 0 0}
 .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
 .fact{background:var(--blue-tint);border-radius:12px;padding:10px 12px;min-width:0}
 .fact b{display:block;font-size:14px;line-height:1.25}
 .fact span{display:block;font-size:12px;color:var(--muted)}
 .lbl{display:block;font-weight:700;font-size:14px;margin:16px 0 8px}
+/* Age groups and class times: real data from the IMAOS schedule (the mock showed these as placeholders). */
 .ages{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ages>div{border-radius:10px;padding:8px 10px;font-size:13px;background:var(--blue-tint);line-height:1.35;min-width:0}
+.age{background:var(--blue-tint);border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.35;min-width:0;overflow-wrap:anywhere}
+.age span{color:var(--muted)}
 .slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.slot{position:relative;display:block;border-radius:12px;padding:10px;cursor:pointer;min-width:0;border:1.5px solid var(--line);background:var(--white)}
+.slot{position:relative;display:block;border-radius:12px;padding:10px;cursor:pointer;min-width:0;background:var(--white);border:1.5px solid var(--input)}
 .slot input{position:absolute;opacity:0}
 .slot b{display:block;font-size:13.5px;line-height:1.25}
-.slot span{display:block;font-size:12px}
-.slot:has(input:checked){outline:2.5px solid var(--blue);outline-offset:1px}
-.phnote{margin:8px 0 0;font-size:12px;color:var(--ph-text)}
+.slot span{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.slot:has(input:checked){outline:2.5px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.slot:has(input:focus-visible){outline:3px solid var(--cyan);outline-offset:2px}
+.slots[aria-invalid=true] .slot{border-color:#d4372c}
+.moretimes{background:none;border:0;color:var(--blue);font:600 14px var(--font);padding:10px 0 0;cursor:pointer}
+.timesnote{margin:16px 0 0;font-size:14px;color:var(--muted)}
+.timesnote b{color:var(--text)}
 .divider{height:1px;background:var(--line);margin:18px 0 2px}
 .field{margin-top:12px;min-width:0}
 .field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
 .field input,.field select{width:100%;height:50px;border:1.5px solid var(--input);border-radius:12px;padding:0 14px;font:400 16px var(--font);color:var(--text);background:var(--white)}
+.field input::placeholder{color:#5c5d66}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.field input[aria-invalid=true],.field select[aria-invalid=true]{border-color:#d4372c}
 .row2{display:grid;grid-template-columns:1fr 96px;gap:10px}
+.kidhead{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kidhead button{background:none;border:0;color:#c02d22;font:600 13px var(--font);cursor:pointer;padding:2px 4px;text-transform:none;letter-spacing:0}
+.kidhead:not([hidden])+.row2 .field{margin-top:4px}
 .addkid{background:none;border:0;color:var(--blue);font:600 14px var(--font);padding:10px 0 0;cursor:pointer}
+.err{color:#c02d22;font-size:13px;margin:10px 0 0}
 .card .btn{margin-top:14px}
 .legal{text-align:center;color:var(--muted);font-size:11px;line-height:1.45;margin:10px 0 0}
 .legal a{color:var(--blue)}
+.legal.consent{margin-top:8px}
+.legal.consent+.legal{margin-top:4px}
 
 /* Sections */
 section.s{padding-block:30px}
@@ -104,8 +119,8 @@ section.alt{background:var(--page)}
 h2.sec{font-size:23px;font-weight:800;line-height:1.2}
 .secsub{color:var(--muted);font-size:14.5px;margin:6px 0 0}
 .video{position:relative;margin:18px auto 0;aspect-ratio:9/16;width:min(100%,calc(62vh * 9 / 16));border-radius:16px;background:#16131b;overflow:hidden}
-.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.video .tag{position:absolute;left:10px;bottom:10px;background:rgba(15,13,19,.85);color:var(--white);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
+.video .tag{position:absolute;left:10px;bottom:10px;background:rgba(15,13,19,.85);color:var(--white);border:0;border-radius:999px;padding:6px 12px;font:600 12.5px/1.5 var(--font);cursor:pointer}
 .photo{margin-top:18px;border-radius:16px;aspect-ratio:16/10;overflow:hidden;background:#eceef4}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
 .benes{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:18px}
@@ -118,15 +133,11 @@ h2.sec{font-size:23px;font-weight:800;line-height:1.2}
 /* Proof */
 .quotes{display:grid;gap:12px;margin-top:16px}
 .q{background:var(--white);border-radius:18px;padding:16px;box-shadow:0 1px 4px rgba(20,19,26,.06);margin:0}
-.q.ph{box-shadow:none;border-radius:18px}
 .q blockquote{margin:0;font-size:14.5px;line-height:1.48}
-.q.ph blockquote{font-style:italic}
 .who{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;margin-top:12px}
 .av{width:44px;height:44px;border-radius:50%;background:var(--blue);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:15px}
-.q.ph .av{background:var(--ph-edge);color:#000}
 .nm b{display:block;font-size:14.5px;line-height:1.25}
 .nm span{display:block;color:var(--muted);font-size:12.5px}
-.q.ph .nm span{color:var(--ph-text)}
 .stars{color:#fbbc04;letter-spacing:2px;font-size:16px;line-height:1;display:block;margin-bottom:8px}
 .sub2{font-size:16px;font-weight:700;margin-top:26px}
 .gmore{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--blue);font-weight:700;font-size:14.5px;text-decoration:none}
@@ -156,6 +167,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .box .logo img{width:100%;max-width:280px;height:auto;display:block}
 .box h3{font-size:15.5px;font-weight:700}
 .box p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.box p.hs{margin-top:8px;color:var(--text);font-weight:600}
 
 /* FAQ */
 .faq dl{margin:14px 0 0;border-top:1px solid #e3e5ee}
@@ -172,22 +184,20 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .closer .btn{margin-top:16px}
 .closer .terms{text-align:center}
 
-/* Footer */
-.foot{background:var(--ink-2);color:#c9c7ce;padding-block:26px 30px;border-top:1px solid #24212a;font-size:13.5px}
+/* Footer: extra room at the bottom on phones so the sticky bar never covers it */
+.foot{background:var(--ink-2);color:#c9c7ce;padding-block:26px calc(102px + env(safe-area-inset-bottom,0px));border-top:1px solid #24212a;font-size:13.5px}
 .foot b{color:var(--white)}
 .foot ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none}
 .foot nav{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px}
+.foot nav a{text-decoration:underline}
 .foot small{display:block;margin-top:12px;color:#8d8a94}
 
-/* Changes list for Tom */
-.changes{background:#fffbe6;border-top:4px solid #ffd400;padding-block:28px 110px}
-.changes h2{font-size:20px;font-weight:800}
-.changes p{font-size:13.5px;color:var(--muted);margin:4px 0 0}
-.changes ol{margin:14px 0 0;padding-left:20px;display:grid;gap:9px;font-size:14px;line-height:1.45}
-.changes h3{font-size:15px;font-weight:800;margin-top:20px}
-
 /* Sticky */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);box-shadow:0 -4px 18px rgba(20,19,26,.12);padding-bottom:env(safe-area-inset-bottom,0px)}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);box-shadow:0 -4px 18px rgba(20,19,26,.12);padding-bottom:env(safe-area-inset-bottom,0px);transition:transform .2s ease,visibility .2s}
+/* Hidden while the reserve card or its checkout button is on screen, so it never covers the button. */
+.sticky.off{transform:translateY(110%);visibility:hidden}
+@media (prefers-reduced-motion:reduce){.sticky{transition:none}}
 .sticky .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:72px}
 .sticky .p b{font-size:21px;font-weight:800;line-height:1}
 .sticky .p span{display:block;font-size:11.5px;color:var(--muted)}
@@ -211,17 +221,19 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   .video{width:min(100%,360px)}
   .sticky{display:none}
   .closer .btn{max-width:420px;margin-inline:auto}
-  .changes{padding-bottom:40px}
+  .foot{padding-bottom:30px}
 }
+.sched{display:block;width:100%;height:auto;border-radius:12px;margin:0 0 6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mockbar{background:#ffd400;color:#000;font:700 12px/1.3 var(--font);text-align:center;padding:6px 10px}
 </style>
 </head>
 <body>
-
-<div class="mockbar">PREVIEW of the proposed trial page. Not live. Class times are a snapshot of this week.</div>
+<div class="mockbar">PREVIEW of the proposed trial page. Not live.</div>
 
 <header class="hdr">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="Impact Martial Athletics"><img src="trial-mock-assets/logo.png" alt=""><span>Impact Martial<br>Athletics</span></a>
+    <a class="brand" href="./" id="top" aria-label="Impact Martial Athletics"><img src="trial-mock-assets/logo.png" alt=""><span>Impact Martial<br>Athletics</span></a>
     <a class="call" href="tel:+19546361515"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>954 636 1515</a>
   </div>
 </header>
@@ -239,28 +251,41 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="offer">
     <div class="row">
       <div class="amt">$27</div>
-      <div class="what">2 classes + a free Impact shirt<span>See class times before you pay</span></div>
+      <div class="what">2 classes + a free Impact shirt<span>Pick your class time right after checkout</span></div>
     </div>
-    <a class="btn" href="#reserve">See Class Times and Claim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+    <a class="btn cta" href="#reserve">See Class Times and Claim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     <p class="terms"><b>One-time $27 charge.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span></p>
   </div>
 </section>
 
 <section class="reserve" id="reserve">
   <div class="card">
-    <img src="trial-mock-assets/class-schedule.jpg" width="1236" height="852" style="display:block;width:100%;height:auto;border-radius:12px" alt="IMA class schedule: Young Warriors, Unified Warriors, Family Class and Rising Warriors, Monday to Friday">
+    <h2 class="sr-only">Class Schedule</h2>
+    <img class="sched" src="trial-mock-assets/class-schedule.jpg" width="1236" height="852" alt="Class schedule. Young Warriors, ages 5 to 8: Mon, Wed, Fri 4:30 PM; Tue, Thu 6:00 PM. Unified Warriors, all ages: Mon, Wed, Fri 12:00 PM and 5:30 PM; Tue, Thu 4:00 PM. Family Class: Tue, Thu 7:00 PM. Rising Warriors, 9 and up: Mon, Wed, Fri 6:30 PM; Tue, Thu 5:00 PM.">
+    <p class="backout" id="backout" role="status" hidden>No charge was made. Your spot is still open.</p>
+
+    <!-- Filled from the IMAOS class schedule, the same feed the /schedule/ima booking page reads. -->
+    <p class="timesnote" id="times-loading" role="status" hidden>Loading class times...</p>
+    <div id="times" hidden>
+      <span class="lbl" id="ageslbl">Age groups</span>
+      <div class="ages" id="ages" aria-labelledby="ageslbl"></div>
+      <span class="lbl" id="slotslbl">Choose your first class</span>
+      <div class="slots" id="slots" role="radiogroup" aria-labelledby="slotslbl"></div>
+      <button type="button" class="moretimes" id="moretimes" hidden>Show more times</button>
+    </div>
+    <p class="timesnote" id="times-off" hidden><b>You pick your class time right after checkout.</b></p>
+
     <div class="divider"></div>
-    <form onsubmit="return false" novalidate>
-      <div class="field"><label for="pname">Parent's name</label><input id="pname" autocomplete="name" placeholder="First and last name"></div>
-      <div class="field"><label for="phone">Mobile number</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(954) 555 0123"></div>
-      <div class="row2">
-        <div class="field"><label for="kname">Child's first name</label><input id="kname" autocomplete="off" placeholder="First name"></div>
-        <div class="field"><label for="kage">Age</label><select id="kage"><option>Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option></select></div>
-      </div>
-      <button type="button" class="addkid">+ Add another child</button>
+    <form id="lead" novalidate>
+      <div class="field"><label for="pname">Parent's name</label><input id="pname" name="pname" autocomplete="name" placeholder="First and last name" required></div>
+      <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(954) 555 0123" required></div>
+      <div id="kids"></div>
+      <button type="button" class="addkid" id="addkid">+ Add another child</button>
+      <p class="err" id="err" role="alert" hidden></p>
       <button class="btn" type="submit">Continue to Secure Checkout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <p class="terms dark"><b>One-time $27 charge per child.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span> Pay with Apple Pay, Google Pay, or card. The trial fee is non-refundable. Need a different time? Tell us 24 hours ahead and we will reschedule.</p>
-      <p class="legal">By continuing you agree to our <a href="#">Privacy Policy</a>, <a href="#">Terms of Service</a> and <a href="#">Refund Policy</a>, and to receive texts about your trial. Reply STOP to opt out.</p>
+      <p class="terms dark"><b>One-time $27 charge per child.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span></p>
+      <p class="legal consent">By continuing you agree to receive texts from Impact Martial Athletics about your trial. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+      <p class="legal">By continuing you agree to our <a href="/privacy-policy">Privacy Policy</a>, <a href="/terms-of-service">Terms of Service</a> and <a href="/refund-policy">Refund Policy</a>.</p>
     </form>
   </div>
 </section>
@@ -272,9 +297,9 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="wrap narrow">
     <h2 class="sec">See what a real class looks like</h2>
     <p class="secsub">Coach Shick walks you through the trial.</p>
-    <div class="video">
-      <video autoplay muted loop playsinline preload="metadata" poster="trial-mock-assets/shick-poster.jpg" src="trial-mock-assets/shick-trial.mp4"></video>
-      <span class="tag">Tap for sound</span>
+    <div class="video" id="video">
+      <video id="herovid" autoplay muted loop playsinline preload="metadata" poster="trial-mock-assets/shick-poster.jpg?v=3" src="trial-mock-assets/shick-trial.mp4"></video>
+      <button type="button" class="tag" id="vsound" aria-label="Turn sound on">Tap for sound</button>
     </div>
   </div>
 </section>
@@ -283,7 +308,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="wrap split">
     <div>
       <h2 class="sec">What your kid takes home</h2>
-      <div class="photo"><img src="trial-mock-assets/class.jpg" alt="Kids training on the Impact floor"></div>
+      <div class="photo"><img src="trial-mock-assets/class.jpg?v=2" alt="Kids training on the Impact floor" loading="lazy" width="1600" height="1000"></div>
     </div>
     <ul class="benes">
       <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.2 12.7 7 22l5-3 5 3-1.2-9.3"/></svg></span><div><h3>Confidence</h3><p>Kids learn to stand tall, speak up, and try hard things.</p></div></li>
@@ -295,11 +320,12 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   </div>
 </section>
 
-
 <section class="s">
   <div class="wrap">
     <h2 class="sec">What local parents say</h2>
     <p class="secsub">Parents of kids training at Impact in Davie.</p>
+    <!-- Three local parent testimonial slots go here (mock: "Placeholder 1 to 3").
+         Hidden until Tom supplies real quotes: no placeholder is ever shown live. -->
 
     <h3 class="sub2">From Google reviews</h3>
     <div class="quotes three">
@@ -315,8 +341,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="wrap narrow">
     <h2 class="sec">Here's exactly what happens</h2>
     <ol class="steps">
-      <li><span class="num">1</span><div><h3>Pick a time and pay $27</h3><p>Choose the class that fits your week, enter your name and number, and check out. One-time charge.</p></div></li>
-      <li><span class="num">2</span><div><h3>Get a text confirming your class</h3><p>We text you to confirm your first class.</p></div></li>
+      <li><span class="num">1</span><div><h3>Pay $27 for 2 classes and a free shirt</h3><p>Enter your name and number and check out. One-time charge.</p></div></li>
+      <li><span class="num">2</span><div><h3>Pick your class time right after checkout</h3><p>We text you to confirm.</p></div></li>
       <li><span class="num">3</span><div><h3>Come in and train</h3><p>Your child gets a free Impact shirt and jumps right into class. After 2 classes, we talk about how it went and you decide what's next. No pressure to join.</p></div></li>
     </ol>
   </div>
@@ -324,7 +350,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 
 <section class="coach">
   <div class="wrap split">
-    <figure class="family"><img src="trial-mock-assets/shick-family.jpg" alt="Coach Shick with his wife and four kids"></figure>
+    <figure class="family"><img src="trial-mock-assets/shick-family.jpg" alt="Coach Shick with his wife and four kids" width="581" height="866" loading="lazy"></figure>
     <div>
       <h2>Meet Coach Shick</h2>
       <p class="tagline">Dad of 4. Your child's mentor.</p>
@@ -343,17 +369,17 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="wrap">
     <h2 class="sec">Pro athletes trust Coach Shick too</h2>
     <div class="quotes four">
-      <figure class="q"><blockquote>“…it’s amazing to see how much stronger and faster my daughters have gotten!”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/kristal.jpg" alt=""><span class="nm"><b>Kristal Richardson</b><span>IFBB Pro Olympia Competitor</span></span></figcaption></figure>
-      <figure class="q"><blockquote>“Coach Shick has a rare ability to bring out the best in young athletes… Parents see the transformation firsthand.”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/nick.jpg" alt=""><span class="nm"><b>Nick Additon</b><span>Professional MLB pitcher</span></span></figcaption></figure>
-      <figure class="q"><blockquote>“His dedication to performance and achievement is remarkable…”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/juan.jpg" alt=""><span class="nm"><b>Juan Moreno</b><span>2X Olympic Silver Medalist</span></span></figcaption></figure>
-      <figure class="q"><blockquote>“The foundation of any great athlete is discipline, resilience, and smart training. Coach Shick instills all of that…”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/denis.jpg" alt=""><span class="nm"><b>Denis Shvidki</b><span>Florida Panthers NHL player</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“…it’s amazing to see how much stronger and faster my daughters have gotten!”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/kristal.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Kristal Richardson</b><span>IFBB Pro Olympia Competitor</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“Coach Shick has a rare ability to bring out the best in young athletes… Parents see the transformation firsthand.”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/nick.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Nick Additon</b><span>Professional MLB pitcher</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“His dedication to performance and achievement is remarkable…”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/juan.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Juan Moreno</b><span>2X Olympic Silver Medalist</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“The foundation of any great athlete is discipline, resilience, and smart training. Coach Shick instills all of that…”</blockquote><figcaption class="who"><img class="avp" src="trial-mock-assets/people/denis.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Denis Shvidki</b><span>Florida Panthers NHL player</span></span></figcaption></figure>
     </div>
   </div>
 </section>
 
 <section class="s">
   <div class="wrap narrow">
-    <div class="box"><div class="logo"><img src="trial-mock-assets/stepup-ema.png" alt="Step Up For Students EMA Marketplace Provider"></div><div><h3>Step Up For Students scholarships accepted</h3><p>A great fit for homeschool families. Ask us how to use yours.</p></div></div>
+    <div class="box"><div class="logo"><img src="trial-mock-assets/stepup-ema.png" alt="Step Up For Students EMA Marketplace Provider" width="646" height="209" loading="lazy"></div><div><h3>Step Up For Students scholarships accepted</h3><p>Using Step Up For Students? The scholarship covers your $27 trial. A great fit for homeschool families. Ask us how to use yours.</p><p class="hs">Homeschool families: our Unified Warriors class runs at 12:00 PM on Monday, Wednesday and Friday.</p></div></div>
   </div>
 </section>
 
@@ -363,6 +389,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     <dl>
       <div class="item"><dt>Is this a membership? Will I be charged again?</dt><dd>No. The $27 is a one-time charge for 2 classes and a free Impact shirt. Nothing renews. After the trial, we explain membership options and you decide.</dd></div>
       <div class="item"><dt>Can I get a refund?</dt><dd>The trial fee is non-refundable. If you need a different class time, contact us at least 24 hours before the class at 954 636 1515 or info@imaimpact.com and we will reschedule.</dd></div>
+      <div class="item"><dt>What if my child misses a class?</dt><dd>No problem. Text us and we will reschedule it.</dd></div>
       <div class="item"><dt>My kid is shy or lacks confidence. Can this help?</dt><dd>Absolutely! Our program helps kids build confidence one class at a time. Through fun challenges, encouragement, and small wins, kids learn to believe in themselves.</dd></div>
       <div class="item"><dt>My kid isn't very athletic or has never trained. Will they fit in?</dt><dd>Of course! No experience needed. Our coaches guide kids step by step at their own pace. Everyone starts somewhere!</dd></div>
       <div class="item"><dt>Is Impact traditional karate?</dt><dd>Impact is more than traditional martial arts. Our martial arts and athletic performance training combines martial arts, boxing, self-defense, and athletic training to build strength, speed, coordination, confidence, and discipline.</dd></div>
@@ -372,11 +399,11 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 
 <section class="closer">
   <div class="wrap">
-    <img src="trial-mock-assets/logo.png" alt="Impact Martial Athletics">
+    <img src="trial-mock-assets/logo.png" alt="Impact Martial Athletics" loading="lazy">
     <h2>2 Classes + Free Impact Shirt</h2>
     <div class="amt">$27</div>
     <p>Ages 5 and up. Beginners welcome. Davie, FL.</p>
-    <a class="btn" href="#reserve">See Class Times and Claim</a>
+    <a class="btn cta" href="#reserve">See Class Times and Claim</a>
     <p class="terms"><b>One-time $27 charge.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span></p>
   </div>
 </section>
@@ -386,21 +413,96 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="wrap">
     <b>Impact Martial Athletics</b>
     <ul>
-      <li>4401 S Flamingo Rd #104, Davie, FL 33330</li>
-      <li>954 636 1515</li>
+      <li><a href="https://maps.google.com/?q=4401+S+Flamingo+Rd+%23104,+Davie,+FL+33330">4401 S Flamingo Rd #104, Davie, FL 33330</a></li>
+      <li><a href="tel:+19546361515">954 636 1515</a></li>
     </ul>
-    <nav><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Refund Policy</a></nav>
+    <nav><a href="/privacy-policy">Privacy Policy</a><a href="/terms-of-service">Terms of Service</a><a href="/refund-policy">Refund Policy</a></nav>
     <small>© 2026 Impact Martial Athletics</small>
   </div>
 </footer>
 
-
-<div class="sticky">
+<div class="sticky" id="sticky" aria-hidden="false">
   <div class="wrap">
     <div class="p"><b>$27</b><span>One-time · 2 classes + shirt</span></div>
     <a class="btn" href="#reserve">See Class Times</a>
   </div>
 </div>
+
+<script>
+(function(){
+  // ---- Children (first name + age, up to 4) -------------------------------------------------
+  var kidsEl=document.getElementById('kids'),addBtn=document.getElementById('addkid'),MAXK=4,kseq=0;
+  // Ages as on the approved mock. "10+" is sent as age 10.
+  function ageOpts(){return '<option value="">Age</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10+</option>'}
+  function syncKids(){
+    var rows=kidsEl.querySelectorAll('.kid');
+    rows.forEach(function(r,i){var h=r.querySelector('.kidhead');if(h){h.hidden=i===0;h.querySelector('span').textContent='Child '+(i+1)}});
+    addBtn.hidden=rows.length>=MAXK;
+  }
+  function addKid(){
+    kseq++;
+    var d=document.createElement('div');d.className='kid';
+    d.innerHTML='<div class="kidhead" hidden><span>Child</span><button type="button">Remove</button></div>'+
+      '<div class="row2">'+
+      '<div class="field"><label for="kname'+kseq+'">Child\'s first name</label><input id="kname'+kseq+'" class="kname" autocomplete="off" placeholder="First name"></div>'+
+      '<div class="field"><label for="kage'+kseq+'">Age</label><select id="kage'+kseq+'" class="kage">'+ageOpts()+'</select></div>'+
+      '</div>';
+    d.querySelector('.kidhead button').addEventListener('click',function(){d.remove();syncKids()});
+    kidsEl.appendChild(d);syncKids();
+    if(kseq>1){try{d.querySelector('.kname').focus()}catch(_){}}
+  }
+  addKid();
+  addBtn.addEventListener('click',addKid);
+
+  // ---- Phone formatting ----------------------------------------------------------------------
+  var ph=document.getElementById('phone');
+  ph.addEventListener('input',function(){
+    var d=ph.value.replace(/\D/g,'').replace(/^1/,'').slice(0,10);
+    ph.value=d.length>6?'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6):d.length>3?'('+d.slice(0,3)+') '+d.slice(3):d;
+  });
+
+  // ---- Submit (preview: does nothing) -------------------------------------------------------
+  var form=document.getElementById('lead');
+  form.addEventListener('submit',function(e){e.preventDefault()});
+
+  // ---- Sticky bar ----------------------------------------------------------------------------
+  // Off whenever any part of the reserve card (and so the checkout button) is on screen, back on
+  // once it has scrolled out, so it never sits over "Continue to Secure Checkout".
+  (function(){
+    var bar=document.getElementById('sticky'),card=document.querySelector('#reserve .card'),cta=form.querySelector('button[type=submit]');
+    if(!bar||!card)return;
+    var shown={};
+    function apply(){var off=!!(shown.card||shown.cta);bar.classList.toggle('off',off);bar.setAttribute('aria-hidden',off?'true':'false');bar.querySelector('a').tabIndex=off?-1:0}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){shown[e.target===cta?'cta':'card']=e.isIntersecting});apply()},{threshold:0});
+      io.observe(card);if(cta)io.observe(cta);
+    }else{
+      var chk=function(){var r=card.getBoundingClientRect();shown.card=r.top<innerHeight&&r.bottom>0;apply()};
+      addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk();
+    }
+  })();
+
+  // ---- Video ---------------------------------------------------------------------------------
+  // Plays muted while on screen and pauses when scrolled away, when a parent heads to the form,
+  // starts typing, or leaves the tab. "Tap for sound" (or a tap on the video) restarts it with sound.
+  (function(){
+    var v=document.getElementById('herovid'),b=document.getElementById('vsound');if(!v)return;
+    function play(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    function soundOn(){v.muted=false;v.currentTime=0;delete v.dataset.userPaused;play();b.hidden=true}
+    b.addEventListener('click',soundOn);
+    v.addEventListener('click',function(){if(v.muted){soundOn();return}if(v.paused){delete v.dataset.userPaused;play()}else{v.dataset.userPaused='1';v.pause()}});
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){if(v.paused&&!v.dataset.userPaused)play()}else if(!v.paused)v.pause();
+      })},{threshold:0.25}).observe(v);
+    }
+    function stop(){if(!v.paused)v.pause()}
+    document.querySelectorAll('a[href="#reserve"]').forEach(function(a){a.addEventListener('click',stop)});
+    form.addEventListener('focusin',stop);
+    document.addEventListener('visibilitychange',function(){if(document.hidden)stop()});
+  })();
+})();
+</script>
 
 </body>
 </html>
