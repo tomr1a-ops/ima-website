@@ -555,6 +555,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   function mins(t){var a=String(t||'').split(':');return (+a[0]||0)*60+(+a[1]||0)}
   function timeLabel(t){var m=mins(t),h=Math.floor(m/60),mm=('0'+(m%60)).slice(-2);return ((h%12)||12)+':'+mm+' '+(h>=12?'PM':'AM')}
   function dayLabel(s,long){var a=String(s).split('-');return new Date(Date.UTC(+a[0],+a[1]-1,+a[2],12)).toLocaleDateString('en-US',long?{timeZone:'UTC',weekday:'short',month:'short',day:'numeric'}:{timeZone:'UTC',weekday:'short'})}
+  // The gym's class names end in an internal E or L (early or late session). Parents never see it.
+  function cleanName(n){return String(n||'').replace(/\s+[EL]\s*$/,'').trim()}
   function upcoming(list){
     var n=nowParts(),today=dayNum(n.date);
     return list.filter(function(c){
@@ -572,9 +574,10 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     agesEl.textContent='';
     var groups=[],byName={};
     list.forEach(function(c){
-      if(!byName[c.name]){byName[c.name]={name:c.name,days:[]};groups.push(byName[c.name])}
+      var nm=cleanName(c.name);
+      if(!byName[nm]){byName[nm]={name:nm,days:[]};groups.push(byName[nm])}
       var dl=dayLabel(c.date);
-      if(byName[c.name].days.indexOf(dl)<0)byName[c.name].days.push(dl);
+      if(byName[nm].days.indexOf(dl)<0)byName[nm].days.push(dl);
     });
     groups.forEach(function(g){
       var d=document.createElement('div');d.className='age';
@@ -592,7 +595,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       r.addEventListener('change',function(){userPicked=true;slotsEl.removeAttribute('aria-invalid');try{window.imaTrack&&imaTrack('TrialClassPicked')}catch(_){}});
       var b=document.createElement('b');b.textContent=dayLabel(c.date)+' · '+timeLabel(c.start_time);
       l.title=dayLabel(c.date,true)+' · '+timeLabel(c.start_time);
-      var s=document.createElement('span');s.textContent=c.name;
+      var s=document.createElement('span');s.textContent=cleanName(c.name);
       l.appendChild(r);l.appendChild(b);l.appendChild(s);slotsEl.appendChild(l);
     });
     moreBtn.hidden=!slotsEl.querySelector('.slot[hidden]');
