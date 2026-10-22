@@ -171,6 +171,33 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .box p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
 .box p.hs{margin-top:8px;color:var(--text);font-weight:600}
 
+/* Better path video */
+.bpath{padding-block:28px 4px}
+.bpvid{position:relative;margin:0 auto;max-width:340px;border-radius:16px;overflow:hidden;background:#16131b;aspect-ratio:7/10}
+.bpvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bpvid .snd{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font:600 13px var(--font);cursor:pointer}
+.bpvid .snd svg{width:16px;height:16px}
+.bpvid .snd.on{display:none}
+.bpvid .pp{position:absolute;right:10px;bottom:10px;width:44px;height:44px;display:grid;place-items:center;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;padding:0}
+.bpvid .pp svg{width:18px;height:18px}
+.bpvid .pp .i-play{display:none}
+.bpvid .pp.paused .i-play{display:block}
+.bpvid .pp.paused .i-pause{display:none}
+.bpvid .pp:focus-visible,.bpvid .snd:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+/* Have questions form */
+.ask .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ask .row2 .field{min-width:0}
+.field textarea{width:100%;border:1.5px solid var(--input);border-radius:12px;padding:12px 15px;font:400 16px/1.4 var(--font);color:var(--text);background:var(--white);resize:vertical}
+.field textarea::placeholder{color:#5c5d66}
+.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.ask-consent{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;margin-top:14px;font-size:12.5px;line-height:1.45;color:var(--muted);cursor:pointer}
+.ask-consent input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--blue)}
+.ask .btn{margin-top:16px;justify-content:center}
+.ask-msg{margin:12px 0 0;font-size:14px;font-weight:600;text-align:center}
+.ask-msg.ok{color:#1a7a1a}.ask-msg.err{color:#d4372c}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
 /* FAQ */
 .faq{padding-block:26px 30px}
 .faq dl{margin:16px 0 0;border-top:1px solid #e3e5ee}
@@ -396,6 +423,16 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   </div>
 </section>
 
+<section class="bpath">
+  <div class="wrap">
+    <div class="bpvid">
+      <video id="bpvid" muted loop playsinline preload="none" data-src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4"></video>
+      <button type="button" class="snd" id="bpsnd" aria-label="Turn sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg><span>Enable sound</span></button>
+      <button type="button" class="pp" id="bppp" aria-label="Pause video"><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+    </div>
+  </div>
+</section>
+
 <section class="s alt pros">
   <div class="wrap">
     <h2 class="sec">Pro athletes trust Coach Shick too</h2>
@@ -427,6 +464,29 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       <div class="item"><dt><button type="button" aria-expanded="false">What if my kid doesn't like it?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>That's why we offer our $27 trial! Your kid gets two classes and a free Impact shirt. It's a great way to experience our program before deciding if it's the right fit for your family.</dd></div>
       <div class="item"><dt><button type="button" aria-expanded="false">What happens after the two trial classes?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>We'll talk about how your kid did, answer your questions, and explain our membership options. There's no pressure to join. You decide what's best for your family.</dd></div>
     </dl>
+  </div>
+</section>
+
+<section class="s ask" id="ask">
+  <div class="wrap narrow">
+    <div class="card">
+      <h2>Have Questions First?</h2>
+      <p class="lede">Not ready to sign up yet? Send us a note and a coach will text or call you back.</p>
+      <form id="askform" novalidate>
+        <div class="hp" aria-hidden="true"><label for="a_hpx">Leave this empty</label><input id="a_hpx" name="hp_check" type="text" tabindex="-1" autocomplete="one-time-code" data-lpignore="true" data-1p-ignore="true"></div>
+        <div class="row2">
+          <div class="field"><label for="a_fname">Parent's first name</label><input id="a_fname" autocomplete="given-name" placeholder="First name" required></div>
+          <div class="field"><label for="a_lname">Last name</label><input id="a_lname" autocomplete="family-name" placeholder="Last name" required></div>
+        </div>
+        <div class="field"><label for="a_phone">Phone</label><input id="a_phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(954) 555-0123" required></div>
+        <div class="field"><label for="a_email">Email</label><input id="a_email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
+        <div class="field"><label for="a_ages">Child ages</label><input id="a_ages" placeholder="Example: 6 and 9"></div>
+        <div class="field"><label for="a_msg">Your question</label><textarea id="a_msg" rows="4" placeholder="Ask us anything about classes, schedule or the trial"></textarea></div>
+        <label class="ask-consent"><input type="checkbox" id="a_sms"> <span>Yes, Impact Martial Athletics may text me about my question. Msg and data rates may apply. Reply STOP to opt out.</span></label>
+        <button class="btn" type="submit">Send My Question</button>
+        <p class="ask-msg" id="ask_msg" hidden></p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -783,6 +843,45 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     b.setAttribute('aria-expanded',open?'false':'true');
     b.closest('.item').querySelector('dd').hidden=open;
   });
+})();
+(function(){
+  // Better-path video: downloads only when a parent scrolls near it, plays muted,
+  // sound button restarts it with sound, pause button, stops off screen or when a form is used.
+  var v=document.getElementById('bpvid'),b=document.getElementById('bpsnd'),pp=document.getElementById('bppp');if(!v)return;
+  function sync(){if(!pp)return;pp.classList.toggle('paused',v.paused);pp.setAttribute('aria-label',v.paused?'Play video':'Pause video')}
+  function play(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+  function load(){if(!v.src&&v.dataset.src){v.src=v.dataset.src;v.preload='auto'}}
+  function toggle(){load();if(v.paused){delete v.dataset.userPaused;play()}else{v.dataset.userPaused='1';v.pause()}}
+  if(b)b.addEventListener('click',function(){load();document.querySelectorAll('video').forEach(function(o){if(o!==v&&!o.paused)o.pause()});v.muted=false;v.currentTime=0;delete v.dataset.userPaused;play();b.classList.add('on')});
+  if(pp)pp.addEventListener('click',toggle);
+  v.addEventListener('click',toggle);v.addEventListener('play',function(){document.querySelectorAll('video').forEach(function(o){if(o!==v&&!o.paused&&!v.muted)o.pause()});sync()});v.addEventListener('pause',sync);sync();
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){load();if(v.paused&&!v.dataset.userPaused)play()}else if(!v.paused)v.pause();
+  })},{rootMargin:'200px 0px',threshold:0}).observe(v)}else load();
+  function stop(){if(!v.paused)v.pause()}
+  document.querySelectorAll('a[href="#reserve"]').forEach(function(a){a.addEventListener('click',stop)});
+  document.querySelectorAll('form').forEach(function(f){f.addEventListener('focusin',stop)});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stop()});
+})();
+(function(){
+  // Have Questions First? form: saves the parent in IMAOS and texts the gym
+  (function(){var f=document.getElementById('askform');if(!f)return;var m=document.getElementById('ask_msg');
+    function v(id){return (document.getElementById(id).value||'').trim()}
+    function say(t,ok){m.hidden=false;m.textContent=t;m.className='ask-msg '+(ok?'ok':'err')}
+    f.addEventListener('submit',function(e){e.preventDefault();
+      var req=[['a_fname','Please enter your first name.'],['a_lname','Please enter your last name.'],['a_phone','Please enter your phone number.'],['a_email','Please enter your email.']];
+      for(var i=0;i<req.length;i++){var el=document.getElementById(req[i][0]);el.removeAttribute('aria-invalid');if(!v(req[i][0])){el.setAttribute('aria-invalid','true');el.focus();say(req[i][1],false);return}}
+      if(v('a_phone').replace(/\D/g,'').length<10){document.getElementById('a_phone').setAttribute('aria-invalid','true');say('Please enter a valid phone number.',false);return}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('a_email'))){document.getElementById('a_email').setAttribute('aria-invalid','true');say('Please enter a valid email.',false);return}
+      var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sending...';m.hidden=true;
+      fetch('https://imaos-next.vercel.app/api/website-question',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        first_name:v('a_fname'),last_name:v('a_lname'),phone:v('a_phone'),email:v('a_email'),child_ages:v('a_ages'),message:v('a_msg'),
+        sms_consent:document.getElementById('a_sms').checked,hp_check:v('a_hpx'),studio_slug:'ima',source:'trial_page_question'})})
+      .then(function(r){return r.json().then(function(d){return {ok:r.ok&&d.ok,d:d}})})
+      .then(function(x){if(x.ok){f.reset();say("Thanks! A coach will reach out shortly.",true);b.textContent='Sent';try{if(window.fbq)fbq('track','Contact')}catch(_){}}else{b.disabled=false;b.textContent='Send My Question';say((x.d&&x.d.error)||'Something went wrong. Please call 954 636 1515.',false)}})
+      .catch(function(){b.disabled=false;b.textContent='Send My Question';say('Something went wrong. Please call 954 636 1515.',false)});
+    });
+  })();
 })();
 </script>
 
