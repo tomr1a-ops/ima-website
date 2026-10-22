@@ -112,6 +112,8 @@ img{max-width:100%}
 .card .btn{margin-top:14px}
 .legal{text-align:center;color:var(--muted);font-size:11px;line-height:1.45;margin:10px 0 0}
 .legal a{color:var(--blue)}
+.legal.consent{margin-top:8px}
+.legal.consent+.legal{margin-top:4px}
 
 /* Sections */
 section.s{padding-block:30px}
@@ -167,6 +169,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .box .logo img{width:100%;max-width:280px;height:auto;display:block}
 .box h3{font-size:15.5px;font-weight:700}
 .box p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.box p.hs{margin-top:8px;color:var(--text);font-weight:600}
 
 /* FAQ */
 .faq dl{margin:14px 0 0;border-top:1px solid #e3e5ee}
@@ -279,7 +282,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="offer">
     <div class="row">
       <div class="amt">$27</div>
-      <div class="what">2 classes + a free Impact shirt<span>See class times before you pay</span></div>
+      <div class="what">2 classes + a free Impact shirt<span>Pick your class time right after checkout</span></div>
     </div>
     <a class="btn cta" href="#reserve">See Class Times and Claim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     <p class="terms"><b>One-time $27 charge.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span></p>
@@ -311,8 +314,9 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       <button type="button" class="addkid" id="addkid">+ Add another child</button>
       <p class="err" id="err" role="alert" hidden></p>
       <button class="btn" type="submit">Continue to Secure Checkout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <p class="terms dark"><b>One-time $27 charge per child.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span> Pay with Apple Pay, Google Pay, or card. The trial fee is non-refundable. Need a different time? Tell us 24 hours ahead and we will reschedule.</p>
-      <p class="legal">By continuing you agree to our <a href="/privacy-policy">Privacy Policy</a>, <a href="/terms-of-service">Terms of Service</a> and <a href="/refund-policy">Refund Policy</a>, and to receive texts about your trial. Reply STOP to opt out.</p>
+      <p class="terms dark"><b>One-time $27 charge per child.</b> No membership. <span style="white-space:nowrap">No auto-renew.</span></p>
+      <p class="legal consent">By continuing you agree to receive texts from Impact Martial Athletics about your trial. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+      <p class="legal">By continuing you agree to our <a href="/privacy-policy">Privacy Policy</a>, <a href="/terms-of-service">Terms of Service</a> and <a href="/refund-policy">Refund Policy</a>.</p>
     </form>
   </div>
 </section>
@@ -368,8 +372,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <div class="wrap narrow">
     <h2 class="sec">Here's exactly what happens</h2>
     <ol class="steps">
-      <li><span class="num">1</span><div><h3>Pick a time and pay $27</h3><p>Choose the class that fits your week, enter your name and number, and check out. One-time charge.</p></div></li>
-      <li><span class="num">2</span><div><h3>Get a text confirming your class</h3><p>We text you to confirm your first class.</p></div></li>
+      <li><span class="num">1</span><div><h3>Pay $27 for 2 classes and a free shirt</h3><p>Enter your name and number and check out. One-time charge.</p></div></li>
+      <li><span class="num">2</span><div><h3>Pick your class time right after checkout</h3><p>We text you to confirm.</p></div></li>
       <li><span class="num">3</span><div><h3>Come in and train</h3><p>Your child gets a free Impact shirt and jumps right into class. After 2 classes, we talk about how it went and you decide what's next. No pressure to join.</p></div></li>
     </ol>
   </div>
@@ -406,7 +410,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 
 <section class="s">
   <div class="wrap narrow">
-    <div class="box"><div class="logo"><img src="/trial/assets/v2/stepup-ema.png" alt="Step Up For Students EMA Marketplace Provider" width="646" height="209" loading="lazy"></div><div><h3>Step Up For Students scholarships accepted</h3><p>A great fit for homeschool families. Ask us how to use yours.</p></div></div>
+    <div class="box"><div class="logo"><img src="/trial/assets/v2/stepup-ema.png" alt="Step Up For Students EMA Marketplace Provider" width="646" height="209" loading="lazy"></div><div><h3>Step Up For Students scholarships accepted</h3><p>A great fit for homeschool families. Ask us how to use yours.</p><p class="hs">Homeschool families: our Unified Warriors class runs at 12:00 PM on Monday, Wednesday and Friday.</p></div></div>
   </div>
 </section>
 
