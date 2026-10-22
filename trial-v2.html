@@ -222,6 +222,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   .closer .btn{max-width:420px;margin-inline:auto}
   .foot{padding-bottom:30px}
 }
+.sched{display:block;width:100%;height:auto;border-radius:12px;margin:0 0 6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 <!-- Meta Pixel (same pixel the GHL trial page uses).
      Test switch: open the page with ?test (or ?test=1) and Meta is told nothing on this visit.
@@ -286,11 +288,12 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 
 <section class="reserve" id="reserve">
   <div class="card">
-    <h2>Class Schedule</h2>
+    <h2 class="sr-only">Class Schedule</h2>
+    <img class="sched" src="/trial/assets/v2/class-schedule.jpg" width="1256" height="922" alt="Class schedule. Young Warriors, ages 5 to 8: Mon, Wed, Fri 4:30 PM; Tue, Thu 6:00 PM. Unified Warriors, all ages: Mon, Wed, Fri 12:00 PM and 5:30 PM; Tue, Thu 4:00 PM. Family Class: Tue, Thu 7:00 PM. Rising Warriors, 9 and up: Mon, Wed, Fri 6:30 PM; Tue, Thu 5:00 PM.">
     <p class="backout" id="backout" role="status" hidden>No charge was made. Your spot is still open.</p>
 
     <!-- Filled from the IMAOS class schedule, the same feed the /schedule/ima booking page reads. -->
-    <p class="timesnote" id="times-loading" role="status">Loading class times...</p>
+    <p class="timesnote" id="times-loading" role="status" hidden>Loading class times...</p>
     <div id="times" hidden>
       <span class="lbl" id="ageslbl">Age groups</span>
       <div class="ages" id="ages" aria-labelledby="ageslbl"></div>
@@ -298,7 +301,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       <div class="slots" id="slots" role="radiogroup" aria-labelledby="slotslbl"></div>
       <button type="button" class="moretimes" id="moretimes" hidden>Show more times</button>
     </div>
-    <p class="timesnote" id="times-off" hidden><b>We'll text you class times.</b></p>
+    <p class="timesnote" id="times-off" hidden><b>You pick your class time right after checkout.</b></p>
 
     <div class="divider"></div>
     <form id="lead" novalidate>
@@ -613,7 +616,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       })
       .catch(function(){clearTimeout(timer);timesUnavailable()});
   }
-  loadTimes();
+  // Class times now come from the schedule picture above; parents pick their class right after checkout.
   function pickedClass(){
     var r=slotsEl.querySelector('input[name=slot]:checked');if(!r)return null;
     for(var i=0;i<classes.length;i++)if(classes[i].id===r.value)return classes[i];
