@@ -544,13 +544,13 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   var sent={},visit='',t0=Date.now(),qs=new URLSearchParams(location.search);
   try{visit=(crypto.randomUUID&&crypto.randomUUID())||''}catch(_){}
   if(!visit)visit=Date.now().toString(36)+Math.random().toString(36).slice(2,10);
-  var FIELD_EVENT={parent_first_name:'TrialFieldParentFirstName',phone:'TrialFieldPhone',child_first_name:'TrialFieldChildFirstName',child_age:'TrialFieldChildAge'};
+  var FIELD_EVENT={parent_first_name:'TrialFieldParentFirstName',phone:'TrialFieldPhone',child_first_name:'TrialFieldChildFirstName',child_last_name:'TrialFieldChildLastName',child_age:'TrialFieldChildAge'};
   function fieldName(el){
     if(!el)return '';
     var byId={pname:'parent_first_name',phone:'phone'};
     if(byId[el.id])return byId[el.id];
     var c=el.classList;
-    return c.contains('kname')?'child_first_name':c.contains('kage')?'child_age':'';
+    return c.contains('kname')?'child_first_name':c.contains('klast')?'child_last_name':c.contains('kage')?'child_age':'';
   }
   function track(name,params){
     if(sent[name])return;sent[name]=1;
@@ -714,7 +714,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       '<div class="row2">'+
       '<div class="field"><label for="kname'+kseq+'">Child\'s first name</label><input id="kname'+kseq+'" class="kname" autocomplete="off" placeholder="First name"></div>'+
       '<div class="field"><label for="kage'+kseq+'">Age</label><select id="kage'+kseq+'" class="kage">'+ageOpts()+'</select></div>'+
-      '</div>';
+      '</div>'+
+      '<div class="field"><label for="klast'+kseq+'">Child\'s last name</label><input id="klast'+kseq+'" class="klast" autocomplete="off" placeholder="Last name"></div>';
     d.querySelector('.kidhead button').addEventListener('click',function(){d.remove();syncKids()});
     kidsEl.appendChild(d);syncKids();
     if(kseq>1){try{d.querySelector('.kname').focus()}catch(_){}}
@@ -740,12 +741,13 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     if(ph.value.replace(/\D/g,'').length!==10){ph.setAttribute('aria-invalid','true');miss.push('10 digit mobile number')}
     var kidRows=[];
     kidsEl.querySelectorAll('.kid').forEach(function(r,i){
-      var kn=r.querySelector('.kname'),ka=r.querySelector('.kage');
-      kn.removeAttribute('aria-invalid');ka.removeAttribute('aria-invalid');
-      var name=kn.value.trim(),age=Number.parseInt(ka.value,10),who=kidsEl.querySelectorAll('.kid').length>1?'child '+(i+1)+"'s":"child's";
+      var kn=r.querySelector('.kname'),kl=r.querySelector('.klast'),ka=r.querySelector('.kage');
+      kn.removeAttribute('aria-invalid');kl.removeAttribute('aria-invalid');ka.removeAttribute('aria-invalid');
+      var name=kn.value.trim(),last=kl.value.trim().replace(/\s+/g,' '),age=Number.parseInt(ka.value,10),who=kidsEl.querySelectorAll('.kid').length>1?'child '+(i+1)+"'s":"child's";
       if(!name){kn.setAttribute('aria-invalid','true');miss.push(who+' first name')}
+      if(!last){kl.setAttribute('aria-invalid','true');miss.push(who+' last name')}
       if(!Number.isFinite(age)){ka.setAttribute('aria-invalid','true');miss.push(who+' age')}
-      kidRows.push({first:name,age:Number.isFinite(age)?age:null});
+      kidRows.push({first:name,last:last,age:Number.isFinite(age)?age:null});
     });
     // When times are shown, one must be picked (after a "class full" answer none is picked for the parent).
     var needTime=!times.hidden&&classes.length>0&&!pickedClass();
@@ -765,7 +767,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     // left to Stripe, which asks for it on the payment screen.
     var payload={
       studio_slug:'ima',first_name:sp>0?parent.slice(0,sp):parent,last_name:sp>0?parent.slice(sp+1):'',phone:ph.value,num_children:kidRows.length,
-      children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
+      children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
         (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
       referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
       fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),return_path:'/trial-v2'
