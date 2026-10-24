@@ -844,6 +844,22 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     form.addEventListener('focusin',stop);
     document.addEventListener('visibilitychange',function(){if(document.hidden)stop()});
   })();
+
+  // ---- Nine-skills video -----------------------------------------------------------------------
+  // The autoplay attribute alone silently fails to start on a lot of mobile browsers (notably the
+  // Facebook/Instagram in-app browser our ad clicks open in). Force a play() call, retry once data
+  // is ready, and retry again whenever it scrolls into view, same pattern as the hero video above.
+  (function(){
+    var v=document.getElementById('ninevid');if(!v)return;
+    function play(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    play();
+    v.addEventListener('loadeddata',play);
+    v.addEventListener('canplay',play);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&v.paused)play()})},{threshold:0.1}).observe(v);
+    }
+    document.addEventListener('visibilitychange',function(){if(!document.hidden&&v.paused)play()});
+  })();
 })();
 (function(){var f=document.getElementById('faq');if(!f)return;
   // FAQ
