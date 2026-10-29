@@ -65,6 +65,12 @@ img{max-width:100%}
 .btn:disabled{cursor:progress;filter:saturate(.7)}
 .btn svg{width:18px;height:18px;flex:none}
 .offer .btn{margin-top:12px}
+.offer{text-align:center;padding:22px 18px}
+.offer-h{font-size:46px;font-weight:900;line-height:1;color:var(--orange);letter-spacing:-.5px;margin:0 0 10px;font-family:Impact,"Arial Narrow",system-ui,sans-serif;text-transform:uppercase}
+.offer-sub{font-size:16px;line-height:1.4;font-weight:600;margin:0;color:var(--white)}
+.offer-strike{color:#b9b6c0;font-weight:500;font-size:14px}
+@media (max-width:420px){.offer-h{font-size:38px}}
+
 .terms{margin:10px 0 0;font-size:12.5px;line-height:1.45;color:#d9d7de}
 .terms b{color:var(--white)}
 .terms.dark{color:var(--muted)}
@@ -331,10 +337,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   <p class="sub">Fun, high energy martial arts and athletic performance training that builds confidence, self defense, and fitness. Beginners welcome.</p>
   <ul class="chips"><li>Confidence</li><li>Self Defense</li><li>Fitness</li><li>50 minute classes</li></ul>
   <div class="offer">
-    <div class="row">
-      <div class="amt">$27</div>
-      <div class="what">2 classes + a free Impact shirt<span>Pick your class time right after checkout</span></div>
-    </div>
+    <h2 class="offer-h">50% OFF RIGHT NOW</h2>
+    <p class="offer-sub">Just $27! 2 Action-Packed Classes + Free Impact Shirt<br><span class="offer-strike">(Normally $54. Limited Time!)</span><br>Ages 5 and up</p>
     <a class="btn cta" href="#reserve">See Class Times and Claim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
   </div>
 </section>
