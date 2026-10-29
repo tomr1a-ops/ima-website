@@ -217,15 +217,18 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .faqlede{color:var(--muted);font-size:15px;margin:6px 0 4px}
 
 /* Closer */
-.community{background:#111;color:var(--white)}
-.community .sec{color:var(--white);text-align:left}
-.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
-.community-logo{width:120px;height:auto;margin-bottom:14px;display:block}
-.community-quote{font-size:22px;font-weight:600;line-height:1.35;margin:14px 0;font-style:italic;border:0;padding:0}
-.community-credit{margin:12px 0 0;color:#d9d7de;font-size:14px;font-weight:600;letter-spacing:.4px}
-.community-video{aspect-ratio:9/16;max-width:360px;margin-inline:auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.community{background:var(--ink);color:var(--white);padding-block:48px}
+.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.community-text{text-align:center}
+.community-logo{width:132px;height:auto;margin:0 auto 18px;display:block}
+.community h2{font-size:36px;font-weight:800;line-height:1.1;margin:0 0 18px;color:var(--white)}
+.community-quote{font-size:20px;font-weight:500;line-height:1.4;margin:0 0 10px;font-style:italic;border:0;padding:0;color:var(--white)}
+.community-credit{margin:0 0 22px;color:#d9d7de;font-size:15px}
+.community-cta{background:#e8ff00;color:#000;font-weight:800;padding:14px 36px;border-radius:12px;display:inline-block;text-decoration:none}
+.community-cta:hover{background:#f3ff5e}
+.community-video{aspect-ratio:16/9;width:100%;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.4);background:#000}
 .community-video video{width:100%;height:100%;object-fit:cover;display:block}
-@media (max-width:720px){.community-grid{grid-template-columns:1fr;gap:24px}.community-text{text-align:center}.community-logo{margin-inline:auto}.community .sec{text-align:center}}
+@media (max-width:720px){.community-grid{grid-template-columns:1fr;gap:28px}.community h2{font-size:28px}}
 .closer{background:var(--ink);color:var(--white);text-align:center;padding-block:30px}
 .closer img{width:76px;height:76px;border-radius:50%;background:var(--white);display:block;margin:0 auto}
 .closer h2{font-size:25px;font-weight:800;line-height:1.15;margin-top:14px}
@@ -507,17 +510,18 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
   </div>
 </section>
 
-<section class="s alt community">
+<section class="community">
   <div class="wrap">
     <div class="community-grid">
       <div class="community-text">
         <img src="https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbb2acf1ef98587aee0b99.png" alt="Local 10+ Plus" class="community-logo" loading="lazy">
-        <h2 class="sec">Impact in the Community</h2>
-        <blockquote class="community-quote">"This program gave our students confidence to stand up for themselves."</blockquote>
-        <p class="community-credit">Featured on Local 10+ Plus</p>
+        <h2>Impact in the Community</h2>
+        <blockquote class="community-quote">“This program gave our students confidence to stand up for themselves…”</blockquote>
+        <p class="community-credit">Featured on Local 10+ Plus (or local media)</p>
+        <a class="btn community-cta" href="#reserve">Get Started!</a>
       </div>
       <div class="community-video">
-        <video autoplay muted loop playsinline preload="metadata" src="https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/transcoded_videos/cts-5bd836927c0220f6_720p.mp4" aria-label="Coach Shick teaching students"></video>
+        <video controls muted loop playsinline preload="metadata" src="https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/transcoded_videos/cts-7a96ad7c3d0883d9_720p.mp4" aria-label="Local 10 news feature on Impact Martial Athletics"></video>
       </div>
     </div>
   </div>
