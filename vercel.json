@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/trial-v2.html"
+    },
+    {
       "source": "/lead-form",
       "destination": "/trial-offer.html"
     },
