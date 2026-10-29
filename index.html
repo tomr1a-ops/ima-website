@@ -1,682 +1,977 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impact Martial Athletics | Martial Arts &amp; Fitness in Davie, FL</title>
-<meta name="description" content="A science-based performance system for kids that builds strength, confidence, and resilience through martial arts and athletic training in Davie, FL.">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>$27 Trial | Impact Martial Athletics, Davie FL</title>
+<meta name="description" content="2 classes plus a free Impact shirt for $27 at Impact Martial Athletics in Davie, FL. Martial arts and athletic performance training, ages 5 and up.">
+<meta property="og:title" content="$27 Trial | Impact Martial Athletics, Davie FL">
+<meta property="og:description" content="2 classes plus a free Impact shirt for $27. Ages 5 and up. Beginners welcome.">
+<meta property="og:image" content="/trial/assets/v2/class.jpg?v=2">
+<link rel="icon" href="/trial/assets/v2/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Poppins',sans-serif;background:#fff;color:#000;overflow-x:hidden}
-a{text-decoration:none}
+/* Layout: ported 1:1 from trial-page-rebuild-mock.html (approved by Tom 21 Oct 2026). Single committed look, no theme switching.
+   The mock's yellow placeholder boxes are replaced by real class times from IMAOS (see the class times script below). */
+:root{
+  --ink:#120f16; --ink-2:#0b0a0f; --orange:#ff8b1a; --orange-edge:#c96a0a;
+  --blue:#0606f4; --blue-tint:#ecedff; --cyan:#12f3f9;
+  --page:#f5f6fb; --white:#ffffff; --text:#14131a; --muted:#5b616d; --line:#dde1ec; --input:#c9cdd8;
+  --font:'Poppins',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --gut:16px; --col:480px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;padding-top:env(safe-area-inset-top,0px);background:var(--white);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:var(--col);margin:0 auto;padding-inline:var(--gut)}
+h1,h2,h3{margin:0;letter-spacing:-.015em}
+a{color:inherit}
 img{max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
 
-/* ── ANNOUNCE BAR ── */
-.announce-bar{background:rgb(6,6,243);padding:10px 20px;text-align:center}
-.announce-bar a{color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;white-space:nowrap}
+/* Header */
+.hdr{background:var(--ink);border-bottom:1px solid #2a2730}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;min-width:0}
+.brand img{width:42px;height:42px;border-radius:50%;background:var(--white);flex:none}
+.brand span{font-weight:700;font-size:11.5px;letter-spacing:.14em;line-height:1.3;text-transform:uppercase}
+.call{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border:1.5px solid #6b6872;border-radius:999px;color:var(--white);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.call svg{width:16px;height:16px}
 
-/* ── NAV (3 buttons, single row, sticky) ── */
-.btn-bar{background:#fff;padding:13px 20px;display:flex;flex-direction:row;gap:14px;justify-content:center;align-items:center;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:100}
-.btn-bar .row{display:contents}
-.btn-bar a{display:flex;align-items:center;justify-content:center;gap:7px;background:rgb(216,236,25);color:#000;font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;padding:11px 44px;border-radius:4px;text-align:center;white-space:nowrap}
-.btn-bar a.wide{padding:11px 44px}
-.btn-bar svg{width:17px;height:17px;fill:#000;flex-shrink:0}
+/* Hero */
+.hero{background:var(--ink);color:var(--white);padding-block:18px 26px;box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.pill{display:inline-block;background:var(--orange);color:var(--ink);font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;text-decoration:none}
+.hero h1{font-size:31px;line-height:1.1;font-weight:800;margin-top:12px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.loc{display:flex;align-items:center;gap:6px;margin-top:10px;color:var(--cyan);font-weight:600;font-size:14px}
+.loc svg{width:16px;height:16px;flex:none}
+.loc a{text-decoration:none}
+.hero .sub{color:#d9d7de;font-size:15px;line-height:1.42;margin:10px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding:0;list-style:none}
+.chips li{border:1px solid #3a3641;border-radius:999px;padding:4px 10px;font-size:12.5px;font-weight:600;color:#ecebef}
+.offer{margin-top:16px;background:#1d1a23;border:1px solid #2f2b36;border-radius:16px;padding:14px}
+.offer .row{display:flex;align-items:center;gap:12px}
+.offer .amt{font-size:40px;font-weight:800;color:var(--orange);line-height:1}
+.offer .what{font-size:14.5px;line-height:1.3;font-weight:600}
+.offer .what span{display:block;color:#b9b6c0;font-weight:500;font-size:13px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:0 16px;background:var(--orange);color:var(--ink);font:700 17px/1.2 var(--font);border:0;border-top:2px solid var(--orange-edge);border-radius:13px;text-decoration:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+.btn:hover{filter:brightness(1.04)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{cursor:progress;filter:saturate(.7)}
+.btn svg{width:18px;height:18px;flex:none}
+.offer .btn{margin-top:12px}
+.offer{text-align:center;padding:22px 18px}
+.offer-h{font-size:46px;font-weight:900;line-height:1;color:var(--orange);letter-spacing:-.5px;margin:0 0 10px;font-family:Impact,"Arial Narrow",system-ui,sans-serif;text-transform:uppercase}
+.offer-sub{font-size:16px;line-height:1.4;font-weight:600;margin:0;color:var(--white)}
+.offer-strike{color:#b9b6c0;font-weight:500;font-size:14px}
+@media (max-width:420px){.offer-h{font-size:38px}}
 
-/* ── HERO ── */
-.hero{position:relative;background-color:#111;background-image:url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_900/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68f7b8aeecb608b19e052c52.webp');background-size:cover;background-position:center;padding:0;min-height:calc(100vh - 90px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.55) 0%,rgba(0,0,0,.15) 60%,transparent 100%);z-index:1}
-.hero-logo{width:100px;height:100px;object-fit:contain;display:block;position:absolute;top:24px;left:50%;transform:translateX(-50%);z-index:3}
-.hero-content{position:relative;z-index:2;padding:0 48px 60px 80px;max-width:560px}
-.hero h1{font-family:'Teko',sans-serif;font-size:clamp(36px,4.2vw,54px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:10px}
-.hero-line{width:110px;height:3px;background:rgb(235,255,0);margin:6px 0 16px}
-.hero p{font-family:'Poppins',sans-serif;font-size:14px;color:rgba(255,255,255,.92);margin-bottom:22px;max-width:360px;line-height:1.6}
-.btn-lime{display:inline-block;background:rgb(235,255,0);color:rgb(34,34,34);font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;padding:13px 26px;border-radius:5px;cursor:pointer;border:none}
+.terms{margin:10px 0 0;font-size:12.5px;line-height:1.45;color:#d9d7de}
+.terms b{color:var(--white)}
+.terms.dark{color:var(--muted)}
+.terms.dark b{color:var(--text)}
 
-/* ── FLOATING VIDEO PLAYER ── */
-.hero-float{position:absolute;right:80px;top:50%;transform:translateY(-45%);width:240px;z-index:4;border:3px solid rgb(235,255,0);background:#000;overflow:hidden}
-.hero-float video{width:100%;display:block;height:400px;object-fit:cover}
-.hero-float-sound{position:absolute;top:8px;left:8px;z-index:5}
-.hero-float-sound button{background:rgba(0,0,0,.7);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px;white-space:nowrap}
+/* Reserve card: times first, then the short form */
+.reserve{background:var(--page);padding-block:20px 24px;box-shadow:0 0 0 100vmax var(--page);clip-path:inset(0 -100vmax)}
+.card{background:var(--white);border-radius:20px;padding:20px 16px 18px;box-shadow:0 1px 3px rgba(20,19,26,.06)}
+.card h2{font-size:21px;font-weight:800;line-height:1.2}
+.card .lede{color:var(--muted);font-size:14px;margin:4px 0 0}
+.backout{background:#e9f6ec;color:#17602a;border:1px solid #bfe3c8;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:600;margin:12px 0 0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.fact{background:var(--blue-tint);border-radius:12px;padding:10px 12px;min-width:0}
+.fact b{display:block;font-size:14px;line-height:1.25}
+.fact span{display:block;font-size:12px;color:var(--muted)}
+.lbl{display:block;font-weight:700;font-size:14px;margin:16px 0 8px}
+/* Age groups and class times: real data from the IMAOS schedule (the mock showed these as placeholders). */
+.ages{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.age{background:var(--blue-tint);border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.35;min-width:0;overflow-wrap:anywhere}
+.age span{color:var(--muted)}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.slot{position:relative;display:block;border-radius:12px;padding:10px;cursor:pointer;min-width:0;background:var(--white);border:1.5px solid var(--input)}
+.slot input{position:absolute;opacity:0}
+.slot b{display:block;font-size:13.5px;line-height:1.25}
+.slot span{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.slot:has(input:checked){outline:2.5px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.slot:has(input:focus-visible){outline:3px solid var(--cyan);outline-offset:2px}
+.slots[aria-invalid=true] .slot{border-color:#d4372c}
+.moretimes{background:none;border:0;color:var(--blue);font:600 14px var(--font);padding:10px 0 0;cursor:pointer}
+.timesnote{margin:16px 0 0;font-size:14px;color:var(--muted)}
+.timesnote b{color:var(--text)}
+.divider{height:1px;background:var(--line);margin:18px 0 2px}
+.field{margin-top:12px;min-width:0}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.field input,.field select{width:100%;height:50px;border:1.5px solid var(--input);border-radius:12px;padding:0 14px;font:400 16px var(--font);color:var(--text);background:var(--white)}
+.field input::placeholder{color:#5c5d66}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.field input[aria-invalid=true],.field select[aria-invalid=true]{border-color:#d4372c}
+.row2{display:grid;grid-template-columns:1fr 96px;gap:10px}
+.kidhead{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kidhead button{background:none;border:0;color:#c02d22;font:600 13px var(--font);cursor:pointer;padding:2px 4px;text-transform:none;letter-spacing:0}
+.kidhead:not([hidden])+.row2 .field{margin-top:4px}
+.addkid{background:none;border:0;color:var(--blue);font:600 14px var(--font);padding:10px 0 0;cursor:pointer}
+.err{color:#c02d22;font-size:13px;margin:10px 0 0}
+.card .btn{margin-top:14px}
+.legal{text-align:center;color:var(--muted);font-size:11px;line-height:1.45;margin:10px 0 0}
+.legal a{color:var(--blue)}
+.legal.consent{margin-top:8px}
+.legal.consent+.legal{margin-top:4px}
 
-/* ── BLUE BANNER ── */
-.blue-banner{background:rgb(6,6,243);padding:30px 20px;text-align:center}
-.blue-banner h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:20px}
+/* Sections */
+section.s{padding-block:30px}
+section.alt{background:var(--page)}
+h2.sec{font-size:23px;font-weight:800;line-height:1.2}
+.secsub{color:var(--muted);font-size:14.5px;margin:6px 0 0}
+.video{position:relative;margin:18px auto 0;aspect-ratio:9/16;width:min(100%,calc(62vh * 9 / 16));border-radius:16px;background:#16131b;overflow:hidden}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
+.video .tag{position:absolute;left:10px;bottom:10px;background:rgba(15,13,19,.85);color:var(--white);border:0;border-radius:999px;padding:6px 12px;font:600 12.5px/1.5 var(--font);cursor:pointer}
+.photo{margin-top:18px;border-radius:16px;aspect-ratio:16/10;overflow:hidden;background:#eceef4}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.benes{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:18px}
+.benes li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.ic{width:44px;height:44px;border-radius:50%;background:var(--blue-tint);display:grid;place-items:center;color:var(--blue)}
+.ic svg{width:20px;height:20px}
+.benes h3{font-size:16px;font-weight:700;line-height:1.3}
+.benes p{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
 
-/* ── PROGRAMS ── */
-.programs{background:rgba(214,212,212,0.5);padding:50px 40px}
-.section-title{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,50px);font-weight:600;color:#000;text-align:center;margin-bottom:28px;line-height:1.05}
-.prog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1200px;margin:0 auto}
-.prog-card{background:#fff;border-radius:8px;overflow:hidden;border:1px solid #ddd;text-align:center;padding-bottom:18px}
-.prog-card img{width:100px;height:100px;object-fit:contain;display:block;margin:24px auto 0}
-.prog-card h3{font-family:'Teko',sans-serif;font-size:26px;font-weight:600;color:#000;margin:14px 14px 5px}
-.prog-card p{font-family:'Poppins',sans-serif;font-size:13px;color:#444;margin:0 14px;line-height:1.5}
-</style>
-<style>
-/* ── IMA ABOUT ── */
-.ima-section{background:#fff;padding:60px 40px}
-.ima-inner{display:grid;grid-template-columns:200px 1fr 220px;gap:40px;max-width:1100px;margin:0 auto;align-items:center}
-.ima-vid-col{position:relative;overflow:hidden;border-radius:6px;height:320px}
-.ima-vid-col video{width:100%;height:100%;object-fit:cover;display:block}
-.ima-vid-sound{position:absolute;top:8px;left:8px;z-index:2}
-.ima-vid-sound button{background:rgba(0,0,0,.65);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px}
-.ima-text h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,50px);font-weight:600;color:#000;line-height:1.05;margin-bottom:14px}
-.ima-text p{font-family:'Poppins',sans-serif;font-size:14px;color:#222;line-height:1.65;margin-bottom:22px}
-.ima-text .btn-lime{display:inline-block}
-.ima-img-col img{width:100%;height:320px;object-fit:cover;display:block;border-radius:6px}
-.camp-banner{background:rgb(6,6,243);padding:28px 40px;text-align:center}
-.camp-banner h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:18px}
+/* Proof */
+.quotes{display:grid;gap:12px;margin-top:16px}
+.q{background:var(--white);border-radius:18px;padding:16px;box-shadow:0 1px 4px rgba(20,19,26,.06);margin:0}
+.q blockquote{margin:0;font-size:14.5px;line-height:1.48}
+.who{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;margin-top:12px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--blue);color:var(--white);display:grid;place-items:center;font-weight:700;font-size:15px}
+.nm b{display:block;font-size:14.5px;line-height:1.25}
+.nm span{display:block;color:var(--muted);font-size:12.5px}
+.stars{color:#fbbc04;letter-spacing:2px;font-size:16px;line-height:1;display:block;margin-bottom:8px}
+.sub2{font-size:16px;font-weight:700;margin-top:26px}
+.gmore{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--blue);font-weight:700;font-size:14.5px;text-decoration:none}
+img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
+.pros .who{grid-template-columns:48px 1fr}
 
-/* ── WHY SECTION ── */
-.why-section{background:rgba(214,212,212,0.5);padding:50px 40px;text-align:center}
-.why-section .section-title{text-align:center;margin-bottom:6px}
-.why-sub{font-family:'Poppins',sans-serif;font-size:14px;color:#000;margin-bottom:28px;line-height:1.5;text-align:center}
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1200px;margin:0 auto}
-.why-card{background:#fff;border-radius:8px;padding:28px 18px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;border:1px solid #ddd}
-.why-card img{width:72px;height:72px;object-fit:contain;margin-bottom:14px}
-.why-card-body h3{font-family:'Teko',sans-serif;font-size:22px;font-weight:600;color:#000;margin-bottom:6px}
-.why-card-body p{font-family:'Poppins',sans-serif;font-size:13px;color:#444;line-height:1.5}
+/* How it works */
+.steps{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:18px}
+.steps li{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start}
+.num{width:38px;height:38px;border-radius:50%;background:var(--blue);color:var(--white);display:grid;place-items:center;font-weight:700}
+.steps h3{font-size:16px;font-weight:700;line-height:1.25}
+.steps p{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
 
-/* ── BETTER PATH ── */
-.better-path{background:#fff;padding:60px 40px}
-.better-path-inner{display:grid;grid-template-columns:1fr 380px;gap:60px;max-width:1100px;margin:0 auto;align-items:center}
-.better-path-text h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,50px);font-weight:600;color:rgb(6,6,243);line-height:1.05;margin-bottom:16px}
-.better-path-text p{font-family:'Poppins',sans-serif;font-size:14px;color:#000;line-height:1.65;margin-bottom:10px}
-.better-path-text p.bold-p{font-weight:700;border-left:4px solid rgb(6,6,243);padding-left:12px;margin-top:12px;margin-bottom:22px}
-.better-path-vid{position:relative;overflow:hidden;border-radius:6px;border:3px solid rgb(235,255,0)}
-.better-path-vid video{width:100%;display:block;max-height:420px;object-fit:cover}
-.better-path-vid-sound{position:absolute;top:8px;left:8px;z-index:2}
-.better-path-vid-sound button{background:rgba(0,0,0,.65);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px}
+/* Coach */
+.coach{background:var(--ink);color:var(--white);padding-block:30px}
+.coach .family{margin:0 auto 20px;max-width:300px;border-radius:16px;overflow:hidden}
+.coach .family img{display:block;width:100%;height:auto}
+.coach h2{font-size:23px;font-weight:800}
+.coach .tagline{color:var(--cyan);font-weight:700;font-size:15px;margin:2px 0 0}
+.checks{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.checks li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14px;line-height:1.45;color:#e6e4ea}
+.checks svg{width:18px;height:18px;color:var(--cyan);margin-top:2px}
 
-/* ── OFFER BANNER ── */
-.offer-banner{background:rgb(6,6,243);padding:50px 40px;text-align:center}
-.offer-banner h2{font-family:'Teko',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:18px}
+/* Step Up */
+.box{background:var(--blue-tint);border-radius:18px;padding:16px;display:grid;gap:12px}
+.box .logo{background:var(--white);border-radius:12px;padding:10px 14px;display:flex;justify-content:center}
+.box .logo img{width:100%;max-width:280px;height:auto;display:block}
+.box h3{font-size:15.5px;font-weight:700}
+.box p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.box p.hs{margin-top:8px;color:var(--text);font-weight:600}
 
-/* ── COACH ── */
-.coach-section{background:#000;padding:70px 40px;text-align:center}
-.coach-section>h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:6px}
-.coach-section>p.ch-tagline{font-family:'Poppins',sans-serif;font-size:15px;color:#ccc;margin-bottom:36px}
-.coach-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;max-width:1100px;margin:0 auto;align-items:stretch}
-.coach-vid-col{position:relative;overflow:hidden;border-radius:6px;min-height:320px}
-.coach-vid-col video{width:100%;height:100%;object-fit:cover;display:block;min-height:320px}
-.coach-vid-sound{position:absolute;top:8px;left:8px;z-index:2}
-.coach-vid-sound button{background:rgba(0,0,0,.65);color:#fff;border:none;padding:5px 11px;font-size:11px;cursor:pointer;border-radius:20px;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px}
-.coach-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:28px 20px;text-align:center}
-.coach-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 14px;border:3px solid rgb(235,255,0)}
-.coach-card h3{font-family:'Teko',sans-serif;font-size:30px;font-weight:600;color:#fff;margin-bottom:16px}
-.coach-card ul{list-style:none;padding:0;text-align:left}
-.coach-card ul li{font-family:'Poppins',sans-serif;font-size:12.5px;color:#ddd;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:flex-start;gap:8px;line-height:1.4}
-.coach-card ul li::before{content:'•';color:rgb(235,255,0);font-weight:700;flex-shrink:0}
-.coach-family-col{overflow:hidden;border-radius:6px}
-.coach-family-col img{width:100%;height:100%;object-fit:cover;display:block;min-height:320px}
+/* Better path video */
+.bpath{padding-block:28px 4px}
+.bpvid{position:relative;margin:0 auto;max-width:340px;border-radius:16px;overflow:hidden;background:#16131b;aspect-ratio:7/10}
+.bpvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bpvid .snd{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font:600 13px var(--font);cursor:pointer}
+.bpvid .snd svg{width:16px;height:16px}
+.bpvid .snd.on{display:none}
+.bpvid .pp{position:absolute;right:10px;bottom:10px;width:44px;height:44px;display:grid;place-items:center;background:rgba(15,13,19,.82);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;padding:0}
+.bpvid .pp svg{width:18px;height:18px}
+.bpvid .pp .i-play{display:none}
+.bpvid .pp.paused .i-play{display:block}
+.bpvid .pp.paused .i-pause{display:none}
+.bpvid .pp:focus-visible,.bpvid .snd:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 
-/* ── TESTIMONIALS ── */
-.testimonials{background:#fff;padding:60px 40px}
-.testimonials h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,52px);font-weight:600;color:#000;line-height:1.05;margin-bottom:28px;text-align:center}
-.tcard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1200px;margin:0 auto}
-.tcard{background:#f8f8f8;border-radius:10px;padding:22px;border:1px solid #e0e0e0;text-align:center}
-.tcard img{width:76px;height:76px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:2px solid rgb(6,6,243)}
-.stars{display:flex;justify-content:center;gap:3px;margin-bottom:8px}
-.stars svg{width:18px;height:18px;fill:#f5a623}
-.tcard h3{font-family:'Teko',sans-serif;font-size:24px;font-weight:600;color:#000;margin-bottom:2px}
-.tcard .role{font-family:'Poppins',sans-serif;font-size:12px;color:#666;margin-bottom:10px}
-.tcard p{font-family:'Poppins',sans-serif;font-size:13px;color:#333;line-height:1.6;font-style:italic}
-</style>
-<style>
-/* ── COMMUNITY ── */
-.community{background:#000;padding:80px 40px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.community img.comm-img{width:100%;max-width:340px;border-radius:8px;object-fit:cover;margin-bottom:22px}
-.community h2{font-family:'Teko',sans-serif;font-size:clamp(36px,4vw,50px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:14px}
-.community p{font-family:'Poppins',sans-serif;font-size:17px;color:#fff;margin-bottom:6px;font-style:italic}
-.community p.media-tag{font-size:13px;color:#bbb;font-style:normal}
-.community a.btn-lime{margin-top:22px}
+/* Have questions form */
+.ask .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ask .row2 .field{min-width:0}
+.field textarea{width:100%;border:1.5px solid var(--input);border-radius:12px;padding:12px 15px;font:400 16px/1.4 var(--font);color:var(--text);background:var(--white);resize:vertical}
+.field textarea::placeholder{color:#5c5d66}
+.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
+.ask-consent{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;margin-top:14px;font-size:12.5px;line-height:1.45;color:var(--muted);cursor:pointer}
+.ask-consent input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--blue)}
+.ask .btn{margin-top:16px;justify-content:center}
+.ask-msg{margin:12px 0 0;font-size:14px;font-weight:600;text-align:center}
+.ask-msg.ok{color:#1a7a1a}.ask-msg.err{color:#d4372c}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
-/* ── STEP UP ── */
-.stepup{background:#fff;padding:50px 40px}
-.stepup h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,46px);font-weight:600;color:#000;line-height:1.05;margin-bottom:16px}
-.stepup img.su-logo{max-width:260px;display:block;margin:0 auto 18px;object-fit:contain}
-.stepup p{font-family:'Poppins',sans-serif;font-size:14px;color:#000;line-height:1.65}
+/* Nine skills video */
+.nine{margin:20px auto 0;max-width:420px;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:4/5}
+.nine video{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ── AREAS ── */
-.areas{background:rgb(245,245,245);padding:50px 40px}
-.areas h2{font-family:'Teko',sans-serif;font-size:clamp(32px,4vw,46px);font-weight:600;color:rgb(6,6,243);line-height:1.05;margin-bottom:12px}
-.areas p{font-family:'Poppins',sans-serif;font-size:13px;color:#000;line-height:1.6;margin-bottom:10px}
-.areas a{display:block;margin-top:14px}
-.areas img.map-img{width:100%;max-width:700px;border-radius:8px;display:block;margin:0 auto}
+/* Top badge, as on the live page */
+.pill-xl{font-size:16px;letter-spacing:.08em;padding:12px 20px;margin-bottom:8px;box-shadow:0 6px 18px rgba(240,146,58,.35)}
+@media (min-width:640px){.pill-xl{font-size:21px;padding:14px 28px}}
 
-/* ── FORM ── */
-.form-section{background:#000;padding:70px 40px}
-.form-section h2{font-family:'Teko',sans-serif;font-size:clamp(28px,3.5vw,38px);font-weight:600;color:#fff;text-align:center;margin-bottom:22px}
-.form-wrap{background:#fff;border-radius:10px;padding:28px 24px;max-width:580px;margin:0 auto}
-.frow{display:flex;gap:10px;margin-bottom:12px}
-.fgroup{flex:1;display:flex;flex-direction:column}
-.fgroup.full{flex:none;width:100%;margin-bottom:12px}
-.fgroup label{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#333;margin-bottom:4px}
-.fgroup input,.fgroup select,.fgroup textarea{font-family:'Poppins',sans-serif;font-size:13px;color:#333;padding:9px 11px;border:1px solid #ccc;border-radius:4px;width:100%;background:#fff;outline:none}
-.fgroup textarea{min-height:75px;resize:vertical}
-.tc-row{display:flex;gap:8px;align-items:flex-start;margin:10px 0}
-.tc-row input[type=checkbox]{margin-top:2px;flex-shrink:0}
-.tc-row label{font-family:'Poppins',sans-serif;font-size:11px;color:#555;line-height:1.4}
-.tc-row a{color:rgb(6,6,243)}
-.btn-submit{width:100%;background:rgb(235,255,0);color:#000;font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;padding:14px;border:none;border-radius:5px;cursor:pointer;margin-top:10px}
+/* FAQ */
+.faq{padding-block:26px 30px}
+.faq dl{margin:16px 0 0;border-top:1px solid #e3e5ee}
+.faq .item{border-bottom:1px solid #e3e5ee}
+.faq dt button{width:100%;display:grid;grid-template-columns:1fr 20px;gap:14px;align-items:center;text-align:left;background:none;border:0;padding:18px 0;font:500 15.5px/1.35 var(--font);color:var(--text);cursor:pointer}
+.faq dt svg{width:16px;height:16px;color:var(--blue);transition:transform .2s ease;justify-self:end}
+.faq dt button[aria-expanded=true] svg{transform:rotate(180deg)}
+.faq dd{margin:0;padding:0 28px 18px 0;color:var(--muted);font-size:14.5px;line-height:1.5}
+.faqlede{color:var(--muted);font-size:15px;margin:6px 0 4px}
 
-/* ── FOOTER CTA BAR ── */
-.footer-cta{background:rgb(6,6,243);padding:22px 40px;display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap}
-.fct-item{display:flex;flex-direction:column;align-items:center;gap:4px}
-.fct-label{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px}
-.fct-item a{display:flex;align-items:center;gap:7px;color:#fff;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600}
-.fct-item svg{width:18px;height:18px;fill:#fff}
+/* Closer */
+.pitch{background:#fff;color:#111;padding-block:48px}
+.pitch-grid{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:24px;align-items:stretch}
+.pitch-video{aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000}
+.pitch-video video{width:100%;height:100%;object-fit:cover;display:block}
+.pitch-text{text-align:center;display:flex;flex-direction:column;justify-content:center;padding:12px 10px}
+.pitch-text h2{font-size:36px;font-weight:800;line-height:1.05;margin:0 0 18px;color:#111}
+.pitch-text p{font-size:16px;line-height:1.5;margin:0 0 22px;color:#333}
+.pitch-cta{background:#e8ff00;color:#000;font-weight:800;padding:14px 36px;border-radius:12px;display:inline-block;text-decoration:none;align-self:center}
+.pitch-cta:hover{background:#f3ff5e}
+.pitch-img{border-radius:14px;overflow:hidden}
+.pitch-img img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:900px){.pitch-grid{grid-template-columns:1fr;gap:20px}.pitch-video{max-width:360px;margin-inline:auto;width:100%}.pitch-img{max-height:380px}.pitch-text h2{font-size:28px}}
+.community{background:var(--ink);color:var(--white);padding-block:48px}
+.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.community-text{text-align:center}
+.community-logo{width:132px;height:auto;margin:0 auto 18px;display:block}
+.community h2{font-size:36px;font-weight:800;line-height:1.1;margin:0 0 18px;color:var(--white)}
+.community-quote{font-size:20px;font-weight:500;line-height:1.4;margin:0 0 10px;font-style:italic;border:0;padding:0;color:var(--white)}
+.community-credit{margin:0 0 22px;color:#d9d7de;font-size:15px}
+.community-cta{background:#e8ff00;color:#000;font-weight:800;padding:14px 36px;border-radius:12px;display:inline-block;text-decoration:none}
+.community-cta:hover{background:#f3ff5e}
+.community-video{aspect-ratio:16/9;width:100%;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.4);background:#000}
+.community-video video{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:720px){.community-grid{grid-template-columns:1fr;gap:28px}.community h2{font-size:28px}}
+.closer{background:var(--ink);color:var(--white);text-align:center;padding-block:30px}
+.closer img{width:76px;height:76px;border-radius:50%;background:var(--white);display:block;margin:0 auto}
+.closer h2{font-size:25px;font-weight:800;line-height:1.15;margin-top:14px}
+.closer .amt{font-size:50px;font-weight:800;color:var(--orange);line-height:1.05;margin-top:6px}
+.closer p{margin:6px 0 0;color:#d9d7de;font-size:14px}
+.closer .btn{margin-top:16px}
+.closer .terms{text-align:center}
 
-/* ── MAIN FOOTER ── */
-.main-footer{background:#111;padding:36px 40px 20px;text-align:center}
-.footer-inner{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:20px}
-.footer-logo{height:52px;object-fit:contain;display:block}
-.social-row{display:flex;gap:14px}
-.social-row a img{width:34px;height:34px;opacity:.7;transition:opacity .2s}
-.social-row a:hover img{opacity:1}
-.footer-copy{font-family:'Poppins',sans-serif;font-size:12px;color:#555;border-top:1px solid #222;padding-top:16px}
-.footer-copy a{color:#666;margin:0 6px}
+/* Footer: extra room at the bottom on phones so the sticky bar never covers it */
+.foot{background:var(--ink-2);color:#c9c7ce;padding-block:26px calc(102px + env(safe-area-inset-bottom,0px));border-top:1px solid #24212a;font-size:13.5px}
+.foot b{color:var(--white)}
+.foot ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px}
+.foot nav a{text-decoration:underline}
+.foot small{display:block;margin-top:12px;color:#8d8a94}
 
-/* ── RESPONSIVE ── */
+/* Sticky */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);box-shadow:0 -4px 18px rgba(20,19,26,.12);padding-bottom:env(safe-area-inset-bottom,0px);transition:transform .2s ease,visibility .2s}
+/* Hidden while the reserve card or its checkout button is on screen, so it never covers the button. */
+.sticky.off{transform:translateY(110%);visibility:hidden}
+@media (prefers-reduced-motion:reduce){.sticky{transition:none}}
+.sticky .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:72px}
+.sticky .p b{font-size:21px;font-weight:800;line-height:1}
+.sticky .p span{display:block;font-size:11.5px;color:var(--muted)}
+.sticky .btn{width:auto;min-height:50px;padding:0 20px;font-size:15.5px}
 
-/* Tablet (≤900px) */
-@media(max-width:900px){
-  .prog-grid{grid-template-columns:repeat(2,1fr)}
-  .tcard-grid{grid-template-columns:repeat(2,1fr)}
-  .why-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-float{display:none}
-  .coach-inner{grid-template-columns:1fr;gap:30px}
-  .ima-inner{grid-template-columns:180px 1fr 180px;gap:20px}
+/* Desktop: hero copy left, times + form right, both on the first screen */
+@media (min-width:960px){
+  :root{--col:1120px;--gut:32px}
+  .hdr .wrap{height:68px}
+  .top{background:linear-gradient(90deg,var(--ink) 0 55%,var(--page) 55% 100%)}
+  .top>.wrap{display:grid;grid-template-columns:1fr 440px;gap:56px;align-items:start}
+  .hero{background:none;box-shadow:none;clip-path:none;padding-block:44px 44px}
+  .hero h1{font-size:46px}
+  .hero .sub{font-size:17px;max-width:520px}
+  .offer{max-width:520px}
+  .reserve{background:none;box-shadow:none;clip-path:none;padding-block:28px 32px}
+  .narrow{max-width:760px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .quotes.three{grid-template-columns:repeat(3,1fr)}
+  .quotes.four{grid-template-columns:repeat(2,1fr)}
+  .video{width:min(100%,360px)}
+  .sticky{display:none}
+  .closer .btn{max-width:420px;margin-inline:auto}
+  .foot{padding-bottom:30px}
 }
-
-/* Mobile (≤640px) */
-@media(max-width:640px){
-
-  /* Nav */
-  .btn-bar{flex-direction:column;padding:12px 16px;gap:10px}
-  .btn-bar .row{display:flex;gap:8px;width:100%}
-  .btn-bar .row a{flex:1;padding:11px 8px;font-size:13px}
-  .btn-bar a.wide{width:100%;padding:12px 8px}
-
-  /* Hero */
-  .hero{min-height:70vh;justify-content:flex-end;background-position:center top}
-  .hero::before{background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.3) 60%,transparent 100%)}
-  .hero-logo{width:64px;height:64px;top:16px}
-  .hero-content{padding:0 20px 40px;max-width:100%}
-  .hero h1{font-size:32px}
-  .hero p{font-size:13px;max-width:100%}
-  .hero-float{display:none}
-
-  /* Blue banner */
-  .blue-banner{padding:28px 20px}
-  .blue-banner h2{font-size:28px}
-
-  /* Programs */
-  .programs{padding:40px 16px}
-  .prog-grid{grid-template-columns:1fr;gap:14px}
-  .section-title{font-size:30px;margin-bottom:20px}
-
-  /* About IMA */
-  .ima-section{padding:40px 16px}
-  .ima-inner{grid-template-columns:1fr;gap:0}
-  .ima-vid-col{height:240px;border-radius:6px 6px 0 0}
-  .ima-text{padding:24px 0 0}
-  .ima-text h2{font-size:30px}
-  .ima-img-col img{height:240px;border-radius:0 0 6px 6px}
-
-  /* Camp banner */
-  .camp-banner{padding:28px 20px}
-  .camp-banner h2{font-size:26px}
-
-  /* Why choose */
-  .why-section{padding:40px 16px}
-  .why-grid{grid-template-columns:1fr 1fr;max-width:100%}
-
-  /* Better path */
-  .better-path{padding:40px 16px}
-  .better-path-inner{grid-template-columns:1fr;gap:28px}
-  .better-path-text h2{font-size:28px}
-
-  /* Offer banner */
-  .offer-banner{padding:40px 16px}
-  .offer-banner h2{font-size:32px}
-
-  /* Coach */
-  .coach-section{padding:50px 16px}
-  .coach-section>h2{font-size:28px}
-  .coach-inner{grid-template-columns:1fr;gap:16px}
-  .coach-vid-col{min-height:220px}
-  .coach-vid-col video{min-height:220px}
-  .coach-family-col img{min-height:220px}
-
-  /* Testimonials */
-  .testimonials{padding:40px 16px}
-  .tcard-grid{grid-template-columns:1fr;gap:14px}
-  .testimonials h2{font-size:26px}
-
-  /* Community */
-  .community{padding:60px 20px}
-
-  /* Step up */
-  .stepup{padding:40px 16px}
-  .stepup h2{font-size:26px}
-
-  /* Areas */
-  .areas{padding:40px 16px}
-  .areas h2{font-size:26px}
-
-  /* Form */
-  .form-section{padding:50px 16px}
-  .frow{flex-direction:column;gap:0}
-  .frow .fgroup{margin-bottom:12px}
-
-  /* Footer CTA */
-  .footer-cta{flex-direction:column;gap:18px;padding:22px 20px}
-
-  /* Main footer */
-  .main-footer{padding:28px 20px 16px}
-}
+.sched{display:block;width:100%;height:auto;border-radius:12px;margin:0 0 6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
+<!-- Meta Pixel (same pixel the GHL trial page uses).
+     Test switch: open the page with ?test (or ?test=1) and Meta is told nothing on this visit.
+     The page and checkout work as normal. Remembered for the browser tab; ?test=0 turns it off. -->
+<script>
+(function(){
+  var q=location.search, on=false;
+  try{
+    if(/[?&]test=0(&|$)/.test(q)) sessionStorage.removeItem('ima_test');
+    else if(/[?&]test(=1)?(&|$)/.test(q)) sessionStorage.setItem('ima_test','1');
+    on=sessionStorage.getItem('ima_test')==='1';
+  }catch(_){ on=/[?&]test(=1)?(&|$)/.test(q); }
+  window.IMA_TEST=on;
+  if(on){
+    document.addEventListener('DOMContentLoaded',function(){
+      var b=document.createElement('div');
+      b.textContent='TEST MODE: Meta is not told about this visit';
+      b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:9999;background:#ffd400;color:#000;font:700 13px/1.2 system-ui,sans-serif;text-align:center;padding:6px 8px';
+      document.body.appendChild(b);
+    });
+    return;
+  }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','9091446380984399');
+  fbq('track','PageView');
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=9091446380984399&ev=PageView&noscript=1"></noscript>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","u8qoxt7ftl");
+</script>
 </head>
 <body>
 
-<!-- NAV (3 equal buttons, single row) -->
-<nav class="btn-bar">
-  <div class="row">
-    <a href="/email-form">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      Email Us
-    </a>
-    <a href="tel:9546361515">
-      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/></svg>
-      954-636-1515
-    </a>
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="/trial-v2" id="top" aria-label="Impact Martial Athletics"><img src="/trial/assets/v2/logo.png" alt=""><span>Impact Martial<br>Athletics</span></a>
+    <a class="call" href="tel:+19546361515"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>954 636 1515</a>
   </div>
-  <a href="/trial-v2" class="wide">50% off Trial</a>
-</nav>
+</header>
 
-<!-- HERO -->
-<div class="hero">
-  <a href="/trial-v2"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ff8e176c38963f59764e9c.png" alt="Impact Martial Athletics" class="hero-logo"></a>
-  <div class="hero-content">
-    <h1>Impact Martial Athletics &#8211; The Future of Youth Training</h1>
-    <div class="hero-line"></div>
-    <p>A science-based performance system that builds strength, confidence, and resilience through a fusion of athletic performance and martial arts training.</p>
-    <a href="/trial-v2" class="btn-lime">Get Started!</a>
+<main>
+<div class="top">
+<div class="wrap">
+
+<section class="hero">
+  <h1>Build a stronger, more <em>confident</em> kid.</h1>
+  <div class="nine"><video id="ninevid" autoplay muted loop playsinline preload="metadata" poster="/trial/assets/v2/this-is-ima-poster.jpg?v=2" src="/trial/assets/v2/this-is-ima.mp4?v=2" aria-label="Impact Martial Athletics, ages 5 to 17: confidence, discipline, focus, strength, speed, agility, self defense, leadership, respect"></video></div>
+  <p class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><a href="https://maps.google.com/?q=4401+S+Flamingo+Rd+%23104,+Davie,+FL+33330">Davie, FL · 4401 S Flamingo Rd</a></p>
+  <p class="sub">Fun, high energy martial arts and athletic performance training that builds confidence, self defense, and fitness. Beginners welcome.</p>
+  <ul class="chips"><li>Confidence</li><li>Self Defense</li><li>Fitness</li><li>50 minute classes</li></ul>
+  <div class="offer">
+    <h2 class="offer-h">50% OFF RIGHT NOW</h2>
+    <p class="offer-sub">Just $27! 2 Action-Packed Classes + Free Impact Shirt<br><span class="offer-strike">(Normally $54. Limited Time!)</span><br>Ages 5 and up</p>
+    <a class="btn cta" href="#reserve">See Class Times and Claim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
   </div>
-  <!-- Floating video player -->
-  <div class="hero-float">
-    <video id="heroFloatVid" autoplay muted loop playsinline>
-      <source src="./hero-video.mov" type="video/mp4">
-    </video>
-    <div class="hero-float-sound">
-      <button onclick="toggleFloat()">&#128263; Enable sound</button>
-    </div>
-  </div>
-</div>
+</section>
 
-<!-- BLUE BANNER -->
-<div class="blue-banner">
-  <h2>Give Your Kid the Competitive Edge in Life</h2>
-  <a href="/trial-v2" class="btn-lime">Get Started!</a>
-</div>
+<section class="reserve" id="reserve">
+  <div class="card">
+    <h2 class="sr-only">Class Schedule</h2>
+    <img class="sched" src="/trial/assets/v2/class-schedule.jpg" width="1236" height="852" alt="Class schedule. Young Warriors, ages 5 to 8: Mon, Wed, Fri 4:30 PM; Tue, Thu 6:00 PM. Unified Warriors, all ages: Mon, Wed, Fri 12:00 PM and 5:30 PM; Tue, Thu 4:00 PM. Family Class: Tue, Thu 7:00 PM. Rising Warriors, 9 and up: Mon, Wed, Fri 6:30 PM; Tue, Thu 5:00 PM.">
+    <p class="backout" id="backout" role="status" hidden>No charge was made. Your spot is still open.</p>
 
-<!-- PROGRAMS -->
-<div class="programs">
-  <div class="section-title">Our Programs &amp; Expertise</div>
-  <div class="prog-grid">
-    <div class="prog-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed75d0bf5ebb0f77774c16.png" alt="Kids Martial Arts">
-      <h3>Kids Martial Arts &amp; Self-Defense</h3>
-      <p>Dynamic classes that teach technique, discipline, and real-world self-defense skills.</p>
+    <!-- Filled from the IMAOS class schedule, the same feed the /schedule/ima booking page reads. -->
+    <p class="timesnote" id="times-loading" role="status" hidden>Loading class times...</p>
+    <div id="times" hidden>
+      <span class="lbl" id="ageslbl">Age groups</span>
+      <div class="ages" id="ages" aria-labelledby="ageslbl"></div>
+      <span class="lbl" id="slotslbl">Choose your first class</span>
+      <div class="slots" id="slots" role="radiogroup" aria-labelledby="slotslbl"></div>
+      <button type="button" class="moretimes" id="moretimes" hidden>Show more times</button>
     </div>
-    <div class="prog-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed75d02ac6aea9318c212d.png" alt="Youth Sports">
-      <h3>Youth Sports &amp; Athletic Training</h3>
-      <p>Strength, agility, speed, coordination — tailored to young athletes looking to level up.</p>
-    </div>
-    <div class="prog-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed75d09c7177c94dd45fed.png" alt="Anti-Bullying">
-      <h3>Anti-Bullying Martial Arts Program</h3>
-      <p>A unique curriculum built to empower kids against bullying through confidence and non-violent defense skills.</p>
-    </div>
-    <div class="prog-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed75d08c1d10590613c300.png" alt="Mindset Coaching">
-      <h3>Mindset Coaching &amp; Character Development</h3>
-      <p>Mental resilience, leadership, focus and discipline — skills that serve in life beyond sports.</p>
-    </div>
-  </div>
-</div>
+    <p class="timesnote" id="times-off" hidden><b>You pick your class time right after checkout.</b></p>
 
-<!-- ABOUT IMA -->
-<div class="ima-section">
-  <div class="ima-inner">
-    <div class="ima-vid-col">
-      <video id="imaAboutVid" autoplay muted loop playsinline>
-        <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/about-video.mp4" type="video/mp4">
-      </video>
-      <div class="ima-vid-sound">
-        <button onclick="toggleImaVid(this)">&#128263; Enable sound</button>
-      </div>
-    </div>
-    <div class="ima-text">
-      <h2>Impact Martial Athletics</h2>
-      <p>Impact Martial Athletics is a science-backed training program for kids that combines the discipline, self-defense, and mental focus of martial arts with the strength, speed, and agility of sports athletic training. It builds both physical and mental strength, enhancing confidence, leadership, and athletic skills to help kids excel in sports and life. By pushing kids beyond their limits, they develop into confident, disciplined, and high performing individuals who are prepared to face challenges.</p>
-      <a href="/trial-v2" class="btn-lime">Get Started!</a>
-    </div>
-    <div class="ima-img-col">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/4-kids-group.png" alt="4 Kids at Impact Martial Athletics">
-    </div>
-  </div>
-</div>
-
-<!-- WHY CHOOSE -->
-<div class="why-section">
-  <div class="section-title">Why Choose Impact Martial Athletics</div>
-  <p class="why-sub">We&#8217;re not just a martial arts studio — we build warriors in life. Here&#8217;s what sets us apart:</p>
-  <div class="why-grid">
-    <div class="why-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed74aa6d717d772439864a.png" alt="Science">
-      <div class="why-card-body">
-        <h3>Science-Driven Training &amp; Safety</h3>
-        <p>We use evidence-based drills and protocols designed around youth athletic development science.</p>
-      </div>
-    </div>
-    <div class="why-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed74aabf5ebb7f74772862.png" alt="All Levels">
-      <div class="why-card-body">
-        <h3>All Levels Welcome</h3>
-        <p>Beginners to advanced; kids thrive in our inclusive environment. Ages 5 and up.</p>
-      </div>
-    </div>
-    <div class="why-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed74aa8299086eaa31bb45.png" alt="Anti-Bullying">
-      <div class="why-card-body">
-        <h3>Anti-Bullying Focus</h3>
-        <p>Built into all classes, we teach respect, conflict resolution, and assertiveness.</p>
-      </div>
-    </div>
-    <div class="why-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ed74aa2ac6ae2ab78c01dc.png" alt="Holistic">
-      <div class="why-card-body">
-        <h3>Holistic Growth</h3>
-        <p>Boosts speed, agility, and power with our specially designed Impact MAAT system.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- BETTER PATH -->
-<div class="better-path">
-  <div class="better-path-inner">
-    <div class="better-path-text">
-      <h2>A Better Path for Their Energy, Confidence &amp; Future</h2>
-      <p>Today&#8217;s world keeps kids sitting, scrolling, and losing valuable time.</p>
-      <p>Our program flips that script — giving kids a place to move with purpose, learn real martial arts, and build the mindset of a champion.</p>
-      <p class="bold-p">Through structure, mentorship, and fun training, we help children fight for their health, not for likes on a screen.</p>
-      <a href="/trial-v2" class="btn-lime">Get Started!</a>
-    </div>
-    <div class="better-path-vid">
-      <video id="betterPathVid" autoplay muted loop playsinline>
-        <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4" type="video/mp4">
-      </video>
-      <div class="better-path-vid-sound">
-        <button onclick="toggleBetterVid(this)">&#128263; Enable sound</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- OFFER BANNER -->
-<div class="offer-banner">
-  <h2>Get 50% Off Your Child&#8217;s First Two Classes</h2>
-  <a href="/trial-v2" class="btn-lime">Get Started!</a>
-</div>
-
-<!-- COACH SHICK -->
-<div class="coach-section">
-  <h2>Meet Coach Shick &#8212; Your Child&#8217;s Mentor</h2>
-  <p class="ch-tagline">Combining Martial Arts and Athletic Training to Build Warriors.</p>
-  <div class="coach-inner">
-    <div class="coach-vid-col">
-      <video id="coachVid" autoplay muted loop playsinline>
-        <source src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-video.mp4" type="video/mp4">
-      </video>
-      <div class="coach-vid-sound">
-        <button onclick="toggleCoachVid(this)">&#128263; Enable sound</button>
-      </div>
-    </div>
-    <div class="coach-card">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbceed0d0b96fd98d25e0a.png" alt="Coach Shick" class="coach-photo">
-      <h3>Coach Shick</h3>
-      <ul>
-        <li>Dad of 4 kids</li>
-        <li>40+ years of martial arts experience</li>
-        <li>Created a national anti-bullying program for public and private schools</li>
-        <li>Certified Pop Warner and USA Football coach</li>
-        <li>Trained elite athletes in martial arts and sports performance</li>
-        <li>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
-        <li>Owned 20+ martial arts schools</li>
-        <li>Owned an Orangetheory Fitness franchise</li>
-        <li>Professional martial arts stuntman</li>
-      </ul>
-    </div>
-    <div class="coach-family-col">
-      <img src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/coach-family.png" alt="Coach Shick Family">
-    </div>
-  </div>
-</div>
-
-<!-- TESTIMONIALS -->
-<div class="testimonials">
-  <h2>Professional Athletes &amp; Educators, Parents Agree: This Works...</h2>
-  <div class="tcard-grid">
-    <div class="tcard">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbda01e6c6d1fc43c2c43b.png" alt="Juan Moreno">
-      <div class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <h3>Juan Moreno</h3><p class="role">(2X Olympic Silver Champion)</p>
-      <p>&#8220;During my 35 years in the Olympic movement, I&#8217;ve worked with many outstanding athletes and coaches&#8212;Coach Shick is one of them. His dedication to performance and achievement is remarkable.&#8221;</p>
-    </div>
-    <div class="tcard">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbda0366ab2c040c8ba640.png" alt="Kristal Richardson">
-      <div class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <h3>Kristal Richardson</h3><p class="role">(IFBB Pro Olympia Competitor)</p>
-      <p>&#8220;Coach Shick&#8217;s program at Impact Martial Athletics is built just like my own fitness competition training&#8212;structured, effective, and it&#8217;s amazing to see how much stronger and faster my daughters have gotten!&#8221;</p>
-    </div>
-    <div class="tcard">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbda05304c6e2c4793b9a7.png" alt="Denis Shvidki">
-      <div class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <h3>Denis Shvidki</h3><p class="role">(Florida Panthers NHL Player)</p>
-      <p>&#8220;The foundation of any great athlete is discipline, resilience, and smart training. Coach Shick instills all of that at Impact Martial Athletics, giving kids the edge they need to succeed.&#8221;</p>
-    </div>
-    <div class="tcard">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbda0554fb6214ec7b6837.png" alt="Nick Additon">
-      <div class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <h3>Nick Additon</h3><p class="role">(Professional MLB Pitcher)</p>
-      <p>&#8220;Coach Shick has a rare ability to bring out the best in young athletes not just in their skills, but in their confidence, discipline, and mindset. Parents see the transformation firsthand.&#8221;</p>
-    </div>
-  </div>
-</div>
-
-<!-- COMMUNITY -->
-<div class="community">
-  <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbb2acf1ef98587aee0b99.png" alt="Coach Shick" class="comm-img">
-  <h2>Impact in the Community</h2>
-  <p>&#8220;This program gave our students confidence to stand up for themselves&#8230;&#8221;</p>
-  <p class="media-tag">Featured on Local 10+ Plus</p>
-  <a href="/trial-v2" class="btn-lime">Get Started!</a>
-</div>
-
-<!-- STEP UP -->
-<div class="stepup">
-  <h2>Step Up Scholarships Accepted &#8211; A Perfect Fit for Homeschool Families</h2>
-  <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68e6a1e3a265ecd3250d1ca1.webp" alt="Step Up | EMA" class="su-logo">
-  <p>At Impact Martial Athletics, we proudly accept Step Up For Students scholarships, making it easier for families to include high-quality martial arts and sports training as part of their child&#8217;s education. Our program is a great fit for homeschool students looking for an engaging and structured way to stay active, build confidence, and develop discipline. Martial arts provide the perfect balance of physical exercise, focus, and fun, giving kids a positive outlet during their school day or recess time.</p>
-</div>
-
-<!-- AREAS WE SERVE -->
-<div class="areas">
-  <h2>Areas We Serve</h2>
-  <p>Our kids fitness programs proudly serve families in Davie, Weston, Pembroke Pines, Cooper City, Sunrise, Plantation, Southwest Ranches, and Hollywood.</p>
-  <p>If you&#8217;re searching for kids fitness in Davie or children&#8217;s fitness programs in Weston, our facility is conveniently located and easy to access from all surrounding areas.</p>
-  <a href="https://www.google.com/maps/place/Impact+Martial+Athletics/@26.0651786,-80.3171672,17z/">
-    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/697cc8c95accfa8415219d0b.png" alt="Impact Martial Athletics Google Map" class="map-img">
-  </a>
-</div>
-
-<!-- CONTACT FORM -->
-<div class="form-section">
-  <h2>Get In Touch</h2>
-  <div class="form-wrap">
-    <form id="mainLeadForm" novalidate>
-      <div class="frow">
-        <div class="fgroup"><label>First Name *</label><input type="text" name="firstName" placeholder="First Name" required></div>
-        <div class="fgroup"><label>Last Name *</label><input type="text" name="lastName" placeholder="Last Name" required></div>
-      </div>
-      <div class="fgroup full"><label>Email *</label><input type="email" name="email" placeholder="Email" required></div>
-      <div class="fgroup full"><label>Phone *</label><input type="tel" name="phone" placeholder="Phone" required></div>
-      <div class="tc-row">
-        <input type="checkbox" id="sms_consent" name="sms_consent" required>
-        <label for="sms_consent">I consent to receive text messages from Impact Martial Athletics at the number provided, including class reminders, studio updates, and promotional offers. Message frequency varies. Reply STOP to opt out or HELP for help. Msg &amp; data rates may apply. View our <a href="/privacy-policy">Privacy Policy</a>.</label>
-      </div>
-      <div class="fgroup full"><label>How many children would you like to enroll?</label>
-        <select name="children"><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-      </div>
-      <div class="frow">
-        <div class="fgroup"><label>1st Child&#8217;s Name</label><input type="text" name="child1Name" placeholder="Full Name"></div>
-        <div class="fgroup"><label>1st Child&#8217;s Age</label><select name="child1Age"><option value="">Age</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15+</option></select></div>
-      </div>
-      <div class="fgroup full"><label>Message</label><textarea name="message" placeholder="Have a question? Ask us here."></textarea></div>
-      <div class="tc-row"><input type="checkbox" id="mainPrivacy" required><label for="mainPrivacy">By clicking the checkbox, I have read &amp; agree to the <a href="/privacy-policy">PRIVACY POLICY</a> and <a href="/terms-of-service">TERMS OF SERVICES</a>.</label></div>
-      <div id="mainFormMsg" style="display:none;padding:12px;border-radius:4px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;margin-bottom:10px;text-align:center"></div>
-      <button type="submit" class="btn-submit" id="mainSubmitBtn">SUBMIT</button>
+    <div class="divider"></div>
+    <form id="lead" novalidate>
+      <div class="field"><label for="pname">Parent's name</label><input id="pname" name="pname" autocomplete="name" placeholder="First and last name" required></div>
+      <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(954) 555 0123" required></div>
+      <div id="kids"></div>
+      <button type="button" class="addkid" id="addkid">+ Add another child</button>
+      <p class="err" id="err" role="alert" hidden></p>
+      <button class="btn" type="submit">Continue to Secure Checkout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </form>
   </div>
+</section>
+
+</div>
 </div>
 
-<!-- FOOTER CTA BAR -->
-<div class="footer-cta">
-  <div class="fct-item">
-    <span class="fct-label">Email</span>
-    <a href="mailto:info@imaimpact.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@imaimpact.com</a>
-  </div>
-  <div class="fct-item">
-    <span class="fct-label">Call us now</span>
-    <a href="tel:954-636-1515"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/></svg>954-636-1515</a>
-  </div>
-  <div class="fct-item">
-    <span class="fct-label">Address</span>
-    <a href="https://www.google.com/maps/dir//4401+S+Flamingo+Rd+%23104,+Davie,+FL+33330"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>4401 S Flamingo Rd, Davie, FL 33330</a>
-  </div>
-</div>
-
-<!-- MAIN FOOTER -->
-<div class="main-footer">
-  <div class="footer-inner">
-    <a href="/trial-v2"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68e697ada265ecdf5bfb4627.png" alt="Impact Martial Athletics" class="footer-logo"></a>
-    <div class="social-row">
-      <a href="https://www.facebook.com/p/Impact-Martial-Athletics-61573942885497/" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/facebook-square.svg" alt="Facebook"></a>
-      <a href="https://www.instagram.com/impactmartialathletics/" target="_blank" rel="noopener"><img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/instagram-square.svg" alt="Instagram"></a>
+<section class="s">
+  <div class="wrap narrow">
+    <h2 class="sec">See what a real class looks like</h2>
+    <p class="secsub">Coach Shick walks you through the trial.</p>
+    <div class="video" id="video">
+      <video id="herovid" autoplay muted loop playsinline preload="metadata" poster="/trial/assets/v2/shick-poster.jpg?v=3" src="/trial/assets/v2/shick-trial.mp4"></video>
+      <button type="button" class="tag" id="vsound" aria-label="Turn sound on">Tap for sound</button>
     </div>
   </div>
-  <div class="footer-copy">
-    &copy; 2025 Impact Martial Athletics &nbsp;|&nbsp;
-    <a href="https://impactmartialathletics.com/privacy-policy">Privacy Policy</a> |
-    <a href="/email-form">Contact Information</a> |
-    <a href="https://impactmartialathletics.com/terms-of-service">Terms of Service</a> |
-    <a href="https://impactmartialathletics.com/refund-policy">Refund Policy</a>
+</section>
+
+<section class="s alt">
+  <div class="wrap split">
+    <div>
+      <h2 class="sec">What your kid takes home</h2>
+      <div class="photo"><img src="/trial/assets/v2/class.jpg?v=2" alt="Kids training on the Impact floor" loading="lazy" width="1600" height="1000"></div>
+    </div>
+    <ul class="benes">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.2 12.7 7 22l5-3 5 3-1.2-9.3"/></svg></span><div><h3>Confidence</h3><p>Kids learn to stand tall, speak up, and try hard things.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><div><h3>Self defense</h3><p>Real skills to stay safe, taught step by step in a safe, controlled class.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span><div><h3>Fitness, off the screen</h3><p>Strength, speed, and coordination. Time spent moving with purpose instead of scrolling.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div><h3>Anti bullying skills</h3><p>We teach respect, conflict resolution, and assertiveness.</p></div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9h20v4H2z"/><path d="M10 13l-2 7M14 13l2 7"/><path d="M17 9v4M19.5 9v4"/></svg></span><div><h3>Progress you can see</h3><p>Kids earn stripes on their belt as they train, then test for their next belt.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="s">
+  <div class="wrap">
+    <h2 class="sec">What local parents say</h2>
+    <p class="secsub">Parents of kids training at Impact in Davie.</p>
+    <!-- Three local parent testimonial slots go here (mock: "Placeholder 1 to 3").
+         Hidden until Tom supplies real quotes: no placeholder is ever shown live. -->
+
+    <h3 class="sub2">From Google reviews</h3>
+    <div class="quotes three">
+      <figure class="q"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“This place is fantastic. The energy level is awesome. The owner is an amazing martial artist. He knows how to get kids up and moving his direction and life skills are also a big part of it. I highly recommend this place.”</blockquote><figcaption class="who"><span class="av">F</span><span class="nm"><b>Frank L.</b><span>Google review</span></span></figcaption></figure>
+      <figure class="q"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“My kids love going here to workout. Coach Schick is awesome as are all the other coaches.”</blockquote><figcaption class="who"><span class="av">A</span><span class="nm"><b>Ari D.</b><span>Google review</span></span></figcaption></figure>
+      <figure class="q"><span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“My daughter just started and absolutely loves it.”</blockquote><figcaption class="who"><span class="av">G</span><span class="nm"><b>Gesette G.</b><span>Google review</span></span></figcaption></figure>
+    </div>
+    <a class="gmore" href="https://www.google.com/maps/search/?api=1&amp;query=Impact+Martial+Athletics+Davie+FL" target="_blank" rel="noopener">Read more reviews on Google ↗</a>
+  </div>
+</section>
+
+<section class="s alt">
+  <div class="wrap narrow">
+    <h2 class="sec">Here's exactly what happens</h2>
+    <ol class="steps">
+      <li><span class="num">1</span><div><h3>Pay $27 for 2 classes and a free shirt</h3><p>Enter your name and number and check out. One-time charge.</p></div></li>
+      <li><span class="num">2</span><div><h3>Pick your class time right after checkout</h3><p>We text you to confirm.</p></div></li>
+      <li><span class="num">3</span><div><h3>Come in and train</h3><p>Your child gets a free Impact shirt and jumps right into class. After 2 classes, we talk about how it went and you decide what's next. No pressure to join.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="coach">
+  <div class="wrap split">
+    <figure class="family"><img src="/trial/assets/v2/shick-family.jpg" alt="Coach Shick with his wife and four kids" width="581" height="866" loading="lazy"></figure>
+    <div>
+      <h2>Meet Coach Shick</h2>
+      <p class="tagline">Dad of 4. Your child's mentor.</p>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>40+ years of martial arts experience</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Created a national anti bullying program for public and private schools</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Certified Pop Warner and USA Football coach</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Competed, coached, and served on the USA Olympic Taekwondo Committee</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>Owned 20+ martial arts schools and an Orangetheory Fitness franchise</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="bpath">
+  <div class="wrap">
+    <div class="bpvid">
+      <video id="bpvid" muted loop playsinline preload="none" data-src="https://mxvkicuojeiapqroksfd.supabase.co/storage/v1/object/public/ima-website-assets/better-path-video.mp4"></video>
+      <button type="button" class="snd" id="bpsnd" aria-label="Turn sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg><span>Enable sound</span></button>
+      <button type="button" class="pp" id="bppp" aria-label="Pause video"><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="s alt pros">
+  <div class="wrap">
+    <h2 class="sec">Pro athletes trust Coach Shick too</h2>
+    <div class="quotes four">
+      <figure class="q"><blockquote>“…it’s amazing to see how much stronger and faster my daughters have gotten!”</blockquote><figcaption class="who"><img class="avp" src="/trial/assets/v2/people/kristal.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Kristal Richardson</b><span>IFBB Pro Olympia Competitor</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“Coach Shick has a rare ability to bring out the best in young athletes… Parents see the transformation firsthand.”</blockquote><figcaption class="who"><img class="avp" src="/trial/assets/v2/people/nick.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Nick Additon</b><span>Professional MLB pitcher</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“His dedication to performance and achievement is remarkable…”</blockquote><figcaption class="who"><img class="avp" src="/trial/assets/v2/people/juan.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Juan Moreno</b><span>2X Olympic Silver Medalist</span></span></figcaption></figure>
+      <figure class="q"><blockquote>“The foundation of any great athlete is discipline, resilience, and smart training. Coach Shick instills all of that…”</blockquote><figcaption class="who"><img class="avp" src="/trial/assets/v2/people/denis.jpg" alt="" width="48" height="48" loading="lazy"><span class="nm"><b>Denis Shvidki</b><span>Florida Panthers NHL player</span></span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="s">
+  <div class="wrap narrow">
+    <div class="box"><div class="logo"><img src="/trial/assets/v2/stepup-ema.png" alt="Step Up For Students EMA Marketplace Provider" width="646" height="209" loading="lazy"></div><div><h3>Step Up For Students scholarships accepted</h3><p>Using Step Up For Students? The scholarship covers your $27 trial. A great fit for homeschool families. Ask us how to use yours.</p><p class="hs">Homeschool families: our Unified Warriors class runs at 12:00 PM on Monday, Wednesday and Friday.</p></div></div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2 class="sec">Wondering If Impact Is Right for Your Kid?</h2>
+    <p class="faqlede">Here are a few things parents often want to know.</p>
+    <dl id="faq">
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid is shy or lacks confidence. Can this program help?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Absolutely! Our program helps kids build confidence one class at a time. Through fun challenges, encouragement, and small wins, kids learn to believe in themselves and become more confident.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid has trouble listening or staying focused. Can this help?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Yes! Our coaches teach kids to listen, follow directions, stay focused, and respect others. These are important life skills they can use at home, in school, and in everyday life.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid spends too much time on screens. Will this keep them active?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Absolutely! Our 50-minute classes keep kids moving, exercising, and learning new skills. It's a fun way to build strength, improve fitness, burn energy, and spend less time on screens.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">Is Impact traditional karate or martial arts?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Impact Martial Athletics is more than traditional martial arts! Our program combines martial arts, boxing, self-defense, and athletic performance training to help kids build strength, speed, coordination, confidence, and discipline. We teach kids how to protect themselves while developing important life skills they can use at home, in school, and in everyday life.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">My kid isn't very athletic or has never done martial arts. Will they fit in?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>Of course! Your kid doesn't need any experience to start. Our coaches guide kids step by step, helping them build strength, coordination, and confidence at their own pace. Everyone starts somewhere!</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">What if my kid doesn't like it?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>That's why we offer our $27 trial! Your kid gets two classes and a free Impact shirt. It's a great way to experience our program before deciding if it's the right fit for your family.</dd></div>
+      <div class="item"><dt><button type="button" aria-expanded="false">What happens after the two trial classes?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></dt><dd hidden>We'll talk about how your kid did, answer your questions, and explain our membership options. There's no pressure to join. You decide what's best for your family.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s ask" id="ask">
+  <div class="wrap narrow">
+    <div class="card">
+      <h2>Have Questions First?</h2>
+      <p class="lede">Not ready to sign up yet? Send us a note and a coach will text or call you back.</p>
+      <form id="askform" novalidate>
+        <div class="hp" aria-hidden="true"><label for="a_hpx">Leave this empty</label><input id="a_hpx" name="hp_check" type="text" tabindex="-1" autocomplete="one-time-code" data-lpignore="true" data-1p-ignore="true"></div>
+        <div class="row2">
+          <div class="field"><label for="a_fname">Parent's first name</label><input id="a_fname" autocomplete="given-name" placeholder="First name" required></div>
+          <div class="field"><label for="a_lname">Last name</label><input id="a_lname" autocomplete="family-name" placeholder="Last name" required></div>
+        </div>
+        <div class="field"><label for="a_phone">Phone</label><input id="a_phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(954) 555-0123" required></div>
+        <div class="field"><label for="a_email">Email</label><input id="a_email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
+        <div class="field"><label for="a_ages">Child ages</label><input id="a_ages" placeholder="Example: 6 and 9"></div>
+        <div class="field"><label for="a_msg">Your question</label><textarea id="a_msg" rows="4" placeholder="Ask us anything about classes, schedule or the trial"></textarea></div>
+        <label class="ask-consent"><input type="checkbox" id="a_sms"> <span>Yes, Impact Martial Athletics may text me about my question. Msg and data rates may apply. Reply STOP to opt out.</span></label>
+        <button class="btn" type="submit">Send My Question</button>
+        <p class="ask-msg" id="ask_msg" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="pitch">
+  <div class="wrap">
+    <div class="pitch-grid">
+      <div class="pitch-video">
+        <video controls playsinline preload="metadata" src="https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/transcoded_videos/cts-7a96ad7c3d0883d9_720p.mp4" aria-label="Impact Martial Athletics strength and balance training"></video>
+      </div>
+      <div class="pitch-text">
+        <h2>Impact Martial Athletics</h2>
+        <p>Impact Martial Athletics is a science backed training program for kids that combines the discipline, self defense, and mental focus of martial arts with the strength, speed, and agility of sports athletic training. It builds both physical and mental strength, enhancing confidence, leadership, and athletic skills to help kids excel in sports and life. By pushing kids beyond their limits, they develop into confident, disciplined, and high performing individuals who are prepared to face challenges.</p>
+        <a class="btn pitch-cta" href="#reserve">Get Started!</a>
+      </div>
+      <div class="pitch-img">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68ee83e94ae0e02f17dc634c.png" alt="Impact Martial Athletics students" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="community">
+  <div class="wrap">
+    <div class="community-grid">
+      <div class="community-text">
+        <img src="https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/68fbb2acf1ef98587aee0b99.png" alt="Local 10+ Plus" class="community-logo" loading="lazy">
+        <h2>Impact in the Community</h2>
+        <blockquote class="community-quote">“This program gave our students confidence to stand up for themselves…”</blockquote>
+        <p class="community-credit">Featured on Local 10+ Plus (or local media)</p>
+        <a class="btn community-cta" href="#reserve">Get Started!</a>
+      </div>
+      <div class="community-video">
+        <video controls muted loop playsinline preload="metadata" src="https://assets.cdn.filesafe.space/JOPG3e2g7KUAA5lfKMPK/media/transcoded_videos/cts-dda06458bdebf342_360p.mp4" aria-label="Local 10 news feature on Impact Martial Athletics"></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <img src="/trial/assets/v2/logo.png" alt="Impact Martial Athletics" loading="lazy">
+    <h2>2 Classes + Free Impact Shirt</h2>
+    <div class="amt">$27</div>
+    <p>Ages 5 and up. Beginners welcome. Davie, FL.</p>
+    <a class="btn cta" href="#reserve">Claim My Child's $27 Trial</a>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>Impact Martial Athletics</b>
+    <ul>
+      <li><a href="https://maps.google.com/?q=4401+S+Flamingo+Rd+%23104,+Davie,+FL+33330">4401 S Flamingo Rd #104, Davie, FL 33330</a></li>
+      <li><a href="tel:+19546361515">954 636 1515</a></li>
+    </ul>
+    <nav><a href="/privacy-policy">Privacy Policy</a><a href="/terms-of-service">Terms of Service</a><a href="/refund-policy">Refund Policy</a></nav>
+    <small>© 2026 Impact Martial Athletics</small>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="false">
+  <div class="wrap">
+    <div class="p"><b>$27</b><span>One-time · 2 classes + shirt</span></div>
+    <a class="btn" href="#reserve">See Class Times</a>
   </div>
 </div>
 
 <script>
-function toggleBetterVid(btn) {
-  var v = document.getElementById('betterPathVid');
-  if (!v) return;
-  v.muted = !v.muted;
-  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
-}
-function toggleCoachVid(btn) {
-  var v = document.getElementById('coachVid');
-  if (!v) return;
-  v.muted = !v.muted;
-  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
-}
-function toggleImaVid(btn) {
-  var v = document.getElementById('imaAboutVid');
-  if (!v) return;
-  v.muted = !v.muted;
-  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
-}
-document.getElementById('mainLeadForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const form = e.target;
-  const btn = document.getElementById('mainSubmitBtn');
-  const msg = document.getElementById('mainFormMsg');
-
-  // Validation
-  const req = ['firstName','lastName','email','phone'];
-  for (const f of req) {
-    if (!form[f].value.trim()) {
-      form[f].focus();
-      showMsg(msg, 'Please fill in all required fields.', '#c00');
-      return;
+// Drop-off tracking: where parents stop on the way to checkout.
+// Each step goes to Meta as a custom event (fbq trackCustom) and to our own /api/trial-event as a
+// beacon, so we have counts that do not depend on Meta. Each event fires at most once per page view.
+// Never sends names, numbers, emails or any typed value: field names only.
+// Test mode (?test): Meta is skipped, each event is logged to the console instead, and the server
+// copy is marked test so it can be left out of the counts.
+// The existing PageView, Lead and InitiateCheckout events are separate and untouched.
+// Since the 21 Oct 2026 rebuild the form has 4 fields. The parent name field carries the parent's
+// first name, so it keeps TrialFieldParentFirstName. The parent last name, email and child last name
+// fields are gone, so TrialFieldParentLastName, TrialFieldEmail and TrialFieldChildLastName no longer fire.
+(function(){
+  var sent={},visit='',t0=Date.now(),qs=new URLSearchParams(location.search);
+  try{visit=(crypto.randomUUID&&crypto.randomUUID())||''}catch(_){}
+  if(!visit)visit=Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+  var FIELD_EVENT={parent_first_name:'TrialFieldParentFirstName',phone:'TrialFieldPhone',child_first_name:'TrialFieldChildFirstName',child_last_name:'TrialFieldChildLastName',child_age:'TrialFieldChildAge'};
+  function fieldName(el){
+    if(!el)return '';
+    var byId={pname:'parent_first_name',phone:'phone'};
+    if(byId[el.id])return byId[el.id];
+    var c=el.classList;
+    return c.contains('kname')?'child_first_name':c.contains('klast')?'child_last_name':c.contains('kage')?'child_age':'';
+  }
+  function track(name,params){
+    if(sent[name])return;sent[name]=1;
+    params=params||{};
+    if(window.IMA_TEST){try{console.log('[IMA track]',name,JSON.stringify(params))}catch(_){}}
+    else{try{if(window.fbq)fbq('trackCustom',name,params)}catch(_){}}
+    try{
+      var body=JSON.stringify({v:1,visit:visit,event:name,params:params,ms:Date.now()-t0,page:location.pathname,
+        utm_source:qs.get('utm_source'),utm_campaign:qs.get('utm_campaign'),utm_content:qs.get('utm_content'),test:!!window.IMA_TEST});
+      if(navigator.sendBeacon)navigator.sendBeacon('/api/trial-event',new Blob([body],{type:'text/plain'}));
+    }catch(_){}
+  }
+  window.imaTrack=track;
+  // For the error event: the field names the form marked as missing or invalid.
+  window.imaTrackFormError=function(kind){
+    var f=[];
+    try{document.querySelectorAll('#lead [aria-invalid="true"]').forEach(function(el){var n=fieldName(el);if(n&&f.indexOf(n)<0)f.push(n)})}catch(_){}
+    if(kind==='checkout'){track('TrialCheckoutFailed',{error:'checkout_failed'});}else{track('TrialFormError',{error:'missing_or_invalid',fields:f.join(',')});}
+  };
+  track('TrialPageLoaded');
+  // Scrolled to the offer (the "See Class Times and Claim" button in the hero offer box)
+  // and to the form (its first field). Based on what is on screen, so it works at any screen size.
+  function seen(el,name){
+    if(!el)return;
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){track(name);io.disconnect()}})},{threshold:0.5});
+      io.observe(el);
+    }else{
+      var chk=function(){var r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){track(name);removeEventListener('scroll',chk)}};
+      addEventListener('scroll',chk,{passive:true});chk();
     }
   }
-  if (!document.getElementById('sms_consent').checked) {
-    showMsg(msg, 'Please consent to receive text messages to continue.', '#c00');
-    return;
+  seen(document.querySelector('.offer .btn.cta'),'TrialOfferSeen');
+  seen(document.getElementById('pname'),'TrialFormSeen');
+  var form=document.getElementById('lead');if(!form)return;
+  form.addEventListener('focusin',function(e){var n=fieldName(e.target);if(n)track('TrialFormStarted',{field:n})});
+  // A field counts as completed when the parent leaves it (or autofill fills it) with a value that
+  // would pass the form's own check.
+  function done(e){
+    var el=e.target,n=fieldName(el);if(!n)return;
+    var v=(el.value||'').trim(),ok;
+    if(n==='phone')ok=v.replace(/\D/g,'').length===10;
+    else ok=v!=='';
+    if(ok)track(FIELD_EVENT[n],{field:n});
   }
-  if (!document.getElementById('mainPrivacy').checked) {
-    showMsg(msg, 'Please accept the privacy policy to continue.', '#c00');
-    return;
-  }
-
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  msg.style.display = 'none';
-
-  try {
-    const res = await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstName: form.firstName.value.trim(),
-        lastName: form.lastName.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-        children: form.children.value,
-        message: form.message.value.trim(),
-        sms_consent: document.getElementById('sms_consent').checked,
-        source: 'website-form'
-      })
-    });
-    if (res.ok) {
-      showMsg(msg, 'Thank you! We\'ll be in touch shortly.', '#1a7a1a');
-      form.reset();
-    } else { throw new Error(); }
-  } catch {
-    showMsg(msg, 'Something went wrong. Please call us at 954-636-1515.', '#c00');
-  } finally {
-    btn.textContent = 'SUBMIT';
-    btn.disabled = false;
-  }
-});
-
-function showMsg(el, text, color) {
-  el.textContent = text;
-  el.style.color = color;
-  el.style.background = color === '#1a7a1a' ? '#e6f9e6' : '#fff0f0';
-  el.style.border = '1px solid ' + color;
-  el.style.display = 'block';
-}
-
-function toggleFloat() {
-  var v = document.getElementById('heroFloatVid');
-  var btn = document.querySelector('.hero-float-sound button');
-  if (!v) return;
-  v.muted = !v.muted;
-  btn.innerHTML = v.muted ? '&#128263; Enable sound' : '&#128266; Sound on';
-}
+  form.addEventListener('change',done);
+  form.addEventListener('focusout',done);
+  // Registered before the form's own submit handler, so it is counted ahead of any error.
+  form.addEventListener('submit',function(){track('TrialSubmitTapped')});
+})();
 </script>
+
+<script>
+(function(){
+  var IMAOS='https://imaos-next.vercel.app';
+
+  // ---- Class times and age groups ----------------------------------------------------------
+  // Real times from the IMAOS schedule feed (/api/schedule-config), the same feed the /schedule/ima
+  // booking page reads. Nothing is invented: when the feed fails or has no classes, the card shows
+  // "We'll text you class times" and checkout works exactly as before (the parent picks after paying).
+  // Times cover the next 7 days, so the weekday alone ("Thu · 5:00 PM", as on the mock) names one class.
+  var ZONE='America/New_York',SHOW=4,DAYS=7,LEAD_MIN=60,WEEK=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var slotsEl=document.getElementById('slots'),agesEl=document.getElementById('ages'),moreBtn=document.getElementById('moretimes');
+  var times=document.getElementById('times'),timesOff=document.getElementById('times-off'),timesLoading=document.getElementById('times-loading');
+  var classes=[],userPicked=false;
+  function nowParts(){
+    // Today's date and time in the gym's time zone, as "YYYY-MM-DD" and "HH:MM".
+    var p={};
+    try{new Intl.DateTimeFormat('en-US',{timeZone:ZONE,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value})}catch(_){}
+    if(!p.year){var d=new Date();p={year:String(d.getFullYear()),month:('0'+(d.getMonth()+1)).slice(-2),day:('0'+d.getDate()).slice(-2),hour:('0'+d.getHours()).slice(-2),minute:('0'+d.getMinutes()).slice(-2)}}
+    return {date:p.year+'-'+p.month+'-'+p.day,mins:(+p.hour%24)*60+(+p.minute)};
+  }
+  function dayNum(s){var a=String(s).split('-');return Math.round(Date.UTC(+a[0],+a[1]-1,+a[2])/86400000)}
+  function mins(t){var a=String(t||'').split(':');return (+a[0]||0)*60+(+a[1]||0)}
+  function timeLabel(t){var m=mins(t),h=Math.floor(m/60),mm=('0'+(m%60)).slice(-2);return ((h%12)||12)+':'+mm+' '+(h>=12?'PM':'AM')}
+  function dayLabel(s,long){var a=String(s).split('-');return new Date(Date.UTC(+a[0],+a[1]-1,+a[2],12)).toLocaleDateString('en-US',long?{timeZone:'UTC',weekday:'short',month:'short',day:'numeric'}:{timeZone:'UTC',weekday:'short'})}
+  // The gym's class names end in an internal E or L (early or late session). Parents never see it.
+  function cleanName(n){return String(n||'').replace(/\s+[EL]\s*$/,'').trim()}
+  function upcoming(list){
+    var n=nowParts(),today=dayNum(n.date);
+    return list.filter(function(c){
+      if(!c||!c.id||!c.date||!c.start_time||!c.name)return false;
+      if(Number(c.spots_left)<=0)return false;
+      var d=dayNum(c.date)-today;
+      if(d<0||d>=DAYS)return false;
+      return d>0||mins(c.start_time)>=n.mins+LEAD_MIN;
+    }).sort(function(a,b){var x=a.date+a.start_time,y=b.date+b.start_time;return x<y?-1:x>y?1:0});
+  }
+  // noPick: leave every time unselected so the parent has to choose (used after a "class full" answer).
+  function renderTimes(list,keepId,noPick){
+    classes=list;
+    // Age groups: each class name on the schedule (IMA's class names carry the age group), with the days it runs this week.
+    agesEl.textContent='';
+    var groups=[],byName={};
+    list.forEach(function(c){
+      var nm=cleanName(c.name);
+      if(!byName[nm]){byName[nm]={name:nm,days:[]};groups.push(byName[nm])}
+      var dl=dayLabel(c.date);
+      if(byName[nm].days.indexOf(dl)<0)byName[nm].days.push(dl);
+    });
+    groups.forEach(function(g){
+      var d=document.createElement('div');d.className='age';
+      var b=document.createElement('b');b.textContent=g.name;d.appendChild(b);
+      g.days.sort(function(x,y){return WEEK.indexOf(x)-WEEK.indexOf(y)});
+      if(g.days.length){d.appendChild(document.createElement('br'));var s=document.createElement('span');s.textContent=g.days.join(', ');d.appendChild(s)}
+      agesEl.appendChild(d);
+    });
+    slotsEl.textContent='';
+    var chosen=noPick?null:keepId&&list.some(function(c){return c.id===keepId})?keepId:(list[0]&&list[0].id);
+    list.forEach(function(c,i){
+      var l=document.createElement('label');l.className='slot';
+      if(i>=SHOW&&c.id!==chosen)l.hidden=true;
+      var r=document.createElement('input');r.type='radio';r.name='slot';r.value=c.id;r.checked=c.id===chosen;
+      r.addEventListener('change',function(){userPicked=true;slotsEl.removeAttribute('aria-invalid');try{window.imaTrack&&imaTrack('TrialClassPicked')}catch(_){}});
+      var b=document.createElement('b');b.textContent=dayLabel(c.date)+' · '+timeLabel(c.start_time);
+      l.title=dayLabel(c.date,true)+' · '+timeLabel(c.start_time);
+      var s=document.createElement('span');s.textContent=cleanName(c.name);
+      l.appendChild(r);l.appendChild(b);l.appendChild(s);slotsEl.appendChild(l);
+    });
+    moreBtn.hidden=!slotsEl.querySelector('.slot[hidden]');
+    timesLoading.hidden=true;times.hidden=false;timesOff.hidden=true;
+  }
+  function timesUnavailable(){
+    classes=[];slotsEl.textContent='';agesEl.textContent='';
+    timesLoading.hidden=true;times.hidden=true;timesOff.hidden=false;
+    try{window.imaTrack&&imaTrack('TrialTimesUnavailable')}catch(_){}
+  }
+  moreBtn.addEventListener('click',function(){slotsEl.querySelectorAll('.slot[hidden]').forEach(function(l){l.hidden=false});moreBtn.hidden=true});
+  function loadTimes(keepId,noPick){
+    var ctl=('AbortController' in window)?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort()},8000);
+    return fetch(IMAOS+'/api/schedule-config?slug=ima',{cache:'no-store',signal:ctl?ctl.signal:undefined})
+      .then(function(r){if(!r.ok)throw new Error('feed '+r.status);return r.json()})
+      .then(function(d){
+        clearTimeout(timer);
+        var list=upcoming(d&&Array.isArray(d.classes)?d.classes:[]);
+        if(!list.length)throw new Error('no classes');
+        renderTimes(list,keepId,noPick);
+      })
+      .catch(function(){clearTimeout(timer);timesUnavailable()});
+  }
+  // Class times now come from the schedule picture above; parents pick their class right after checkout.
+  function pickedClass(){
+    var r=slotsEl.querySelector('input[name=slot]:checked');if(!r)return null;
+    for(var i=0;i<classes.length;i++)if(classes[i].id===r.value)return classes[i];
+    return null;
+  }
+
+  // ---- Children (first name + age, up to 4) -------------------------------------------------
+  var kidsEl=document.getElementById('kids'),addBtn=document.getElementById('addkid'),MAXK=4,kseq=0;
+  // Ages as on the live page: 5 to 17, then 18+ (sent as 18).
+  function ageOpts(){var s='<option value="">Age</option>';for(var a=5;a<=17;a++)s+='<option value="'+a+'">'+a+'</option>';return s+'<option value="18">18+</option>'}
+  function syncKids(){
+    var rows=kidsEl.querySelectorAll('.kid');
+    rows.forEach(function(r,i){var h=r.querySelector('.kidhead');if(h){h.hidden=i===0;h.querySelector('span').textContent='Child '+(i+1)}});
+    addBtn.hidden=rows.length>=MAXK;
+  }
+  function addKid(){
+    kseq++;
+    var d=document.createElement('div');d.className='kid';
+    d.innerHTML='<div class="kidhead" hidden><span>Child</span><button type="button">Remove</button></div>'+
+      '<div class="row2">'+
+      '<div class="field"><label for="kname'+kseq+'">Child\'s first name</label><input id="kname'+kseq+'" class="kname" autocomplete="off" placeholder="First name"></div>'+
+      '<div class="field"><label for="kage'+kseq+'">Age</label><select id="kage'+kseq+'" class="kage">'+ageOpts()+'</select></div>'+
+      '</div>'+
+      '<div class="field"><label for="klast'+kseq+'">Child\'s last name</label><input id="klast'+kseq+'" class="klast" autocomplete="off" placeholder="Last name"></div>';
+    d.querySelector('.kidhead button').addEventListener('click',function(){d.remove();syncKids()});
+    kidsEl.appendChild(d);syncKids();
+    if(kseq>1){try{d.querySelector('.kname').focus()}catch(_){}}
+  }
+  addKid();
+  addBtn.addEventListener('click',addKid);
+
+  // ---- Phone formatting ----------------------------------------------------------------------
+  var ph=document.getElementById('phone');
+  ph.addEventListener('input',function(){
+    var d=ph.value.replace(/\D/g,'').replace(/^1/,'').slice(0,10);
+    ph.value=d.length>6?'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6):d.length>3?'('+d.slice(0,3)+') '+d.slice(3):d;
+  });
+
+  // ---- Submit --------------------------------------------------------------------------------
+  var form=document.getElementById('lead'),err=document.getElementById('err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var pn=document.getElementById('pname'),miss=[];
+    [pn,ph].forEach(function(x){x.removeAttribute('aria-invalid')});
+    var parent=pn.value.trim().replace(/\s+/g,' ');
+    if(!parent){pn.setAttribute('aria-invalid','true');miss.push('name')}
+    if(ph.value.replace(/\D/g,'').length!==10){ph.setAttribute('aria-invalid','true');miss.push('10 digit mobile number')}
+    var kidRows=[];
+    kidsEl.querySelectorAll('.kid').forEach(function(r,i){
+      var kn=r.querySelector('.kname'),kl=r.querySelector('.klast'),ka=r.querySelector('.kage');
+      kn.removeAttribute('aria-invalid');kl.removeAttribute('aria-invalid');ka.removeAttribute('aria-invalid');
+      var name=kn.value.trim(),last=kl.value.trim().replace(/\s+/g,' '),age=Number.parseInt(ka.value,10),who=kidsEl.querySelectorAll('.kid').length>1?'child '+(i+1)+"'s":"child's";
+      if(!name){kn.setAttribute('aria-invalid','true');miss.push(who+' first name')}
+      if(!last){kl.setAttribute('aria-invalid','true');miss.push(who+' last name')}
+      if(!Number.isFinite(age)){ka.setAttribute('aria-invalid','true');miss.push(who+' age')}
+      kidRows.push({first:name,last:last,age:Number.isFinite(age)?age:null});
+    });
+    // When times are shown, one must be picked (after a "class full" answer none is picked for the parent).
+    var needTime=!times.hidden&&classes.length>0&&!pickedClass();
+    if(needTime)slotsEl.setAttribute('aria-invalid','true');else slotsEl.removeAttribute('aria-invalid');
+    var ok=miss.length===0&&!needTime;
+    var msg=ok?'':(needTime?'Pick a class time'+(miss.length?', then enter your ':'.'):'Enter your ')+
+      (miss.length?(miss.length>1?miss.slice(0,-1).join(', ')+' and '+miss[miss.length-1]:miss[0])+'.':'');
+    err.textContent=msg;err.hidden=ok;
+    if(!ok){try{window.imaTrackFormError&&imaTrackFormError('validation')}catch(_){}return}
+    var btn=form.querySelector('button[type=submit]'),label=btn.innerHTML;
+    // Lead fires when a parent leaves their details. The Meta ad set optimizes for Lead, so this must fire here.
+    try{if(window.fbq)fbq('track','Lead',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
+    try{if(window.fbq)fbq('track','InitiateCheckout',{value:27*kidRows.length,currency:'USD',content_name:'IMA $27 Trial'})}catch(_){}
+    btn.disabled=true;btn.textContent='Opening secure checkout...';
+    var qs=new URLSearchParams(location.search),sp=parent.indexOf(' '),cls=pickedClass();
+    // One name field: the first word is the first name, the rest (if any) the last name. Email is
+    // left to Stripe, which asks for it on the payment screen.
+    var payload={
+      studio_slug:'ima',first_name:sp>0?parent.slice(0,sp):parent,last_name:sp>0?parent.slice(sp+1):'',phone:ph.value,num_children:kidRows.length,
+      children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
+        (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
+      referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
+      fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),return_path:'/trial-v2'
+    };
+    if(cls)payload.class_id=cls.id;
+    fetch(IMAOS+'/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(d){return {ok:r.ok,status:r.status,d:d}})}).then(function(x){
+      if(x.status===409&&x.d&&x.d.code==='class_full'){
+        // The class filled while the parent was on the page: refresh the times and let them pick again.
+        var e2=new Error(x.d.error||'That class just filled up. Please pick another time.');e2.full=true;throw e2;
+      }
+      if(!x.ok||!x.d.url) throw new Error(x.d.error||'Something went wrong. Please try again.');
+      try{window.imaTrack&&imaTrack('TrialLeftForStripe')}catch(_){}
+      window.location.href=x.d.url;
+    }).catch(function(e){
+      err.textContent=(e&&e.message)||'Something went wrong. Please try again.';err.hidden=false;
+      try{window.imaTrackFormError&&imaTrackFormError('checkout')}catch(_){}
+      btn.disabled=false;btn.innerHTML=label;
+      // Fresh times with nothing picked: the parent chooses again.
+      if(e&&e.full){loadTimes(null,true).then(function(){try{document.getElementById('slotslbl').scrollIntoView({block:'center'})}catch(_){}})}
+    });
+  });
+
+  // ---- Back from Stripe without paying -------------------------------------------------------
+  // IMAOS sends parents here with checkout=canceled&lead=<id>.
+  // Show a reassuring line, keep the form usable, and tell IMAOS once so the owner gets a text.
+  // Test mode (?test) shows the line but never calls IMAOS.
+  (function(){
+    var q=new URLSearchParams(location.search),lead=q.get('lead');
+    if(q.get('checkout')!=='canceled'||!lead) return;
+    var box=document.getElementById('backout');box.hidden=false;
+    try{document.getElementById('reserve').scrollIntoView({block:'start'})}catch(_){}
+    // Take the flags off the address so a reload or a shared link does not repeat this.
+    try{q.delete('checkout');q.delete('lead');var rest=q.toString().replace(/(^|&)test=(?=&|$)/,'$1test');history.replaceState(null,'',location.pathname+(rest?'?'+rest:'')+location.hash)}catch(_){}
+    if(window.IMA_TEST) return;
+    var key='ima_canceled_'+lead;
+    try{if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1')}catch(_){}
+    fetch(IMAOS+'/api/trial-checkout-canceled',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lead_id:lead}),keepalive:true}).catch(function(){});
+  })();
+
+  // ---- Sticky bar ----------------------------------------------------------------------------
+  // Off whenever any part of the reserve card (and so the checkout button) is on screen, back on
+  // once it has scrolled out, so it never sits over "Continue to Secure Checkout".
+  (function(){
+    var bar=document.getElementById('sticky'),card=document.querySelector('#reserve .card'),cta=form.querySelector('button[type=submit]');
+    if(!bar||!card)return;
+    var shown={};
+    function apply(){var off=!!(shown.card||shown.cta);bar.classList.toggle('off',off);bar.setAttribute('aria-hidden',off?'true':'false');bar.querySelector('a').tabIndex=off?-1:0}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){shown[e.target===cta?'cta':'card']=e.isIntersecting});apply()},{threshold:0});
+      io.observe(card);if(cta)io.observe(cta);
+    }else{
+      var chk=function(){var r=card.getBoundingClientRect();shown.card=r.top<innerHeight&&r.bottom>0;apply()};
+      addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk();
+    }
+  })();
+
+  // ---- Video ---------------------------------------------------------------------------------
+  // Plays muted while on screen and pauses when scrolled away, when a parent heads to the form,
+  // starts typing, or leaves the tab. "Tap for sound" (or a tap on the video) restarts it with sound.
+  (function(){
+    var v=document.getElementById('herovid'),b=document.getElementById('vsound');if(!v)return;
+    function play(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    function soundOn(){v.muted=false;v.currentTime=0;delete v.dataset.userPaused;play();b.hidden=true}
+    b.addEventListener('click',soundOn);
+    v.addEventListener('click',function(){if(v.muted){soundOn();return}if(v.paused){delete v.dataset.userPaused;play()}else{v.dataset.userPaused='1';v.pause()}});
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){if(v.paused&&!v.dataset.userPaused)play()}else if(!v.paused)v.pause();
+      })},{threshold:0.25}).observe(v);
+    }
+    function stop(){if(!v.paused)v.pause()}
+    document.querySelectorAll('a[href="#reserve"]').forEach(function(a){a.addEventListener('click',stop)});
+    form.addEventListener('focusin',stop);
+    document.addEventListener('visibilitychange',function(){if(document.hidden)stop()});
+  })();
+
+  // ---- Nine-skills video -----------------------------------------------------------------------
+  // The autoplay attribute alone silently fails to start on a lot of mobile browsers (notably the
+  // Facebook/Instagram in-app browser our ad clicks open in). Force a play() call, retry once data
+  // is ready, and retry again whenever it scrolls into view, same pattern as the hero video above.
+  (function(){
+    var v=document.getElementById('ninevid');if(!v)return;
+    function play(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    play();
+    v.addEventListener('loadeddata',play);
+    v.addEventListener('canplay',play);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&v.paused)play()})},{threshold:0.1}).observe(v);
+    }
+    document.addEventListener('visibilitychange',function(){if(!document.hidden&&v.paused)play()});
+  })();
+})();
+(function(){var f=document.getElementById('faq');if(!f)return;
+  // FAQ
+  f.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',open?'false':'true');
+    b.closest('.item').querySelector('dd').hidden=open;
+  });
+})();
+(function(){
+  // Better-path video: downloads only when a parent scrolls near it, plays muted,
+  // sound button restarts it with sound, pause button, stops off screen or when a form is used.
+  var v=document.getElementById('bpvid'),b=document.getElementById('bpsnd'),pp=document.getElementById('bppp');if(!v)return;
+  function sync(){if(!pp)return;pp.classList.toggle('paused',v.paused);pp.setAttribute('aria-label',v.paused?'Play video':'Pause video')}
+  function play(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+  function load(){if(!v.src&&v.dataset.src){v.src=v.dataset.src;v.preload='auto'}}
+  function toggle(){load();if(v.paused){delete v.dataset.userPaused;play()}else{v.dataset.userPaused='1';v.pause()}}
+  if(b)b.addEventListener('click',function(){load();document.querySelectorAll('video').forEach(function(o){if(o!==v&&!o.paused)o.pause()});v.muted=false;v.currentTime=0;delete v.dataset.userPaused;play();b.classList.add('on')});
+  if(pp)pp.addEventListener('click',toggle);
+  v.addEventListener('click',toggle);v.addEventListener('play',function(){document.querySelectorAll('video').forEach(function(o){if(o!==v&&!o.paused&&!v.muted)o.pause()});sync()});v.addEventListener('pause',sync);sync();
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){load();if(v.paused&&!v.dataset.userPaused)play()}else if(!v.paused)v.pause();
+  })},{rootMargin:'200px 0px',threshold:0}).observe(v)}else load();
+  function stop(){if(!v.paused)v.pause()}
+  document.querySelectorAll('a[href="#reserve"]').forEach(function(a){a.addEventListener('click',stop)});
+  document.querySelectorAll('form').forEach(function(f){f.addEventListener('focusin',stop)});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stop()});
+})();
+(function(){
+  // Have Questions First? form: saves the parent in IMAOS and texts the gym
+  (function(){var f=document.getElementById('askform');if(!f)return;var m=document.getElementById('ask_msg');
+    function v(id){return (document.getElementById(id).value||'').trim()}
+    function say(t,ok){m.hidden=false;m.textContent=t;m.className='ask-msg '+(ok?'ok':'err')}
+    f.addEventListener('submit',function(e){e.preventDefault();
+      var req=[['a_fname','Please enter your first name.'],['a_lname','Please enter your last name.'],['a_phone','Please enter your phone number.'],['a_email','Please enter your email.']];
+      for(var i=0;i<req.length;i++){var el=document.getElementById(req[i][0]);el.removeAttribute('aria-invalid');if(!v(req[i][0])){el.setAttribute('aria-invalid','true');el.focus();say(req[i][1],false);return}}
+      if(v('a_phone').replace(/\D/g,'').length<10){document.getElementById('a_phone').setAttribute('aria-invalid','true');say('Please enter a valid phone number.',false);return}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('a_email'))){document.getElementById('a_email').setAttribute('aria-invalid','true');say('Please enter a valid email.',false);return}
+      var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sending...';m.hidden=true;
+      fetch('https://imaos-next.vercel.app/api/website-question',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        first_name:v('a_fname'),last_name:v('a_lname'),phone:v('a_phone'),email:v('a_email'),child_ages:v('a_ages'),message:v('a_msg'),
+        sms_consent:document.getElementById('a_sms').checked,hp_check:v('a_hpx'),studio_slug:'ima',source:'trial_page_question'})})
+      .then(function(r){return r.json().then(function(d){return {ok:r.ok&&d.ok,d:d}})})
+      .then(function(x){if(x.ok){f.reset();say("Thanks! A coach will reach out shortly.",true);b.textContent='Sent';try{if(window.fbq)fbq('track','Contact')}catch(_){}}else{b.disabled=false;b.textContent='Send My Question';say((x.d&&x.d.error)||'Something went wrong. Please call 954 636 1515.',false)}})
+      .catch(function(){b.disabled=false;b.textContent='Send My Question';say('Something went wrong. Please call 954 636 1515.',false)});
+    });
+  })();
+})();
+</script>
+
 </body>
 </html>
