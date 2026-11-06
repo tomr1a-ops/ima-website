@@ -203,6 +203,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
 .ask-consent{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;margin-top:14px;font-size:12.5px;line-height:1.45;color:var(--muted);cursor:pointer}
 .ask-consent input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--blue)}
+.sms-consent{margin:14px 0 4px;text-align:left}
 .ask .btn{margin-top:16px;justify-content:center}
 .ask-msg{margin:12px 0 0;font-size:14px;font-weight:600;text-align:center}
 .ask-msg.ok{color:#1a7a1a}.ask-msg.err{color:#d4372c}
@@ -391,6 +392,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(954) 555 0123" required></div>
       <div id="kids"></div>
       <button type="button" class="addkid" id="addkid">+ Add another child</button>
+      <label class="ask-consent sms-consent"><input type="checkbox" id="r_sms"> <span id="r_sms_text">Yes, Impact Martial Athletics may text me about my trial, including class times and a reminder if I don't finish checkout. Msg and data rates may apply. Msg frequency varies. Reply STOP to opt out.</span></label>
       <p class="err" id="err" role="alert" hidden></p>
       <button class="btn" type="submit">Claim Your $27 Trial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </form>
@@ -866,7 +868,9 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       studio_slug:'ima',first_name:sp>0?parent.slice(0,sp):parent,last_name:sp>0?parent.slice(sp+1):'',phone:ph.value,num_children:kidRows.length,
       children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
         (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
-      referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
+      referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),
+      // The parent's own answer to the texting checkbox, with the exact words they saw (6 Nov 2026).
+      sms_consent:document.getElementById('r_sms').checked,sms_consent_text:document.getElementById('r_sms_text').textContent,
       fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),ad_id:qs.get('utm_content'),campaign_id:qs.get('utm_campaign'),return_path:'/trial-v2'
     };
     if(cls)payload.class_id=cls.id;
