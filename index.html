@@ -867,7 +867,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
         (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
       referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),sms_consent:true,
-      fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),return_path:'/trial-v2'
+      fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),ad_id:qs.get('utm_content'),campaign_id:qs.get('utm_campaign'),return_path:'/trial-v2'
     };
     if(cls)payload.class_id=cls.id;
     fetch(IMAOS+'/api/trial-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
