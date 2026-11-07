@@ -41,6 +41,10 @@
       "destination": "/trial-offer.html"
     },
     {
+      "source": "/homeschool",
+      "destination": "/homeschool.html"
+    },
+    {
       "source": "/trial-v2",
       "destination": "/trial-v2.html"
     },
