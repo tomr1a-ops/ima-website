@@ -312,11 +312,9 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .stepup-badge{display:flex;align-items:center;gap:12px;background:var(--white);border-radius:14px;padding:12px 14px;margin:14px 0}
 .stepup-badge img{width:170px;max-width:45%;height:auto;flex-shrink:0}
 .stepup-badge span{font-size:15px;font-weight:600;color:var(--text);line-height:1.35}
-.stepup-pick{background:var(--blue-tint);border-radius:12px;padding:14px;margin:12px 0;font-size:15px;display:grid;gap:12px}
-.stepup-steps{margin:0;line-height:1.5}
-.stepup-steps a{color:var(--blue);font-weight:600}
-.stepup-check{display:flex;gap:10px;align-items:flex-start}
-.stepup-check input{margin-top:4px;width:18px;height:18px;flex-shrink:0}
+.stepup-pick{display:flex;gap:10px;align-items:flex-start;background:var(--blue-tint);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:15px}
+.stepup-pick input{margin-top:4px;width:18px;height:18px;flex-shrink:0}
+.stepup-pick a{color:var(--blue);font-weight:600}
 </style>
 <!-- Meta Pixel (same pixel the GHL trial page uses).
      Test switch: open the page with ?test (or ?test=1) and Meta is told nothing on this visit.
@@ -403,7 +401,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       <div id="kids"></div>
       <button type="button" class="addkid" id="addkid">+ Add another child</button>
       <label class="ask-consent sms-consent"><input type="checkbox" id="r_sms"> <span id="r_sms_text">Yes, Impact Martial Athletics may text me about my trial, including class times and a reminder if I don't finish checkout. Msg and data rates may apply. Msg frequency varies. Reply STOP to opt out.</span></label>
-      <div class="stepup-pick"><p class="stepup-steps"><b>Step 1:</b> Go to <a href="https://www.stepupforstudents.org" target="_blank" rel="noopener">stepupforstudents.org</a> and reserve your scholarship funds for Impact Martial Athletics.<br><b>Step 2:</b> Come back here, tick the box below, and pick your class time. No card needed.</p><label class="stepup-check"><input type="checkbox" id="r_stepup"> <span><b>I have reserved my Step Up For Students funds for Impact Martial Athletics.</b></span></label></div>
+      <label class="stepup-pick"><input type="checkbox" id="r_stepup"> <span><b>Paying with my Step Up For Students scholarship.</b> Reserve your funds at <a href="https://www.stepupforstudents.org" target="_blank" rel="noopener">stepupforstudents.org</a> first. No card needed.</span></label>
       <p class="err" id="err" role="alert" hidden></p>
       <button class="btn" type="submit" id="submitbtn">Schedule Your Trial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </form>
