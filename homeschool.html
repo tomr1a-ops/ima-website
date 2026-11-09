@@ -876,7 +876,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
       studio_slug:'ima',first_name:sp>0?parent.slice(0,sp):parent,last_name:sp>0?parent.slice(sp+1):'',phone:ph.value,num_children:kidRows.length,
       children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
         (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
-      referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),
+      referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),landing_page:location.pathname.replace(/\/$/,''),
       // The parent's own answer to the texting checkbox, with the exact words they saw (6 Nov 2026).
       sms_consent:document.getElementById('r_sms').checked,sms_consent_text:document.getElementById('r_sms_text').textContent,
       fbclid:qs.get('fbclid'),gclid:qs.get('gclid'),ad_id:qs.get('utm_content'),campaign_id:qs.get('utm_campaign'),return_path:'/homeschool',
