@@ -388,6 +388,23 @@ module.exports = async function handler(req, res) {
     }
     const displayName = child_name || first_name
     await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cls.name} at ${IMA_STUDIO_NAME} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
+    // Step Up reminder: when the lead came from the /homeschool page, remind the parent to
+    // complete payment through their Step Up For Students scholarship.
+    if (leadId) {
+      try {
+        const surfaceRes = await sbFetch(
+          `leads?id=eq.${encodeURIComponent(leadId)}&select=capture_surface&limit=1`,
+          { method: 'GET' },
+        )
+        const leadRow = Array.isArray(surfaceRes.data) ? surfaceRes.data[0] : null
+        if (leadRow && leadRow.capture_surface === 'homeschool_page') {
+          const stepUpMsg = `Hi ${first_name}, ${displayName} is booked for ${cls.name} on ${dateLabel} at ${timeLabel} at ${IMA_STUDIO_NAME}! To complete your trial, log in to your Step Up For Students account and purchase the trial for Impact Martial Athletics. Questions? Call us at 954-636-1515.`
+          await sendSms(normalizePhone(phone), stepUpMsg)
+        }
+      } catch (stepupErr) {
+        console.warn('[schedule-book] Step Up SMS failed:', stepupErr.message)
+      }
+    }
     if (leadId) {
       try {
         await maybeSendTrialScheduledOwnerSummary(leadId, 'schedule-book')
