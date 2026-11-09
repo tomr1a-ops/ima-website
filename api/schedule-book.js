@@ -381,15 +381,18 @@ module.exports = async function handler(req, res) {
     const fullName = [first_name, last_name].filter(Boolean).join(' ')
     const studioNotifyNum = process.env.TWILIO_TO_NUMBER
     if (studioNotifyNum) {
+      const ownerClassName = String(cls.name || '').replace(/\s+[A-Z]$/, '')
       const studioMsg = child_name
-        ? `Trial booked: ${child_name} (parent: ${phone}) -> ${cls.name} on ${dateLabel} at ${timeLabel}`
-        : `Trial class booked: ${fullName} (${phone}) -> ${cls.name} on ${dateLabel} at ${timeLabel}`
+        ? `Trial booked: ${child_name} (parent: ${phone}) -> ${ownerClassName} on ${dateLabel} at ${timeLabel}`
+        : `Trial class booked: ${fullName} (${phone}) -> ${ownerClassName} on ${dateLabel} at ${timeLabel}`
       await sendSms(studioNotifyNum, studioMsg)
     }
     const displayName = child_name || first_name
-    await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cls.name} at ${IMA_STUDIO_NAME} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
-    // Step Up reminder: when the lead came from the /homeschool page, remind the parent to
-    // complete payment through their Step Up For Students scholarship.
+    // Strip a trailing single-letter level suffix (e.g. "Rising Warriors (9&Up) L" -> "Rising Warriors (9&Up)").
+    const cleanClassName = String(cls.name || '').replace(/\s+[A-Z]$/, '')
+    // Homeschool / Step Up leads get only the Step Up reminder (one text, not two).
+    // Everyone else gets the standard confirmation text.
+    let isHomeschool = false
     if (leadId) {
       try {
         const surfaceRes = await sbFetch(
@@ -397,13 +400,16 @@ module.exports = async function handler(req, res) {
           { method: 'GET' },
         )
         const leadRow = Array.isArray(surfaceRes.data) ? surfaceRes.data[0] : null
-        if (leadRow && leadRow.capture_surface === 'homeschool_page') {
-          const stepUpMsg = `Hi ${first_name}, ${displayName} is booked for ${cls.name} on ${dateLabel} at ${timeLabel} at ${IMA_STUDIO_NAME}! To complete your trial, log in to your Step Up For Students account and purchase the trial for Impact Martial Athletics. Questions? Call us at 954-636-1515.`
-          await sendSms(normalizePhone(phone), stepUpMsg)
-        }
-      } catch (stepupErr) {
-        console.warn('[schedule-book] Step Up SMS failed:', stepupErr.message)
+        isHomeschool = !!(leadRow && leadRow.capture_surface === 'homeschool_page')
+      } catch (surfaceErr) {
+        console.warn('[schedule-book] capture_surface lookup failed:', surfaceErr.message)
       }
+    }
+    if (isHomeschool) {
+      const stepUpMsg = `Hi ${first_name}, ${displayName} is booked for ${cleanClassName} on ${dateLabel} at ${timeLabel} at ${IMA_STUDIO_NAME}! To complete your trial, log in to your Step Up For Students account and purchase the trial for Impact Martial Athletics. Questions? Call us at 954-636-1515.`
+      await sendSms(normalizePhone(phone), stepUpMsg)
+    } else {
+      await sendSms(normalizePhone(phone), `Hi! ${displayName} is booked for ${cleanClassName} at ${IMA_STUDIO_NAME} on ${dateLabel} at ${timeLabel}. We can't wait to meet you!`)
     }
     if (leadId) {
       try {
