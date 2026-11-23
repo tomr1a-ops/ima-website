@@ -111,6 +111,7 @@ img{max-width:100%}
 .field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
 .field input,.field select{width:100%;height:50px;border:1.5px solid var(--input);border-radius:12px;padding:0 14px;font:400 16px var(--font);color:var(--text);background:var(--white)}
 .field input::placeholder{color:#5c5d66}
+.field label .opt{font-weight:400;color:var(--muted)}
 .field input:focus,.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-tint)}
 .field input[aria-invalid=true],.field select[aria-invalid=true]{border-color:#d4372c}
 .row2{display:grid;grid-template-columns:1fr 96px;gap:10px}
@@ -390,8 +391,10 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     <form id="lead" novalidate>
       <div class="field"><label for="pname">Parent's name</label><input id="pname" name="pname" autocomplete="name" placeholder="First and last name" required></div>
       <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(954) 555 0123" required></div>
+      <div class="field"><label for="email">Email <span class="opt">(optional)</span></label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div>
       <div id="kids"></div>
       <button type="button" class="addkid" id="addkid">+ Add another child</button>
+      <div class="field"><label for="heard">How did you find out about us? <span class="opt">(optional)</span></label><select id="heard" name="heard"><option value="">Choose one</option><option value="facebook">Facebook</option><option value="instagram">Instagram</option><option value="google">Google</option><option value="other">Other</option></select></div>
       <label class="ask-consent sms-consent"><input type="checkbox" id="r_sms"> <span id="r_sms_text">Yes, Impact Martial Athletics may text me about my trial, including class times and a reminder if I don't finish checkout. Msg and data rates may apply. Msg frequency varies. Reply STOP to opt out.</span></label>
       <p class="err" id="err" role="alert" hidden></p>
       <button class="btn" type="submit">Claim Your $27 Trial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -838,6 +841,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     var parent=pn.value.trim().replace(/\s+/g,' ');
     if(!parent){pn.setAttribute('aria-invalid','true');miss.push('name')}
     if(ph.value.replace(/\D/g,'').length!==10){ph.setAttribute('aria-invalid','true');miss.push('10 digit mobile number')}
+    var em=document.getElementById('email'),emv=em.value.trim();em.removeAttribute('aria-invalid');
+    if(emv&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emv)){em.setAttribute('aria-invalid','true');miss.push('a valid email (or leave it blank)')}
     var kidRows=[];
     kidsEl.querySelectorAll('.kid').forEach(function(r,i){
       var kn=r.querySelector('.kname'),kl=r.querySelector('.klast'),ka=r.querySelector('.kage');
@@ -863,9 +868,10 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     btn.disabled=true;btn.textContent='Opening secure checkout...';
     var qs=new URLSearchParams(location.search),sp=parent.indexOf(' '),cls=pickedClass();
     // One name field: the first word is the first name, the rest (if any) the last name. Email is
-    // left to Stripe, which asks for it on the payment screen.
+    // optional here; when left blank Stripe asks for it on the payment screen.
     var payload={
       studio_slug:'ima',first_name:sp>0?parent.slice(0,sp):parent,last_name:sp>0?parent.slice(sp+1):'',phone:ph.value,num_children:kidRows.length,
+      email:emv||undefined,heard_about:document.getElementById('heard').value||undefined,
       children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
         (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
       referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),landing_page:location.pathname.replace(/\/$/,''),
