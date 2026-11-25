@@ -315,6 +315,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
 .stepup-pick{display:flex;gap:10px;align-items:flex-start;background:var(--blue-tint);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:15px}
 .stepup-pick input{margin-top:4px;width:18px;height:18px;flex-shrink:0}
 .stepup-pick a{color:var(--blue);font-weight:600}
+.field label .opt{font-weight:400;color:var(--muted)}
 </style>
 <!-- Meta Pixel (same pixel the GHL trial page uses).
      Test switch: open the page with ?test (or ?test=1) and Meta is told nothing on this visit.
@@ -397,8 +398,10 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     <form id="lead" novalidate>
       <div class="field"><label for="pname">Parent's name</label><input id="pname" name="pname" autocomplete="name" placeholder="First and last name" required></div>
       <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(954) 555 0123" required></div>
+      <div class="field"><label for="email">Email <span class="opt">(optional)</span></label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div>
       <div id="kids"></div>
       <button type="button" class="addkid" id="addkid">+ Add another child</button>
+      <div class="field"><label for="heard">How did you find out about us? <span class="opt">(optional)</span></label><select id="heard" name="heard"><option value="">Choose one</option><option value="facebook">Facebook</option><option value="instagram">Instagram</option><option value="google">Google</option><option value="other">Other</option></select></div>
       <label class="ask-consent sms-consent"><input type="checkbox" id="r_sms"> <span id="r_sms_text">Yes, Impact Martial Athletics may text me about my trial, including class times and a reminder if I don't finish checkout. Msg and data rates may apply. Msg frequency varies. Reply STOP to opt out.</span></label>
       <label class="stepup-pick"><input type="checkbox" id="r_stepup"> <span><b>Paying with my Step Up For Students scholarship.</b> Reserve your funds at <a href="https://www.stepupforstudents.org" target="_blank" rel="noopener">stepupforstudents.org</a>. Look us up: <b>Impact Martial Athletics</b>.</span></label>
       <p class="err" id="err" role="alert" hidden></p>
@@ -846,6 +849,8 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     var parent=pn.value.trim().replace(/\s+/g,' ');
     if(!parent){pn.setAttribute('aria-invalid','true');miss.push('name')}
     if(ph.value.replace(/\D/g,'').length!==10){ph.setAttribute('aria-invalid','true');miss.push('10 digit mobile number')}
+    var em=document.getElementById('email'),emv=em.value.trim();em.removeAttribute('aria-invalid');
+    if(emv&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emv)){em.setAttribute('aria-invalid','true');miss.push('a valid email (or leave it blank)')}
     var kidRows=[];
     kidsEl.querySelectorAll('.kid').forEach(function(r,i){
       var kn=r.querySelector('.kname'),kl=r.querySelector('.klast'),ka=r.querySelector('.kage');
@@ -874,6 +879,7 @@ img.avp{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block}
     // left to Stripe, which asks for it on the payment screen.
     var payload={
       studio_slug:'ima',first_name:sp>0?parent.slice(0,sp):parent,last_name:sp>0?parent.slice(sp+1):'',phone:ph.value,num_children:kidRows.length,
+      email:emv||undefined,heard_about:document.getElementById('heard').value||undefined,
       children:kidRows,message:'Children: '+kidRows.map(function(k){return k.first+' '+k.last+' ('+(k.age===18?'18+':k.age)+')'}).join(', ')+
         (cls?'. Picked class: '+cls.name+', '+dayLabel(cls.date,true)+' '+timeLabel(cls.start_time):''),
       referral_source:qs.get('utm_source')||(qs.get('fbclid')?'facebook':null),landing_page:location.pathname.replace(/\/$/,''),
